@@ -1,7 +1,7 @@
 ---
 title: 3B. Peer 운동 리더
-parent: 강사
-nav_order: 2
+parent: 3. 강사
+nav_order: 6
 ---
 
 # Level 3B — Peer 운동 리더 (자격·보상·검증)
@@ -11,7 +11,7 @@ nav_order: 2
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2A 세션 종류](../operations/session-types.html) · [2C AI 역할](../operations/ai-role.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
+| **상위 의존** | [2A 세션 종류](../service/session-types.html) · [2C AI 역할](../service/ai-role.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
 | **하위 영향** | [3C 모집](./recruitment.html) · [3D 정산](./payout.html) · [4B 가격](../members/pricing.html) |
 
 ---
@@ -98,7 +98,7 @@ nav_order: 2
 
 ## 의존성
 
-**입력**: [2A 세션 종류](../operations/session-types.html), [2C AI 역할](../operations/ai-role.html), [8B PT 자격증 법규](../legal/pt-license.html)
+**입력**: [2A 세션 종류](../service/session-types.html), [2C AI 역할](../service/ai-role.html), [8B PT 자격증 법규](../legal/pt-license.html)
 **영향 주는 것**:
 - [3D 정산](./payout.html) — Peer 회당 단가
 - [3C 모집](./recruitment.html) — Peer 풀 모집

@@ -1,6 +1,6 @@
 ---
 title: 7A. 단위 경제 (지점당)
-parent: 경제성
+parent: 7. 경제성
 nav_order: 1
 ---
 
@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2D 공간](../operations/space.html) · [4A 멤버십](../members/membership.html) · [4B 가격](../members/pricing.html) · [3D 강사 정산](../partners/payout.html) · [5C 본사 분배](../expansion/revenue-share.html) |
+| **상위 의존** | [2D 공간](../service/space.html) · [4A 멤버십](../members/membership.html) · [4B 가격](../members/pricing.html) · [3D 강사 정산](../partners/payout.html) · [5C 본사 분배](../expansion/revenue-share.html) |
 | **하위 영향** | [7C 100호점 추정](./projection.html) · 가맹 BEP · 투자 IR |
 
 ---

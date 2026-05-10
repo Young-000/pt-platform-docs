@@ -1,6 +1,6 @@
 ---
-title: 경제성
-nav_order: 9
+title: 7. 경제성
+nav_order: 8
 has_children: true
 ---
 

@@ -1,16 +1,17 @@
 ---
 title: 4B. 가격 체계
-parent: 회원
-nav_order: 2
+parent: 2. 회원
+nav_order: 3
 ---
 
 # Level 4B — 가격 체계
 
 | | |
 |---|---|
-| **상태** | 🔴 TBD |
+| **상태** | 🔴 TBD ⚠️ **재검토 필요** |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
+| **재검토 사유** | 초기 가설 가격 (Light 15만 / Standard 25만 / Premium 40만)은 placeholder. 실제 가격은 페르소나·강사 정산·단위 경제·경쟁사 검증 후 재산출 필요. |
 | **상위 의존** | [4A 멤버십](./membership.html) · [3D 정산](../partners/payout.html) · [1C 경쟁비교](../product/competition.html) |
 | **하위 영향** | [7A 단위 경제](../economics/unit-economics.html) · [7B 매출](../economics/revenue-cost.html) · [1D Value Prop](../product/value-prop.html) |
 

@@ -1,6 +1,6 @@
 ---
-title: 스펙
-nav_order: 5
+title: 스펙 (PRD)
+nav_order: 9
 has_children: true
 ---
 

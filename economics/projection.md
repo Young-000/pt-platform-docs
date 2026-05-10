@@ -1,6 +1,6 @@
 ---
 title: 7C. 100호점 추정
-parent: 경제성
+parent: 7. 경제성
 nav_order: 3
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 4C. 회원 여정
-parent: 회원
-nav_order: 3
+parent: 2. 회원
+nav_order: 1
 ---
 
 # Level 4C — 회원 여정 (가입 → 재예약)
@@ -11,7 +11,7 @@ nav_order: 3
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [4A 멤버십](./membership.html) · [4B 가격](./pricing.html) · [2C AI 역할](../operations/ai-role.html) |
+| **상위 의존** | [4A 멤버십](./membership.html) · [4B 가격](./pricing.html) · [2C AI 역할](../service/ai-role.html) |
 | **하위 영향** | 앱 UX · CS 프로세스 · 이탈 방지 · LTV |
 
 ---
@@ -114,7 +114,7 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: [4A 멤버십](./membership.html), [4B 가격](./pricing.html), [2C AI 역할](../operations/ai-role.html), [3E 강사 등급](../partners/quality.html)
+**입력**: [4A 멤버십](./membership.html), [4B 가격](./pricing.html), [2C AI 역할](../service/ai-role.html), [3E 강사 등급](../partners/quality.html)
 **영향 주는 것**:
 - 앱 UX 전반
 - 본사 CS 조직

@@ -1,6 +1,6 @@
 ---
 title: 5A. 확장 모델
-parent: 비즈니스 모델
+parent: 6. 비즈니스 모델
 nav_order: 1
 ---
 

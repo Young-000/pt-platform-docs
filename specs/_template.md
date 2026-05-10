@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 title: "[템플릿] PRD"
 parent: 스펙
 nav_order: 999

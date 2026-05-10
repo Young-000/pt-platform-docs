@@ -1,7 +1,7 @@
 ---
 title: 0. 정체성
-parent: 제품
-nav_order: 1
+parent: 1. 제품
+nav_order: 2
 ---
 
 # Level 0 — 정체성 🟢 LOCKED

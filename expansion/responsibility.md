@@ -1,6 +1,6 @@
 ---
 title: 5B. 본사 ↔ 가맹점주 책임 분담
-parent: 비즈니스 모델
+parent: 6. 비즈니스 모델
 nav_order: 2
 ---
 

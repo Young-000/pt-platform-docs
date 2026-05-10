@@ -1,4 +1,5 @@
 ---
+nav_exclude: true
 title: "[템플릿] ADR"
 parent: 의사결정
 nav_order: 999

@@ -1,7 +1,7 @@
 ---
 title: 4A. 멤버십 구조
-parent: 회원
-nav_order: 1
+parent: 2. 회원
+nav_order: 2
 ---
 
 # Level 4A — 멤버십 구조
@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2A 세션 종류](../operations/session-types.html) · [1A 페르소나](../product/personas.html) |
+| **상위 의존** | [2A 세션 종류](../service/session-types.html) · [1A 페르소나](../product/personas.html) |
 | **하위 영향** | [4B 가격](./pricing.html) · [4C 여정](./journey.html) · [4D 정책](./policies.html) · [6A 예약](../operations/reservation.html) · [7B 매출 모델](../economics/revenue-cost.html) |
 
 ---
@@ -76,7 +76,7 @@ nav_order: 1
 | Standard | 6 | 2 | 일반 (1A 1순위 페르소나) |
 | Premium | 4 | 6 | 본격 관리 |
 
-→ Pro 회차 비율 = AI 의존도([2C](../operations/ai-role.html))와 trade-off.
+→ Pro 회차 비율 = AI 의존도([2C](../service/ai-role.html))와 trade-off.
 
 ---
 
@@ -102,7 +102,7 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: [2A 세션 종류](../operations/session-types.html), [1A 페르소나](../product/personas.html), [2C AI 역할](../operations/ai-role.html)
+**입력**: [2A 세션 종류](../service/session-types.html), [1A 페르소나](../product/personas.html), [2C AI 역할](../service/ai-role.html)
 **영향 주는 것**:
 - [4B 가격](./pricing.html) — 티어별 가격
 - [4C 회원 여정](./journey.html) — 가입·갱신

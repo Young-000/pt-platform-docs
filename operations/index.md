@@ -1,22 +1,25 @@
 ---
-title: 운영
-nav_order: 7
+title: 5. 운영
+nav_order: 6
 has_children: true
 ---
 
-# 운영 (Operations)
+# 5. 운영 (Operations)
 
-서비스의 What/How. 세션 구조 · AI 역할 · 공간 · 예약 시스템 · 지점 운영 · 안전.
+> 회원·강사·지점이 일상적으로 어떻게 작동하는가. **회원 운영 흐름이 1순위**.
 
-## 결정 노드
+## 결정 노드 (Level 6)
 
-### Level 2 — 서비스 (What)
-- [2A. 세션 종류 — Pro PT vs Peer 운동](./session-types.html)
-- [2B. 세션 포맷 — 30분 카디오 + 60분 PT](./session.html)
-- [2C. AI 역할 범위](./ai-role.html)
-- [2D. 공간 구조 — 방·테마·평수](./space.html)
-
-### Level 6 — 운영 (Operations)
-- [6A. 예약 시스템 — 피크 6-10pm 고정 슬롯 등](./reservation.html)
+- [6A. 예약 시스템 — 피크 6-10pm 고정 슬롯 등](./reservation.html) ★ user flow
 - [6B. 지점 운영 — 무인/유인·시간·SOP](./store.html)
 - [6C. 안전·보험·사고처리](./safety.html)
+
+## 회원 일상 흐름 (User Flow)
+
+```
+앱 예약 → 입장(QR) → 카디오 30분 → 방 PT 60분 → 세션 기록 → 퇴장 → AI 다음 추천
+```
+
+각 단계의 룰·SOP가 위 결정 노드에서 정의됩니다.
+
+> 세션 종류·포맷·AI·공간 (Level 2 서비스 정의)는 [4. 서비스](../service/) 카테고리 참고.

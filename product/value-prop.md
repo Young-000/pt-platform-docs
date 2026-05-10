@@ -1,7 +1,7 @@
 ---
 title: 1D. Value Proposition
-parent: 제품
-nav_order: 7
+parent: 1. 제품
+nav_order: 8
 ---
 
 # Level 1D — Value Proposition (한 줄 약속)

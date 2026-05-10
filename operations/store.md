@@ -1,7 +1,7 @@
 ---
 title: 6B. 지점 운영
-parent: 운영
-nav_order: 6
+parent: 5. 운영
+nav_order: 2
 ---
 
 # Level 6B — 지점 운영 (무인/유인·시간·SOP)

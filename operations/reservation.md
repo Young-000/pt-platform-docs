@@ -1,7 +1,7 @@
 ---
 title: 6A. 예약 시스템
-parent: 운영
-nav_order: 5
+parent: 5. 운영
+nav_order: 1
 ---
 
 # Level 6A — 예약 시스템

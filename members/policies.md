@@ -1,6 +1,6 @@
 ---
 title: 4D. 회원 정책 (환불·노쇼·취소)
-parent: 회원
+parent: 2. 회원
 nav_order: 4
 ---
 

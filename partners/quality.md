@@ -1,7 +1,7 @@
 ---
 title: 3E. 강사 품질·등급
-parent: 강사
-nav_order: 5
+parent: 3. 강사
+nav_order: 8
 ---
 
 # Level 3E — 강사 품질 관리·등급제

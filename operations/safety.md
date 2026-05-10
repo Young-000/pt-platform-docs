@@ -1,7 +1,7 @@
 ---
 title: 6C. 안전·보험·사고
-parent: 운영
-nav_order: 7
+parent: 5. 운영
+nav_order: 3
 ---
 
 # Level 6C — 안전·보험·사고처리

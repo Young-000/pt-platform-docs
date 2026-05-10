@@ -1,6 +1,6 @@
 ---
-title: 비즈니스 모델
-nav_order: 8
+title: 6. 비즈니스 모델
+nav_order: 7
 has_children: true
 ---
 

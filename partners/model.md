@@ -1,7 +1,7 @@
 ---
 title: 3A. Pro 강사 모델
-parent: 강사
-nav_order: 1
+parent: 3. 강사
+nav_order: 5
 ---
 
 # Level 3A — Pro 강사 모델 (gig vs 전속 vs hybrid)
@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | 🔴 TBD ★ 핵심 결정 |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [0. 비전 100호점](../product/vision.html) · [2A 세션 종류](../operations/session-types.html) |
+| **상위 의존** | [0. 비전 100호점](../product/vision.html) · [2A 세션 종류](../service/session-types.html) |
 | **하위 영향** | [3C 모집](./recruitment.html) · [3D 정산](./payout.html) · [3E 품질](./quality.html) · [4B 가격](../members/pricing.html) · [7C 원가](../economics/revenue-cost.html) · [5B 가맹점주 책임](../expansion/responsibility.html) |
 
 ---
@@ -61,6 +61,7 @@ nav_order: 1
 ## 추천
 
 **C (Hybrid)** — 100호점 비전과 사실상 유일하게 양립 가능.
+**다만 단계별 진화 필요.** 콜드스타트(1-3호점)에선 안정성, 스케일(4호점+)에서 다양화·파트형.
 
 핵심 매커니즘:
 - 강사 = 프리랜서 (직고용 ❌)
@@ -69,6 +70,16 @@ nav_order: 1
 - 피크 시간 의무 슬롯 비율 (예: 주당 X시간) → 공급 안정
 
 → ADR 봉인 가치 있는 결정.
+
+### 단계별 모델 진화
+
+| 단계 | 강사 풀 성격 | 의무 슬롯 강도 | 모집 다양성 |
+|---|---|---|---|
+| **Phase 1 (1-3호점)** | 본사 직접 헤드헌팅한 **안정 코어 강사 5-8명/지점** | 강함 (주 N시간 의무) | 좁음 — 검증된 풀만 |
+| **Phase 2 (4호점+)** | 코어 + **파트타임·다채널 모집** 강사 추가 | 코어는 의무, 파트는 자율 | 본격 다양화 |
+| **Phase 3 (10호점+)** | 강사 풀 자동화 onboarding, 지역별 분산 | 등급별 차등 | 자발 지원 ↑ |
+
+→ "PT 강사 다양 모집·파트형"은 **4호점 이상** 고민 영역. 1-3호점은 안정성 우선.
 
 ---
 
@@ -83,7 +94,7 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: 비전(100호점), [2A 세션 종류](../operations/session-types.html)
+**입력**: 비전(100호점), [2A 세션 종류](../service/session-types.html)
 **영향 주는 것**:
 - [3C 모집](./recruitment.html) — gig 모델은 모집 마찰 낮음
 - [3D 정산](./payout.html) — 회당 단가 + 등급 보너스

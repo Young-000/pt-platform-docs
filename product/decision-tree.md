@@ -1,6 +1,7 @@
 ---
 title: 결정 트리
-nav_order: 2
+parent: 1. 제품
+nav_order: 1
 ---
 
 # 결정 트리 (Decision Tree)
@@ -36,10 +37,10 @@ nav_order: 2
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 2A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](./operations/session-types.html) |
-| 2B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](./operations/session.html) |
-| 2C | AI 역할 범위 | [ai-role](./operations/ai-role.html) |
-| 2D | 공간 구조 — 방 단위·테마·평수 | [space](./operations/space.html) |
+| 2A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](./service/session-types.html) |
+| 2B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](./service/session.html) |
+| 2C | AI 역할 범위 | [ai-role](./service/ai-role.html) |
+| 2D | 공간 구조 — 방 단위·테마·평수 | [space](./service/space.html) |
 
 ---
 

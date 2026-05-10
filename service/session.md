@@ -1,6 +1,6 @@
 ---
 title: 2B. 세션 포맷
-parent: 운영
+parent: 4. 서비스
 nav_order: 2
 ---
 

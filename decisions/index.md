@@ -1,6 +1,6 @@
 ---
-title: 의사결정
-nav_order: 9
+title: 결정 기록 (ADR)
+nav_order: 11
 has_children: true
 ---
 

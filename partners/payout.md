@@ -1,7 +1,7 @@
 ---
 title: 3D. 강사 정산
-parent: 강사
-nav_order: 4
+parent: 3. 강사
+nav_order: 7
 ---
 
 # Level 3D — 강사 정산 구조

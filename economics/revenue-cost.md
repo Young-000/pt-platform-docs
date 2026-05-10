@@ -1,6 +1,6 @@
 ---
 title: 7B. 매출·원가 모델
-parent: 경제성
+parent: 7. 경제성
 nav_order: 2
 ---
 
