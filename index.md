@@ -1,94 +1,101 @@
 ---
 title: 홈
-layout: home
 nav_order: 1
 ---
 
 # PT Platform — 결정 대시보드
 
-> **예약제 private PT shop** — 강사 풀 + 공간 + AI 코치를 하나의 앱에 묶은 새로운 형태의 피트니스 서비스.
-> 목표: **100호점 이상 체인화**
+> **예약제 private PT shop with AI** — AI 기반 운동 세션을 핵심으로 하는 회원제 부티크 PT 서비스.
+> 목표: **100호점 이상 체인화** (가맹 모델 활용 가능).
 
 {: .note }
-> 본 사이트는 단순 위키가 아니라 **사업 OS**입니다. 모든 핵심 결정이 여기에 정의되고, 결정 전엔 🔴TBD로 남아 있습니다. 결정 후엔 ADR로 봉인됩니다.
+> 본 사이트는 단순 위키가 아니라 **사업 OS**입니다. 모든 핵심 결정이 여기에 정의되고, 결정 전엔 🔴 TBD로 남아 있습니다. 결정 후엔 ADR로 봉인됩니다.
+
+전체 구조는 **[결정 트리](./decision-tree.html)**에서 한눈에. 각 노드는 통일된 [결정 카드](./_decision-card-template.html) 양식을 따릅니다.
 
 ---
 
-## 결정 영역 (한눈에)
+## 결정 영역 한눈에
 
-각 영역의 상세 결정 항목은 해당 카테고리 페이지로 이동.
+각 항목 옆 상태가 색깔로 표시됩니다.
+**범례** — 🟢 결정 / 🟡 부분 정의 / 🔴 미결정 / ⚪ 외부 의존
 
 ### 제품 정체성
-| 항목 | 상태 |
-|---|---|
-| [정체성 — 예약제 private PT shop](./product/identity.html) | 🟡 Drafted |
-| [비전 — 100호점 확장](./product/vision.html) | 🟢 Locked |
-| [문제의식 — 5가지 고질병](./product/problems.html) | 🟢 Drafted |
-| [페르소나 — Middle Ground Mover](./product/personas.html) | 🟢 Drafted |
+
+- 🟡 [정체성 — 예약제 private PT shop with AI](./product/identity.html)
+- 🟢 [비전 — 100호점 확장](./product/vision.html)
+- 🔴 [문제의식 — 5가지 고질병 정제](./product/problems.html)
+- 🔴 [페르소나 — 1순위/2순위 단계화](./product/personas.html)
+- 🔴 [경쟁 대안 비교](./product/competition.html)
+- 🔴 [Value Proposition](./product/value-prop.html)
 
 ### 강사 (Partners) ★ 최우선
-| 항목 | 상태 |
-|---|---|
-| [강사 모델 (Pro vs Peer, gig vs hybrid)](./partners/model.html) | 🔴 TBD |
-| [강사 모집 전략 (콜드스타트 vs 스케일)](./partners/recruitment.html) | 🔴 TBD |
-| [강사 정산](./partners/payout.html) | 🔴 TBD |
-| [강사 품질 관리·등급](./partners/quality.html) | 🔴 TBD |
+
+- 🔴 [강사 모델 — Pro vs Peer, gig vs hybrid](./partners/model.html)
+- 🔴 [Peer 운동 리더 모델](./partners/peer-leader.html)
+- 🔴 [강사 모집 전략 — 콜드스타트 vs 스케일](./partners/recruitment.html)
+- 🔴 [강사 정산 구조](./partners/payout.html)
+- 🔴 [강사 품질 관리·등급](./partners/quality.html)
 
 ### 회원 (Members)
-| 항목 | 상태 |
-|---|---|
-| [회원 여정 (가입 → 재예약)](./members/journey.html) | 🔴 TBD |
-| [멤버십 구조](./members/membership.html) | 🔴 TBD |
-| [가격 체계](./members/pricing.html) | 🔴 TBD |
-| [환불·노쇼·취소](./members/policies.html) | 🔴 TBD |
+
+- 🔴 [회원 여정 — 가입 → 재예약](./members/journey.html)
+- 🔴 [멤버십 구조](./members/membership.html)
+- 🔴 [가격 체계](./members/pricing.html)
+- 🔴 [환불·노쇼·취소·일시정지·양도](./members/policies.html)
+
+### 서비스 (What)
+
+- 🔴 [세션 종류 — Pro PT vs Peer 운동](./operations/session-types.html)
+- 🟡 [세션 포맷 — 30분 카디오 + 60분 PT](./operations/session.html)
+- 🔴 [AI 역할 범위](./operations/ai-role.html)
+- 🔴 [공간 구조 — 방·테마·평수](./operations/space.html)
 
 ### 운영 (Operations)
-| 항목 | 상태 |
-|---|---|
-| [세션 구조 (30분 카디오 + 60분 PT)](./operations/session.html) | 🟡 Partial |
-| [예약 시스템](./operations/reservation.html) | 🔴 TBD |
-| [지점 운영 (무인/유인·운영시간 등)](./operations/store.html) | 🔴 TBD |
+
+- 🔴 [예약 시스템 — 피크 6-10pm 고정 슬롯 등](./operations/reservation.html)
+- 🔴 [지점 운영 — 무인/유인·시간·SOP](./operations/store.html)
+- 🔴 [안전·보험·사고처리](./operations/safety.html)
+
+### 비즈니스 모델 (How we make money)
+
+- 🔴 [확장 모델 — 직영 vs 가맹 vs 하이브리드](./expansion/model.html)
+- 🔴 [본사 ↔ 가맹점주 책임 분담](./expansion/responsibility.html)
+- 🔴 [본사 수익 모델 — 가맹비·로열티·분배](./expansion/revenue-share.html)
 
 ### 경제성 (Economics)
-| 항목 | 상태 |
-|---|---|
-| [단위 경제 (지점당)](./economics/unit-economics.html) | 🔴 TBD |
-| [매출 모델](./economics/revenue.html) | 🔴 TBD |
-| [원가 구조](./economics/cost.html) | 🔴 TBD |
-| [100호점 추정](./economics/projection.html) | 🔴 TBD |
+
+- 🔴 [단위 경제 — 지점당 P&L](./economics/unit-economics.html)
+- 🔴 [매출·원가 모델](./economics/revenue-cost.html)
+- 🔴 [100호점 추정 — BEP / CapEx](./economics/projection.html)
 
 ### 법무·약관
-| 항목 | 상태 |
-|---|---|
-| [개인정보 / 이용약관](./legal/) | ⚪ 변호사 검토 필요 |
 
-**범례**: 🟢 결정 · 🟡 부분 정의 · 🔴 미결정 · ⚪ 외부 의존
+- ⚪ [가맹사업법 / 정보공개서](./legal/franchise-law.html)
+- ⚪ [PT 자격증 법규](./legal/pt-license.html)
+- ⚪ [개인정보 / 이용약관](./legal/privacy-tos.html)
 
 ---
 
-## 우선순위 (먼저 풀어야 할 결정)
+## 우선 결정 순서
 
-| 순위 | 영역 | 왜 먼저 |
-|---|---|---|
-| 1 | **강사 모델** | 정산·품질·예약·회원 매칭 모두 여기서 파생 |
-| 2 | **세션 구조 확정** | "Pro PT" vs "Peer 운동" 두 종류 정의 |
-| 3 | **멤버십 구조** | 가격·회원 여정·예약 단위 모두 여기서 파생 |
-| 4 | **단위 경제** | 가격 결정의 검증 도구 |
-| 5 | **가격 체계** | 강사 정산 단가 + 시뮬레이터 입력값 |
-| 6 | **예약 시스템** | 위 결정되면 자연스럽게 도출 |
-| 7 | **회원 정책** | 운영 시작 직전 |
-| 8 | **약관·개인정보** | 사업자 등록 / 결제 연동 시 |
+1. **강사 모델** — 정산·품질·예약 모두 여기서 파생
+2. **세션 종류 (Pro PT vs Peer)** — 강사 모델과 동시 결정
+3. **멤버십 구조** — 가격·여정·예약 단위 입력
+4. **단위 경제** — 가격 결정의 검증 도구
+5. **가격 체계**
+6. **예약 시스템**
+7. **회원 정책 (환불·노쇼)**
+8. **약관·개인정보** — 사업자 등록 / 결제 연동 시
 
 ---
 
 ## 라이브 앱
 
-| 앱 | URL |
-|---|---|
-| 유저 앱 | [pt-platform-mvp.vercel.app](https://pt-platform-mvp.vercel.app) |
-| 강사 앱 | [pt-platform-partner.vercel.app](https://pt-platform-partner.vercel.app) |
-| 어드민 | [pt-platform-admin.vercel.app](https://pt-platform-admin.vercel.app) |
-| 수익 시뮬레이터 | [pt-platform-simulator.vercel.app](https://pt-platform-simulator.vercel.app) |
+- [유저 앱](https://pt-platform-mvp.vercel.app)
+- [강사 앱](https://pt-platform-partner.vercel.app)
+- [어드민](https://pt-platform-admin.vercel.app)
+- [수익 시뮬레이터](https://pt-platform-simulator.vercel.app)
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: 온보딩
-nav_order: 2
+nav_order: 3
 ---
 
 # 협업자 온보딩
