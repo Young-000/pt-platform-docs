@@ -44,6 +44,20 @@ callouts:
 last_edit_timestamp: true
 last_edit_time_format: "%Y-%m-%d %H:%M"
 
+# 페이지 하단 "GitHub에서 편집" 링크
+gh_edit_link: true
+gh_edit_link_text: "이 페이지 GitHub에서 편집하기"
+gh_edit_repository: "https://github.com/Young-000/pt-platform-docs"
+gh_edit_branch: "main"
+gh_edit_source: /
+gh_edit_view_mode: "edit"
+
+# 페이지 하단 "이슈 등록" 링크 (수정 요청용)
+nav_external_links:
+  - title: "수정 요청 / 이슈 등록"
+    url: "https://github.com/Young-000/pt-platform-docs/issues/new/choose"
+    hide_icon: false
+
 # 푸터
 footer_content: "PT Platform — 내부 문서. 외부 공유 금지."
 
