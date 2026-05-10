@@ -1,0 +1,67 @@
+title: PT Platform Docs
+description: 오프라인 링글 + 공간 예약 + AI 코치 — 제품 문서, 정책, 의사결정 기록
+
+remote_theme: just-the-docs/just-the-docs
+
+# 검색 활성화
+search_enabled: true
+search:
+  heading_level: 3
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+
+# 사이드바 보조 링크
+aux_links:
+  "GitHub Repo":
+    - "https://github.com/Young-000/pt-platform-docs"
+  "유저 앱":
+    - "https://pt-platform-mvp.vercel.app"
+  "강사 앱":
+    - "https://pt-platform-partner.vercel.app"
+  "어드민":
+    - "https://pt-platform-admin.vercel.app"
+  "수익 시뮬레이터":
+    - "https://pt-platform-simulator.vercel.app"
+
+# Mermaid 다이어그램
+mermaid:
+  version: "10.9.0"
+
+# Callouts (note/warning/tip)
+callouts:
+  warning:
+    title: 주의
+    color: red
+  note:
+    title: 메모
+    color: blue
+  tip:
+    title: 팁
+    color: green
+
+# 마지막 수정일 표시
+last_edit_timestamp: true
+last_edit_time_format: "%Y-%m-%d %H:%M"
+
+# 푸터
+footer_content: "PT Platform — 내부 문서. 외부 공유 금지."
+
+# 색상 모드
+color_scheme: light
+
+# 코드 복사 버튼
+enable_copy_code_button: true
+
+# 시간대
+timezone: Asia/Seoul
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
