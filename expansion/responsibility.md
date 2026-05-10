@@ -11,7 +11,7 @@ nav_order: 2
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [5A 확장 모델](./model.html) · [3A 강사 모델](../partners/model.html) |
+| **상위 의존** | [5A 확장 모델](./model.html) · [3E 강사 모델](../partners/model.html) |
 | **하위 영향** | [5C 수익 분배](./revenue-share.html) · 가맹 매뉴얼 · 가맹점주 모집 |
 
 ---
@@ -99,7 +99,7 @@ nav_order: 2
 
 ## 의존성
 
-**입력**: [5A 확장 모델](./model.html), [3A 강사 모델](../partners/model.html)
+**입력**: [5A 확장 모델](./model.html), [3E 강사 모델](../partners/model.html)
 **영향 주는 것**:
 - [5C 수익 분배](./revenue-share.html)
 - 가맹 정보공개서·계약서

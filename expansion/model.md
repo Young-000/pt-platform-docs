@@ -12,7 +12,7 @@ nav_order: 1
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [0 비전 100호점](../product/vision.html) |
-| **하위 영향** | [5B 책임 분담](./responsibility.html) · [5C 수익 모델](./revenue-share.html) · [3C 강사 모집](../partners/recruitment.html) · [7 Economics 전반](../economics/) |
+| **하위 영향** | [5B 책임 분담](./responsibility.html) · [5C 수익 모델](./revenue-share.html) · [3D 강사 모집](../partners/recruitment.html) · [7 Economics 전반](../economics/) |
 
 ---
 
@@ -104,7 +104,7 @@ nav_order: 1
 **영향 주는 것**:
 - [5B 책임 분담](./responsibility.html)
 - [5C 수익 모델](./revenue-share.html)
-- [3C 강사 모집](../partners/recruitment.html)
+- [3D 강사 모집](../partners/recruitment.html)
 - [7C 100호점 추정](../economics/projection.html)
 - [8A 가맹사업법](../legal/franchise-law.html)
 

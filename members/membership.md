@@ -1,10 +1,10 @@
 ---
-title: 🔴 4A. 멤버십 구조
+title: 🔴 4B. 멤버십 구조
 parent: 2. 회원
 nav_order: 2
 ---
 
-# Level 4A — 멤버십 구조
+# Level 4B — 멤버십 구조
 
 | | |
 |---|---|
@@ -12,7 +12,7 @@ nav_order: 2
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [2A 세션 종류](../service/session-types.html) · [1A 페르소나](../product/personas.html) |
-| **하위 영향** | [4B 가격](./pricing.html) · [4C 여정](./journey.html) · [4D 정책](./policies.html) · [6A 예약](../operations/reservation.html) · [7B 매출 모델](../economics/revenue-cost.html) |
+| **하위 영향** | [4C 가격](./pricing.html) · [4A 여정](./journey.html) · [4D 정책](./policies.html) · [6A 예약](../operations/reservation.html) · [7B 매출 모델](../economics/revenue-cost.html) |
 
 ---
 
@@ -95,7 +95,7 @@ nav_order: 2
 ## 결정 기준
 
 - [ ] 페르소나(1A) 1순위가 어느 티어에 가장 매력 느끼는가
-- [ ] 강사 모델(3A) 공급량과 일치하는가 (무제한은 공급 어려움)
+- [ ] 강사 모델(3E) 공급량과 일치하는가 (무제한은 공급 어려움)
 - [ ] 단위 경제 ([7A](../economics/unit-economics.html)) BEP 빠른가
 
 ---
@@ -104,8 +104,8 @@ nav_order: 2
 
 **입력**: [2A 세션 종류](../service/session-types.html), [1A 페르소나](../product/personas.html), [2C AI 역할](../service/ai-role.html)
 **영향 주는 것**:
-- [4B 가격](./pricing.html) — 티어별 가격
-- [4C 회원 여정](./journey.html) — 가입·갱신
+- [4C 가격](./pricing.html) — 티어별 가격
+- [4A 회원 여정](./journey.html) — 가입·갱신
 - [4D 정책](./policies.html) — 회차 환불·이월
 - [6A 예약 시스템](../operations/reservation.html) — 회차 차감 로직
 - [7B 매출](../economics/revenue-cost.html) — ARPU

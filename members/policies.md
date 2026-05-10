@@ -11,7 +11,7 @@ nav_order: 4
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [4A 멤버십](./membership.html) · [4B 가격](./pricing.html) |
+| **상위 의존** | [4B 멤버십](./membership.html) · [4C 가격](./pricing.html) |
 | **하위 영향** | 앱 UX · 본사 CS 프로세스 · [8C 약관](../legal/privacy-tos.html) · 분쟁 처리 |
 
 ---
@@ -103,7 +103,7 @@ nav_order: 4
 
 ## 의존성
 
-**입력**: [4A 멤버십](./membership.html), [4B 가격](./pricing.html)
+**입력**: [4B 멤버십](./membership.html), [4C 가격](./pricing.html)
 **영향 주는 것**:
 - [8C 약관](../legal/privacy-tos.html) — 약관 명시
 - 본사 CS SOP

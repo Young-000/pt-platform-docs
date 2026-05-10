@@ -1,10 +1,10 @@
 ---
-title: 🔴 3A. Pro 강사 모델
+title: 🔴 3E. Pro 강사 모델
 parent: 3. 강사
 nav_order: 5
 ---
 
-# Level 3A — Pro 강사 모델 (gig vs 전속 vs hybrid)
+# Level 3E — Pro 강사 모델 (gig vs 전속 vs hybrid)
 
 | | |
 |---|---|
@@ -12,7 +12,7 @@ nav_order: 5
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [0. 비전 100호점](../product/vision.html) · [2A 세션 종류](../service/session-types.html) |
-| **하위 영향** | [3C 모집](./recruitment.html) · [3D 정산](./payout.html) · [3E 품질](./quality.html) · [4B 가격](../members/pricing.html) · [7C 원가](../economics/revenue-cost.html) · [5B 가맹점주 책임](../expansion/responsibility.html) |
+| **하위 영향** | [3D 모집](./recruitment.html) · [3G 정산](./payout.html) · [3H 품질](./quality.html) · [4C 가격](../members/pricing.html) · [7C 원가](../economics/revenue-cost.html) · [5B 가맹점주 책임](../expansion/responsibility.html) |
 
 ---
 
@@ -86,7 +86,7 @@ nav_order: 5
 ## 결정 기준
 
 - [ ] 100호점 시 강사 수 추정 (B는 가능한가)
-- [ ] 콜드스타트 시 1지점 강사 10명 모집 가능성 ([3C](./recruitment.html))
+- [ ] 콜드스타트 시 1지점 강사 10명 모집 가능성 ([3D](./recruitment.html))
 - [ ] 강사 단가 시장 가격과 회당 정산 단가 매치
 - [ ] 변호사 검토 (프리랜서 계약 + 의무 슬롯 양립 가능?)
 
@@ -96,9 +96,9 @@ nav_order: 5
 
 **입력**: 비전(100호점), [2A 세션 종류](../service/session-types.html)
 **영향 주는 것**:
-- [3C 모집](./recruitment.html) — gig 모델은 모집 마찰 낮음
-- [3D 정산](./payout.html) — 회당 단가 + 등급 보너스
-- [3E 품질](./quality.html) — 등급제 핵심
+- [3D 모집](./recruitment.html) — gig 모델은 모집 마찰 낮음
+- [3G 정산](./payout.html) — 회당 단가 + 등급 보너스
+- [3H 품질](./quality.html) — 등급제 핵심
 - [5B 가맹점주 책임](../expansion/responsibility.html) — 강사 풀이 본사 자산이면 가맹점주는 공간만
 - [7C 원가](../economics/revenue-cost.html) — 강사 비용 = 회당 정산
 - [6A 예약](../operations/reservation.html) — 슬롯 매칭 알고리즘

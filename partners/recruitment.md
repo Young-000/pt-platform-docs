@@ -1,17 +1,17 @@
 ---
-title: 🔴 3C. 강사 모집 전략
+title: 🔴 3D. 강사 모집 전략
 parent: 3. 강사
 nav_order: 4
 ---
 
-# Level 3C — 강사 모집 전략 (콜드스타트 vs 스케일)
+# Level 3D — 강사 모집 전략 (콜드스타트 vs 스케일)
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [3A 강사 모델](./model.html) · [3B Peer 리더](./peer-leader.html) · [0 비전](../product/vision.html) |
+| **상위 의존** | [3E 강사 모델](./model.html) · [3F Peer 리더](./peer-leader.html) · [0 비전](../product/vision.html) |
 | **하위 영향** | 1호점 오픈 일정 · [5A 확장 모델](../expansion/model.html) · 마케팅 예산 |
 
 ---
@@ -120,7 +120,7 @@ nav_order: 4
 
 ## 의존성
 
-**입력**: [3A 강사 모델](./model.html), [3B Peer 리더](./peer-leader.html), [0 비전](../product/vision.html)
+**입력**: [3E 강사 모델](./model.html), [3F Peer 리더](./peer-leader.html), [0 비전](../product/vision.html)
 **영향 주는 것**:
 - 1호점 오픈 일정
 - [5A 확장 모델](../expansion/model.html)

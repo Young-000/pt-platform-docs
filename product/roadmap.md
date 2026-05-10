@@ -35,9 +35,9 @@ nav_order: 4
 - ✅ [정체성 락](./identity.html)
 - ✅ [100호점 비전 락](./vision.html)
 - 🔴 [1A 페르소나·1B 문제·1C 경쟁·1D VP](./personas.html) 결정
-- 🔴 [3A Pro 강사 모델](../partners/model.html) — Hybrid 결정 + 코어 풀
-- 🔴 [3D 정산](../partners/payout.html) 구조 결정
-- 🔴 [4A 멤버십·4B 가격](../members/pricing.html) 결정
+- 🔴 [3E Pro 강사 모델](../partners/model.html) — Hybrid 결정 + 코어 풀
+- 🔴 [3G 정산](../partners/payout.html) 구조 결정
+- 🔴 [4B 멤버십·4C 가격](../members/pricing.html) 결정
 - 🔴 자본 조달 (자기자본 + 시드)
 - ⚪ 법인 설립
 
@@ -55,10 +55,10 @@ nav_order: 4
 - 🔴 [2A 세션 종류](../service/session-types.html) — Pro/Peer 정의
 - 🔴 [2B 세션 포맷](../service/session.html) — 90분 락
 - 🔴 [2C AI 역할](../service/ai-role.html) 범위 결정
-- 🔴 [3C 강사 모집](../partners/recruitment.html) — 코어 5-10명 헤드헌팅
-- 🔴 [3B Peer 리더](../partners/peer-leader.html) 검증 코스 설계
+- 🔴 [3D 강사 모집](../partners/recruitment.html) — 코어 5-10명 헤드헌팅
+- 🔴 [3F Peer 리더](../partners/peer-leader.html) 검증 코스 설계
 - 🔴 [6A 예약 시스템](../operations/reservation.html) — 고정 슬롯 + AI 매칭
-- 🔴 [4C 회원 여정](../members/journey.html) · [4D 정책](../members/policies.html)
+- 🔴 [4A 회원 여정](../members/journey.html) · [4D 정책](../members/policies.html)
 - 🔴 1호점 회원 모집 시작 → BEP 검증
 
 ---
@@ -85,7 +85,7 @@ nav_order: 4
 
 ### 🎯 Service
 
-- 🔴 ★ **[3A 강사 모델 다양화](../partners/model.html) — 파트타임·다채널 본격화**
+- 🔴 ★ **[3E 강사 모델 다양화](../partners/model.html) — 파트타임·다채널 본격화**
 - 🔴 강사 풀 자동화 onboarding 시스템
 - 🔴 AI 시스템 본격 가동 (Mock → 실 데이터 학습)
 - 🔴 회원 데이터 플라이휠 작동 검증
@@ -148,7 +148,7 @@ nav_order: 4
 ```
 🏢 가맹 모델 결정 (5A)  ──► 📍 가맹점 표준 사이즈 (Phase 2)  ──► 🎯 가맹점 강사 풀 운영
                                                                          ▲
-🏢 강사 정산 (3D)  ──────────────────────────────────────────────────────┘
+🏢 강사 정산 (3G)  ──────────────────────────────────────────────────────┘
 ```
 
 - 🏢 결정이 📍·🎯 실행을 가로막을 수 있음

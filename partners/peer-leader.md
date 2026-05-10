@@ -1,10 +1,10 @@
 ---
-title: 🔴 3B. Peer 운동 리더
+title: 🔴 3F. Peer 운동 리더
 parent: 3. 강사
 nav_order: 6
 ---
 
-# Level 3B — Peer 운동 리더 (자격·보상·검증)
+# Level 3F — Peer 운동 리더 (자격·보상·검증)
 
 | | |
 |---|---|
@@ -12,7 +12,7 @@ nav_order: 6
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [2A 세션 종류](../service/session-types.html) · [2C AI 역할](../service/ai-role.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
-| **하위 영향** | [3C 모집](./recruitment.html) · [3D 정산](./payout.html) · [4B 가격](../members/pricing.html) |
+| **하위 영향** | [3D 모집](./recruitment.html) · [3G 정산](./payout.html) · [4C 가격](../members/pricing.html) |
 
 ---
 
@@ -84,7 +84,7 @@ nav_order: 6
 | 회원 수 비례 | 인원 적은 슬롯 부담 |
 | 회당 + 등급 보너스 | Pro 강사와 동일 구조 |
 
-→ 강사 정산([3D](./payout.html))과 함께 결정.
+→ 강사 정산([3G](./payout.html))과 함께 결정.
 
 ---
 
@@ -100,9 +100,9 @@ nav_order: 6
 
 **입력**: [2A 세션 종류](../service/session-types.html), [2C AI 역할](../service/ai-role.html), [8B PT 자격증 법규](../legal/pt-license.html)
 **영향 주는 것**:
-- [3D 정산](./payout.html) — Peer 회당 단가
-- [3C 모집](./recruitment.html) — Peer 풀 모집
-- [4B 가격](../members/pricing.html) — Peer 세션 가격이 Pro의 X% 수준?
+- [3G 정산](./payout.html) — Peer 회당 단가
+- [3D 모집](./recruitment.html) — Peer 풀 모집
+- [4C 가격](../members/pricing.html) — Peer 세션 가격이 Pro의 X% 수준?
 
 ---
 

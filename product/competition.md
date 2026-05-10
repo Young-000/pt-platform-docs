@@ -12,7 +12,7 @@ nav_order: 7
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [1A 회원 페르소나](./personas.html) · [1B 문제의식](./problems.html) |
-| **하위 영향** | [1D Value Prop](./value-prop.html) · [4B 가격](../members/pricing.html) · 마케팅 포지셔닝 |
+| **하위 영향** | [1D Value Prop](./value-prop.html) · [4C 가격](../members/pricing.html) · 마케팅 포지셔닝 |
 
 ---
 
@@ -128,7 +128,7 @@ nav_order: 7
 **입력**: [1A 페르소나](./personas.html), [1B 문제의식](./problems.html)
 **영향 주는 것**:
 - [1D Value Prop](./value-prop.html) — 두 축 한 줄 압축
-- [4B 가격](../members/pricing.html) — "풀 PT 절반"이 검증되도록 가격 책정
+- [4C 가격](../members/pricing.html) — "풀 PT 절반"이 검증되도록 가격 책정
 - 마케팅 메시지·광고
 
 ---

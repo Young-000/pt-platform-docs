@@ -1,18 +1,18 @@
 ---
-title: 🔴 3D. 강사 정산
+title: 🔴 3G. 강사 정산
 parent: 3. 강사
 nav_order: 7
 ---
 
-# Level 3D — 강사 정산 구조
+# Level 3G — 강사 정산 구조
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [3A 강사 모델](./model.html) · [3B Peer 리더](./peer-leader.html) · [3E 품질·등급](./quality.html) |
-| **하위 영향** | [4B 가격](../members/pricing.html) · [7B 매출·원가](../economics/revenue-cost.html) · [5C 본사 수익](../expansion/revenue-share.html) |
+| **상위 의존** | [3E 강사 모델](./model.html) · [3F Peer 리더](./peer-leader.html) · [3H 품질·등급](./quality.html) |
+| **하위 영향** | [4C 가격](../members/pricing.html) · [7B 매출·원가](../economics/revenue-cost.html) · [5C 본사 수익](../expansion/revenue-share.html) |
 
 ---
 
@@ -74,7 +74,7 @@ nav_order: 7
 
 ## 분배 가설 (90분 세션 X만원 기준, B 모델)
 
-가격 결정 전 가설치. 가격([4B](../members/pricing.html)) 결정 후 재산출.
+가격 결정 전 가설치. 가격([4C](../members/pricing.html)) 결정 후 재산출.
 
 | 받는 사람 | 비율 | 금액 (예: 결제 5만원 기준) |
 |---|---|---|
@@ -102,9 +102,9 @@ nav_order: 7
 
 ## 의존성
 
-**입력**: [3A 모델](./model.html), [3B Peer](./peer-leader.html), [3E 등급](./quality.html)
+**입력**: [3E 모델](./model.html), [3F Peer](./peer-leader.html), [3H 등급](./quality.html)
 **영향 주는 것**:
-- [4B 가격](../members/pricing.html) — 강사 단가 ≤ 회원 결제액
+- [4C 가격](../members/pricing.html) — 강사 단가 ≤ 회원 결제액
 - [7B 매출·원가](../economics/revenue-cost.html) — 강사 비용 = 핵심 변동비
 - [5C 본사 수익 모델](../expansion/revenue-share.html)
 

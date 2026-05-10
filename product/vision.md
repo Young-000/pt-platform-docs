@@ -63,7 +63,7 @@ Phase 1 ──────► Phase 2 ──────► Phase 3 ────
 | **Phase 3** | 등급별 차등, 자발 지원 ↑ | 시스템 자동화 |
 | **Phase 4** | 지역 분산, 마스터 가맹 강사 풀 | 지역 단위 |
 
-→ 자세한 내용: [3A 강사 모델](../partners/model.html) · [3C 모집 전략](../partners/recruitment.html)
+→ 자세한 내용: [3E 강사 모델](../partners/model.html) · [3D 모집 전략](../partners/recruitment.html)
 
 ---
 

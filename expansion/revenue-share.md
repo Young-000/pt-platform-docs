@@ -11,7 +11,7 @@ nav_order: 3
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [5A 확장 모델](./model.html) · [5B 책임 분담](./responsibility.html) · [3D 정산](../partners/payout.html) |
+| **상위 의존** | [5A 확장 모델](./model.html) · [5B 책임 분담](./responsibility.html) · [3G 정산](../partners/payout.html) |
 | **하위 영향** | [7B 매출 모델](../economics/revenue-cost.html) · [7C 100호점 추정](../economics/projection.html) · 가맹 모집 |
 
 ---
@@ -107,7 +107,7 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: [5A 확장](./model.html), [5B R&R](./responsibility.html), [3D 정산](../partners/payout.html), [4B 가격](../members/pricing.html)
+**입력**: [5A 확장](./model.html), [5B R&R](./responsibility.html), [3G 정산](../partners/payout.html), [4C 가격](../members/pricing.html)
 **영향 주는 것**:
 - [7B 매출 모델](../economics/revenue-cost.html)
 - [7C 100호점 추정](../economics/projection.html)

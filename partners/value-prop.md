@@ -1,17 +1,17 @@
 ---
-title: 🔴 3H. 강사 Value Prop
+title: 🔴 3C. 강사 Value Prop
 parent: 3. 강사
 nav_order: 3
 ---
 
-# Level 3H — 강사 Value Proposition
+# Level 3C — 강사 Value Proposition
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [3F 강사 페르소나](./personas.html) · [3G 강사 문제의식](./problems.html) · [3D 정산](./payout.html) · [3E 등급](./quality.html) |
+| **상위 의존** | [3A 강사 페르소나](./personas.html) · [3B 강사 문제의식](./problems.html) · [3G 정산](./payout.html) · [3H 등급](./quality.html) |
 | **하위 영향** | 강사 모집 카피 · 강사 onboarding |
 
 ---
@@ -84,11 +84,11 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: 3F·3G·3D·3E
+**입력**: 3A·3B·3G·3H
 **영향 주는 것**:
 - 강사 모집 카피·채널·헤드헌팅 스크립트
 - 강사 onboarding 페이지
-- [3C 모집 전략](./recruitment.html)
+- [3D 모집 전략](./recruitment.html)
 
 ---
 

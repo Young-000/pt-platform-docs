@@ -1,10 +1,10 @@
 ---
-title: 🔴 4B. 가격 체계
+title: 🔴 4C. 가격 체계
 parent: 2. 회원
 nav_order: 3
 ---
 
-# Level 4B — 가격 체계
+# Level 4C — 가격 체계
 
 | | |
 |---|---|
@@ -12,7 +12,7 @@ nav_order: 3
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **재검토 사유** | 초기 가설 가격 (Light 15만 / Standard 25만 / Premium 40만)은 placeholder. 실제 가격은 페르소나·강사 정산·단위 경제·경쟁사 검증 후 재산출 필요. |
-| **상위 의존** | [4A 멤버십](./membership.html) · [3D 정산](../partners/payout.html) · [1C 경쟁비교](../product/competition.html) |
+| **상위 의존** | [4B 멤버십](./membership.html) · [3G 정산](../partners/payout.html) · [1C 경쟁비교](../product/competition.html) |
 | **하위 영향** | [7A 단위 경제](../economics/unit-economics.html) · [7B 매출](../economics/revenue-cost.html) · [1D Value Prop](../product/value-prop.html) |
 
 ---
@@ -98,7 +98,7 @@ nav_order: 3
 
 ## 결정 기준
 
-- [ ] 강사 정산 단가 ([3D](../partners/payout.html))와 합산 시 본사 마진 충분
+- [ ] 강사 정산 단가 ([3G](../partners/payout.html))와 합산 시 본사 마진 충분
 - [ ] 페르소나 1순위가 25만/월에 willing to pay인가 (인터뷰)
 - [ ] 단위 경제 ([7A](../economics/unit-economics.html)) BEP 18개월 이하
 
@@ -106,7 +106,7 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: [4A 멤버십](./membership.html), [3D 정산](../partners/payout.html), [1C 경쟁](../product/competition.html)
+**입력**: [4B 멤버십](./membership.html), [3G 정산](../partners/payout.html), [1C 경쟁](../product/competition.html)
 **영향 주는 것**:
 - [7A 단위 경제](../economics/unit-economics.html) — ARPU 입력
 - [1D Value Prop](../product/value-prop.html) — "절반 가격" 메시지

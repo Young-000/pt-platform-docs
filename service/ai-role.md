@@ -12,7 +12,7 @@ nav_order: 3
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [0. 정체성](../product/identity.html) (AI는 핵심 차별점) · [2A 세션 종류](./session-types.html) |
-| **하위 영향** | [2B 세션 포맷](./session.html) · [3B Peer 리더](../partners/peer-leader.html) · [4C 회원 여정](../members/journey.html) · [7C 원가 구조](../economics/revenue-cost.html) (AI 비용) |
+| **하위 영향** | [2B 세션 포맷](./session.html) · [3F Peer 리더](../partners/peer-leader.html) · [4A 회원 여정](../members/journey.html) · [7C 원가 구조](../economics/revenue-cost.html) (AI 비용) |
 
 ---
 
@@ -89,8 +89,8 @@ nav_order: 3
 
 **입력**: 정체성, [2A 세션 종류](./session-types.html)
 **영향 주는 것**:
-- [3B Peer 리더 모델](../partners/peer-leader.html) — Peer는 AI 의존
-- [4C 회원 여정](../members/journey.html) — AI 터치포인트
+- [3F Peer 리더 모델](../partners/peer-leader.html) — Peer는 AI 의존
+- [4A 회원 여정](../members/journey.html) — AI 터치포인트
 - [7C 원가 구조](../economics/revenue-cost.html) — AI API 비용
 
 ---

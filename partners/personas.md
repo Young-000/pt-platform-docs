@@ -1,18 +1,18 @@
 ---
-title: 🔴 3F. 강사 페르소나
+title: 🔴 3A. 강사 페르소나
 parent: 3. 강사
 nav_order: 1
 ---
 
-# Level 3F — 강사 페르소나 (강사도 우리 고객)
+# Level 3A — 강사 페르소나 (강사도 우리 고객)
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [3A 강사 모델](./model.html) · [0 비전](../product/vision.html) |
-| **하위 영향** | [3C 모집 전략](./recruitment.html) · [3D 정산](./payout.html) · [3G 강사 VP](./value-prop.html) · 강사 모집 카피 |
+| **상위 의존** | [3E 강사 모델](./model.html) · [0 비전](../product/vision.html) |
+| **하위 영향** | [3D 모집 전략](./recruitment.html) · [3G 정산](./payout.html) · [3B 강사 VP](./value-prop.html) · 강사 모집 카피 |
 
 ---
 
@@ -120,11 +120,11 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: [3A 강사 모델](./model.html), [0 비전](../product/vision.html)
+**입력**: [3E 강사 모델](./model.html), [0 비전](../product/vision.html)
 **영향 주는 것**:
-- [3C 모집 전략](./recruitment.html)
-- [3D 정산](./payout.html) — 페르소나별 매력 포인트
-- [3G 강사 VP](./value-prop.html)
+- [3D 모집 전략](./recruitment.html)
+- [3G 정산](./payout.html) — 페르소나별 매력 포인트
+- [3B 강사 VP](./value-prop.html)
 - 강사 모집 카피·채널
 
 ---

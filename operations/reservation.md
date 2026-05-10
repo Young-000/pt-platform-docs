@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2B 세션 포맷](./session.html) · [2D 공간 구조](./space.html) · [4A 멤버십](../members/membership.html) · [3A 강사 모델](../partners/model.html) |
+| **상위 의존** | [2B 세션 포맷](./session.html) · [2D 공간 구조](./space.html) · [4B 멤버십](../members/membership.html) · [3E 강사 모델](../partners/model.html) |
 | **하위 영향** | 앱 UX · utilization (= 단위 경제 직격) · [4D 노쇼 정책](../members/policies.html) |
 
 ---
@@ -102,13 +102,13 @@ nav_order: 1
 
 - [ ] 페르소나(1A) 1순위가 "고정 슬롯"을 선호하는가 (직장인 정기 운동 패턴)
 - [ ] utilization 시뮬레이션 (피크 90% / 오프피크 30~50%)
-- [ ] 강사 모델([3A](../partners/model.html))과 정합 (피크 의무 슬롯 ↔ 고정 슬롯)
+- [ ] 강사 모델([3E](../partners/model.html))과 정합 (피크 의무 슬롯 ↔ 고정 슬롯)
 
 ---
 
 ## 의존성
 
-**입력**: [2B 세션 포맷](./session.html), [2D 공간](./space.html), [4A 멤버십](../members/membership.html), [3A 강사 모델](../partners/model.html)
+**입력**: [2B 세션 포맷](./session.html), [2D 공간](./space.html), [4B 멤버십](../members/membership.html), [3E 강사 모델](../partners/model.html)
 **영향 주는 것**:
 - 앱 예약 UX
 - [7A 단위 경제](../economics/unit-economics.html) — utilization

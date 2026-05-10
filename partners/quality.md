@@ -1,18 +1,18 @@
 ---
-title: 🔴 3E. 강사 품질·등급
+title: 🔴 3H. 강사 품질·등급
 parent: 3. 강사
 nav_order: 8
 ---
 
-# Level 3E — 강사 품질 관리·등급제
+# Level 3H — 강사 품질 관리·등급제
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [3A 강사 모델](./model.html) · [3D 정산](./payout.html) |
-| **하위 영향** | 매칭 알고리즘 · [3D 정산 보너스](./payout.html) · 회원 만족도 |
+| **상위 의존** | [3E 강사 모델](./model.html) · [3G 정산](./payout.html) |
+| **하위 영향** | 매칭 알고리즘 · [3G 정산 보너스](./payout.html) · 회원 만족도 |
 
 ---
 
@@ -92,9 +92,9 @@ nav_order: 8
 
 ## 의존성
 
-**입력**: [3A 강사 모델](./model.html), [3D 정산](./payout.html)
+**입력**: [3E 강사 모델](./model.html), [3G 정산](./payout.html)
 **영향 주는 것**:
-- [3D 정산 보너스](./payout.html)
+- [3G 정산 보너스](./payout.html)
 - 매칭 알고리즘 (예약 시 등급 노출)
 - 회원 LTV (강사 품질이 retention 핵심)
 

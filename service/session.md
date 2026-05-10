@@ -98,7 +98,7 @@ nav_order: 2
 - [6A 예약 시스템](./reservation.html) — 슬롯 단위 = 90분
 - [6B 지점 운영](./store.html) — 청소·전환 SOP
 - [7A 단위 경제](../economics/unit-economics.html) — utilization × 평당수익
-- [4B 가격](../members/pricing.html) — 90분 가치 가격
+- [4C 가격](../members/pricing.html) — 90분 가치 가격
 
 ---
 

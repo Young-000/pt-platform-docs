@@ -1,18 +1,18 @@
 ---
-title: 🔴 3G. 강사 문제의식
+title: 🔴 3B. 강사 문제의식
 parent: 3. 강사
 nav_order: 2
 ---
 
-# Level 3G — 강사 문제의식 (강사 입장의 페인)
+# Level 3B — 강사 문제의식 (강사 입장의 페인)
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [3F 강사 페르소나](./personas.html) |
-| **하위 영향** | [3H 강사 Value Prop](./value-prop.html) · [3D 정산](./payout.html) · 강사 모집 카피 |
+| **상위 의존** | [3A 강사 페르소나](./personas.html) |
+| **하위 영향** | [3C 강사 Value Prop](./value-prop.html) · [3G 정산](./payout.html) · 강사 모집 카피 |
 
 ---
 
@@ -103,12 +103,12 @@ nav_order: 2
 
 ## 의존성
 
-**입력**: [3F 강사 페르소나](./personas.html)
+**입력**: [3A 강사 페르소나](./personas.html)
 **영향 주는 것**:
-- [3H 강사 VP](./value-prop.html)
-- [3D 정산](./payout.html) — 보상 구조
+- [3C 강사 VP](./value-prop.html)
+- [3G 정산](./payout.html) — 보상 구조
 - 강사 모집 카피
-- [3E 등급 시스템](./quality.html)
+- [3H 등급 시스템](./quality.html)
 
 ---
 

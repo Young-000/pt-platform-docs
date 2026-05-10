@@ -11,7 +11,7 @@ nav_order: 2
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [4A 멤버십](../members/membership.html) · [4B 가격](../members/pricing.html) · [3D 정산](../partners/payout.html) · [5C 본사 분배](../expansion/revenue-share.html) |
+| **상위 의존** | [4B 멤버십](../members/membership.html) · [4C 가격](../members/pricing.html) · [3G 정산](../partners/payout.html) · [5C 본사 분배](../expansion/revenue-share.html) |
 | **하위 영향** | [7A 단위 경제](./unit-economics.html) · [7C 추정](./projection.html) |
 
 ---
@@ -107,7 +107,7 @@ nav_order: 2
 
 ## 의존성
 
-**입력**: [4A](../members/membership.html), [4B](../members/pricing.html), [3D](../partners/payout.html), [5C](../expansion/revenue-share.html)
+**입력**: [4B](../members/membership.html), [4C](../members/pricing.html), [3G](../partners/payout.html), [5C](../expansion/revenue-share.html)
 **영향 주는 것**: [7A](./unit-economics.html), [7C](./projection.html)
 
 ---
