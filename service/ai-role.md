@@ -1,5 +1,5 @@
 ---
-title: 2C. AI 역할 범위
+title: 🔴 2C. AI 역할 범위
 parent: 4. 서비스
 nav_order: 3
 ---

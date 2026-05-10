@@ -1,5 +1,5 @@
 ---
-title: 4B. 가격 체계
+title: 🔴 4B. 가격 체계
 parent: 2. 회원
 nav_order: 3
 ---

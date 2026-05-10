@@ -1,5 +1,5 @@
 ---
-title: 1C. 경쟁 대안 비교
+title: 🟡 1C. 경쟁 대안 비교
 parent: 1. 제품
 nav_order: 7
 ---

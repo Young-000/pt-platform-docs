@@ -1,5 +1,5 @@
 ---
-title: 3D. 강사 정산
+title: 🔴 3D. 강사 정산
 parent: 3. 강사
 nav_order: 7
 ---

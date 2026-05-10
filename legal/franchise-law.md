@@ -1,5 +1,5 @@
 ---
-title: 8A. 가맹사업법
+title: ⚪ 8A. 가맹사업법
 parent: 법무·약관
 nav_order: 1
 ---

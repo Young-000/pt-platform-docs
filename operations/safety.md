@@ -1,5 +1,5 @@
 ---
-title: 6C. 안전·보험·사고
+title: 🔴 6C. 안전·보험·사고
 parent: 5. 운영
 nav_order: 3
 ---

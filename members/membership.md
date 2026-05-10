@@ -1,5 +1,5 @@
 ---
-title: 4A. 멤버십 구조
+title: 🔴 4A. 멤버십 구조
 parent: 2. 회원
 nav_order: 2
 ---

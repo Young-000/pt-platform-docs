@@ -1,5 +1,5 @@
 ---
-title: 7A. 단위 경제 (지점당)
+title: 🔴 7A. 단위 경제 (지점당)
 parent: 7. 경제성
 nav_order: 1
 ---

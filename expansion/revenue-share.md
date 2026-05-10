@@ -1,5 +1,5 @@
 ---
-title: 5C. 본사 수익 모델
+title: 🔴 5C. 본사 수익 모델
 parent: 6. 비즈니스 모델
 nav_order: 3
 ---

@@ -1,5 +1,5 @@
 ---
-title: 3H. 강사 Value Prop
+title: 🔴 3H. 강사 Value Prop
 parent: 3. 강사
 nav_order: 3
 ---

@@ -1,5 +1,5 @@
 ---
-title: 3C. 강사 모집 전략
+title: 🔴 3C. 강사 모집 전략
 parent: 3. 강사
 nav_order: 4
 ---

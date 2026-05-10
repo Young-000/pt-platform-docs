@@ -1,5 +1,5 @@
 ---
-title: 결정 트리
+title: 📋 결정 트리
 parent: 1. 제품
 nav_order: 1
 ---

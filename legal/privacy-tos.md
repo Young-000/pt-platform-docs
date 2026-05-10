@@ -1,5 +1,5 @@
 ---
-title: 8C. 개인정보·이용약관
+title: ⚪ 8C. 개인정보·이용약관
 parent: 법무·약관
 nav_order: 3
 ---

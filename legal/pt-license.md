@@ -1,5 +1,5 @@
 ---
-title: 8B. PT 자격증 법규
+title: ⚪ 8B. PT 자격증 법규
 parent: 법무·약관
 nav_order: 2
 ---

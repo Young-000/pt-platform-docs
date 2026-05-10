@@ -1,5 +1,5 @@
 ---
-title: 3F. 강사 페르소나
+title: 🔴 3F. 강사 페르소나
 parent: 3. 강사
 nav_order: 1
 ---

@@ -1,5 +1,5 @@
 ---
-title: 3B. Peer 운동 리더
+title: 🔴 3B. Peer 운동 리더
 parent: 3. 강사
 nav_order: 6
 ---

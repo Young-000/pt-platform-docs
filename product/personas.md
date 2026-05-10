@@ -1,5 +1,5 @@
 ---
-title: 1A. 회원 페르소나 ★ 시작점
+title: 🟡 1A. 회원 페르소나 ★ 시작점
 parent: 1. 제품
 nav_order: 5
 ---

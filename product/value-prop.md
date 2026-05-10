@@ -1,5 +1,5 @@
 ---
-title: 1D. Value Proposition
+title: 🔴 1D. Value Proposition
 parent: 1. 제품
 nav_order: 8
 ---

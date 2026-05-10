@@ -1,5 +1,5 @@
 ---
-title: 1B. 문제의식 (수요·공급)
+title: 🔴 1B. 문제의식 (수요·공급)
 parent: 1. 제품
 nav_order: 6
 ---

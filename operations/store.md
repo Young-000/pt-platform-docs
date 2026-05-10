@@ -1,5 +1,5 @@
 ---
-title: 6B. 지점 운영
+title: 🔴 6B. 지점 운영
 parent: 5. 운영
 nav_order: 2
 ---

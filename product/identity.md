@@ -1,5 +1,5 @@
 ---
-title: 0. 정체성
+title: 🟢 0. 정체성
 parent: 1. 제품
 nav_order: 2
 ---

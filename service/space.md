@@ -1,5 +1,5 @@
 ---
-title: 2D. 공간 구조
+title: 🔴 2D. 공간 구조
 parent: 4. 서비스
 nav_order: 4
 ---

@@ -1,5 +1,5 @@
 ---
-title: 3A. Pro 강사 모델
+title: 🔴 3A. Pro 강사 모델
 parent: 3. 강사
 nav_order: 5
 ---

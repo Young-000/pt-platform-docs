@@ -1,5 +1,5 @@
 ---
-title: 2A. 세션 종류 (Pro vs Peer)
+title: 🔴 2A. 세션 종류 (Pro vs Peer)
 parent: 4. 서비스
 nav_order: 1
 ---

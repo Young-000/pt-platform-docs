@@ -1,5 +1,5 @@
 ---
-title: 3G. 강사 문제의식
+title: 🔴 3G. 강사 문제의식
 parent: 3. 강사
 nav_order: 2
 ---

@@ -1,5 +1,5 @@
 ---
-title: 3E. 강사 품질·등급
+title: 🔴 3E. 강사 품질·등급
 parent: 3. 강사
 nav_order: 8
 ---

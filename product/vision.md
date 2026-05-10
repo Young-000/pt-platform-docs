@@ -1,5 +1,5 @@
 ---
-title: 0. 비전 (100호점)
+title: 🟢 0. 비전 (100호점)
 parent: 1. 제품
 nav_order: 3
 ---
