@@ -6,93 +6,166 @@ nav_order: 0
 
 # 단위 경제 시뮬레이션
 
-> **3 가동률 × 3 멘토 단가 = 9 시나리오.**
-> 이 페이지는 라이브 결정용 작업장입니다. 숫자 바뀌면 이 페이지에서 먼저 갱신.
+> 슬라이더·드롭다운 조정 시 자동 계산. **현재 결정(주 1·2회권, 멘토 30분, 90평 8방, 직영)** 기준.
 
-라이브 인터랙티브 시뮬레이터 → [pt-platform-simulator.vercel.app](https://pt-platform-simulator.vercel.app)
+<style>
+.sim {
+  background: #f7f9fb;
+  border: 1px solid #d8e0e8;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  font-family: system-ui, sans-serif;
+}
+.sim h3 { margin-top: 0; }
+.sim .field {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin: 0.6rem 0;
+}
+.sim .field > label { flex: 0 0 13rem; font-weight: 500; }
+.sim .field > input[type=range] { flex: 1; }
+.sim .field > .val { flex: 0 0 5rem; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: #1a73e8; }
+.sim select { padding: 0.3rem 0.5rem; }
+.sim .out {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem;
+  background: #fff; padding: 1rem; border-radius: 6px; margin-top: 1rem;
+  border: 1px solid #d8e0e8;
+}
+.sim .out .row { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #eef; }
+.sim .out .row.hi { background: #fffbe7; padding-left: 0.5rem; padding-right: 0.5rem; border-radius: 4px; border-bottom: none; }
+.sim .out .row b { color: #d97706; }
+.sim .label { color: #555; }
+.sim .num { font-weight: 600; font-variant-numeric: tabular-nums; }
+.sim .formula { font-size: 0.85rem; color: #888; margin-top: 0.5rem; }
+</style>
+
+<div class="sim">
+  <h3>입력</h3>
+
+  <div class="field">
+    <label>평당 임대료 (만원/월)</label>
+    <input type="range" id="i-rent" min="6" max="13" value="10" step="0.5">
+    <span class="val"><span id="v-rent">10</span>만</span>
+  </div>
+
+  <div class="field">
+    <label>멘토 회당 정산 (원, 30분 1:1)</label>
+    <input type="range" id="i-mentor" min="10000" max="35000" value="20000" step="1000">
+    <span class="val"><span id="v-mentor">20,000</span>원</span>
+  </div>
+
+  <div class="field">
+    <label>가동률 시나리오</label>
+    <select id="i-util">
+      <option value="321">공격적 (90/50/70 → 321h/방/월)</option>
+      <option value="270" selected>표준 (85/35/60 → 270h/방/월)</option>
+      <option value="215">보수적 (70/25/50 → 215h/방/월)</option>
+    </select>
+    <span class="val"></span>
+  </div>
+
+  <div class="field">
+    <label>목표 흑자 (만원/지점/월)</label>
+    <input type="range" id="i-margin" min="0" max="2000" value="500" step="100">
+    <span class="val"><span id="v-margin">500</span>만</span>
+  </div>
+
+  <div class="field">
+    <label>인건비·관리비 분담 (만원/방/월)</label>
+    <input type="range" id="i-ops" min="50" max="150" value="90" step="10">
+    <span class="val"><span id="v-ops">90</span>만</span>
+  </div>
+
+  <h3 style="margin-top:1.5rem;">결과</h3>
+
+  <div class="out">
+    <div class="row"><span class="label">방 1개 임대료</span><span class="num"><span id="o-rent-room"></span>만/월</span></div>
+    <div class="row"><span class="label">방 1개 총 비용</span><span class="num"><span id="o-cost-room"></span>만/월</span></div>
+    <div class="row"><span class="label">효율 방시간/방/월</span><span class="num"><span id="o-hours"></span>h</span></div>
+    <div class="row"><span class="label">우리 시간당 수령 (BEP)</span><span class="num"><span id="o-take-bep"></span>원</span></div>
+    <div class="row"><span class="label">우리 시간당 수령 (흑자)</span><span class="num"><span id="o-take-goal"></span>원</span></div>
+    <div class="row"><span class="label">회원 결제 BEP (1세션)</span><span class="num"><span id="o-pay-bep"></span>원</span></div>
+    <div class="row hi"><span class="label"><b>회원 결제 (흑자 목표, 1세션)</b></span><span class="num"><b><span id="o-pay-goal"></span>원</b></span></div>
+    <div class="row hi"><span class="label"><b>주 2회권 (월)</b></span><span class="num"><b><span id="o-week2"></span>원</b></span></div>
+    <div class="row"><span class="label">주 1회권 (월)</span><span class="num"><span id="o-week1"></span>원</span></div>
+    <div class="row"><span class="label">지점 월 매출 (예상)</span><span class="num"><span id="o-rev"></span>만/월</span></div>
+  </div>
+
+  <div class="formula">
+    수식: 방 1개 비용 = (평당 × 11) + 인건비 분담 · 우리 수령 = 비용/효율방시간 · 회원결제 = 우리수령 + 멘토회당
+  </div>
+</div>
+
+<script>
+(function(){
+  const ids = ['i-rent','i-mentor','i-util','i-margin','i-ops'];
+  const $ = id => document.getElementById(id);
+  const fmt = n => n.toLocaleString('ko-KR');
+  const round = (n, step) => Math.round(n / step) * step;
+
+  function calc(){
+    const rent = parseFloat($('i-rent').value);
+    const mentor = parseInt($('i-mentor').value, 10);
+    const util = parseInt($('i-util').value, 10);
+    const marginM = parseInt($('i-margin').value, 10);
+    const opsM = parseInt($('i-ops').value, 10);
+
+    $('v-rent').textContent = rent;
+    $('v-mentor').textContent = fmt(mentor);
+    $('v-margin').textContent = marginM;
+    $('v-ops').textContent = opsM;
+
+    const rentRoomM = rent * 11;                  // 방 1개 임대료(만/월)
+    const costRoomM = rentRoomM + opsM;           // 방 1개 총 비용(만)
+    const costRoomWon = costRoomM * 10000;        // 원
+    const takeBep = costRoomWon / util;           // BEP 시간당 (원)
+    const marginRoomWon = (marginM * 10000) / 8;  // 방당 흑자 (원)
+    const takeGoal = (costRoomWon + marginRoomWon) / util;
+
+    const payBep = takeBep + mentor;
+    const payGoal = takeGoal + mentor;
+
+    const week2 = payGoal * 8;  // 월 8회
+    const week1 = payGoal * 4;  // 월 4회
+
+    const revPerRoomM = (payGoal * util) / 10000;  // 방 매출(만)
+    const revStoreM = revPerRoomM * 8;             // 지점 매출(만)
+
+    $('o-rent-room').textContent = rentRoomM.toFixed(0);
+    $('o-cost-room').textContent = costRoomM.toFixed(0);
+    $('o-hours').textContent = util;
+    $('o-take-bep').textContent = fmt(Math.round(takeBep));
+    $('o-take-goal').textContent = fmt(Math.round(takeGoal));
+    $('o-pay-bep').textContent = fmt(round(payBep, 100));
+    $('o-pay-goal').textContent = fmt(round(payGoal, 100));
+    $('o-week2').textContent = fmt(round(week2, 1000));
+    $('o-week1').textContent = fmt(round(week1, 1000));
+    $('o-rev').textContent = revStoreM.toFixed(0);
+  }
+
+  ids.forEach(id => $(id).addEventListener('input', calc));
+  calc();
+})();
+</script>
 
 ---
 
-## 기본 가정
+## 락된 가정 (시뮬레이터 안 변수 ❌)
 
-| 항목 | 값 |
-|---|---|
-| 표준 지점 | 90평, 8방 (각 11평 환산) |
-| 임대료 | 평당 10만원/월 = 방 1개 110만 |
-| 운영비 (방 1개 분담) | 약 200만/월 (임대 110 + 인건비·관리 90) |
-| 멘토 운영 | 회원 1세션당 30분 1:1 = 멘토 시간당 2명 |
-| 효율 방시간/월 | 가동률 시나리오별 (아래) |
+- 표준 지점: 90평, 8방 (방 1개 11평 환산)
+- 멘토 운영: 회원 1세션당 30분 1:1 → 멘토 1시간 = 2 회원
+- 회원 1세션 = 90분 세트 (카디오 30 + 방 60)
+- Phase 1 직영 (가맹 분배 ❌)
 
-## 가동률 시나리오 (방 1개 효율 방시간/월)
+## 시나리오 의미
 
-| | 골든타임 | 오프피크 | 주말 | 효율 방시간 |
-|---|---|---|---|---|
-| 공격적 | 90% | 50% | 70% | **321h** |
-| **표준** | 85% | 35% | 60% | **270h** |
-| 보수적 | 70% | 25% | 50% | **215h** |
-
-## 멘토 회당 정산 (30분 1:1 기준)
-
-| 회당 | 시급 환산 | 시장 시세 비교 |
-|---|---|---|
-| 15,000원 | 30,000/시간 | 헬스장 피고용 수준 |
-| **20,000원** | 40,000/시간 | 부티크 그룹 PT 수준 |
-| 25,000원 | 50,000/시간 | 프리랜서 시세 |
+| 시나리오 | 골든타임 | 오프피크 | 주말 |
+|---|---|---|---|
+| 공격적 | 90% | 50% | 70% |
+| 표준 | 85% | 35% | 60% |
+| 보수적 | 70% | 25% | 50% |
 
 ---
 
-## 9 시나리오 매트릭스 — BEP 회원 결제 (1세션 = 90분 세트)
-
-```
-BEP: 우리 수령 (회원결제 - 멘토회당) × 효율방시간 = 운영비 200만
-```
-
-| 가동률\멘토 | 15,000원 | 20,000원 | 25,000원 |
-|---|---|---|---|
-| 공격적 (321h) | 21,200원 | 26,200원 | 31,200원 |
-| **표준 (270h)** | **22,400원** | **27,400원** | **32,400원** |
-| 보수적 (215h) | 24,300원 | 29,300원 | 34,300원 |
-
-→ 회원 1세션 BEP 결제액. 그 이상 = 흑자.
-
-## 9 시나리오 매트릭스 — 흑자 회원 결제 (지점당 월 500만 마진 목표)
-
-| 가동률\멘토 | 15,000원 | 20,000원 | 25,000원 |
-|---|---|---|---|
-| 공격적 (321h) | 23,100원 | 28,100원 | 33,100원 |
-| **표준 (270h)** | **24,700원** | **29,700원** | **34,700원** |
-| 보수적 (215h) | 27,200원 | 32,200원 | 37,200원 |
-
-## 주 2회권 환산 (회원 결제 × 8)
-
-흑자 목표 기준:
-
-| 가동률\멘토 | 15,000원 | 20,000원 | 25,000원 |
-|---|---|---|---|
-| 공격적 | 약 18만 | 약 22만 | 약 26만 |
-| **표준** | **약 20만** | **약 24만** | **약 28만** |
-| 보수적 | 약 22만 | 약 26만 | 약 30만 |
-
-## 주 1회권 환산 (회원 결제 × 4)
-
-| 가동률\멘토 | 15,000원 | 20,000원 | 25,000원 |
-|---|---|---|---|
-| **표준** | 약 10만 | **약 12만** | 약 14만 |
-
----
-
-## 추천 시나리오 (Phase 1 직영 검증)
-
-**표준 가동률 (270h) + 멘토 20k/회 (시급 40k)**
-
-- 회원 결제: **약 30,000원/세션**
-- 주 2회권: **약 24만/월**
-- 주 1회권: **약 12만/월**
-- 지점당 월 흑자: 500만
-
-→ 부티크 그룹 PT(25-35만)와 헬스장(5-15만) 사이 sweet spot.
-→ Phase 2 가맹 시작 시 분배 구조 추가 → 가격 인상 또는 분배 비율 조정 필요.
-
----
-
-| 2026-05-12 | 9 시나리오 매트릭스 초안. 라이브 갱신 페이지로 운영. |
+| 2026-05-12 | 9 시나리오 매트릭스 |
+| 2026-05-12 | 인터랙티브 슬라이더 시뮬레이션으로 교체 |
