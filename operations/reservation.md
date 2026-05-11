@@ -1,18 +1,18 @@
 ---
-title: 🔴 6A. 예약 시스템
+title: 🔴 5A. 예약 시스템
 parent: 5. 운영
 nav_order: 1
 ---
 
-# Level 6A — 예약 시스템
+# Level 5A — 예약 시스템
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2B 세션 포맷](./session.html) · [2D 공간 구조](./space.html) · [4B 멤버십](../members/membership.html) · [3E 강사 모델](../partners/model.html) |
-| **하위 영향** | 앱 UX · utilization (= 단위 경제 직격) · [4D 노쇼 정책](../members/policies.html) |
+| **상위 의존** | [4B 세션 포맷](./session.html) · [4D 공간 구조](./space.html) · [2B 멤버십](../members/membership.html) · [3E 강사 모델](../partners/model.html) |
+| **하위 영향** | 앱 UX · utilization (= 단위 경제 직격) · [2D 노쇼 정책](../members/policies.html) |
 
 ---
 
@@ -46,7 +46,7 @@ nav_order: 1
 
 ### 변경/취소 룰
 
-→ [4D 회원 정책](../members/policies.html)과 동일 룰:
+→ [2D 회원 정책](../members/policies.html)과 동일 룰:
 - 24시간 전: 무료
 - 6시간 전: 회차 50%
 - 6시간 이내: 회차 100% (=노쇼)
@@ -108,11 +108,11 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: [2B 세션 포맷](./session.html), [2D 공간](./space.html), [4B 멤버십](../members/membership.html), [3E 강사 모델](../partners/model.html)
+**입력**: [4B 세션 포맷](./session.html), [4D 공간](./space.html), [2B 멤버십](../members/membership.html), [3E 강사 모델](../partners/model.html)
 **영향 주는 것**:
 - 앱 예약 UX
 - [7A 단위 경제](../economics/unit-economics.html) — utilization
-- [4D 노쇼](../members/policies.html)
+- [2D 노쇼](../members/policies.html)
 
 ---
 

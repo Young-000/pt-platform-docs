@@ -1,18 +1,18 @@
 ---
-title: 🟡 2B. 세션 포맷
+title: 🟡 4B. 세션 포맷
 parent: 4. 서비스
 nav_order: 2
 ---
 
-# Level 2B — 세션 포맷 (30분 카디오 + 60분 방 운동)
+# Level 4B — 세션 포맷 (30분 카디오 + 60분 방 운동)
 
 | | |
 |---|---|
 | **상태** | 🟡 Partial |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2A 세션 종류](./session-types.html) · [2D 공간 구조](./space.html) |
-| **하위 영향** | [6A 예약 시스템](./reservation.html) · [7A 단위 경제](../economics/unit-economics.html) (utilization!) |
+| **상위 의존** | [4A 세션 종류](./session-types.html) · [4D 공간 구조](./space.html) |
+| **하위 영향** | [5A 예약 시스템](./reservation.html) · [7A 단위 경제](../economics/unit-economics.html) (utilization!) |
 
 ---
 
@@ -93,12 +93,12 @@ nav_order: 2
 
 ## 의존성
 
-**입력**: [2A 세션 종류](./session-types.html), [2D 공간 구조](./space.html)
+**입력**: [4A 세션 종류](./session-types.html), [4D 공간 구조](./space.html)
 **영향 주는 것**:
-- [6A 예약 시스템](./reservation.html) — 슬롯 단위 = 90분
-- [6B 지점 운영](./store.html) — 청소·전환 SOP
+- [5A 예약 시스템](./reservation.html) — 슬롯 단위 = 90분
+- [5B 지점 운영](./store.html) — 청소·전환 SOP
 - [7A 단위 경제](../economics/unit-economics.html) — utilization × 평당수익
-- [4C 가격](../members/pricing.html) — 90분 가치 가격
+- [2C 가격](../members/pricing.html) — 90분 가치 가격
 
 ---
 

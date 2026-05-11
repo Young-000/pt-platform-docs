@@ -12,7 +12,7 @@ nav_order: 4
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [3E 강사 모델](./model.html) · [3F Peer 리더](./peer-leader.html) · [0 비전](../product/vision.html) |
-| **하위 영향** | 1호점 오픈 일정 · [5A 확장 모델](../expansion/model.html) · 마케팅 예산 |
+| **하위 영향** | 1호점 오픈 일정 · [6A 확장 모델](../expansion/model.html) · 마케팅 예산 |
 
 ---
 
@@ -123,7 +123,7 @@ nav_order: 4
 **입력**: [3E 강사 모델](./model.html), [3F Peer 리더](./peer-leader.html), [0 비전](../product/vision.html)
 **영향 주는 것**:
 - 1호점 오픈 일정
-- [5A 확장 모델](../expansion/model.html)
+- [6A 확장 모델](../expansion/model.html)
 - 본사 인사·CS 조직 규모
 
 ---

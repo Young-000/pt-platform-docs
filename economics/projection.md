@@ -11,7 +11,7 @@ nav_order: 3
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [7A 단위 경제](./unit-economics.html) · [7B 매출·원가](./revenue-cost.html) · [5A 확장 모델](../expansion/model.html) |
+| **상위 의존** | [7A 단위 경제](./unit-economics.html) · [7B 매출·원가](./revenue-cost.html) · [6A 확장 모델](../expansion/model.html) |
 | **하위 영향** | 자본 조달 계획 · 투자 IR · 가맹 정보공개서 |
 
 ---
@@ -103,7 +103,7 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: [7A](./unit-economics.html), [7B](./revenue-cost.html), [5A 확장](../expansion/model.html)
+**입력**: [7A](./unit-economics.html), [7B](./revenue-cost.html), [6A 확장](../expansion/model.html)
 **영향 주는 것**:
 - 자본 조달 계획
 - 투자 IR

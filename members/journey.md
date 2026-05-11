@@ -1,17 +1,17 @@
 ---
-title: 🔴 4A. 회원 여정
+title: 🔴 2A. 회원 여정
 parent: 2. 회원
 nav_order: 1
 ---
 
-# Level 4A — 회원 여정 (가입 → 재예약)
+# Level 2A — 회원 여정 (가입 → 재예약)
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [4B 멤버십](./membership.html) · [4C 가격](./pricing.html) · [2C AI 역할](../service/ai-role.html) |
+| **상위 의존** | [2B 멤버십](./membership.html) · [2C 가격](./pricing.html) · [4C AI 역할](../service/ai-role.html) |
 | **하위 영향** | 앱 UX · CS 프로세스 · 이탈 방지 · LTV |
 
 ---
@@ -71,7 +71,7 @@ nav_order: 1
 
 ### Stage 8 — 이탈
 - 사유 서베이 (가격? 강사? 효과?)
-- 환불 처리 ([4D](./policies.html))
+- 환불 처리 ([2D](./policies.html))
 - 6개월 후 콜백 (재가입 인센티브)
 
 ---
@@ -114,7 +114,7 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: [4B 멤버십](./membership.html), [4C 가격](./pricing.html), [2C AI 역할](../service/ai-role.html), [3H 강사 등급](../partners/quality.html)
+**입력**: [2B 멤버십](./membership.html), [2C 가격](./pricing.html), [4C AI 역할](../service/ai-role.html), [3H 강사 등급](../partners/quality.html)
 **영향 주는 것**:
 - 앱 UX 전반
 - 본사 CS 조직

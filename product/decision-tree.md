@@ -33,14 +33,14 @@ nav_order: 1
 
 ---
 
-## Level 2 — 서비스 (What)
+## Level 4 — 서비스 (What)
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 2A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](./service/session-types.html) |
-| 2B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](./service/session.html) |
-| 2C | AI 역할 범위 | [ai-role](./service/ai-role.html) |
-| 2D | 공간 구조 — 방 단위·테마·평수 | [space](./service/space.html) |
+| 4A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](./service/session-types.html) |
+| 4B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](./service/session.html) |
+| 4C | AI 역할 범위 | [ai-role](./service/ai-role.html) |
+| 4D | 공간 구조 — 방 단위·테마·평수 | [space](./service/space.html) |
 
 ---
 
@@ -56,34 +56,34 @@ nav_order: 1
 
 ---
 
-## Level 4 — 회원 (Members)
+## Level 2 — 회원 (Members)
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 4B | 멤버십 구조 | [membership](./members/membership.html) |
-| 4C | 가격 체계 | [pricing](./members/pricing.html) |
-| 4A | 회원 여정 (가입~이탈방지) | [journey](./members/journey.html) |
-| 4D | 환불·노쇼·취소·일시정지·양도 | [policies](./members/policies.html) |
+| 2B | 멤버십 구조 | [membership](./members/membership.html) |
+| 2C | 가격 체계 | [pricing](./members/pricing.html) |
+| 2A | 회원 여정 (가입~이탈방지) | [journey](./members/journey.html) |
+| 2D | 환불·노쇼·취소·일시정지·양도 | [policies](./members/policies.html) |
 
 ---
 
-## Level 5 — 비즈니스 모델 (How we make money)
+## Level 6 — 비즈니스 모델 (How we make money)
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 5A | 확장 모델 — 직영 vs 가맹 vs 하이브리드 | [expansion-model](./expansion/model.html) |
-| 5B | 본사 ↔ 가맹점주 책임 분담 | [responsibility](./expansion/responsibility.html) |
-| 5C | 본사 수익 모델 (가맹비·로열티·분배) | [revenue-share](./expansion/revenue-share.html) |
+| 6A | 확장 모델 — 직영 vs 가맹 vs 하이브리드 | [expansion-model](./expansion/model.html) |
+| 6B | 본사 ↔ 가맹점주 책임 분담 | [responsibility](./expansion/responsibility.html) |
+| 6C | 본사 수익 모델 (가맹비·로열티·분배) | [revenue-share](./expansion/revenue-share.html) |
 
 ---
 
-## Level 6 — 운영 (Operations)
+## Level 5 — 운영 (Operations)
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 6A | 예약 시스템 (피크 6-10pm 고정 슬롯 등) | [reservation](./operations/reservation.html) |
-| 6B | 지점 운영 (무인/유인, 시간, SOP) | [store](./operations/store.html) |
-| 6C | 안전·보험·사고 | [safety](./operations/safety.html) |
+| 5A | 예약 시스템 (피크 6-10pm 고정 슬롯 등) | [reservation](./operations/reservation.html) |
+| 5B | 지점 운영 (무인/유인, 시간, SOP) | [store](./operations/store.html) |
+| 5C | 안전·보험·사고 | [safety](./operations/safety.html) |
 
 ---
 

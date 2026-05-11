@@ -12,7 +12,7 @@ nav_order: 7
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [3E 강사 모델](./model.html) · [3F Peer 리더](./peer-leader.html) · [3H 품질·등급](./quality.html) |
-| **하위 영향** | [4C 가격](../members/pricing.html) · [7B 매출·원가](../economics/revenue-cost.html) · [5C 본사 수익](../expansion/revenue-share.html) |
+| **하위 영향** | [2C 가격](../members/pricing.html) · [7B 매출·원가](../economics/revenue-cost.html) · [6C 본사 수익](../expansion/revenue-share.html) |
 
 ---
 
@@ -74,7 +74,7 @@ nav_order: 7
 
 ## 분배 가설 (90분 세션 X만원 기준, B 모델)
 
-가격 결정 전 가설치. 가격([4C](../members/pricing.html)) 결정 후 재산출.
+가격 결정 전 가설치. 가격([2C](../members/pricing.html)) 결정 후 재산출.
 
 | 받는 사람 | 비율 | 금액 (예: 결제 5만원 기준) |
 |---|---|---|
@@ -95,7 +95,7 @@ nav_order: 7
 
 - [ ] 시장 시세 대비 강사 수령액 매력도
 - [ ] 단위 경제 시뮬레이션에서 본사 마진 충분한가
-- [ ] 가맹점주 입장 분배율이 매력적인가 ([5C](../expansion/revenue-share.html))
+- [ ] 가맹점주 입장 분배율이 매력적인가 ([6C](../expansion/revenue-share.html))
 - [ ] 4대 보험·세무 처리 (프리랜서 vs 사업소득)
 
 ---
@@ -104,9 +104,9 @@ nav_order: 7
 
 **입력**: [3E 모델](./model.html), [3F Peer](./peer-leader.html), [3H 등급](./quality.html)
 **영향 주는 것**:
-- [4C 가격](../members/pricing.html) — 강사 단가 ≤ 회원 결제액
+- [2C 가격](../members/pricing.html) — 강사 단가 ≤ 회원 결제액
 - [7B 매출·원가](../economics/revenue-cost.html) — 강사 비용 = 핵심 변동비
-- [5C 본사 수익 모델](../expansion/revenue-share.html)
+- [6C 본사 수익 모델](../expansion/revenue-share.html)
 
 ---
 

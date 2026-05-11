@@ -1,10 +1,10 @@
 ---
-title: 🔴 2A. 세션 종류 (Pro vs Peer)
+title: 🔴 4A. 세션 종류 (Pro vs Peer)
 parent: 4. 서비스
 nav_order: 1
 ---
 
-# Level 2A — 세션 종류 (Pro PT vs Peer 운동)
+# Level 4A — 세션 종류 (Pro PT vs Peer 운동)
 
 | | |
 |---|---|
@@ -12,7 +12,7 @@ nav_order: 1
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
 | **상위 의존** | [0. 정체성](../product/identity.html) · [1A 페르소나](../product/personas.html) |
-| **하위 영향** | [3E 강사 모델](../partners/model.html) · [3F Peer 리더](../partners/peer-leader.html) · [4B 멤버십](../members/membership.html) · [4C 가격](../members/pricing.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
+| **하위 영향** | [3E 강사 모델](../partners/model.html) · [3F Peer 리더](../partners/peer-leader.html) · [2B 멤버십](../members/membership.html) · [2C 가격](../members/pricing.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
 
 ---
 
@@ -95,9 +95,9 @@ nav_order: 1
 **영향 주는 것**:
 - [3E 강사 모델](../partners/model.html) — Pro 강사
 - [3F Peer 리더 모델](../partners/peer-leader.html) — Peer 리더 자격·보상
-- [4B 멤버십](../members/membership.html) — 회차 구성
-- [4C 가격](../members/pricing.html) — Pro vs Peer 가격 격차
-- [2C AI 역할](./ai-role.html) — Peer 세션의 AI 의존도가 더 큼
+- [2B 멤버십](../members/membership.html) — 회차 구성
+- [2C 가격](../members/pricing.html) — Pro vs Peer 가격 격차
+- [4C AI 역할](./ai-role.html) — Peer 세션의 AI 의존도가 더 큼
 - [8B PT 자격증 법규](../legal/pt-license.html)
 
 ---

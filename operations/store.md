@@ -1,17 +1,17 @@
 ---
-title: 🔴 6B. 지점 운영
+title: 🔴 5B. 지점 운영
 parent: 5. 운영
 nav_order: 2
 ---
 
-# Level 6B — 지점 운영 (무인/유인·시간·SOP)
+# Level 5B — 지점 운영 (무인/유인·시간·SOP)
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [5B 가맹점주 책임](../expansion/responsibility.html) · [2D 공간](./space.html) |
+| **상위 의존** | [6B 가맹점주 책임](../expansion/responsibility.html) · [4D 공간](./space.html) |
 | **하위 영향** | 가맹점주 인건비 · 회원 UX · [7C 원가](../economics/revenue-cost.html) |
 
 ---
@@ -108,7 +108,7 @@ Phase 1 운영 시간 가설:
 
 ## 의존성
 
-**입력**: [5B R&R](../expansion/responsibility.html), [2D 공간](./space.html)
+**입력**: [6B R&R](../expansion/responsibility.html), [4D 공간](./space.html)
 **영향 주는 것**:
 - 가맹점주 인건비
 - [7B 원가](../economics/revenue-cost.html)

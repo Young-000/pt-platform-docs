@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | ⚪ 변호사 검토 필요 |
 | **Owner** | @young + 변호사 |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [5A 확장 모델](../expansion/model.html) · [5C 본사 수익](../expansion/revenue-share.html) |
+| **상위 의존** | [6A 확장 모델](../expansion/model.html) · [6C 본사 수익](../expansion/revenue-share.html) |
 | **하위 영향** | 가맹 모집 가능 시점 · 가맹점주 계약 |
 
 ---
@@ -80,7 +80,7 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: [5A 확장](../expansion/model.html), [5C 수익 분배](../expansion/revenue-share.html)
+**입력**: [6A 확장](../expansion/model.html), [6C 수익 분배](../expansion/revenue-share.html)
 **영향 주는 것**:
 - 가맹 모집 시점
 - 가맹계약서 표준안

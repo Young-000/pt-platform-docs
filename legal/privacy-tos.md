@@ -11,7 +11,7 @@ nav_order: 3
 | **상태** | ⚪ 변호사 검토 필요 |
 | **Owner** | @young + 변호사 |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [4B 멤버십](../members/membership.html) · [4D 정책](../members/policies.html) · [3E 강사 모델](../partners/model.html) |
+| **상위 의존** | [2B 멤버십](../members/membership.html) · [2D 정책](../members/policies.html) · [3E 강사 모델](../partners/model.html) |
 | **하위 영향** | 앱 약관 표시 · 회원 가입 화면 · 분쟁 처리 |
 
 ---
@@ -92,7 +92,7 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: 4B·4D·3E·5A
+**입력**: 2B·2D·3E·6A
 **영향 주는 것**:
 - 앱 회원가입 UX (약관 동의)
 - 강사·가맹 계약서 표준안

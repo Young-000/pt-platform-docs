@@ -11,8 +11,8 @@ nav_order: 6
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2A 세션 종류](../service/session-types.html) · [2C AI 역할](../service/ai-role.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
-| **하위 영향** | [3D 모집](./recruitment.html) · [3G 정산](./payout.html) · [4C 가격](../members/pricing.html) |
+| **상위 의존** | [4A 세션 종류](../service/session-types.html) · [4C AI 역할](../service/ai-role.html) · [8B PT 자격증 법규](../legal/pt-license.html) |
+| **하위 영향** | [3D 모집](./recruitment.html) · [3G 정산](./payout.html) · [2C 가격](../members/pricing.html) |
 
 ---
 
@@ -98,11 +98,11 @@ nav_order: 6
 
 ## 의존성
 
-**입력**: [2A 세션 종류](../service/session-types.html), [2C AI 역할](../service/ai-role.html), [8B PT 자격증 법규](../legal/pt-license.html)
+**입력**: [4A 세션 종류](../service/session-types.html), [4C AI 역할](../service/ai-role.html), [8B PT 자격증 법규](../legal/pt-license.html)
 **영향 주는 것**:
 - [3G 정산](./payout.html) — Peer 회당 단가
 - [3D 모집](./recruitment.html) — Peer 풀 모집
-- [4C 가격](../members/pricing.html) — Peer 세션 가격이 Pro의 X% 수준?
+- [2C 가격](../members/pricing.html) — Peer 세션 가격이 Pro의 X% 수준?
 
 ---
 

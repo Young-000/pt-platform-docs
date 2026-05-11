@@ -11,7 +11,7 @@ nav_order: 2
 | **상태** | ⚪ 변호사 검토 필요 ★ 핵심 |
 | **Owner** | @young + 변호사 |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2A 세션 종류](../service/session-types.html) · [3F Peer 리더](../partners/peer-leader.html) |
+| **상위 의존** | [4A 세션 종류](../service/session-types.html) · [3F Peer 리더](../partners/peer-leader.html) |
 | **하위 영향** | Peer 모델 가능 여부 · 사업 자체의 법적 안전성 |
 
 ---
@@ -88,11 +88,11 @@ nav_order: 2
 
 ## 의존성
 
-**입력**: [2A 세션 종류](../service/session-types.html), [3F Peer 리더](../partners/peer-leader.html)
+**입력**: [4A 세션 종류](../service/session-types.html), [3F Peer 리더](../partners/peer-leader.html)
 **영향 주는 것**:
 - Peer 모델 자체의 가능 여부 → 사업 모델 근간
 - 명칭·마케팅 제약
-- [6C 안전·보험](../operations/safety.html)
+- [5C 안전·보험](../operations/safety.html)
 - 약관 ([8C](./privacy-tos.html))
 
 ---

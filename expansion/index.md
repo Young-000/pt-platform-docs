@@ -10,6 +10,6 @@ has_children: true
 
 ## 결정 노드
 
-- [5A. 확장 모델 — 직영 vs 가맹 vs 하이브리드](./model.html)
-- [5B. 본사 ↔ 가맹점주 책임 분담](./responsibility.html)
-- [5C. 본사 수익 모델 — 가맹비·로열티·매출 분배](./revenue-share.html)
+- [6A. 확장 모델 — 직영 vs 가맹 vs 하이브리드](./model.html)
+- [6B. 본사 ↔ 가맹점주 책임 분담](./responsibility.html)
+- [6C. 본사 수익 모델 — 가맹비·로열티·매출 분배](./revenue-share.html)

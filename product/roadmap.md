@@ -37,14 +37,14 @@ nav_order: 4
 - 🔴 [1A 페르소나·1B 문제·1C 경쟁·1D VP](./personas.html) 결정
 - 🔴 [3E Pro 강사 모델](../partners/model.html) — Hybrid 결정 + 코어 풀
 - 🔴 [3G 정산](../partners/payout.html) 구조 결정
-- 🔴 [4B 멤버십·4C 가격](../members/pricing.html) 결정
+- 🔴 [2B 멤버십·2C 가격](../members/pricing.html) 결정
 - 🔴 자본 조달 (자기자본 + 시드)
 - ⚪ 법인 설립
 
 ### 📍 Space
 
 - 🔴 1호점 입지 결정 (오피스 vs 주거+오피스)
-- 🔴 [2D 공간 구조](../service/space.html) — 90평 8룸 표준 확정
+- 🔴 [4D 공간 구조](../service/space.html) — 90평 8룸 표준 확정
 - 🔴 임대 계약
 - 🔴 인테리어 설계·시공
 - 🔴 운동기구 입고
@@ -52,13 +52,13 @@ nav_order: 4
 
 ### 🎯 Service
 
-- 🔴 [2A 세션 종류](../service/session-types.html) — Pro/Peer 정의
-- 🔴 [2B 세션 포맷](../service/session.html) — 90분 락
-- 🔴 [2C AI 역할](../service/ai-role.html) 범위 결정
+- 🔴 [4A 세션 종류](../service/session-types.html) — Pro/Peer 정의
+- 🔴 [4B 세션 포맷](../service/session.html) — 90분 락
+- 🔴 [4C AI 역할](../service/ai-role.html) 범위 결정
 - 🔴 [3D 강사 모집](../partners/recruitment.html) — 코어 5-10명 헤드헌팅
 - 🔴 [3F Peer 리더](../partners/peer-leader.html) 검증 코스 설계
-- 🔴 [6A 예약 시스템](../operations/reservation.html) — 고정 슬롯 + AI 매칭
-- 🔴 [4A 회원 여정](../members/journey.html) · [4D 정책](../members/policies.html)
+- 🔴 [5A 예약 시스템](../operations/reservation.html) — 고정 슬롯 + AI 매칭
+- 🔴 [2A 회원 여정](../members/journey.html) · [2D 정책](../members/policies.html)
 - 🔴 1호점 회원 모집 시작 → BEP 검증
 
 ---
@@ -70,8 +70,8 @@ nav_order: 4
 
 ### 🏢 Business
 
-- 🔴 [5A 확장 모델](../expansion/model.html) — 직영+가맹 혼합 본격화
-- 🔴 [5B R&R](../expansion/responsibility.html) · [5C 수익 분배](../expansion/revenue-share.html) 확정
+- 🔴 [6A 확장 모델](../expansion/model.html) — 직영+가맹 혼합 본격화
+- 🔴 [6B R&R](../expansion/responsibility.html) · [6C 수익 분배](../expansion/revenue-share.html) 확정
 - ⚪ [8A 가맹사업법](../legal/franchise-law.html) — 정보공개서 등록
 - 🔴 가맹 1호점 모집·계약
 - 🔴 시리즈 A 검토
@@ -146,7 +146,7 @@ nav_order: 4
 ## 트랙 간 의존성 (예시)
 
 ```
-🏢 가맹 모델 결정 (5A)  ──► 📍 가맹점 표준 사이즈 (Phase 2)  ──► 🎯 가맹점 강사 풀 운영
+🏢 가맹 모델 결정 (6A)  ──► 📍 가맹점 표준 사이즈 (Phase 2)  ──► 🎯 가맹점 강사 풀 운영
                                                                          ▲
 🏢 강사 정산 (3G)  ──────────────────────────────────────────────────────┘
 ```

@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2D 공간](../service/space.html) · [4B 멤버십](../members/membership.html) · [4C 가격](../members/pricing.html) · [3G 강사 정산](../partners/payout.html) · [5C 본사 분배](../expansion/revenue-share.html) |
+| **상위 의존** | [4D 공간](../service/space.html) · [2B 멤버십](../members/membership.html) · [2C 가격](../members/pricing.html) · [3G 강사 정산](../partners/payout.html) · [6C 본사 분배](../expansion/revenue-share.html) |
 | **하위 영향** | [7C 100호점 추정](./projection.html) · 가맹 BEP · 투자 IR |
 
 ---
@@ -66,7 +66,7 @@ nav_order: 1
 | 매니저 인건비 | 250만 | 1인 |
 | 알바 인건비 | 200만 | 2인 시프트 |
 | 강사 정산 (회원당 평균) | 매출의 35% | 회원수 비례 |
-| 본사 시스템·로열티 | 매출의 9% | [5C](../expansion/revenue-share.html) |
+| 본사 시스템·로열티 | 매출의 9% | [6C](../expansion/revenue-share.html) |
 | 본사 마케팅 분담 | 매출의 2% | |
 | 보험 | 30만 | |
 | 기구 감가·소모품 | 100만 | |
@@ -125,7 +125,7 @@ nav_order: 1
 
 ## 의존성
 
-**입력**: 2D, 4B, 4C, 3G, 5C
+**입력**: 4D, 2B, 2C, 3G, 6C
 **영향 주는 것**:
 - [7C 100호점 추정](./projection.html)
 - 가맹 정보공개서

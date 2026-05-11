@@ -1,18 +1,18 @@
 ---
-title: 🔴 2D. 공간 구조
+title: 🔴 4D. 공간 구조
 parent: 4. 서비스
 nav_order: 4
 ---
 
-# Level 2D — 공간 구조 (방·테마·평수)
+# Level 4D — 공간 구조 (방·테마·평수)
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [2B 세션 포맷](./session.html) |
-| **하위 영향** | [6A 예약 시스템](./reservation.html) · [7A 단위 경제](../economics/unit-economics.html) ★ |
+| **상위 의존** | [4B 세션 포맷](./session.html) |
+| **하위 영향** | [5A 예약 시스템](./reservation.html) · [7A 단위 경제](../economics/unit-economics.html) ★ |
 
 ---
 
@@ -97,11 +97,11 @@ nav_order: 4
 
 ## 의존성
 
-**입력**: [2B 세션 포맷](./session.html)
+**입력**: [4B 세션 포맷](./session.html)
 **영향 주는 것**:
-- [6A 예약 시스템](./reservation.html) — 방 단위 예약
+- [5A 예약 시스템](./reservation.html) — 방 단위 예약
 - [7A 단위 경제](../economics/unit-economics.html) — 평당 수익 핵심
-- [5A 확장 모델](../expansion/model.html) — 가맹 표준화
+- [6A 확장 모델](../expansion/model.html) — 가맹 표준화
 
 ---
 

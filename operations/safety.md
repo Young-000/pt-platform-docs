@@ -1,17 +1,17 @@
 ---
-title: 🔴 6C. 안전·보험·사고
+title: 🔴 5C. 안전·보험·사고
 parent: 5. 운영
 nav_order: 3
 ---
 
-# Level 6C — 안전·보험·사고처리
+# Level 5C — 안전·보험·사고처리
 
 | | |
 |---|---|
 | **상태** | 🔴 TBD |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [5B R&R](../expansion/responsibility.html) · [3F Peer 리더](../partners/peer-leader.html) |
+| **상위 의존** | [6B R&R](../expansion/responsibility.html) · [3F Peer 리더](../partners/peer-leader.html) |
 | **하위 영향** | 가맹 매뉴얼 · 보험 비용 · [8 법무](../legal/) |
 
 ---
@@ -114,7 +114,7 @@ nav_order: 3
 
 ## 의존성
 
-**입력**: [5B R&R](../expansion/responsibility.html), [3F Peer](../partners/peer-leader.html)
+**입력**: [6B R&R](../expansion/responsibility.html), [3F Peer](../partners/peer-leader.html)
 **영향 주는 것**:
 - 가맹 매뉴얼
 - [7C 원가](../economics/revenue-cost.html) — 보험비
