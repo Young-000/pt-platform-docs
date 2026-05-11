@@ -23,6 +23,7 @@ has_children: true
 
 ## 결정 노드
 
+- [📊 단위 경제 시뮬레이션 (라이브 작업장)](./simulation.html) ★
 - [7A. 단위 경제 (지점당 P&L)](./unit-economics.html)
 - [7B. 매출·원가 모델](./revenue-cost.html)
 - [7C. 100호점 추정 — BEP / CapEx](./projection.html)
