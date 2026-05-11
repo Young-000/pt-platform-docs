@@ -13,6 +13,8 @@ search:
 
 # 사이드바 보조 링크
 aux_links:
+  "📊 시뮬레이션":
+    - "/pt-platform-docs/economics/simulation.html"
   "GitHub Repo":
     - "https://github.com/Young-000/pt-platform-docs"
   "유저 앱":
@@ -21,8 +23,6 @@ aux_links:
     - "https://pt-platform-partner.vercel.app"
   "어드민":
     - "https://pt-platform-admin.vercel.app"
-  "수익 시뮬레이터":
-    - "https://pt-platform-simulator.vercel.app"
 
 # Mermaid 다이어그램
 mermaid:

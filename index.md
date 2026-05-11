@@ -12,6 +12,7 @@ nav_order: 1
 > **사업 OS** — 모든 핵심 결정이 여기에 정의됩니다. 결정 전엔 🔴 TBD, 결정 후엔 ADR로 봉인.
 
 전체 결정 구조 → [결정 트리](./product/decision-tree.html)
+**📊 [단위 경제 시뮬레이션](./economics/simulation.html)** — 슬라이더로 가격·가동률·임대료 실시간 탐색
 
 ---
 
