@@ -28,107 +28,104 @@ flowchart LR
 
 | 갈래 | 활동 |
 |---|---|
-| **회원** | 가입 → 예약 → 세션 → 개인화 추천 받음 |
+| **회원** | 가입 → 예약 → 세션 → 개인화 추천 |
 | **앱 (AI)** | 매칭 · 결제 · 데이터 누적 · 운동 설계 |
 | **강사** | 등록·검증 → 슬롯 오픈 → 세션·기록 → 정산 |
 
-→ 회원·강사가 직접 만나지 않고 **앱이 모든 매칭·결제·데이터를 중개**. 이 구조가 강사 우회 방지 + 회원 데이터 본사 보유 + AI 학습 루프를 동시에 가능하게 함.
+→ 앱이 모든 매칭·결제·데이터를 중개. 강사 우회 방지 + 회원 데이터 본사 보유 + AI 학습 루프.
 
 ---
 
 ## 결정 영역 한눈에
 
 **범례** — 🟢 결정 / 🟡 부분 / 🔴 미결정 / ⚪ 외부 의존
-**우선순위**: 회원·강사·서비스 카테고리에서 **user flow가 1순위 페이지**.
 
 ### 1. 제품 (Product)
 
 - 🟢 [정체성 — 예약제 private PT shop with AI](./product/identity.html)
 - 🟢 [비전 — 100호점 확장](./product/vision.html)
-- 🟡 [페르소나 — Middle Ground Mover (구체화 진행)](./product/personas.html) ★
-- 🟡 [문제의식 — 수요·공급 두 관점](./product/problems.html)
-- 🟡 [경쟁 비교 — 가격 × 운동 체계화](./product/competition.html)
-- 🔴 [Value Proposition](./product/value-prop.html)
+- 🟢 [1A 페르소나 — 주 2회 + 체계화 + PT는 비싼 사람](./product/personas.html)
+- 🟢 [1B 문제의식 — 회원 페인 2종](./product/problems.html)
+- 🟢 [1C 경쟁 비교 — 가격 × 체계화 × private](./product/competition.html)
+- 🟢 [1D Value Proposition](./product/value-prop.html)
 - 📋 [결정 트리](./product/decision-tree.html) · [로드맵 (3-Track)](./product/roadmap.html)
 
 ### 2. 회원 (Members)
 
-- 🔴 [회원 여정 — 가입 → 재예약](./members/journey.html) ★ user flow
-- 🔴 [멤버십 구조](./members/membership.html)
-- 🔴 [가격 체계 — 재검토 필요](./members/pricing.html)
-- 🔴 [환불·노쇼·취소·일시정지·양도](./members/policies.html)
+- 🟢 [2A 회원 여정 — 8단계](./members/journey.html)
+- 🟢 [2B 멤버십 — 주 1회권 / 주 2회권 + 포인트](./members/membership.html)
+- 🔴 [2C 가격 — 시뮬레이션 기준 가설치](./members/pricing.html)
+- 🟢 [2D 환불·노쇼·취소 (48h/6h)](./members/policies.html)
 
 ### 3. 강사 (Partners) — 강사도 우리 고객
 
-- 🔴 [강사 페르소나](./partners/personas.html) ★ user flow
-- 🔴 [강사 문제의식](./partners/problems.html)
-- 🔴 [강사 Value Proposition](./partners/value-prop.html)
-- 🔴 [강사 모집 전략](./partners/recruitment.html)
-- 🔴 [Pro 강사 모델](./partners/model.html)
-- 🔴 [Peer 운동 리더 모델](./partners/peer-leader.html)
-- 🔴 [강사 정산 구조](./partners/payout.html)
-- 🔴 [강사 품질·등급](./partners/quality.html)
+- 🟢 [3A 강사 페르소나 — 파트타임 잡 (배달기사형)](./partners/personas.html)
+- 🟢 [3B 강사 문제의식](./partners/problems.html)
+- 🟢 [3C 강사 VP — Pro 인증 자율 단가](./partners/value-prop.html)
+- 🔴 [3D 모집 — 기존 헬스장 4개 활용](./partners/recruitment.html)
+- 🟢 [3E 운영 모델 — Hybrid Phase별](./partners/model.html)
+- 🟡 [3F 일반 멘토 — 검증 코스 TBD](./partners/peer-leader.html)
+- 🟡 [3G 정산 — 구조 락, 숫자 TBD](./partners/payout.html)
+- 🔴 [3H 품질·등급 — 원칙만 락](./partners/quality.html)
 
 ### 4. 서비스 (Service / What)
 
-- 🔴 [세션 종류 — Pro PT vs Peer 운동](./service/session-types.html)
-- 🟡 [세션 포맷 — 30분 카디오 + 60분 PT](./service/session.html)
-- 🔴 [AI 역할 범위](./service/ai-role.html)
-- 🔴 [공간 구조 — 방·테마·평수](./service/space.html)
+- 🟢 [4A 세션 종류 — 1:1 멘토링 단일 카테고리](./service/session-types.html)
+- 🟢 [4B 세션 포맷 — 카디오 30 + 방 60](./service/session.html)
+- 🟢 [4C AI — 시스템 PT (세션 기록 + 다음 운동 제안)](./service/ai-role.html)
+- 🟢 [4D 공간 — 90평 8방 + 카디오 6자리](./service/space.html)
 
 ### 5. 운영 (Operations)
 
-- 🔴 [예약 시스템 — 피크 6-10pm 고정 슬롯 등](./operations/reservation.html) ★ user flow
-- 🔴 [지점 운영 — 무인/유인·시간·SOP](./operations/store.html)
-- 🔴 [안전·보험·사고처리](./operations/safety.html)
+- 🟢 [5A 예약 시스템 — 피크 고정 슬롯 + 연속성](./operations/reservation.html)
+- 🔴 [5B 지점 운영 — 무인/유인·시간·SOP](./operations/store.html)
+- 🔴 [5C 안전·보험·사고처리](./operations/safety.html)
 
 ### 6. 비즈니스 모델 (Expansion)
 
-- 🔴 [확장 모델 — 직영 vs 가맹 vs 하이브리드](./expansion/model.html)
-- 🔴 [본사 ↔ 가맹점주 책임 분담](./expansion/responsibility.html)
-- 🔴 [본사 수익 모델](./expansion/revenue-share.html)
+- 🟢 [6A 확장 모델 — 하이브리드 4-Phase](./expansion/model.html)
+- 🟢 [6B R&R — 본사 강 통제, 가맹점주 "동전노래방"](./expansion/responsibility.html)
+- 🔴 [6C 본사 수익 모델 — 숫자 TBD](./expansion/revenue-share.html)
 
-### 7. 경제성 (Economics)
+### 7. 경제성 (Economics) — 공간 임대업
 
-> 핵심: **공간 임대업** — 평당 비용 ↓ × 평당 수익 ↑ × utilization ↑
-
-- 🔴 [단위 경제 — 지점당 P&L](./economics/unit-economics.html)
-- 🔴 [매출·원가 모델](./economics/revenue-cost.html)
-- 🔴 [100호점 추정 — BEP / CapEx](./economics/projection.html)
+- 📊 [단위 경제 시뮬레이션 — 인터랙티브 슬라이더](./economics/simulation.html) ★
+- 🟡 [7A 단위 경제 — 90평 / 멘토 30분 모델](./economics/unit-economics.html)
+- 🔴 [7B 매출·원가 모델](./economics/revenue-cost.html)
+- 🔴 [7C 100호점 추정 — BEP / CapEx](./economics/projection.html)
 
 ---
 
 ## 별도 섹션
 
-### 📐 스펙 (PRD) — 실제 기능 명세
-- [Spec 인덱스](./specs/) (PRD 템플릿 + 작성된 PRD)
-
 ### ⚖️ 법무·약관 — 외부 검토 필수
-- [가맹사업법 / 정보공개서](./legal/franchise-law.html)
-- [PT 자격증 법규](./legal/pt-license.html)
-- [개인정보 / 이용약관](./legal/privacy-tos.html)
+- ⚪ [8A 가맹사업법 / 정보공개서](./legal/franchise-law.html)
+- ⚪ [8B PT 자격증 법규](./legal/pt-license.html)
+- ⚪ [8C 개인정보 / 이용약관](./legal/privacy-tos.html)
+
+### 📐 스펙 (PRD)
+- [Spec 인덱스](./specs/)
 
 ### 📌 결정 기록 (ADR)
 - [ADR 인덱스](./decisions/)
 
 ---
 
-## 우선 결정 순서
+## 남은 결정 (우선순위)
 
-1. **1A 회원 페르소나 구체화** ★ — 모든 결정의 시작점
-2. **3A 강사 페르소나** — 1A에서 derived
-3. **3E 강사 모델 + 4A 세션 종류** — 동시 결정
-4. **2B 멤버십 + 2C 가격** — 페르소나·강사 정해진 후
-5. **7A 단위 경제** — 가격·원가 검증
-6. **5A 예약 시스템**
-7. **6A 확장 모델 (직영/가맹)**
-8. **법무 (8A/8B/8C)** — 변호사 검토
+1. **2C 가격 락** — 시뮬레이션 추천 (멘토 20k·표준 → 주 2회 24만 / 주 1회 12만)
+2. **7B 매출·원가 모델** — 단위 경제 확장
+3. **7C 100호점 추정** — 자본 소요·BEP 시점
+4. **5B 지점 운영 + 5C 안전** — 1호점 직전
+5. **3D 모집 디테일** — 1호점 직전
+6. **6C 본사 수익 모델** — 가맹 시작 전 (Phase 2 직전)
+7. **8 법무** — 사업자 등록 / 결제 연동 시
 
 ---
 
 ## 라이브 앱
 
-- [유저 앱](https://pt-platform-mvp.vercel.app) · [강사 앱](https://pt-platform-partner.vercel.app) · [어드민](https://pt-platform-admin.vercel.app) · [수익 시뮬레이터](https://pt-platform-simulator.vercel.app)
+- [유저 앱](https://pt-platform-mvp.vercel.app) · [강사 앱](https://pt-platform-partner.vercel.app) · [어드민](https://pt-platform-admin.vercel.app)
 
 ---
 
