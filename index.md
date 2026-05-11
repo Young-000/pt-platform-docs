@@ -3,12 +3,22 @@ title: 홈
 nav_order: 1
 ---
 
-# PT Platform — 결정 대시보드
+# PT Platform
 
-> **예약제 private PT shop with AI** — AI 기반 운동 세션을 핵심으로 하는 회원제 부티크 PT 서비스.
-> 목표: **100호점 이상 체인화** (가맹 모델 활용 가능).
+<div style="background:#1a73e8;color:#fff;padding:1.6rem 1.4rem;border-radius:10px;margin:1rem 0 1.5rem;">
+  <div style="font-size:1.4rem;font-weight:700;line-height:1.4;">
+    AI 기반 체계화된 운동을, private room에서 1:1 멘토와 받는<br/>
+    <span style="font-size:1.7rem;">개인 맞춤 세션</span>
+  </div>
+  <div style="margin-top:1rem;opacity:0.95;line-height:1.6;">
+    🎯 <b>회원</b>: 주 2회 운동러 — 헬스장은 북적·PT는 비쌈<br/>
+    🏋️ <b>서비스</b>: 1세션 90분 (카디오 30 + 방 60), AI + 1:1 멘토<br/>
+    💪 <b>강사</b>: 배달기사형 파트타임 잡, Pro 인증 시 단가 자율<br/>
+    🏢 <b>지점</b>: 90평 8방 / 평당 10만 → 주 2회권 약 <b>24만/월</b><br/>
+    🚀 <b>목표</b>: 100호점 체인화 (가맹 모델 활용)
+  </div>
+</div>
 
-{: .note }
 > **사업 OS** — 모든 핵심 결정이 여기에 정의됩니다. 결정 전엔 🔴 TBD, 결정 후엔 ADR로 봉인.
 
 전체 결정 구조 → [결정 트리](./product/decision-tree.html)
