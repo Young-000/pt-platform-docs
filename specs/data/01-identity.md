@@ -73,7 +73,22 @@ stateDiagram-v2
 
 **Purpose**: 멘토 (강사). 슬롯 오픈·세션 진행·정산·등급 보유.
 **Related PRDs**: [💪 모든 멘토 PRD](../mentor/) · [🏢 멘토 등급 시스템](../platform/2026-05-13-mentor-tier-system.html)
-**Lifecycle**: 가입 → 검증 코스 → verified → Pro 신청 → pro_certified → (선택) 자격 정지 / 비활성
+
+### 가입·승인 흐름
+
+> **별도 모집 페이지 ❌**. 멘토 앱 다운로드 → 가입 → 그 안에서 자격 신청. admin이 승인.
+
+```
+[멘토 앱 다운로드·가입] → tier='pending_review', status='active'
+       ↓ 멘토 앱 안에서 자격 신청 (자격증·경력·시범 영상 등 제출)
+[under_review] → admin 검토
+       ↓ 검증 코스 통과 + admin 승인
+[verified] → 활동 시작 (슬롯 오픈 가능)
+       ↓ Pro 인증 신청 (자격 충족 시)
+[pro_certified] → 단가 자율 권한
+       ↓ (옵션) 컴플레인 누적 / 활동 중단 등
+[suspended / inactive / rejected]
+```
 
 ### Fields
 
@@ -85,7 +100,7 @@ stateDiagram-v2
 | passwordHash | String | ✓ | - | bcrypt |
 | name | String | ✓ | - | 실명 |
 | avatarUrl | String? | - | null | |
-| tier | MentorTier | ✓ | verified | verified / pro_certified |
+| tier | MentorTier | ✓ | pending_review | pending_review / under_review / verified / pro_certified / rejected |
 | licenseNumber | String? | - | null | 자격증 번호 (Pro 필수) |
 | licenseType | String? | - | null | "생활스포츠지도사 2급" 등 |
 | licenseVerified | Boolean | ✓ | false | 본사 발행처 확인 |
@@ -111,12 +126,14 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    [*] --> 검증코스: 가입
-    검증코스 --> verified: 코스 통과
-    검증코스 --> [*]: 불합격 (3개월 후 재시도 가능)
-    verified --> ProApplication: Pro 신청
-    ProApplication --> pro_certified: 통과
-    ProApplication --> verified: 보류
+    [*] --> pending_review: 멘토 앱 가입
+    pending_review --> under_review: 자격 신청 (자격증·시범 제출)
+    under_review --> verified: admin 승인
+    under_review --> rejected: 불합격 (3개월 후 재신청 가능)
+    rejected --> under_review: 재신청
+    verified --> under_review: Pro 인증 신청
+    under_review --> pro_certified: Pro 통과
+    under_review --> verified: Pro 보류
     verified --> suspended: 3차 컴플레인
     pro_certified --> verified: 등급 하향
     pro_certified --> suspended: 3차 컴플레인
