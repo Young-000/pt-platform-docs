@@ -5,17 +5,41 @@ nav_order: 1
 
 # PT Platform
 
-<div style="background:#1a73e8;color:#fff;padding:1.6rem 1.4rem;border-radius:10px;margin:1rem 0 1.5rem;">
-  <div style="font-size:1.4rem;font-weight:700;line-height:1.4;">
-    AI 기반 체계화된 운동을, private room에서 1:1 멘토와 받는<br/>
-    <span style="font-size:1.7rem;">개인 맞춤 세션</span>
+<style>
+.pt-hero { background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); color: #fff; padding: 2rem 1.6rem; border-radius: 12px; margin: 1.2rem 0 1.8rem; }
+.pt-hero .tag { font-size: 1.7rem; font-weight: 800; line-height: 1.4; letter-spacing: -0.01em; }
+.pt-hero .sub { margin-top: 0.6rem; font-size: 1rem; opacity: 0.92; }
+.pt-stakeholders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin: 1.3rem 0 0.8rem; }
+.pt-stakeholders .who { background: rgba(255,255,255,0.12); padding: 0.85rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); }
+.pt-stakeholders .who h4 { margin: 0 0 0.4rem; font-size: 0.92rem; opacity: 0.9; letter-spacing: 0.02em; }
+.pt-stakeholders .who p { margin: 0; font-size: 0.95rem; line-height: 1.45; font-weight: 600; }
+.pt-mech { background: rgba(0,0,0,0.22); padding: 0.85rem 1rem; border-radius: 8px; margin: 0.7rem 0; font-size: 0.95rem; line-height: 1.55; }
+.pt-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 1rem; }
+.pt-stats .card { background: rgba(255,255,255,0.13); padding: 0.7rem 0.5rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,255,255,0.15); }
+.pt-stats .num { font-size: 1.55rem; font-weight: 800; line-height: 1; }
+.pt-stats .lbl { font-size: 0.72rem; opacity: 0.85; margin-top: 0.35rem; }
+@media (max-width: 700px) { .pt-stakeholders, .pt-stats { grid-template-columns: repeat(2, 1fr); } }
+</style>
+
+<div class="pt-hero">
+  <div class="tag">AI 기반 체계화된 운동을,<br/>private room에서 1:1 멘토와.</div>
+  <div class="sub">서비스 카테고리 = <b>개인 맞춤 세션</b>. 목표 = 100호점 체인화.</div>
+
+  <div class="pt-stakeholders">
+    <div class="who"><h4>🎯 회원에게</h4><p>비싸지 않은 1:1 체계 운동 + 북적임 없는 private room</p></div>
+    <div class="who"><h4>💪 강사에게</h4><p>영업·정산 부담 없는 파트타임 잡. Pro 인증 시 단가 자율.</p></div>
+    <div class="who"><h4>🏢 본사에게</h4><p>강사풀·AI·브랜드 자산 보유. 가맹점주 = "동전노래방" 운영.</p></div>
   </div>
-  <div style="margin-top:1rem;opacity:0.95;line-height:1.6;">
-    🎯 <b>회원</b>: 주 2회 운동러 — 헬스장은 북적·PT는 비쌈<br/>
-    🏋️ <b>서비스</b>: 1세션 90분 (카디오 30 + 방 60), AI + 1:1 멘토<br/>
-    💪 <b>강사</b>: 배달기사형 파트타임 잡, Pro 인증 시 단가 자율<br/>
-    🏢 <b>지점</b>: 90평 8방 / 평당 10만 → 주 2회권 약 <b>24만/월</b><br/>
-    🚀 <b>목표</b>: 100호점 체인화 (가맹 모델 활용)
+
+  <div class="pt-mech">
+    <b>핵심 매커니즘:</b> AI가 운동 설계 → 멘토는 30분 1:1만 (시간당 2회원) → 회원은 데이터 누적 + 다음 운동 자동 추천. 강사 풀타임 ❌, 회원 매번 처음부터 ❌.
+  </div>
+
+  <div class="pt-stats">
+    <div class="card"><div class="num">90<span style="font-size:0.6em;">분</span></div><div class="lbl">1세션 (카디오 30 + 방 60)</div></div>
+    <div class="card"><div class="num">8<span style="font-size:0.55em;">방</span></div><div class="lbl">표준 90평 지점</div></div>
+    <div class="card"><div class="num">24<span style="font-size:0.55em;">만</span></div><div class="lbl">주 2회권 / 월 (가설)</div></div>
+    <div class="card"><div class="num">100<span style="font-size:0.55em;">호점</span></div><div class="lbl">목표 (가맹)</div></div>
   </div>
 </div>
 
