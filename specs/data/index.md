@@ -24,4 +24,4 @@ has_children: true
 
 ## 관련 결정
 
-모든 [Level 2~7 결정](../../decision-tree.html)이 데이터 모델에 영향.
+모든 [Level 2~7 결정](../../product/decision-tree.html)이 데이터 모델에 영향.

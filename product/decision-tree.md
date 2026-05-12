@@ -18,7 +18,7 @@ nav_order: 1
 
 > **"예약제 private PT shop with AI"** — 100호점 체인화 야망.
 
-→ [상세](./product/identity.html)
+→ [상세](./identity.html)
 
 ---
 
@@ -26,10 +26,10 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 1A | 타겟 고객 — 누가 쓰는가 | [personas](./product/personas.html) |
-| 1B | 문제의식 / JTBD — 왜 쓰는가 | [problems](./product/problems.html) |
-| 1C | 경쟁 대안 비교 — 뭐가 다른가 | [competition](./product/competition.html) |
-| 1D | Value Proposition — 한 줄 약속 | [value-prop](./product/value-prop.html) |
+| 1A | 타겟 고객 — 누가 쓰는가 | [personas](./personas.html) |
+| 1B | 문제의식 / JTBD — 왜 쓰는가 | [problems](./problems.html) |
+| 1C | 경쟁 대안 비교 — 뭐가 다른가 | [competition](./competition.html) |
+| 1D | Value Proposition — 한 줄 약속 | [value-prop](./value-prop.html) |
 
 ---
 
@@ -37,10 +37,10 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 4A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](./service/session-types.html) |
-| 4B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](./service/session.html) |
-| 4C | AI 역할 범위 | [ai-role](./service/ai-role.html) |
-| 4D | 공간 구조 — 방 단위·테마·평수 | [space](./service/space.html) |
+| 4A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](../service/session-types.html) |
+| 4B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](../service/session.html) |
+| 4C | AI 역할 범위 | [ai-role](../service/ai-role.html) |
+| 4D | 공간 구조 — 방 단위·테마·평수 | [space](../service/space.html) |
 
 ---
 
@@ -48,11 +48,11 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 3E | Pro 강사 모델 (gig vs 전속 vs hybrid) | [model](./partners/model.html) |
-| 3F | Peer 운동 리더 (자격·보상·검증) | [peer-leader](./partners/peer-leader.html) |
-| 3D | 모집 전략 (콜드스타트 vs 스케일) | [recruitment](./partners/recruitment.html) |
-| 3G | 정산 구조 | [payout](./partners/payout.html) |
-| 3H | 품질 관리·등급 | [quality](./partners/quality.html) |
+| 3E | Pro 강사 모델 (gig vs 전속 vs hybrid) | [model](../partners/model.html) |
+| 3F | Peer 운동 리더 (자격·보상·검증) | [peer-leader](../partners/peer-leader.html) |
+| 3D | 모집 전략 (콜드스타트 vs 스케일) | [recruitment](../partners/recruitment.html) |
+| 3G | 정산 구조 | [payout](../partners/payout.html) |
+| 3H | 품질 관리·등급 | [quality](../partners/quality.html) |
 
 ---
 
@@ -60,10 +60,10 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 2B | 멤버십 구조 | [membership](./members/membership.html) |
-| 2C | 가격 체계 | [pricing](./members/pricing.html) |
-| 2A | 회원 여정 (가입~이탈방지) | [journey](./members/journey.html) |
-| 2D | 환불·노쇼·취소·일시정지·양도 | [policies](./members/policies.html) |
+| 2B | 멤버십 구조 | [membership](../members/membership.html) |
+| 2C | 가격 체계 | [pricing](../members/pricing.html) |
+| 2A | 회원 여정 (가입~이탈방지) | [journey](../members/journey.html) |
+| 2D | 환불·노쇼·취소·일시정지·양도 | [policies](../members/policies.html) |
 
 ---
 
@@ -71,9 +71,9 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 6A | 확장 모델 — 직영 vs 가맹 vs 하이브리드 | [expansion-model](./expansion/model.html) |
-| 6B | 본사 ↔ 가맹점주 책임 분담 | [responsibility](./expansion/responsibility.html) |
-| 6C | 본사 수익 모델 (가맹비·로열티·분배) | [revenue-share](./expansion/revenue-share.html) |
+| 6A | 확장 모델 — 직영 vs 가맹 vs 하이브리드 | [expansion-model](../expansion/model.html) |
+| 6B | 본사 ↔ 가맹점주 책임 분담 | [responsibility](../expansion/responsibility.html) |
+| 6C | 본사 수익 모델 (가맹비·로열티·분배) | [revenue-share](../expansion/revenue-share.html) |
 
 ---
 
@@ -81,9 +81,9 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 5A | 예약 시스템 (피크 6-10pm 고정 슬롯 등) | [reservation](./operations/reservation.html) |
-| 5B | 지점 운영 (무인/유인, 시간, SOP) | [store](./operations/store.html) |
-| 5C | 안전·보험·사고 | [safety](./operations/safety.html) |
+| 5A | 예약 시스템 (피크 6-10pm 고정 슬롯 등) | [reservation](../operations/reservation.html) |
+| 5B | 지점 운영 (무인/유인, 시간, SOP) | [store](../operations/store.html) |
+| 5C | 안전·보험·사고 | [safety](../operations/safety.html) |
 
 ---
 
@@ -91,9 +91,9 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 7A | 단위 경제 (지점당 P&L) | [unit-economics](./economics/unit-economics.html) |
-| 7B | 매출·원가 모델 | [revenue-cost](./economics/revenue-cost.html) |
-| 7C | 100호점 추정 / BEP / CapEx | [projection](./economics/projection.html) |
+| 7A | 단위 경제 (지점당 P&L) | [unit-economics](../economics/unit-economics.html) |
+| 7B | 매출·원가 모델 | [revenue-cost](../economics/revenue-cost.html) |
+| 7C | 100호점 추정 / BEP / CapEx | [projection](../economics/projection.html) |
 
 ---
 
@@ -101,9 +101,9 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 8A | 가맹사업법 / 정보공개서 | [franchise-law](./legal/franchise-law.html) |
-| 8B | PT 자격증 법규 | [pt-license](./legal/pt-license.html) |
-| 8C | 개인정보·이용약관 | [privacy-tos](./legal/privacy-tos.html) |
+| 8A | 가맹사업법 / 정보공개서 | [franchise-law](../legal/franchise-law.html) |
+| 8B | PT 자격증 법규 | [pt-license](../legal/pt-license.html) |
+| 8C | 개인정보·이용약관 | [privacy-tos](../legal/privacy-tos.html) |
 
 ---
 
