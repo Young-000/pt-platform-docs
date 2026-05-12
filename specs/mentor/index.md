@@ -13,4 +13,7 @@ has_children: true
 
 ## PRDs
 
-(아직 없음)
+1. [세션 진행 (1시간 = 2 회원)](./2026-05-13-session-flow.html)
+2. [슬롯 오픈·매칭](./2026-05-13-reservation.html)
+3. [등급·Pro 인증](./2026-05-13-mentor-tier.html)
+4. [정산 (격주)](./2026-05-13-payout.html)

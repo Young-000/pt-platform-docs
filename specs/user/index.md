@@ -9,8 +9,11 @@ has_children: true
 
 회원이 직접 보고 사용하는 모든 화면·기능·플로우.
 
-대응 코드: `pt-platform/apps/mvp/` (이름은 향후 변경 예정).
+대응 코드: `pt-platform/apps/mvp/`.
 
 ## PRDs
 
-(아직 없음)
+1. [세션 진행 (90분 흐름)](./2026-05-13-session-flow.html)
+2. [멤버십·결제·정책](./2026-05-13-membership-payment.html)
+3. [예약 시스템](./2026-05-13-reservation.html)
+4. [AI 가이드 (시스템 PT)](./2026-05-13-ai-coaching.html)

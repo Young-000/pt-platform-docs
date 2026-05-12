@@ -12,9 +12,9 @@ has_children: true
 
 PRD는 stakeholder별로 분리:
 
-- **[👤 유저](./user/)** — 회원 앱 화면·기능·플로우
-- **[💪 멘토](./mentor/)** — 강사 앱 화면·기능·플로우
-- **[🏢 플랫폼](./platform/)** — 본사 운영 시스템·어드민·API·데이터
+- **[👤 유저](./user/)** — 회원 앱 (4개 PRD)
+- **[💪 멘토](./mentor/)** — 강사 앱 (4개 PRD)
+- **[🏢 플랫폼](./platform/)** — 본사·API·어드민·AI (6개 PRD)
 
 각 PRD는 하나의 기능 단위. cross-layer 영향이 있으면 각 layer에서 상호 참조.
 
@@ -22,15 +22,24 @@ PRD는 stakeholder별로 분리:
 
 - 파일명: `YYYY-MM-DD-feature-name.md`
 - [`_template.md`](./_template.html) 복사
-- frontmatter `parent`로 레이어 지정 (👤 유저 / 💪 멘토 / 🏢 플랫폼)
+- frontmatter `parent`로 레이어 지정
 
-## 작성 예정 (기능 단위)
+## 기능별 PRD 매트릭스
 
-1. **세션·멘토 모델** (foundational — 다른 PRD 입력)
-2. **멤버십·결제·정책**
-3. **예약 시스템** (고정 슬롯 + 자유 + 카디오)
-4. **AI 시스템 PT** (세션 기록 + 다음 운동 제안)
-5. **멘토 등급** (일반 / Pro 인증 + 본사 심사)
-6. **정산·분배**
+| 기능 | 👤 유저 | 💪 멘토 | 🏢 플랫폼 |
+|---|---|---|---|
+| 세션·멘토 모델 | [✓](./user/2026-05-13-session-flow.html) | [✓](./mentor/2026-05-13-session-flow.html) | [✓](./platform/2026-05-13-session-system.html) |
+| 멤버십·결제·정책 | [✓](./user/2026-05-13-membership-payment.html) | — | [✓](./platform/2026-05-13-membership-system.html) |
+| 예약 시스템 | [✓](./user/2026-05-13-reservation.html) | [✓](./mentor/2026-05-13-reservation.html) | [✓](./platform/2026-05-13-reservation-system.html) |
+| AI 시스템 PT | [✓](./user/2026-05-13-ai-coaching.html) | (멘토 세션 PRD 안에) | [✓](./platform/2026-05-13-ai-engine.html) |
+| 멘토 등급·Pro 인증 | (멘토 프로필 화면) | [✓](./mentor/2026-05-13-mentor-tier.html) | [✓](./platform/2026-05-13-mentor-tier-system.html) |
+| 정산·분배 | (결제 PRD 안에) | [✓](./mentor/2026-05-13-payout.html) | [✓](./platform/2026-05-13-payout-system.html) |
 
-각 기능 = 👤·💪·🏢 3 PRD 묶음.
+**총 14개 PRD**. 모두 Draft 상태. 1호점 오픈 직전 Review·Approve로 전환.
+
+## 다음 단계
+
+1. PRD 리뷰 (협업자)
+2. 우선순위·의존성 분석 → 개발 순서 결정
+3. 첫 sprint = 세션·멘토 모델 + 예약 시스템 (가장 foundational)
+4. ADR 봉인 — 큰 결정 (예: PG 선택, AI 모델 선택) 결정 후
