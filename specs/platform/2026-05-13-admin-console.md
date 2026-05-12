@@ -8,9 +8,9 @@ nav_order: 7
 # 🏢 어드민 콘솔 — 수익·시스템·현황·분석
 
 **Status**: Draft · **Layer**: 🏢 플랫폼 · **Updated**: 2026-05-13
-**관련 결정**: [6B 본사 R&R](../../expansion/responsibility.html) · [모든 정책 결정](../../decision-tree.html)
+**관련 결정**: [6B 본사 R&R](../../expansion/responsibility.html) · [모든 정책 결정](../../product/decision-tree.html)
 **📡 API**: [어드민](../../api/catalog.html#어드민-admin) · [정산](../../api/catalog.html#정산-payout)
-**🗄️ Data**: [전체 도메인](../../data/)
+**🗄️ Data**: [전체 도메인](../data/)
 **현재 코드**: `apps/admin/`
 
 ## 1. 배경
@@ -70,7 +70,7 @@ analyst     — 데이터·KPI 조회 (수정 ❌)
 
 ### A. 가격 설정 (`/admin/system/pricing`)
 
-**대응 데이터**: [PricingConfig](../../data/09-payout.html)
+**대응 데이터**: [PricingConfig](../data/09-payout.html)
 
 - 활성 config 리스트 (global + scope별)
 - 새 config 생성 (피크 가산·고정 슬롯 우대 등)
@@ -79,7 +79,7 @@ analyst     — 데이터·KPI 조회 (수정 ❌)
 
 ### B. 분배 설정 (`/admin/system/distribution`)
 
-**대응 데이터**: [RevenueDistributionConfig](../../data/09-payout.html)
+**대응 데이터**: [RevenueDistributionConfig](../data/09-payout.html)
 
 - 활성 분배 정책 (멘토·본사·가맹점주 비율)
 - 정액 / 비율 / 혼합 모드 선택
@@ -146,7 +146,7 @@ analyst     — 데이터·KPI 조회 (수정 ❌)
 - 멘토 상세 → 슬롯·세션 이력·평가·컴플레인·정산
 
 **멘토 액션**:
-- 신청서 심사 (`/admin/applications`) — [MentorApplication](../../data/08-mentor-system.html)
+- 신청서 심사 (`/admin/applications`) — [MentorApplication](../data/08-mentor-system.html)
 - 검증 코스 통과 처리
 - Pro 인증 심사 (영상·면담·필기)
 - 등급 변경 (강등·복권)
@@ -154,7 +154,7 @@ analyst     — 데이터·KPI 조회 (수정 ❌)
 
 ### C. 멘토 자격 검토 큐 (`/admin/mentors/review`)
 
-**대응 데이터**: [Mentor.tier='under_review'](../../data/01-identity.html)
+**대응 데이터**: [Mentor.tier='under_review'](../data/01-identity.html)
 
 > 멘토는 별도 모집 페이지 ❌. 멘토 앱 가입 후 그 안에서 자격 신청 (자격증·경력·시범 영상 제출) → 이 큐에 노출.
 
@@ -175,7 +175,7 @@ analyst     — 데이터·KPI 조회 (수정 ❌)
 
 ### D. 컴플레인 큐 (`/admin/complaints`)
 
-**대응 데이터**: [MentorComplaint](../../data/08-mentor-system.html)
+**대응 데이터**: [MentorComplaint](../data/08-mentor-system.html)
 
 - 우선순위 큐 (severity DESC, createdAt)
 - 각 컴플레인 = 회원 신고 텍스트 + 세션 정보 + 멘토 누적 이력
@@ -253,7 +253,7 @@ analyst     — 데이터·KPI 조회 (수정 ❌)
 
 ## 8. 데이터 모델
 
-기존 [전체 데이터](../../data/) + 추가 필요:
+기존 [전체 데이터](../data/) + 추가 필요:
 
 ```typescript
 // MentorApplication 모델 ❌ — Mentor 모델로 통합

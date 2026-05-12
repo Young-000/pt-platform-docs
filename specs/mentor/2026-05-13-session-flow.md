@@ -10,7 +10,7 @@ nav_order: 1
 **Status**: Draft · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [3A 강사 페르소나](../../partners/personas.html) · [3E 운영 모델](../../partners/model.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html) · [4C AI 역할](../../service/ai-role.html) · [3G 정산](../../partners/payout.html)
 **📡 API**: [세션](../../api/catalog.html#세션-session) · [멘토](../../api/catalog.html#멘토-mentor) · [AI](../../api/catalog.html#ai)
-**🗄️ Data**: [3. Schedule](../../data/03-schedule.html) · [4. Reservation](../../data/04-reservation.html) · [5. Records](../../data/05-records.html) · [6. AI](../../data/06-ai.html)
+**🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [5. Records](../data/05-records.html) · [6. AI](../data/06-ai.html)
 **현재 코드**: `apps/partner/src/pages/session-detail-page.tsx`, `dashboard-page.tsx`
 
 ## 1. 배경
