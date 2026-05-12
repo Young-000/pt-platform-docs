@@ -6,159 +6,203 @@ nav_order: 0
 
 # 단위 경제 시뮬레이션
 
-> 슬라이더·드롭다운 조정 시 자동 계산. **현재 결정(주 1·2회권, 멘토 30분, 90평 8방, 직영)** 기준.
+> **3단계 흐름**: 공간 → 비용 → 운영 → 결과 가격대.
 
 <style>
 .pt-sim, .pt-sim * { box-sizing: border-box; }
 .pt-sim {
-  background: #fafafa;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 1.3rem;
-  margin: 1rem 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  color: #1f2937;
+  background: #fafafa; border: 1px solid #e5e7eb; border-radius: 10px;
+  padding: 1.3rem; margin: 1rem 0;
+  font-family: system-ui, -apple-system, sans-serif; color: #1f2937;
 }
-.pt-sim h3 { margin: 0 0 0.8rem; font-size: 1.05rem; font-weight: 600; color: #111827; border: none !important; }
-.pt-sim h4 { margin: 1.1rem 0 0.5rem; font-size: 0.92rem; font-weight: 600; color: #374151; border: none !important; }
+.pt-sim .pt-card {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+  padding: 1rem 1.1rem; margin: 0.7rem 0;
+}
+.pt-sim .pt-card-title {
+  font-size: 0.78rem; font-weight: 700; color: #6b7280;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin: 0 0 0.7rem; display: flex; align-items: center; gap: 0.4rem;
+}
+.pt-sim .pt-card-title .badge { background: #f3f4f6; color: #4b5563; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 999px; }
 .pt-sim .pt-field {
-  display: flex; align-items: center; gap: 0.8rem;
-  margin: 0.55rem 0;
-  background: transparent !important; padding: 0;
+  display: grid; grid-template-columns: 1fr 1.2fr auto; align-items: center; gap: 0.8rem;
+  padding: 0.4rem 0;
 }
 .pt-sim .pt-field-label {
-  flex: 0 0 16rem; font-weight: 500; font-size: 0.92rem;
-  color: #374151;
-  background: transparent !important; padding: 0 !important; border: none !important;
+  font-weight: 500; font-size: 0.9rem; color: #374151;
 }
-.pt-sim .pt-field-label small { font-size: 0.78rem; color: #9ca3af; display: block; margin-top: 1px; }
-.pt-sim input[type=range] { flex: 1; accent-color: #1a73e8; }
+.pt-sim .pt-field-label small { font-size: 0.74rem; color: #9ca3af; display: block; margin-top: 1px; font-weight: 400; }
+.pt-sim input[type=range] { width: 100%; accent-color: #1a73e8; }
 .pt-sim .pt-field-val {
-  flex: 0 0 5.5rem; text-align: right;
-  font-variant-numeric: tabular-nums; font-weight: 600;
-  color: #1a73e8;
-  background: transparent !important; padding: 0 !important; border: none !important;
+  min-width: 5rem; text-align: right;
+  font-variant-numeric: tabular-nums; font-weight: 600; color: #1a73e8;
 }
-.pt-sim select {
-  padding: 0.35rem 0.6rem; border: 1px solid #d1d5db; border-radius: 6px;
-  background: #fff; font-size: 0.92rem; flex: 1;
+.pt-sim .pt-derived {
+  background: #f0f7ff; border-top: 1px solid #dbeafe;
+  margin: 0.7rem -1.1rem -1rem;
+  padding: 0.7rem 1.1rem; border-radius: 0 0 8px 8px;
+  display: flex; flex-wrap: wrap; gap: 1.2rem;
 }
+.pt-sim .pt-derived .item { font-size: 0.85rem; color: #1e40af; }
+.pt-sim .pt-derived .item b { color: #0c3a91; font-weight: 700; }
 .pt-sim .pt-presets {
-  display: flex; gap: 0.5rem; margin: 0.7rem 0 0.3rem;
+  display: flex; gap: 0.4rem; margin: 0 0 0.6rem;
 }
 .pt-sim .pt-preset-btn {
-  flex: 1; padding: 0.5rem; border-radius: 6px;
+  flex: 1; padding: 0.45rem 0.5rem; border-radius: 6px;
   border: 1px solid #d1d5db; background: #fff;
-  cursor: pointer; font-size: 0.85rem; color: #374151;
+  cursor: pointer; font-size: 0.82rem; color: #374151;
 }
 .pt-sim .pt-preset-btn:hover { background: #f3f4f6; }
 .pt-sim .pt-preset-btn.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
-.pt-sim .pt-out {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 1rem;
-  background: #fff; padding: 1rem 1.2rem; border-radius: 8px; margin-top: 1rem;
-  border: 1px solid #e5e7eb;
+.pt-sim .pt-result {
+  background: #fff; border: 2px solid #fbbf24; border-radius: 8px;
+  padding: 1.1rem 1.2rem; margin: 1rem 0;
 }
-.pt-sim .pt-row {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding: 0.55rem 0; border-bottom: 1px solid #f3f4f6;
+.pt-sim .pt-result-title {
+  font-size: 0.85rem; font-weight: 700; color: #92400e;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin: 0 0 0.7rem;
 }
-.pt-sim .pt-row:last-child { border-bottom: none; }
-.pt-sim .pt-row.pt-hi {
-  background: #fffbeb; padding-left: 0.7rem; padding-right: 0.7rem;
-  border-radius: 6px; border-bottom: none; margin: 0.2rem -0.5rem;
+.pt-sim .pt-result-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem 1.5rem;
 }
-.pt-sim .pt-label {
-  font-size: 0.92rem; color: #4b5563;
-  background: transparent !important; padding: 0 !important; border: none !important;
-}
-.pt-sim .pt-num {
-  font-weight: 600; font-variant-numeric: tabular-nums;
-  font-size: 0.98rem; color: #111827;
-  background: transparent !important; padding: 0 !important; border: none !important;
-}
-.pt-sim .pt-hi .pt-label { color: #92400e; font-weight: 600; }
-.pt-sim .pt-hi .pt-num { color: #b45309; font-size: 1.08rem; }
-.pt-sim .pt-formula {
-  font-size: 0.83rem; color: #6b7280; margin-top: 0.7rem; line-height: 1.5;
-}
+.pt-sim .pt-result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.3rem 0; }
+.pt-sim .pt-result-row.pt-hi { background: #fffbeb; padding: 0.4rem 0.6rem; border-radius: 6px; }
+.pt-sim .pt-result-label { font-size: 0.9rem; color: #4b5563; }
+.pt-sim .pt-result-num { font-weight: 600; font-variant-numeric: tabular-nums; color: #111827; }
+.pt-sim .pt-hi .pt-result-label { color: #92400e; font-weight: 600; }
+.pt-sim .pt-hi .pt-result-num { color: #b45309; font-size: 1.05rem; }
+.pt-sim .pt-formula { font-size: 0.78rem; color: #6b7280; margin-top: 0.7rem; line-height: 1.5; }
 @media (max-width: 700px) {
-  .pt-sim .pt-out { grid-template-columns: 1fr; }
-  .pt-sim .pt-field-label { flex: 0 0 11rem; font-size: 0.85rem; }
+  .pt-sim .pt-result-grid { grid-template-columns: 1fr; }
+  .pt-sim .pt-field { grid-template-columns: 1fr; gap: 0.3rem; }
+  .pt-sim .pt-field-val { text-align: left; }
 }
 </style>
 
 <div class="pt-sim">
 
-  <h3>입력</h3>
-
-  <h4>비용</h4>
-  <div class="pt-field">
-    <span class="pt-field-label">평당 임대료 <small>(만원/월)</small></span>
-    <input type="range" id="i-rent" min="6" max="13" value="10" step="0.5">
-    <span class="pt-field-val"><span id="v-rent">10</span>만</span>
-  </div>
-  <div class="pt-field">
-    <span class="pt-field-label">인건비·관리비 <small>(만원/방/월)</small></span>
-    <input type="range" id="i-ops" min="50" max="150" value="90" step="10">
-    <span class="pt-field-val"><span id="v-ops">90</span>만</span>
-  </div>
-
-  <h4>멘토</h4>
-  <div class="pt-field">
-    <span class="pt-field-label">멘토 회당 <small>(30분 1:1, 원)</small></span>
-    <input type="range" id="i-mentor" min="10000" max="35000" value="20000" step="1000">
-    <span class="pt-field-val"><span id="v-mentor">20,000</span>원</span>
-  </div>
-
-  <h4>가동률 (시간대별)</h4>
-
-  <div class="pt-presets">
-    <button class="pt-preset-btn" data-preset="aggressive">공격적 (90/50/70)</button>
-    <button class="pt-preset-btn active" data-preset="standard">표준 (85/35/60)</button>
-    <button class="pt-preset-btn" data-preset="conservative">보수적 (70/25/50)</button>
+  <!-- 1. 공간 -->
+  <div class="pt-card">
+    <div class="pt-card-title">1️⃣ 공간 설정 <span class="badge">SPACE</span></div>
+    <div class="pt-field">
+      <span class="pt-field-label">방 수</span>
+      <input type="range" id="i-rooms" min="4" max="12" value="8" step="1">
+      <span class="pt-field-val"><span id="v-rooms">8</span>개</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">방당 평수</span>
+      <input type="range" id="i-roomArea" min="5" max="10" value="7" step="0.5">
+      <span class="pt-field-val"><span id="v-roomArea">7</span>평</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">공용 공간 비율 <small>카디오 + 라운지·탈의·샤워</small></span>
+      <input type="range" id="i-commonRatio" min="20" max="50" value="38" step="2">
+      <span class="pt-field-val"><span id="v-commonRatio">38</span>%</span>
+    </div>
+    <div class="pt-derived">
+      <div class="item">방 총 면적 <b id="d-roomTotal">56</b>평</div>
+      <div class="item">공용 면적 <b id="d-commonTotal">34</b>평</div>
+      <div class="item">→ 전체 평수 <b id="d-totalArea">90</b>평</div>
+    </div>
   </div>
 
-  <div class="pt-field">
-    <span class="pt-field-label">🌟 골든타임 <small>평일 6-9 / 18-22 = 35h/주</small></span>
-    <input type="range" id="i-golden" min="30" max="100" value="85" step="5">
-    <span class="pt-field-val"><span id="v-golden">85</span>%</span>
-  </div>
-  <div class="pt-field">
-    <span class="pt-field-label">🌤️ 오프피크 <small>평일 9-18 / 22-23 = 50h/주</small></span>
-    <input type="range" id="i-offpeak" min="0" max="80" value="35" step="5">
-    <span class="pt-field-val"><span id="v-offpeak">35</span>%</span>
-  </div>
-  <div class="pt-field">
-    <span class="pt-field-label">📅 주말 <small>토·일 8-21 = 26h/주</small></span>
-    <input type="range" id="i-weekend" min="20" max="100" value="60" step="5">
-    <span class="pt-field-val"><span id="v-weekend">60</span>%</span>
-  </div>
-
-  <h4>운영 목표</h4>
-  <div class="pt-field">
-    <span class="pt-field-label">목표 흑자 <small>(만원/지점/월)</small></span>
-    <input type="range" id="i-margin" min="0" max="2000" value="500" step="100">
-    <span class="pt-field-val"><span id="v-margin">500</span>만</span>
-  </div>
-
-  <h3 style="margin-top:1.4rem;">결과</h3>
-
-  <div class="pt-out">
-    <div class="pt-row"><span class="pt-label">방 1개 임대료</span><span class="pt-num"><span id="o-rent-room"></span>만/월</span></div>
-    <div class="pt-row"><span class="pt-label">방 1개 총 비용</span><span class="pt-num"><span id="o-cost-room"></span>만/월</span></div>
-    <div class="pt-row"><span class="pt-label">효율 방시간/방/월</span><span class="pt-num"><span id="o-hours"></span>h</span></div>
-    <div class="pt-row"><span class="pt-label">우리 시간당 (BEP)</span><span class="pt-num"><span id="o-take-bep"></span>원</span></div>
-    <div class="pt-row"><span class="pt-label">우리 시간당 (흑자)</span><span class="pt-num"><span id="o-take-goal"></span>원</span></div>
-    <div class="pt-row"><span class="pt-label">회원 결제 BEP (1세션)</span><span class="pt-num"><span id="o-pay-bep"></span>원</span></div>
-    <div class="pt-row pt-hi"><span class="pt-label">회원 결제 (흑자, 1세션)</span><span class="pt-num"><span id="o-pay-goal"></span>원</span></div>
-    <div class="pt-row pt-hi"><span class="pt-label">주 2회권 (월)</span><span class="pt-num"><span id="o-week2"></span>원</span></div>
-    <div class="pt-row"><span class="pt-label">주 1회권 (월)</span><span class="pt-num"><span id="o-week1"></span>원</span></div>
-    <div class="pt-row"><span class="pt-label">지점 월 매출 (예상)</span><span class="pt-num"><span id="o-rev"></span>만/월</span></div>
+  <!-- 2. 비용 -->
+  <div class="pt-card">
+    <div class="pt-card-title">2️⃣ 비용 설정 <span class="badge">COST</span></div>
+    <div class="pt-field">
+      <span class="pt-field-label">평당 임대료 <small>만원/월</small></span>
+      <input type="range" id="i-rent" min="6" max="15" value="10" step="0.5">
+      <span class="pt-field-val"><span id="v-rent">10</span>만</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">인건비·관리비 <small>지점/월</small></span>
+      <input type="range" id="i-ops" min="300" max="1500" value="720" step="50">
+      <span class="pt-field-val"><span id="v-ops">720</span>만</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">멘토 회당 <small>30분 1:1, 원</small></span>
+      <input type="range" id="i-mentor" min="10000" max="35000" value="20000" step="1000">
+      <span class="pt-field-val"><span id="v-mentor">20,000</span>원</span>
+    </div>
+    <div class="pt-derived">
+      <div class="item">월 임대료 <b id="d-rentTotal">900</b>만</div>
+      <div class="item">→ 총 고정비 <b id="d-fixedTotal">1,620</b>만/월</div>
+    </div>
   </div>
 
-  <div class="pt-formula">
-    수식: 효율 방시간 = (35×골든% + 50×오프% + 26×주말%) × 4.3주<br/>
-    방 1개 비용 = (평당 × 11) + 인건비 분담 · 우리 수령 = 비용 ÷ 효율방시간 · 회원결제 = 우리수령 + 멘토회당
+  <!-- 3. 운영 -->
+  <div class="pt-card">
+    <div class="pt-card-title">3️⃣ 운영 설정 <span class="badge">OPERATIONS</span></div>
+
+    <div class="pt-presets" style="margin-top: 0.3rem;">
+      <button class="pt-preset-btn" data-preset="aggressive">공격적 (90/50/70)</button>
+      <button class="pt-preset-btn active" data-preset="standard">표준 (85/35/60)</button>
+      <button class="pt-preset-btn" data-preset="conservative">보수적 (70/25/50)</button>
+    </div>
+
+    <div class="pt-field">
+      <span class="pt-field-label">🌟 골든타임 시간 <small>평일 (출근 전·저녁)</small></span>
+      <input type="range" id="i-goldenHours" min="3" max="10" value="7" step="0.5">
+      <span class="pt-field-val"><span id="v-goldenHours">7</span>h/일</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">↳ 골든타임 가동률</span>
+      <input type="range" id="i-golden" min="30" max="100" value="85" step="5">
+      <span class="pt-field-val"><span id="v-golden">85</span>%</span>
+    </div>
+
+    <div class="pt-field">
+      <span class="pt-field-label">🌤️ 오프피크 시간 <small>평일 (낮·심야)</small></span>
+      <input type="range" id="i-offpeakHours" min="3" max="14" value="10" step="0.5">
+      <span class="pt-field-val"><span id="v-offpeakHours">10</span>h/일</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">↳ 오프피크 가동률</span>
+      <input type="range" id="i-offpeak" min="0" max="80" value="35" step="5">
+      <span class="pt-field-val"><span id="v-offpeak">35</span>%</span>
+    </div>
+
+    <div class="pt-field">
+      <span class="pt-field-label">📅 주말 시간 <small>토·일</small></span>
+      <input type="range" id="i-weekendHours" min="6" max="15" value="13" step="0.5">
+      <span class="pt-field-val"><span id="v-weekendHours">13</span>h/일</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">↳ 주말 가동률</span>
+      <input type="range" id="i-weekend" min="20" max="100" value="60" step="5">
+      <span class="pt-field-val"><span id="v-weekend">60</span>%</span>
+    </div>
+
+    <div class="pt-field" style="margin-top: 0.7rem;">
+      <span class="pt-field-label">🎯 목표 흑자 <small>만원/지점/월</small></span>
+      <input type="range" id="i-margin" min="0" max="2000" value="500" step="100">
+      <span class="pt-field-val"><span id="v-margin">500</span>만</span>
+    </div>
+    <div class="pt-derived">
+      <div class="item">효율 방시간/방/월 <b id="d-hours">270</b>h</div>
+      <div class="item">→ 지점 가용 방시간/월 <b id="d-storeHours">2,160</b>h</div>
+    </div>
+  </div>
+
+  <!-- 결과 -->
+  <div class="pt-result">
+    <div class="pt-result-title">📊 결과 — 가격대 산출</div>
+    <div class="pt-result-grid">
+      <div class="pt-result-row"><span class="pt-result-label">방시간 원가 (BEP)</span><span class="pt-result-num"><span id="o-take-bep"></span>원</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">방시간 목표 단가 (흑자)</span><span class="pt-result-num"><span id="o-take-goal"></span>원</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">회원 결제 BEP (1세션)</span><span class="pt-result-num"><span id="o-pay-bep"></span>원</span></div>
+      <div class="pt-result-row pt-hi"><span class="pt-result-label">회원 결제 (흑자, 1세션)</span><span class="pt-result-num"><span id="o-pay-goal"></span>원</span></div>
+      <div class="pt-result-row pt-hi"><span class="pt-result-label">주 2회권 (월)</span><span class="pt-result-num"><span id="o-week2"></span>원</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">주 1회권 (월)</span><span class="pt-result-num"><span id="o-week1"></span>원</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">지점 월 매출 (예상)</span><span class="pt-result-num"><span id="o-rev"></span>만/월</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">예상 회원 수 (포화)</span><span class="pt-result-num"><span id="o-members"></span>명</span></div>
+    </div>
+    <div class="pt-formula">
+      회원 결제 = 멘토 회당 + (총 고정비 + 목표 흑자) ÷ 지점 가용 방시간
+    </div>
   </div>
 </div>
 
@@ -174,72 +218,94 @@ nav_order: 0
     conservative:{ golden: 70, offpeak: 25, weekend: 50 }
   };
 
-  function applyPreset(name){
-    const p = presets[name];
-    $('i-golden').value = p.golden;
-    $('i-offpeak').value = p.offpeak;
-    $('i-weekend').value = p.weekend;
-    document.querySelectorAll('.pt-preset-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.preset === name);
-    });
-    calc();
-  }
-
   document.querySelectorAll('.pt-preset-btn').forEach(b => {
-    b.addEventListener('click', () => applyPreset(b.dataset.preset));
+    b.addEventListener('click', () => {
+      const p = presets[b.dataset.preset];
+      $('i-golden').value = p.golden;
+      $('i-offpeak').value = p.offpeak;
+      $('i-weekend').value = p.weekend;
+      calc();
+    });
   });
 
   function calc(){
-    const rent    = parseFloat($('i-rent').value);
-    const ops     = parseInt($('i-ops').value, 10);
-    const mentor  = parseInt($('i-mentor').value, 10);
-    const golden  = parseInt($('i-golden').value, 10) / 100;
-    const offpeak = parseInt($('i-offpeak').value, 10) / 100;
-    const weekend = parseInt($('i-weekend').value, 10) / 100;
-    const marginM = parseInt($('i-margin').value, 10);
+    const rooms         = parseInt($('i-rooms').value, 10);
+    const roomArea      = parseFloat($('i-roomArea').value);
+    const commonRatio   = parseInt($('i-commonRatio').value, 10) / 100;
+    const rent          = parseFloat($('i-rent').value);
+    const opsM          = parseInt($('i-ops').value, 10);
+    const mentor        = parseInt($('i-mentor').value, 10);
+    const goldenHours   = parseFloat($('i-goldenHours').value);
+    const offpeakHours  = parseFloat($('i-offpeakHours').value);
+    const weekendHours  = parseFloat($('i-weekendHours').value);
+    const golden        = parseInt($('i-golden').value, 10) / 100;
+    const offpeak       = parseInt($('i-offpeak').value, 10) / 100;
+    const weekend       = parseInt($('i-weekend').value, 10) / 100;
+    const marginM       = parseInt($('i-margin').value, 10);
 
-    $('v-rent').textContent    = rent;
-    $('v-ops').textContent     = ops;
-    $('v-mentor').textContent  = fmt(mentor);
-    $('v-golden').textContent  = (golden*100).toFixed(0);
-    $('v-offpeak').textContent = (offpeak*100).toFixed(0);
-    $('v-weekend').textContent = (weekend*100).toFixed(0);
-    $('v-margin').textContent  = marginM;
+    // 입력 표시
+    $('v-rooms').textContent        = rooms;
+    $('v-roomArea').textContent     = roomArea;
+    $('v-commonRatio').textContent  = (commonRatio*100).toFixed(0);
+    $('v-rent').textContent         = rent;
+    $('v-ops').textContent          = opsM;
+    $('v-mentor').textContent       = fmt(mentor);
+    $('v-goldenHours').textContent  = goldenHours;
+    $('v-offpeakHours').textContent = offpeakHours;
+    $('v-weekendHours').textContent = weekendHours;
+    $('v-golden').textContent       = (golden*100).toFixed(0);
+    $('v-offpeak').textContent      = (offpeak*100).toFixed(0);
+    $('v-weekend').textContent      = (weekend*100).toFixed(0);
+    $('v-margin').textContent       = marginM;
 
-    // 가동률 시간대별로 효율 방시간 계산 (방 1개/월)
-    // 평일 골든 7h/일 × 5일 × 4.3주 = 150.5h (max)
-    // 평일 오프피크 10h × 5 × 4.3 = 215h
-    // 주말 13h × 2 × 4.3 = 111.8h
-    const goldenMaxH  = 7 * 5 * 4.3;
-    const offpeakMaxH = 10 * 5 * 4.3;
-    const weekendMaxH = 13 * 2 * 4.3;
+    // 1. 공간 계산
+    const roomTotal   = rooms * roomArea;
+    const totalArea   = roomTotal / (1 - commonRatio);
+    const commonArea  = totalArea - roomTotal;
+
+    $('d-roomTotal').textContent   = roomTotal.toFixed(0);
+    $('d-commonTotal').textContent = commonArea.toFixed(0);
+    $('d-totalArea').textContent   = totalArea.toFixed(0);
+
+    // 2. 비용 계산
+    const rentTotalM = totalArea * rent;
+    const fixedTotalM = rentTotalM + opsM;
+    $('d-rentTotal').textContent  = rentTotalM.toFixed(0);
+    $('d-fixedTotal').textContent = fmt(Math.round(fixedTotalM));
+
+    // 3. 가동률 → 효율 방시간 (시간대 시간도 가변)
+    const goldenMaxH  = goldenHours  * 5 * 4.3;
+    const offpeakMaxH = offpeakHours * 5 * 4.3;
+    const weekendMaxH = weekendHours * 2 * 4.3;
     const util = goldenMaxH*golden + offpeakMaxH*offpeak + weekendMaxH*weekend;
+    const storeHours = util * rooms;
 
-    const rentRoomM   = rent * 11;
-    const costRoomM   = rentRoomM + ops;
-    const costRoomWon = costRoomM * 10000;
-    const takeBep     = util > 0 ? costRoomWon / util : 0;
-    const marginRoom  = (marginM * 10000) / 8;
-    const takeGoal    = util > 0 ? (costRoomWon + marginRoom) / util : 0;
+    $('d-hours').textContent      = util.toFixed(0);
+    $('d-storeHours').textContent = fmt(Math.round(storeHours));
 
-    const payBep  = takeBep + mentor;
-    const payGoal = takeGoal + mentor;
-    const week2 = payGoal * 8;
-    const week1 = payGoal * 4;
-    const revStoreM = (payGoal * util * 8) / 10000;
+    // 4. 가격 산출
+    const fixedTotalWon = fixedTotalM * 10000;
+    const marginWon     = marginM * 10000;
 
-    $('o-rent-room').textContent = rentRoomM.toFixed(0);
-    $('o-cost-room').textContent = costRoomM.toFixed(0);
-    $('o-hours').textContent     = util.toFixed(0);
+    const takeBep  = storeHours > 0 ? fixedTotalWon / storeHours : 0;
+    const takeGoal = storeHours > 0 ? (fixedTotalWon + marginWon) / storeHours : 0;
+    const payBep   = takeBep + mentor;
+    const payGoal  = takeGoal + mentor;
+    const week2    = payGoal * 8;
+    const week1    = payGoal * 4;
+    const revStoreM = (payGoal * storeHours) / 10000;
+    const memberCount = Math.round((storeHours / 8));  // 회원 1인당 월 8회 가정
+
     $('o-take-bep').textContent  = fmt(Math.round(takeBep));
     $('o-take-goal').textContent = fmt(Math.round(takeGoal));
     $('o-pay-bep').textContent   = fmt(round(payBep, 100));
     $('o-pay-goal').textContent  = fmt(round(payGoal, 100));
     $('o-week2').textContent     = fmt(round(week2, 1000));
     $('o-week1').textContent     = fmt(round(week1, 1000));
-    $('o-rev').textContent       = revStoreM.toFixed(0);
+    $('o-rev').textContent       = fmt(Math.round(revStoreM));
+    $('o-members').textContent   = fmt(memberCount);
 
-    // 슬라이더 직접 조작 시 preset active 해제
+    // preset active 표시
     const matched = Object.entries(presets).find(([k,v]) =>
       Math.round(golden*100) === v.golden &&
       Math.round(offpeak*100) === v.offpeak &&
@@ -250,7 +316,9 @@ nav_order: 0
     });
   }
 
-  ['i-rent','i-mentor','i-margin','i-ops','i-golden','i-offpeak','i-weekend']
+  ['i-rooms','i-roomArea','i-commonRatio','i-rent','i-ops','i-mentor','i-margin',
+   'i-goldenHours','i-offpeakHours','i-weekendHours',
+   'i-golden','i-offpeak','i-weekend']
     .forEach(id => $(id).addEventListener('input', calc));
   calc();
 })();
@@ -262,28 +330,28 @@ nav_order: 0
 
 | 구분 | 평일 | 주말 | 주간 시간 |
 |---|---|---|---|
-| 🌟 **골든타임** | 06:00-09:00 (출근 전) + 18:00-22:00 (저녁 피크) = 7h/일 × 5일 | - | **35h/주** |
-| 🌤️ **오프피크** | 09:00-18:00 (낮) + 22:00-23:00 (심야) = 10h/일 × 5일 | - | **50h/주** |
-| 📅 **주말** | - | 08:00-21:00 = 13h/일 × 2일 | **26h/주** |
-| 합 (운영 가능) | 평일 17h × 5 = 85h | 주말 13h × 2 = 26h | **111h/주** |
+| 🌟 **골든타임** | 06-09 + 18-22 = 7h/일 × 5일 | - | **35h/주** |
+| 🌤️ **오프피크** | 09-18 + 22-23 = 10h/일 × 5일 | - | **50h/주** |
+| 📅 **주말** | - | 08-21 = 13h/일 × 2일 | **26h/주** |
 
-## 락된 가정 (시뮬레이터 안 변수 ❌)
+## 락된 가정
 
-- 표준 지점: 90평, 8방 (방 1개 11평 환산)
 - 멘토 운영: 회원 1세션당 30분 1:1 → 멘토 1시간 = 2 회원
 - 회원 1세션 = 90분 세트 (카디오 30 + 방 60)
 - Phase 1 직영 (가맹 분배 ❌)
 - 주 평균 = 4.3주/월
+- 회원 1인당 월 8회 가정 (포화 회원 수 계산용)
 
 ## 프리셋
 
-| 시나리오 | 골든 | 오프피크 | 주말 | 평균 효율 방시간 |
+| 시나리오 | 골든 | 오프피크 | 주말 | 평균 효율 방시간 (방 1개/월) |
 |---|---|---|---|---|
-| 공격적 | 90% | 50% | 70% | ~321h/월 |
-| **표준** | 85% | 35% | 60% | ~270h/월 |
-| 보수적 | 70% | 25% | 50% | ~215h/월 |
+| 공격적 | 90% | 50% | 70% | ~321h |
+| **표준** | 85% | 35% | 60% | ~270h |
+| 보수적 | 70% | 25% | 50% | ~215h |
 
 ---
 
-| 2026-05-13 | 9 시나리오 매트릭스 → 인터랙티브 슬라이더 |
-| 2026-05-13 | 가동률 = 시간대별 개별 슬라이더 (골든/오프/주말) + 시간대 명시 |
+| 2026-05-13 | 9 시나리오 매트릭스 |
+| 2026-05-13 | 시간대별 슬라이더 |
+| 2026-05-13 | 3단계 카드 흐름 (공간→비용→운영→결과) + 자동 도출 표시 |
