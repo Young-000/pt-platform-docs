@@ -5,43 +5,62 @@ nav_order: 1
 
 # PT Platform
 
-<style>
-.pt-hero { background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); color: #fff; padding: 2rem 1.6rem; border-radius: 12px; margin: 1.2rem 0 1.8rem; }
-.pt-hero .tag { font-size: 1.7rem; font-weight: 800; line-height: 1.4; letter-spacing: -0.01em; }
-.pt-hero .sub { margin-top: 0.6rem; font-size: 1rem; opacity: 0.92; }
-.pt-stakeholders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin: 1.3rem 0 0.8rem; }
-.pt-stakeholders .who { background: rgba(255,255,255,0.12); padding: 0.85rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); }
-.pt-stakeholders .who h4 { margin: 0 0 0.4rem; font-size: 0.92rem; opacity: 0.9; letter-spacing: 0.02em; }
-.pt-stakeholders .who p { margin: 0; font-size: 0.95rem; line-height: 1.45; font-weight: 600; }
-.pt-mech { background: rgba(0,0,0,0.22); padding: 0.85rem 1rem; border-radius: 8px; margin: 0.7rem 0; font-size: 0.95rem; line-height: 1.55; }
-.pt-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 1rem; }
-.pt-stats .card { background: rgba(255,255,255,0.13); padding: 0.7rem 0.5rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,255,255,0.15); }
-.pt-stats .num { font-size: 1.55rem; font-weight: 800; line-height: 1; }
-.pt-stats .lbl { font-size: 0.72rem; opacity: 0.85; margin-top: 0.35rem; }
-@media (max-width: 700px) { .pt-stakeholders, .pt-stats { grid-template-columns: repeat(2, 1fr); } }
-</style>
+## 시스템 요약 (한 번에 이해하기)
 
-<div class="pt-hero">
-  <div class="tag">AI 기반 체계화된 운동을,<br/>private room에서 1:1 멘토와.</div>
-  <div class="sub">서비스 카테고리 = <b>개인 맞춤 세션</b>. 목표 = 100호점 체인화.</div>
+### 우리가 만드는 것
 
-  <div class="pt-stakeholders">
-    <div class="who"><h4>🎯 회원에게</h4><p>비싸지 않은 1:1 체계 운동 + 북적임 없는 private room</p></div>
-    <div class="who"><h4>💪 강사에게</h4><p>영업·정산 부담 없는 파트타임 잡. Pro 인증 시 단가 자율.</p></div>
-    <div class="who"><h4>🏢 본사에게</h4><p>강사풀·AI·브랜드 자산 보유. 가맹점주 = "동전노래방" 운영.</p></div>
-  </div>
+> **AI 기반 체계화된 운동을 private room에서 1:1 멘토와 받는 "개인 맞춤 세션" 서비스.**
+> 서비스 카테고리 자체를 "개인 맞춤 세션"으로 정의. PT·반값 PT 같은 비교/할인 뉘앙스 ❌.
+> 목표: 100호점 체인화.
 
-  <div class="pt-mech">
-    <b>핵심 매커니즘:</b> AI가 운동 설계 → 멘토는 30분 1:1만 (시간당 2회원) → 회원은 데이터 누적 + 다음 운동 자동 추천. 강사 풀타임 ❌, 회원 매번 처음부터 ❌.
-  </div>
+### 누구를 위해
 
-  <div class="pt-stats">
-    <div class="card"><div class="num">90<span style="font-size:0.6em;">분</span></div><div class="lbl">1세션 (카디오 30 + 방 60)</div></div>
-    <div class="card"><div class="num">8<span style="font-size:0.55em;">방</span></div><div class="lbl">표준 90평 지점</div></div>
-    <div class="card"><div class="num">24<span style="font-size:0.55em;">만</span></div><div class="lbl">주 2회권 / 월 (가설)</div></div>
-    <div class="card"><div class="num">100<span style="font-size:0.55em;">호점</span></div><div class="lbl">목표 (가맹)</div></div>
-  </div>
-</div>
+- **회원** — 주 2회 운동러. "헬스장은 북적, PT는 비싸다"를 해결.
+- **강사** — 영업·정산·CS 부담 없는 **파트타임 잡** (배달기사 모델). 자격증 보유 + 본사 심사 통과 시 **Pro 인증 멘토** = 단가 자율 권한.
+- **본사** — 강사풀·AI·브랜드·회원 데이터 **무형자산 보유**. 가맹점주는 공간 + 일상 운영("동전노래방" 수준)만.
+
+### 어떻게 작동하는가
+
+1. 회원이 앱에서 멤버십 결제 (주 1회권 4회 / 주 2회권 8회 / 월).
+2. 매주 같은 시간 **고정 슬롯** 보유 (피크 6-10pm). 멘토는 매번 다를 수 있으나 이전 멘토 우선 매칭.
+3. 1세션 = **90분 세트** — 카디오존(공용) 30분 → private room 60분.
+4. 방 안 60분 = 멘토와 1:1 30분 + 자율 운동 30분 (AI 가이드). **멘토는 시간당 2명 cover**.
+5. 멘토가 세션 기록 → AI 누적 → **다음 세션 운동 자동 제안**. 멘토 바뀌어도 회원 운동 이력 연속.
+
+### 어떻게 돈 버는가
+
+- 회원 결제 → **본사 앱이 직접 수령** → 자동 분배 (멘토 · 본사 · 가맹점주).
+- 표준 지점 = 90평 8방. 평당 임대료 10만 (방 1개 110만/월).
+- 멘토 회당 약 20,000원 (30분 1:1, 시급 환산 40k).
+- 시뮬레이션 (표준 가동률 270h/방/월) → **주 2회권 약 24만/월, 주 1회권 약 12만/월**에 지점당 월 500만 흑자.
+- **Pro 인증 멘토** = 회당 자율 단가 (회원이 포인트 추가 결제). 본사 추가 매출 + 강사 수익 인센티브.
+
+### 확장 계획 (시점 미정, KPI 기준)
+
+| Phase | 호점 | 모델 |
+|---|---|---|
+| 1 | 1-3 | **직영** PMF 검증 |
+| 2 | 4-10 | 직영 + 가맹 1-2개 병행 |
+| 3 | 10-30 | 가맹 70% + 직영 30% |
+| 4 | 30-100 | 가맹 90% + 직영 10% (플래그십) |
+
+### 핵심 차별점 (시장 빈자리)
+
+```
+저렴 (헬스장·짐박스)     중간            비쌈 (풀 PT 60-120만)
+가이드 ❌                ?               1:1·체계화 있음
+                                       강사 락인 부담
+        ↓
+     PT Platform 자리
+     합리적 가격 × 체계화 × private + 1:1
+```
+
+- **AI 시스템 PT** — 매일 챙기는 코치 ❌. 세션 기록 누적 + 다음 운동 제안 (운동 = 회원에게 누적되는 자산).
+- **강사 파트타임 모델** — 배달기사처럼 슬롯 자유 오픈. 자격증 보유 + 본사 심사 = Pro 인증 단가 자율.
+- **공간 예약제** — 방 + 카디오존 둘 다 예약 단위. 북적임 ❌.
+- **본사 자산 보호** — 회원·강사·결제·AI 본사 보유 → 가맹점주·강사 우회 불가.
+
+📊 [단위 경제 시뮬레이션](./economics/simulation.html) — 슬라이더로 가격·가동률·임대료 실시간 탐색
 
 > **사업 OS** — 모든 핵심 결정이 여기에 정의됩니다. 결정 전엔 🔴 TBD, 결정 후엔 ADR로 봉인.
 
