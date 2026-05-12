@@ -195,6 +195,10 @@ stateDiagram-v2
 - 멤버십 만료 → active=false 자동 전환
 - 동일 시각 다른 회원의 고정 슬롯과 충돌 시 — 방 8개 stagger 운영으로 동시 가능 (방 매칭 알고리즘이 처리)
 
+## 📘 사용 PRD
+
+[👤 세션 진행](../user/2026-05-13-session-flow.html) · [👤 예약](../user/2026-05-13-reservation.html) · [💪 세션 진행](../mentor/2026-05-13-session-flow.html) · [💪 슬롯](../mentor/2026-05-13-reservation.html) · [🏢 세션 시스템](../platform/2026-05-13-session-system.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
+
 ---
 
 | 2026-05-13 | 초안 — Schedule 4 모델 상세 명세 |

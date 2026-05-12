@@ -9,6 +9,8 @@ nav_order: 1
 
 **Status**: Draft
 **관련 결정**: [4A 세션 종류](../../service/session-types.html) · [4B 포맷](../../service/session.html) · [4D 공간](../../service/space.html) · [4C AI 역할](../../service/ai-role.html) · [5A 예약](../../operations/reservation.html)
+**📡 API**: [세션](../../api/catalog.html#세션-session) · [예약](../../api/catalog.html#예약-reservation) · [시스템·Cron](../../api/catalog.html#시스템--cron)
+**🗄️ Data**: [3. Schedule](../../data/03-schedule.html) · [4. Reservation](../../data/04-reservation.html) · [5. Records](../../data/05-records.html) · [6. AI](../../data/06-ai.html)
 
 ## 1. 배경
 

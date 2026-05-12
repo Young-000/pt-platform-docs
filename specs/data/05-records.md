@@ -110,6 +110,10 @@ nav_order: 15
 - 평가 후 7일 이내 수정 가능 (이후 lock)
 - 부적절한 코멘트 신고 → 운영자 검토 → publicOnProfile=false
 
+## 📘 사용 PRD
+
+[👤 AI 가이드](../user/2026-05-13-ai-coaching.html) · [💪 세션 진행](../mentor/2026-05-13-session-flow.html) · [🏢 AI 엔진](../platform/2026-05-13-ai-engine.html)
+
 ---
 
 | 2026-05-13 | 초안 — SessionRecord·Rating 상세 명세 |

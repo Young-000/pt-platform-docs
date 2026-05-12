@@ -214,6 +214,10 @@ stateDiagram-v2
 ### Edge Cases
 - 동시 여러 reason (예: Pro 인증 통과 + 즉시 컴플레인) → 별개 TierChange 기록
 
+## 📘 사용 PRD
+
+[💪 등급·Pro 인증](../mentor/2026-05-13-mentor-tier.html) · [🏢 멘토 등급 시스템](../platform/2026-05-13-mentor-tier-system.html)
+
 ---
 
 | 2026-05-13 | 초안 — Mentor System 5 모델 상세 명세 |

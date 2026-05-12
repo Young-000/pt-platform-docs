@@ -123,6 +123,10 @@ nav_order: 12
 - 기계 고장 시 (status=maintenance): 그 자리 슬롯 자동 닫힘, 회원 다른 자리로 swap
 - 모든 자리 점유 시 (이론치 6 = 동시 6명): 추가 예약 차단
 
+## 📘 사용 PRD
+
+[🏢 세션 시스템](../platform/2026-05-13-session-system.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
+
 ---
 
 | 2026-05-13 | 초안 — Store/Room/CardioSeat 상세 명세 |

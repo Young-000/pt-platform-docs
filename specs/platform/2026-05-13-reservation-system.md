@@ -9,6 +9,8 @@ nav_order: 3
 
 **Status**: Draft
 **관련 결정**: [5A 예약](../../operations/reservation.html) · [2D 정책](../../members/policies.html) · [4D 공간](../../service/space.html)
+**📡 API**: [예약](../../api/catalog.html#예약-reservation) · [시스템·Cron](../../api/catalog.html#시스템--cron)
+**🗄️ Data**: [3. Schedule](../../data/03-schedule.html) · [4. Reservation](../../data/04-reservation.html) · [10. Audit](../../data/10-audit.html)
 
 ## 1. 핵심 컴포넌트
 

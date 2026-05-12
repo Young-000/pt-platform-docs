@@ -11,9 +11,28 @@ nav_order: 17
 
 ## Membership
 
-**Purpose**: 회원 활성 멤버십 (주 1·2회권 + 약정 + 자동결제).
+**Purpose**: 회원 멤버십. **결제 → 생성 → 활성화 → 만료/해지** 라이프사이클.
 **Related PRDs**: [👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html)
-**Lifecycle**: 가입 → active → (일시정지) paused → 갱신 → 만료 또는 해지
+
+### 라이프사이클
+
+```
+[결제 성공] → 회원권 생성 (status=created, 유효기간 카운트 ❌)
+       ↓
+[첫 사용 (첫 세션 예약 또는 체크인)]
+       ↓
+[활성화] → status=active, activatedAt 기록, expiresAt 카운트 시작
+       ↓
+[활성 기간] — 회차 사용·일시정지·재개
+       ↓
+[종료 조건 충족]:
+  - 유효기간 만료 (expiresAt < NOW) → status=expired
+  - 회차 0 + 만료 임박 → status=expired
+  - 중도 해지 + 환불 → status=cancelled
+  - autoRenew=true → 다음 기간 새 Membership 자동 생성
+       ↓
+[연장] — 만료 임박/만료 후 N일 내 추가 결제로 기간·회차 연장 (status=active 유지/복원)
+```
 
 ### Fields
 
@@ -22,39 +41,56 @@ nav_order: 17
 | id | String | ✓ | cuid() | PK |
 | memberId | String | ✓ | - | FK |
 | type | MembershipType | ✓ | - | week1 / week2 |
-| creditsRemaining | Int | ✓ | - | 주 1=4, 주 2=8 기준 (이번 달) |
+| creditsRemaining | Int | ✓ | - | 주 1=4, 주 2=8 기준 |
 | contractMonths | Int | ✓ | 1 | 1, 3, 6, 12 |
 | discountRate | Decimal(3,2) | ✓ | 0 | 0, 0.05, 0.10, 0.15 |
-| pricePerMonth | Int | ✓ | - | 정상가 (할인 전) |
-| priceCharged | Int | ✓ | - | 실제 결제액 (할인 적용) |
-| startedAt | DateTime | ✓ | - | 멤버십 시작 |
-| expiresAt | DateTime | ✓ | - | 약정 만료 (일시정지 시 연장) |
+| pricePerMonth | Int | ✓ | - | 정상가 |
+| priceCharged | Int | ✓ | - | 실제 결제액 |
+| paidAt | DateTime | ✓ | - | 결제 완료 시각 (Payment 연결) |
+| activatedAt | DateTime? | - | null | 첫 사용 시점 (status=active 전환) |
+| autoActivateBy | DateTime | ✓ | - | 결제 후 자동 활성화 한도 (기본 paidAt + 30일) |
+| expiresAt | DateTime? | - | null | 활성화 시점 + contractMonths (활성화 전엔 null) |
 | pausedAt | DateTime? | - | null | 일시정지 시작 |
 | resumedAt | DateTime? | - | null | 재개 |
 | pauseUsedDays | Int | ✓ | 0 | 누적 일시정지 일수 |
-| autoRenew | Boolean | ✓ | true | |
-| status | MembershipStatus | ✓ | active | active/paused/expired/cancelled |
+| autoRenew | Boolean | ✓ | true | 만료 시 자동 갱신 여부 |
+| extensionCount | Int | ✓ | 0 | 수동 연장 횟수 (회원당 카운트) |
+| status | MembershipStatus | ✓ | created | created/active/paused/expired/cancelled |
 | createdAt | DateTime | ✓ | now() | |
 
 ### Validation
-- 한 회원 = 1 active membership (status='active')
-- creditsRemaining: week1 = 0-4, week2 = 0-8
+- 한 회원 = 1 active or created membership (status IN ('active', 'created'))
+- creditsRemaining: week1 = 0-4, week2 = 0-8 (확장 시 늘어남)
 - pauseUsedDays ≤ contractMonths × 30 × 0.30
-- expiresAt = startedAt + contractMonths × 30일 + pauseUsedDays
+- expiresAt = activatedAt + contractMonths × 30일 + pauseUsedDays (활성화 후 산출)
+- autoActivateBy = paidAt + 30일 (이 시점 미사용 시 시스템 자동 활성화)
+- status='active' 전환 시 activatedAt, expiresAt 필수
 - discountRate enum {0, 0.05, 0.10, 0.15}
 
 ### State Transitions
 
 ```mermaid
 stateDiagram-v2
-    [*] --> active: 가입·결제
+    [*] --> created: 결제 성공
+    created --> active: 첫 사용 또는 30일 후 자동
+    created --> cancelled: 청약철회 (7일 내, 미사용)
     active --> paused: 일시정지
     paused --> active: 재개
-    active --> active_renewed: 자동 갱신 (다음 기간)
+    active --> extended: 수동 연장 (추가 결제)
+    extended --> active: 기간·회차 +
     active --> cancelled: 중도 해지
-    active --> expired: 만료
+    active --> expired: 유효기간 만료 OR 회차 0 + 만료
     paused --> expired: 만료 (정지 중)
+    expired --> active: 만료 후 N일 내 수동 연장 (재활성화)
 ```
+
+### 연장 (수동) 룰
+
+회원이 추가 결제로 기간·회차 연장 가능:
+- **만료 전 연장**: 기존 expiresAt + N개월 + 회차 추가 (잔여 + N)
+- **만료 후 연장** (만료 후 30일 내): expired → active 재활성화 (새 기간 시작)
+- **만료 후 30일 초과**: 신규 가입과 동일 (Membership row 새로 생성)
+- 가격 = 현재 PricingConfig 기준 (할인 적용 가능 — 연장 인센티브)
 
 ### Indexes
 - `[memberId, status]` — 회원 활성 멤버십 조회
@@ -201,6 +237,10 @@ stateDiagram-v2
 ### Edge Cases
 - PG 환불 실패 → 운영자 수동 처리 + 회원 알림
 - 환불 후 멘토 정산 회수 → DistributionEntry 차감 (다음 격주)
+
+## 📘 사용 PRD
+
+[👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [🏢 정산 시스템](../platform/2026-05-13-payout-system.html) · [💳 결제 흐름](../payments/flow.html)
 
 ---
 

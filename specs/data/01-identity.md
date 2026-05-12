@@ -173,6 +173,10 @@ stateDiagram-v2
 - 결정 이력 추적: `JOIN TierChange ON changedBy = Admin.id`
 - 활동 모니터링: `WHERE lastLoginAt > NOW() - 30days`
 
+## 📘 사용 PRD
+
+[👤 모든 회원 PRD](../user/) · [💪 모든 멘토 PRD](../mentor/) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [🏢 멘토 등급](../platform/2026-05-13-mentor-tier-system.html)
+
 ---
 
 | 2026-05-13 | 초안 — Member/Mentor/Admin 상세 명세 |

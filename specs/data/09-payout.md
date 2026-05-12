@@ -5,9 +5,183 @@ grand_parent: 스펙 (PRD)
 nav_order: 19
 ---
 
-# 9. Payout — PayoutPeriod·PaymentLedger·DistributionEntry·MentorPayout·MentorBankAccount·TaxReport
+# 9. Payout — PricingConfig·RevenueDistributionConfig·PayoutPeriod·PaymentLedger·DistributionEntry·MentorPayout·MentorBankAccount·TaxReport
 
-정산 시스템. [3G 정산](../../partners/payout.html), [6C 본사 수익](../../expansion/revenue-share.html) 정책 반영.
+정산 시스템 + **가변 가격·분배 설정**. [3G 정산](../../partners/payout.html), [6C 본사 수익](../../expansion/revenue-share.html), [2C 가격](../../members/pricing.html) 정책 반영.
+
+## PricingConfig (회원 결제 가격, 가변)
+
+**Purpose**: 회원이 1세션에 내는 가격을 **시간·슬롯 타입·멘토 등급별로 가변** 설정. admin이 운영.
+**Related PRDs**: [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 예약](../platform/2026-05-13-reservation-system.html)
+**Lifecycle**: admin 설정 → 활성 → 다이나믹 프라이싱 (Phase 2+) 적용
+
+### Fields
+
+| Field | Type | Required | Default | Description |
+|---|---|---|---|---|
+| id | String | ✓ | cuid() | PK |
+| name | String | ✓ | - | "Phase 1 기본" / "피크 가산" 등 |
+| sessionPriceWon | Int | ✓ | - | 1세션 가격 (원) — 멤버십 회당 환산 |
+| pointSurchargeWon | Int? | - | null | Pro 인증 멘토 선택 시 추가 결제 (포인트) |
+| scope | String | ✓ | global | global / time_band / slot_type / mentor_tier |
+| scopeValue | String? | - | null | "peak" / "off_peak" / "fixed" / "ad_hoc" / "pro_certified" |
+| priority | Int | ✓ | 0 | specific > general 우선순위 |
+| active | Boolean | ✓ | true | |
+| effectiveFrom | DateTime | ✓ | - | |
+| effectiveUntil | DateTime? | - | null | |
+| createdAt | DateTime | ✓ | now() | |
+| createdBy | String | ✓ | - | admin id |
+
+### 사용 예시
+
+```
+# Phase 1 기본
+config_default (global, priority=0)
+  sessionPriceWon: 30,000
+  pointSurchargeWon: null
+
+# 피크 시간 가산 (Phase 2)
+config_peak (time_band='peak', priority=10)
+  sessionPriceWon: 33,000  # +10%
+
+# 고정 슬롯 우대 (멤버십 가격 ↓)
+config_fixed (slot_type='fixed', priority=20)
+  sessionPriceWon: 28,000  # -7%
+
+# Pro 인증 멘토 (포인트 추가)
+config_pro (mentor_tier='pro_certified', priority=5)
+  sessionPriceWon: 30,000  # 회차는 동일
+  pointSurchargeWon: 5,000  # 포인트 추가 차감
+```
+
+### Validation
+- 1 시각·슬롯·멘토에 매칭되는 config 중 priority 최고 적용
+- effectiveUntil > effectiveFrom
+
+### 적용 우선순위
+
+```
+mentor_tier (5) → slot_type (20) → time_band (10) → global (0)
+숫자 높음 = 우선
+```
+
+### Edge Cases
+- 가격 변경 시점 = 신규 예약부터 적용 (기존 예약 = 기존 가격 snapshot)
+- 동시 충돌 (multi-scope 매칭) → priority 같으면 effectiveFrom 더 최근
+- 가격 ↓ 변경 시 회원 알림 (긍정), 가격 ↑ 시 7일 전 알림
+
+---
+
+## RevenueDistributionConfig (정산 분배, 가변)
+
+**Purpose**: 세션별 분배 정책을 **admin이 가변 설정**. 비율 / 정액 / 혼합 모두 지원. 시간·등급·지점별 차등 가능.
+**Related PRDs**: [🏢 정산 시스템](../platform/2026-05-13-payout-system.html) · [3G 정산](../../partners/payout.html) · [6C 본사 수익](../../expansion/revenue-share.html)
+**Lifecycle**: admin 설정 → 활성 → 변경 (이력 기록)
+
+### Fields
+
+| Field | Type | Required | Default | Description |
+|---|---|---|---|---|
+| id | String | ✓ | cuid() | PK |
+| name | String | ✓ | - | "Phase 1 직영 기본" 등 |
+| scope | String | ✓ | global | global / store / mentor_tier / time_band / slot_type |
+| scopeValue | String? | - | null | |
+| priority | Int | ✓ | 0 | |
+| mode | String | ✓ | percentage | percentage / flat / hybrid |
+| mentorPercent | Decimal(4,2)? | - | null | 0.50 |
+| mentorFlatRate | Int? | - | null | 20,000원 |
+| hqPercent | Decimal(4,2)? | - | null | 0.50 (Phase 1 직영) |
+| hqFlatRate | Int? | - | null | |
+| franchiseePercent | Decimal(4,2)? | - | null | Phase 2+ |
+| franchiseeFlatRate | Int? | - | null | |
+| active | Boolean | ✓ | true | |
+| effectiveFrom | DateTime | ✓ | - | |
+| effectiveUntil | DateTime? | - | null | |
+| createdAt | DateTime | ✓ | now() | |
+| createdBy | String | ✓ | - | admin id |
+
+### 사용 예시
+
+```
+# Phase 1 직영 (기본)
+default (global, percentage, priority=0)
+  mentorPercent: 0.50
+  hqPercent: 0.50
+  franchiseePercent: null
+
+# Pro 인증 멘토 (자율 단가 정액)
+pro_flat (mentor_tier='pro_certified', mode=flat, priority=10)
+  mentorFlatRate: 28,000   # Pro 자율 단가
+  hqFlatRate: nullable     # 나머지 자동 (회원 결제 - 멘토)
+
+# 피크 시간 (멘토 추가 인센티브)
+peak_bonus (time_band='peak', percentage, priority=5)
+  mentorPercent: 0.55     # +5%
+  hqPercent: 0.45
+
+# Phase 2 가맹
+franchise (global Phase 2+, percentage, priority=0)
+  mentorPercent: 0.50
+  hqPercent: 0.30
+  franchiseePercent: 0.20
+```
+
+### Validation
+- mode=percentage: mentorPercent + hqPercent + (franchiseePercent || 0) = 1.0
+- mode=flat: 합 ≤ 회원 결제액 (예약 시 검증)
+- mode=hybrid: 일부 percentage + 일부 flat (멘토는 flat, 본사는 나머지 등)
+- effectiveFrom < effectiveUntil
+
+### State Transitions
+
+```mermaid
+stateDiagram-v2
+    [*] --> active: admin 생성
+    active --> superseded: 새 config 우선순위 ↑
+    active --> ended: effectiveUntil 도달
+```
+
+### Indexes
+- `[scope, scopeValue, active, priority]` — 매칭 시 lookup
+- `[effectiveFrom, effectiveUntil]` — 시점별 조회
+
+### 적용 우선순위 (동일 시점)
+
+```
+mentor_tier → store → slot_type → time_band → global
+priority 높을수록 먼저
+```
+
+### 진행 중 예약 보호
+
+예약 시점의 config snapshot을 `DistributionEntry.configSnapshot` (jsonb)에 저장 → config 변경되어도 이미 예약된 세션은 기존 비율 적용.
+
+### Edge Cases
+- 진행 중 예약의 config 변경 → snapshot 보존 (불변)
+- 비율 합 ≠ 1.0 → 저장 차단
+- 정액 합이 회원 결제 초과 → admin 알림 (손실 발생)
+- 우선순위 동률 → effectiveFrom 더 최근
+
+---
+
+## DistributionEntry 보강
+
+DistributionEntry에 `configSnapshot` 컬럼 추가 — 예약 시점 RevenueDistributionConfig 스냅샷.
+
+```diff
+model DistributionEntry {
+  id
+  paymentLedgerId
+  recipientType
+  recipientId
+  amount
++ configSnapshot  Json  // 적용된 config 전체 snapshot
++ configId        String?  // 참조 (선택)
+  status
+}
+```
+
+---
 
 ## PayoutPeriod
 
@@ -276,6 +450,10 @@ stateDiagram-v2
 ### Edge Cases
 - 원천세 신고 = 본사 책임 (멘토는 종합소득세 신고 시 사용)
 - 사업소득 신고 누락 → 운영 알림
+
+## 📘 사용 PRD
+
+[💪 정산](../mentor/2026-05-13-payout.html) · [🏢 정산 시스템](../platform/2026-05-13-payout-system.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [💳 결제 흐름](../payments/flow.html)
 
 ---
 

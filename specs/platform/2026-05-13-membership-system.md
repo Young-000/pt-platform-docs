@@ -9,6 +9,8 @@ nav_order: 2
 
 **Status**: Draft
 **관련 결정**: [2B 멤버십](../../members/membership.html) · [2C 가격](../../members/pricing.html) · [2D 정책](../../members/policies.html)
+**📡 API**: [멤버십·결제](../../api/catalog.html#멤버십결제-membership) · [시스템·Cron](../../api/catalog.html#시스템--cron)
+**🗄️ Data**: [7. Membership](../../data/07-membership.html) · [10. Audit](../../data/10-audit.html)
 
 ## 1. 시스템 구성
 

@@ -9,6 +9,8 @@ nav_order: 3
 
 **Status**: Draft · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [3F 일반 멘토](../../partners/peer-leader.html) · [3H 품질·등급](../../partners/quality.html) · [3G 정산](../../partners/payout.html) · [4A 세션 종류](../../service/session-types.html) · [3A 강사 페르소나](../../partners/personas.html) · [3C 강사 VP](../../partners/value-prop.html)
+**📡 API**: [멘토](../../api/catalog.html#멘토-mentor) · [어드민](../../api/catalog.html#어드민-admin)
+**🗄️ Data**: [8. Mentor System](../../data/08-mentor-system.html)
 **현재 코드**: `apps/partner/src/pages/more/profile-page.tsx`
 
 ## 1. 배경

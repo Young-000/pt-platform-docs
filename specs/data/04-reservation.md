@@ -202,6 +202,10 @@ stateDiagram-v2
 - 보상권 만료 (30일 미사용) → 자동 archive
 - 회원 탈퇴 시 → 미사용 보상권 무효화 (환불 ❌)
 
+## 📘 사용 PRD
+
+[👤 세션 진행](../user/2026-05-13-session-flow.html) · [👤 예약](../user/2026-05-13-reservation.html) · [💪 세션 진행](../mentor/2026-05-13-session-flow.html) · [💪 슬롯](../mentor/2026-05-13-reservation.html) · [🏢 세션 시스템](../platform/2026-05-13-session-system.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
+
 ---
 
 | 2026-05-13 | 초안 — Reservation·Session·DayPass·BonusCredit 상세 명세 |

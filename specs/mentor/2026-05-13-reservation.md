@@ -9,6 +9,8 @@ nav_order: 2
 
 **Status**: Draft · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [3A 강사 페르소나](../../partners/personas.html) · [3E 운영 모델](../../partners/model.html) · [5A 예약](../../operations/reservation.html) · [3F 일반 멘토](../../partners/peer-leader.html)
+**📡 API**: [멘토](../../api/catalog.html#멘토-mentor) · [예약](../../api/catalog.html#예약-reservation)
+**🗄️ Data**: [3. Schedule](../../data/03-schedule.html) · [4. Reservation](../../data/04-reservation.html) · [8. Mentor System](../../data/08-mentor-system.html)
 **현재 코드**: `apps/partner/src/pages/schedule-page.tsx`
 
 ## 1. 배경

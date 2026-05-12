@@ -166,6 +166,10 @@ nav_order: 20
 3. 회원 알림 (보상 회차 안내), 멘토 알림 (패널티 안내)
 ```
 
+## 📘 사용 PRD
+
+[🏢 모든 플랫폼 PRD](../platform/) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [🏢 멘토 등급](../platform/2026-05-13-mentor-tier-system.html)
+
 ---
 
 | 2026-05-13 | 초안 — PolicyEvent·CancellationLog 상세 + 통합 흐름 예시 |
