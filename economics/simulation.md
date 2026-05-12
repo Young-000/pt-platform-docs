@@ -34,6 +34,14 @@ nav_order: 0
 }
 .pt-sim .pt-field-label small { font-size: 0.74rem; color: #9ca3af; display: block; margin-top: 1px; font-weight: 400; }
 .pt-sim input[type=range] { width: 100%; accent-color: #1a73e8; }
+.pt-sim .pt-time-range {
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.pt-sim .pt-time-range input[type=number] {
+  width: 3.5rem; padding: 0.3rem 0.4rem; border: 1px solid #d1d5db; border-radius: 4px;
+  font-size: 0.88rem; text-align: center; font-variant-numeric: tabular-nums;
+}
+.pt-sim .pt-time-range .sep { color: #9ca3af; }
 .pt-sim .pt-field-val {
   min-width: 5rem; text-align: right;
   font-variant-numeric: tabular-nums; font-weight: 600; color: #1a73e8;
@@ -144,19 +152,42 @@ nav_order: 0
     </div>
 
     <div class="pt-field">
-      <span class="pt-field-label">🌟 골든타임 시간 <small>평일 (출근 전·저녁)</small></span>
-      <input type="range" id="i-goldenHours" min="3" max="10" value="7" step="0.5">
-      <span class="pt-field-val"><span id="v-goldenHours">7</span>h/일</span>
+      <span class="pt-field-label">⏰ 평일 운영 시간</span>
+      <div class="pt-time-range">
+        <input type="number" id="i-weekdayOpen" min="0" max="23" value="6" step="1"> 시
+        <span class="sep">~</span>
+        <input type="number" id="i-weekdayClose" min="1" max="24" value="23" step="1"> 시
+      </div>
+      <span class="pt-field-val"><span id="v-weekdayHours">17</span>h/일</span>
+    </div>
+
+    <div class="pt-field">
+      <span class="pt-field-label">🌟 골든타임 (저녁) <small>피크 시간</small></span>
+      <div class="pt-time-range">
+        <input type="number" id="i-goldenEveOpen" min="0" max="23" value="18" step="1"> 시
+        <span class="sep">~</span>
+        <input type="number" id="i-goldenEveClose" min="1" max="24" value="22" step="1"> 시
+      </div>
+      <span class="pt-field-val"><span id="v-goldenEveHours">4</span>h/일</span>
     </div>
     <div class="pt-field">
-      <span class="pt-field-label">↳ 골든타임 가동률</span>
+      <span class="pt-field-label">🌅 골든타임 (아침) <small>출근 전, 옵션</small></span>
+      <div class="pt-time-range">
+        <input type="number" id="i-goldenMornOpen" min="0" max="23" value="6" step="1"> 시
+        <span class="sep">~</span>
+        <input type="number" id="i-goldenMornClose" min="1" max="24" value="9" step="1"> 시
+      </div>
+      <span class="pt-field-val"><span id="v-goldenMornHours">3</span>h/일</span>
+    </div>
+    <div class="pt-field">
+      <span class="pt-field-label">↳ 골든 가동률</span>
       <input type="range" id="i-golden" min="30" max="100" value="85" step="5">
       <span class="pt-field-val"><span id="v-golden">85</span>%</span>
     </div>
 
     <div class="pt-field">
-      <span class="pt-field-label">🌤️ 오프피크 시간 <small>평일 (낮·심야)</small></span>
-      <input type="range" id="i-offpeakHours" min="3" max="14" value="10" step="0.5">
+      <span class="pt-field-label">🌤️ 오프피크 <small>자동 = 평일 - 골든</small></span>
+      <div class="pt-time-range" style="color:#9ca3af; font-size:0.85rem;">자동 도출</div>
       <span class="pt-field-val"><span id="v-offpeakHours">10</span>h/일</span>
     </div>
     <div class="pt-field">
@@ -166,8 +197,12 @@ nav_order: 0
     </div>
 
     <div class="pt-field">
-      <span class="pt-field-label">📅 주말 시간 <small>토·일</small></span>
-      <input type="range" id="i-weekendHours" min="6" max="15" value="13" step="0.5">
+      <span class="pt-field-label">📅 주말 운영 시간</span>
+      <div class="pt-time-range">
+        <input type="number" id="i-weekendOpen" min="0" max="23" value="8" step="1"> 시
+        <span class="sep">~</span>
+        <input type="number" id="i-weekendClose" min="1" max="24" value="21" step="1"> 시
+      </div>
       <span class="pt-field-val"><span id="v-weekendHours">13</span>h/일</span>
     </div>
     <div class="pt-field">
@@ -229,34 +264,49 @@ nav_order: 0
   });
 
   function calc(){
-    const rooms         = parseInt($('i-rooms').value, 10);
-    const roomArea      = parseFloat($('i-roomArea').value);
-    const commonRatio   = parseInt($('i-commonRatio').value, 10) / 100;
-    const rent          = parseFloat($('i-rent').value);
-    const opsM          = parseInt($('i-ops').value, 10);
-    const mentor        = parseInt($('i-mentor').value, 10);
-    const goldenHours   = parseFloat($('i-goldenHours').value);
-    const offpeakHours  = parseFloat($('i-offpeakHours').value);
-    const weekendHours  = parseFloat($('i-weekendHours').value);
-    const golden        = parseInt($('i-golden').value, 10) / 100;
-    const offpeak       = parseInt($('i-offpeak').value, 10) / 100;
-    const weekend       = parseInt($('i-weekend').value, 10) / 100;
-    const marginM       = parseInt($('i-margin').value, 10);
+    const rooms          = parseInt($('i-rooms').value, 10);
+    const roomArea       = parseFloat($('i-roomArea').value);
+    const commonRatio    = parseInt($('i-commonRatio').value, 10) / 100;
+    const rent           = parseFloat($('i-rent').value);
+    const opsM           = parseInt($('i-ops').value, 10);
+    const mentor         = parseInt($('i-mentor').value, 10);
+    const weekdayOpen    = parseInt($('i-weekdayOpen').value, 10);
+    const weekdayClose   = parseInt($('i-weekdayClose').value, 10);
+    const goldenEveOpen  = parseInt($('i-goldenEveOpen').value, 10);
+    const goldenEveClose = parseInt($('i-goldenEveClose').value, 10);
+    const goldenMornOpen  = parseInt($('i-goldenMornOpen').value, 10);
+    const goldenMornClose = parseInt($('i-goldenMornClose').value, 10);
+    const weekendOpen    = parseInt($('i-weekendOpen').value, 10);
+    const weekendClose   = parseInt($('i-weekendClose').value, 10);
+    const golden         = parseInt($('i-golden').value, 10) / 100;
+    const offpeak        = parseInt($('i-offpeak').value, 10) / 100;
+    const weekend        = parseInt($('i-weekend').value, 10) / 100;
+    const marginM        = parseInt($('i-margin').value, 10);
 
-    // 입력 표시
-    $('v-rooms').textContent        = rooms;
-    $('v-roomArea').textContent     = roomArea;
-    $('v-commonRatio').textContent  = (commonRatio*100).toFixed(0);
-    $('v-rent').textContent         = rent;
-    $('v-ops').textContent          = opsM;
-    $('v-mentor').textContent       = fmt(mentor);
-    $('v-goldenHours').textContent  = goldenHours;
-    $('v-offpeakHours').textContent = offpeakHours;
-    $('v-weekendHours').textContent = weekendHours;
-    $('v-golden').textContent       = (golden*100).toFixed(0);
-    $('v-offpeak').textContent      = (offpeak*100).toFixed(0);
-    $('v-weekend').textContent      = (weekend*100).toFixed(0);
-    $('v-margin').textContent       = marginM;
+    // 시간 도출
+    const weekdayHours = Math.max(0, weekdayClose - weekdayOpen);
+    const goldenEveHours  = Math.max(0, goldenEveClose - goldenEveOpen);
+    const goldenMornHours = Math.max(0, goldenMornClose - goldenMornOpen);
+    const goldenHours = goldenEveHours + goldenMornHours;
+    const offpeakHours = Math.max(0, weekdayHours - goldenHours);
+    const weekendHours = Math.max(0, weekendClose - weekendOpen);
+
+    // 입력·도출 표시
+    $('v-rooms').textContent           = rooms;
+    $('v-roomArea').textContent        = roomArea;
+    $('v-commonRatio').textContent     = (commonRatio*100).toFixed(0);
+    $('v-rent').textContent            = rent;
+    $('v-ops').textContent             = opsM;
+    $('v-mentor').textContent          = fmt(mentor);
+    $('v-weekdayHours').textContent    = weekdayHours;
+    $('v-goldenEveHours').textContent  = goldenEveHours;
+    $('v-goldenMornHours').textContent = goldenMornHours;
+    $('v-offpeakHours').textContent    = offpeakHours;
+    $('v-weekendHours').textContent    = weekendHours;
+    $('v-golden').textContent          = (golden*100).toFixed(0);
+    $('v-offpeak').textContent         = (offpeak*100).toFixed(0);
+    $('v-weekend').textContent         = (weekend*100).toFixed(0);
+    $('v-margin').textContent          = marginM;
 
     // 1. 공간 계산
     const roomTotal   = rooms * roomArea;
@@ -317,7 +367,9 @@ nav_order: 0
   }
 
   ['i-rooms','i-roomArea','i-commonRatio','i-rent','i-ops','i-mentor','i-margin',
-   'i-goldenHours','i-offpeakHours','i-weekendHours',
+   'i-weekdayOpen','i-weekdayClose',
+   'i-goldenEveOpen','i-goldenEveClose','i-goldenMornOpen','i-goldenMornClose',
+   'i-weekendOpen','i-weekendClose',
    'i-golden','i-offpeak','i-weekend']
     .forEach(id => $(id).addEventListener('input', calc));
   calc();
