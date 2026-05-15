@@ -6,7 +6,21 @@ nav_order: 7
 
 # 3G. 강사 정산
 
-**🟡 Drafted** (구조 락, 숫자는 2C 가격과 함께) · 의존: [3E 운영 모델](./model.html), [3F 일반 멘토](./peer-leader.html), [3H 등급](./quality.html), [2C 가격](../members/pricing.html) → [7B 매출·원가](../economics/revenue-cost.html), [6C 본사 수익](../expansion/revenue-share.html)
+**🟡 Updated (2026-05-15)** · 의존: [3E 운영 모델](./model.html), [3F 일반 멘토](./peer-leader.html), [3H 등급](./quality.html), [2C 가격](../members/pricing.html) → [7B 매출·원가](../economics/revenue-cost.html), [6C 본사 수익](../expansion/revenue-share.html)
+
+> **🔥 2026-05-15 회의 — 강사 정산 시나리오** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+>
+> **강사 정산 30분 슬롯당 = 12,000~20,000원 범위** (admin 정책 변수로 변경 가능)
+>
+> | | S1. 파트타이머 | S2. 전문 강사 |
+> |---|---|---|
+> | 30분 슬롯 정산 | **12,000원** (예시) | **최대 20,000원 (상한)** |
+> | 시간당 환산 | 24,000원 | 40,000원 |
+> | 베타 적합성 | ★★★★★ | ★★ |
+>
+> **상한선 = 30분 2만원**. 그 이상 강사에게 지급 ❌. Pro 멘토 단가 자율권은 회원에게 추가금 받아 자기 인센티브로 가져가는 구조(본사 부담 ❌).
+>
+> 본문의 정산 표는 v1 (단일 PT) 기준. v2 시뮬은 [경제성 시뮬레이션](../economics/simulation.html) 참조.
 
 ## 단가 구조
 

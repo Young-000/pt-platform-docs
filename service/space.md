@@ -6,7 +6,20 @@ nav_order: 4
 
 # 4D. 공간 구조
 
-**🟢 Decided** · 의존: [4B 세션 포맷](./session.html) → [5A 예약](../operations/reservation.html), [7A 단위 경제](../economics/unit-economics.html)
+**🟡 Updated (2026-05-15)** · 의존: [4B 세션 포맷](./session.html) → [5A 예약](../operations/reservation.html), [7A 단위 경제](../economics/unit-economics.html)
+
+> **🔥 2026-05-15 회의 — 공간 축소 + 다종목 재배치** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+>
+> **v2 표준 1지점 = 60평** (기존 90평 → 60평)
+>
+> | 구역 | 평수 | 수 | 용도 |
+> |---|---|---|---|
+> | **Private 룸** | 32평 | 8개 × 4평 | 룸 필요 코스 전용 — 스트레칭·필라테스·요가 등 (강사+회원 1:1 또는 1:소그룹) |
+> | **오픈 공간** | 28평 | — | 1:1 PT + 자유 헬스 ([ADR 0003](../decisions/0003-free-gym-add-on.html)) |
+>
+> **변경 배경**: 호점당 투자비 ↓ → 가맹 매력 ↑, 60평이면 강남·여의도 임대료 부담 감소 (~2,100만/월 @ 35만/평).
+>
+> 본문의 90평 모델은 v1 (단일 PT). v2는 위 표 기준으로 [경제성 시뮬레이션](../economics/simulation.html) 재계산.
 
 ## 표준 1지점 — 90평
 
