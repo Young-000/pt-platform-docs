@@ -1,22 +1,22 @@
 ---
-title: 4. Reservation·Session
+title: 4. Reservation·Session·FreeGymVisit
 parent: 🗄️ 데이터
 grand_parent: 스펙 (PRD)
 nav_order: 14
 ---
 
-# 4. Reservation·Session·DayPass·BonusCredit
+# 4. Reservation · Session · FreeGymVisit · DayPass · BonusCredit (v2)
 
-예약 + 세션 + 보상권. [5A 예약](../../operations/reservation.html), [2D 정책](../../members/policies.html) 정책 반영.
+**Status**: v2 Accepted · **Updated**: 2026-05-16 · **Source of truth**
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+**의존**: [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html) · [2D 정책](../../members/policies.html)
 
-{: .warning }
-> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 회원 1예약 = **강사 + 프로그램 + 30분 unit** (60분 = 2 unit). 카디오 슬롯·방 슬롯·90분 세트 모델은 v1 폐기. 본문 스키마는 v1이며 데이터 재설계 시 CardioSlot 제거 + Reservation 모델을 30분 unit 기준으로 단순화 필요.
+> **v2 변경 요약**: 회원 1예약 = **강사 + 프로그램 + 30분 unit**. v1의 `cardioSlotId`·`roomSlotId`·`autoMatchedAt`(자동 매칭) 필드 폐기. 룸 필요 프로그램이면 `assignedRoomId`로 자동 배정. 자유 헬스는 별도 `FreeGymVisit`로 분리 (회차·예약 ❌).
 
-## Reservation
+## Reservation (v2)
 
-**Purpose**: 회원 1예약 (v1: 카디오 30분 슬롯 + 방 60분 슬롯 + 멘토 30분 블록 묶음 / v2: 강사 + 프로그램 + 30분 unit).
-**Related PRDs**: [👤 예약](../user/2026-05-13-reservation.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
-**Lifecycle**: 회원 예약 → 매칭 → 체크인 → 세션 진행 → 완료 (또는 취소/노쇼)
+**Purpose**: 회원 1예약 = 강사 1명 + 프로그램 1개 + 30분 unit (60분=2 unit 묶음 예약 → unit 두 row 또는 unitCount=2 단일 row, 본 스펙은 후자 채택).
+**Lifecycle**: `confirmed → checked-in → completed` (또는 `cancelled / no-show`)
 
 ### Fields
 
@@ -24,67 +24,82 @@ nav_order: 14
 |---|---|---|---|---|
 | id | String | ✓ | cuid() | PK |
 | memberId | String | ✓ | - | FK |
-| sessionId | String | ✓ | - | FK → Session (1:1) |
-| storeId | String | ✓ | - | FK (denorm) |
-| cardioSlotId | String | ✓ | - | FK → CardioSlot |
-| roomSlotId | String | ✓ | - | FK → RoomSlot |
-| mentorBlockId | String? | - | null | FK → MentorBlock (자동 매칭 대기 시 null) |
-| mentorId | String? | - | null | FK → Mentor (FK lookup 편의) |
-| mentorTier | MentorTier | ✓ | verified | 진행 당시 멘토 등급 |
-| startAt | DateTime | ✓ | - | 카디오 시작 시각 |
-| matchingMode | MatchingMode | ✓ | manual | manual / auto |
-| autoMatchedAt | DateTime? | - | null | 24h 거절 카운트다운 기준 |
-| pointsCharged | Int? | - | null | Pro 인증 매칭 시 차감 포인트 |
-| isFixed | Boolean | ✓ | false | 고정 슬롯 자동 예약 여부 |
-| status | ReservationStatus | ✓ | confirmed | confirmed/rejected/cancelled/no-show/completed |
+| mentorId | String | ✓ | - | FK (v2에선 항상 확정, 자동 매칭 대기 ❌) |
+| programId | String | ✓ | - | FK → Program |
+| categoryId | String | ✓ | - | FK → CourseCategory (denorm) |
+| storeId | String | ✓ | - | FK → Store (denorm) |
+| startAt | DateTime | ✓ | - | unit 시작 시각 |
+| unitCount | Int | ✓ | 1 | 1 (30분) 또는 2 (60분) |
+| mentorBlockIds | String[] | ✓ | - | 점유한 MentorBlock id 배열 (길이=unitCount) |
+| assignedRoomId | String? | - | null | 룸 필요 프로그램이면 배정된 Room |
+| isPro | Boolean | ✓ | false | 멘토가 Pro인지 (denorm, 가격 산출용) |
+| ticketId | String | ✓ | - | FK → MembershipTicket (회차 차감 대상) |
+| creditsUsed | Int | ✓ | 1 | 일반적으로 1 (60분 예약도 회차 1 — 회차는 unit 아닌 세션 기준) |
+| pointsCharged | Int | ✓ | 0 | Pro 옵션 추가금 (5000원 등) |
+| sessionId | String? | - | null | FK → Session (1:1) |
+| isFixed | Boolean | ✓ | false | FixedSlot 자동 예약 여부 |
+| status | ReservationStatus | ✓ | confirmed | confirmed / cancelled / no-show / completed |
 | createdAt | DateTime | ✓ | now() | |
 | cancelledAt | DateTime? | - | null | |
 | cancelReason | String? | - | null | |
+| dayPassIssued | Boolean | ✓ | false | 48h~6h 취소 시 발급 여부 |
 
 ### Validation
-- (cardioSlotId, roomSlotId, mentorBlockId) 모두 status=available 또는 매칭 가능 상태에서 동시 점유
-- startAt = cardioSlot.startAt
-- roomSlot.startAt = startAt + 30min
-- mentorBlock.startAt = roomSlot.startAt + 30min (방 60분 중 후반 30분)
-- isFixed=true → memberId의 FixedSlot 매칭
+- `mentorBlockIds.length == unitCount` · 모든 block의 `mentorId` 동일 · 연속 30분
+- `program.requiresMentor=true`라면 `mentorId` 필수 (v2에서는 항상)
+- `program.requiresPrivateRoom=true`라면 `assignedRoomId` 필수
+- 룸 필요 시 동일 `(roomId, startAt..startAt+30*unitCount)` 다른 Reservation 충돌 ❌
+- `ticketId.creditsRemaining ≥ 1` (트랜잭션 lock)
+- `isPro=true` AND `mentor.isPro=true` → `pointsCharged = admin.pro_mentor_surcharge_per_session` (기본 5000)
+
+### Transaction (예약 생성)
+
+```sql
+BEGIN;
+  -- 1) 회차 lock
+  SELECT creditsRemaining FROM MembershipTicket WHERE id=? FOR UPDATE;
+  -- 2) MentorBlock(s) status=open → assigned (unitCount개)
+  UPDATE MentorBlock SET status='assigned' WHERE id IN (?) AND status='open';
+  -- 3) 룸 필요 시 자동 배정 (가용 Room 1개 lock)
+  -- 4) Pro 옵션 시 PointBalance 차감
+  -- 5) Reservation insert + Session insert (booked)
+  -- 6) MembershipTicket.creditsRemaining -= 1
+COMMIT;
+```
+
+실패 시 전체 롤백 — `INSUFFICIENT_CREDITS` · `BLOCK_TAKEN` · `INSUFFICIENT_ROOM` · `INSUFFICIENT_POINTS` 중 첫 실패 원인 반환.
 
 ### State Transitions
 
 ```mermaid
 stateDiagram-v2
     [*] --> confirmed: 예약 생성
-    confirmed --> rejected: 자동 매칭 24h 거절
     confirmed --> cancelled: 변경/취소
-    confirmed --> no-show: T+15 미체크인
+    confirmed --> no_show: T+15 미체크인
     confirmed --> completed: 세션 완료
-    cancelled --> [*]
-    rejected --> confirmed: 재매칭 성공
 ```
 
 ### Indexes
-- `[memberId, startAt]` — 회원 예약 리스트
-- `[mentorId, startAt]` — 멘토 일정
-- `[startAt, status]` — 오늘 진행 예약 조회
-- `[storeId, startAt]` — 지점별 운영
+- `[memberId, startAt]`
+- `[mentorId, startAt]`
+- `[storeId, startAt, status]`
+- `[ticketId]`
 
 ### Common Queries
 - 회원 다음 예약: `WHERE memberId=? AND status='confirmed' AND startAt > NOW()`
-- 매칭 거절 가능 (24h 내): `WHERE memberId=? AND matchingMode='auto' AND autoMatchedAt > NOW() - 24h AND status='confirmed'`
-- 노쇼 처리: cron `WHERE status='confirmed' AND startAt < NOW() - 15min AND checkedInAt IS NULL` → no-show
+- 노쇼 cron: `WHERE status='confirmed' AND startAt < NOW() - 15min AND sessionId.checkedInAt IS NULL`
 
 ### Edge Cases
-- 동시성 (두 회원 같은 슬롯 시도): DB row lock
-- 매칭 후 회원 거절 → 다른 멘토 자동 매칭 → 또 거절 (반복) 시 수동 모드 권유
-- 변경 시 슬롯 swap: 트랜잭션으로 처리
-- 취소 시점에 따른 룰: CancellationLog 기록 (별도)
+- 동시성 (두 회원 같은 MentorBlock): `MentorBlock.status` row lock으로 차단
+- 취소 룰 ([2D](../../members/policies.html)): 48h+ = 회차 복원 · 48h~6h = 회차 차감 + DayPass 발급 · 6h 이내 = no-show 처리
+- 멘토 노쇼 보상: `BonusCredit` 1매 발급 + 회차 복원
 
 ---
 
 ## Session
 
-**Purpose**: 실제 세션 진행 단위. Reservation 1:1.
-**Related PRDs**: [🏢 세션 시스템](../platform/2026-05-13-session-system.html)
-**Lifecycle**: booked → checked-in → in-progress → completed (또는 no-show / cancelled)
+**Purpose**: 실제 진행 단위. Reservation 1:1.
+**Lifecycle**: `booked → checked-in → in-progress → completed` (또는 `no-show / cancelled`)
 
 ### Fields
 
@@ -93,52 +108,35 @@ stateDiagram-v2
 | id | String | ✓ | cuid() | PK |
 | reservationId | String | ✓ | - | FK (1:1) |
 | memberId | String | ✓ | - | denorm |
-| mentorId | String? | - | null | denorm (자동 매칭 대기 시 null) |
+| mentorId | String | ✓ | - | denorm |
+| categoryId | String | ✓ | - | denorm |
 | storeId | String | ✓ | - | denorm |
-| startAt | DateTime | ✓ | - | 세션 시작 (카디오 시작) |
-| checkedInAt | DateTime? | - | null | 회원 체크인 시각 |
-| startedAt | DateTime? | - | null | 카디오 시작 |
-| mentorEnteredAt | DateTime? | - | null | 멘토 방 입장 (T+30) |
-| completedAt | DateTime? | - | null | 세션 종료 |
+| startAt | DateTime | ✓ | - | unit 시작 |
+| durationMinutes | Int | ✓ | 30 | 30 또는 60 |
+| checkedInAt | DateTime? | - | null | 회원 QR 체크인 |
+| startedAt | DateTime? | - | null | 세션 시작 |
+| completedAt | DateTime? | - | null | 종료 |
 | cancelledAt | DateTime? | - | null | |
 | status | SessionStatus | ✓ | booked | booked/checked-in/in-progress/completed/no-show/cancelled |
 
 ### Validation
-- reservationId unique (1:1)
-- 시간 흐름: startAt < checkedInAt < mentorEnteredAt < completedAt
-
-### State Transitions
-
-```mermaid
-stateDiagram-v2
-    [*] --> booked: Reservation 확정
-    booked --> checked_in: QR 체크인
-    checked_in --> in_progress: 카디오 시작
-    in_progress --> completed: 세션 끝
-    booked --> no_show: T+15 미체크인
-    booked --> cancelled: 회원 취소
-```
+- `reservationId` unique
+- 시간 흐름: `startAt ≤ checkedInAt ≤ startedAt ≤ completedAt`
+- `durationMinutes` ∈ {30, 60} (Reservation.unitCount × 30)
 
 ### Indexes
-- `[startAt, status]` — 오늘 세션 조회
-- `[memberId, startAt]` — 회원 히스토리
-- `[mentorId, startAt]` — 멘토 일정·이력
-
-### Common Queries
-- 오늘 진행 세션: `WHERE DATE(startAt) = TODAY AND status IN ('checked_in','in_progress')`
-- 회원 누적 세션: `WHERE memberId=? AND status='completed'`
+- `[startAt, status]` · `[memberId, startAt]` · `[mentorId, startAt]`
 
 ### Edge Cases
-- 회원 미체크인 + 멘토 도착 = 멘토 대기 상태 (T+15에 노쇼 판정)
-- 세션 중 부상 → 강제 종료 (`completed` + record에 사유 메모)
+- 카테고리별 진행 흐름은 [4 세션 포맷](../../service/session.html) 참조. 룸 코스(스트레칭·필라테스): 룸 1개 점유. 오픈 공간 코스(1:1 PT): 오픈 공간.
+- 자유 헬스는 `Session` ❌ → `FreeGymVisit` 별도.
 
 ---
 
-## DayPass (당일 예약권)
+## FreeGymVisit (v2 신규)
 
-**Purpose**: 48h-6h 취소 시 발급되는 당일 예약권 (당일 23:59 만료).
-**Related PRDs**: [👤 예약·취소](../user/2026-05-13-reservation.html) · [👤 멤버십](../user/2026-05-13-membership-payment.html)
-**Lifecycle**: 발급 → 사용 (또는 만료)
+**Purpose**: 회차권 보유 회원의 자유 헬스 입장 기록. **회차 차감 ❌, 정산 ❌** ([ADR 0003](../../decisions/0003-free-gym-add-on.html)).
+**Lifecycle**: `enter → exit (수동 또는 180분 자동)`
 
 ### Fields
 
@@ -146,36 +144,56 @@ stateDiagram-v2
 |---|---|---|---|---|
 | id | String | ✓ | cuid() | PK |
 | memberId | String | ✓ | - | FK |
-| issuedAt | DateTime | ✓ | now() | 발급 시각 |
-| expiresAt | DateTime | ✓ | - | 발급일 23:59 |
-| reason | String | ✓ | - | "late_cancel_48_to_6" |
-| sourceReservationId | String | ✓ | - | 발급 근거 예약 |
-| used | Boolean | ✓ | false | |
-| usedAt | DateTime? | - | null | |
-| usedReservationId | String? | - | null | 사용된 예약 |
+| storeId | String | ✓ | - | FK |
+| enteredAt | DateTime | ✓ | now() | QR 체크인 시각 |
+| exitedAt | DateTime? | - | null | 게이트 exit 또는 자동 마감 |
+| autoClosed | Boolean | ✓ | false | 180분 무활동 자동 마감 여부 |
+| ticketSnapshot | Json | ✓ | - | 입장 시점 회차권 상태 (만료일·잔여회차) 스냅샷 |
 
 ### Validation
-- expiresAt = DATE(issuedAt) + 23:59
-- used=true 시 usedAt, usedReservationId 필수
+- 입장 가능: 회원 활성 `MembershipTicket` 보유 OR 만료 후 30일 이내 (`grace_days_after_expiry`)
+- 동시 활성 visit 1건만 (`exitedAt IS NULL` UNIQUE per memberId)
 
 ### Indexes
-- `[memberId, used, expiresAt]` — 활성 당일 예약권 조회
-
-### Common Queries
-- 회원 활성 당일권: `WHERE memberId=? AND used=false AND expiresAt > NOW()`
+- `[memberId, enteredAt]`
+- `[storeId, enteredAt]`
+- `[memberId, exitedAt]` (active visit 조회)
 
 ### Edge Cases
-- 발급 후 회원이 그날 안 옴 → 만료 (used=false 유지, 자동 archive)
-- 발급 후 즉시 사용 시도 → OK
-- 동시 여러 장 보유 시 → FIFO 사용
+- 회원 미exit + 180분 경과 → cron 자동 `exitedAt=enteredAt+180min`, `autoClosed=true`
+- 비상벨 발생 시 visit row에 `incidentId` 별도 audit table 링크 (10. Audit)
+
+---
+
+## DayPass (당일 예약권)
+
+**Purpose**: 48h~6h 취소 시 자동 발급. 당일 23:59 만료.
+
+### Fields
+
+| Field | Type | Required | Default | Description |
+|---|---|---|---|---|
+| id | String | ✓ | cuid() | PK |
+| memberId | String | ✓ | - | FK |
+| issuedAt | DateTime | ✓ | now() | |
+| expiresAt | DateTime | ✓ | - | `DATE(issuedAt) 23:59` |
+| reason | String | ✓ | - | "late_cancel_48_to_6" |
+| sourceReservationId | String | ✓ | - | 발급 근거 |
+| used | Boolean | ✓ | false | |
+| usedAt | DateTime? | - | null | |
+| usedReservationId | String? | - | null | |
+
+### Indexes
+- `[memberId, used, expiresAt]`
+
+### Edge Cases
+- 만료 시 archive · 동시 보유 시 FIFO
 
 ---
 
 ## BonusCredit (보상 회차)
 
-**Purpose**: Pro 인증 예약 → 일반 멘토 변경 시 발급되는 추가 1회권. 멘토 노쇼 보상도 같은 모델.
-**Related PRDs**: [👤 멤버십](../user/2026-05-13-membership-payment.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
-**Lifecycle**: 발급 → 사용 (또는 만료, 30일)
+**Purpose**: 본사·멘토 사유 노쇼 보상 · Pro 매칭 실패 fallback 보상. 30일 만료.
 
 ### Fields
 
@@ -185,30 +203,24 @@ stateDiagram-v2
 | memberId | String | ✓ | - | FK |
 | issuedAt | DateTime | ✓ | now() | |
 | expiresAt | DateTime | ✓ | - | issuedAt + 30일 |
-| reason | String | ✓ | - | "pro_mentor_swap" / "mentor_no_show" |
-| sourceReservationId | String | ✓ | - | 발급 근거 |
+| reason | String | ✓ | - | "mentor_no_show" / "pro_unavailable_fallback" |
+| sourceReservationId | String? | - | null | |
 | used | Boolean | ✓ | false | |
 | usedAt | DateTime? | - | null | |
 | usedReservationId | String? | - | null | |
 
-### Validation
-- reason enum
-- expiresAt > issuedAt
-
 ### Indexes
-- `[memberId, used, expiresAt]` — 활성 보상권
-
-### Common Queries
-- 회원 활성 보상권: `WHERE memberId=? AND used=false AND expiresAt > NOW()`
-
-### Edge Cases
-- 보상권 만료 (30일 미사용) → 자동 archive
-- 회원 탈퇴 시 → 미사용 보상권 무효화 (환불 ❌)
+- `[memberId, used, expiresAt]`
 
 ## 📘 사용 PRD
 
-[👤 세션 진행](../user/2026-05-13-session-flow.html) · [👤 예약](../user/2026-05-13-reservation.html) · [💪 세션 진행](../mentor/2026-05-13-session-flow.html) · [💪 슬롯](../mentor/2026-05-13-reservation.html) · [🏢 세션 시스템](../platform/2026-05-13-session-system.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
+[👤 세션 진행](../user/2026-05-13-session-flow.html) · [👤 예약](../user/2026-05-13-reservation.html) · [💪 세션 진행](../mentor/2026-05-13-session-flow.html) · [💪 슬롯](../mentor/2026-05-13-reservation.html)
 
 ---
 
-| 2026-05-13 | 초안 — Reservation·Session·DayPass·BonusCredit 상세 명세 |
+## 변경 이력
+
+| 날짜 | 변경 |
+|---|---|
+| 2026-05-13 | v1 초안 — Reservation(cardio+room+block) · Session · DayPass · BonusCredit |
+| 2026-05-16 | **v2 재작성** — 자동 매칭·CardioSlot·RoomSlot 필드 폐기. `programId·categoryId·mentorBlockIds[]·assignedRoomId` 추가. FreeGymVisit 신규. (ADR 0001 · 0003) |

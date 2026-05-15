@@ -5,10 +5,12 @@ grand_parent: 스펙 (PRD)
 nav_order: 1
 ---
 
-# API 엔드포인트 카탈로그
+# API 엔드포인트 카탈로그 (v2)
 
-**Status**: Draft · **Updated**: 2026-05-13
-**관련 PRD**: 모든 [플랫폼 PRD](../platform/) · [👤 유저 PRD](../user/) · [💪 멘토 PRD](../mentor/)
+**Status**: v2 Accepted · **Updated**: 2026-05-16
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+
+> **v2 변경 요약**: 매칭 알고리즘 엔드포인트(`match-candidates`, `reject`) 폐기. **회원이 카테고리 → 시간 → 강사를 직접 선택**하는 단일 흐름. 회차권 라인업 1·4·12·24·48 결제, Pro 옵션 포인트 차감, 자유 헬스 입장 엔드포인트 신설. 신규 v2 엔드포인트 카테고리: [v2-categories](./v2-categories.html) · [v2-programs](./v2-programs.html) · [v2-reservations](./v2-reservations.html) · [v2-free-gym](./v2-free-gym.html).
 
 ## 인증 (Auth)
 
@@ -25,11 +27,9 @@ nav_order: 1
 | Method | Path | 권한 | 설명 |
 |---|---|---|---|
 | GET | `/api/members/me` | member | 본인 프로필 |
-| PATCH | `/api/members/me` | member | 프로필 수정 (페르소나·목표) |
-| GET | `/api/members/me/dashboard` | member | 홈 대시보드 (예약·진행 등) |
-| GET | `/api/members/me/phase` | member | 운동 Phase |
-| GET | `/api/members/me/progress?period=week|month` | member | 운동량·중량 추이 |
-| GET | `/api/members/me/handover-notes?limit=3` | member | 강사 인계 메모 요약 |
+| PATCH | `/api/members/me` | member | 프로필 수정 |
+| GET | `/api/members/me/dashboard` | member | 홈 대시보드 (예약·잔여 회차·자유 헬스 자격) |
+| GET | `/api/members/me/progress?period=week\|month` | member | 운동량 추이 |
 | GET | `/api/members/me/sessions` | member | 세션 히스토리 |
 | GET | `/api/members/me/sessions/:id` | member | 세션 상세 |
 
@@ -40,37 +40,64 @@ nav_order: 1
 | GET | `/api/mentors/me` | mentor | 본인 정보 (등급·통계) |
 | PATCH | `/api/mentors/me` | mentor | 프로필 수정 |
 | GET | `/api/mentors/me/today` | mentor | 오늘 일정 |
-| GET | `/api/mentors/me/blocks?from&to` | mentor | 슬롯 조회 |
+| GET | `/api/mentors/me/blocks?from&to` | mentor | 30분 unit 슬롯 조회 |
 | POST | `/api/mentors/me/blocks` | mentor | 슬롯 오픈 |
 | POST | `/api/mentors/me/blocks/bulk` | mentor | 반복 슬롯 등록 |
 | DELETE | `/api/mentors/me/blocks/:id` | mentor | 슬롯 닫기 (룰 적용) |
-| GET | `/api/mentors/me/obligation` | mentor | 의무 슬롯 상태 (Phase 1) |
-| PATCH | `/api/mentors/me/rate` | mentor (pro) | Pro 단가 변경 |
-| GET | `/api/mentors/me/rate-history` | mentor | 단가 변경 이력 |
 | POST | `/api/mentors/me/pro-application` | mentor | Pro 인증 신청 |
-| GET | `/api/mentors/me/pro-application` | mentor | 신청 진행 상황 |
-| POST | `/api/mentors/me/pro-application/video` | mentor | 영상 업로드 |
+| GET | `/api/mentors/me/pro-application` | mentor | 신청 진행 |
 | GET | `/api/mentors/me/complaints` | mentor | 본인 컴플레인 |
 | GET | `/api/mentors/me/tier-history` | mentor | 등급 변경 이력 |
-| GET | `/api/mentors/:id` (public) | public | 멘토 프로필 (회원 매칭 시) |
+| GET | `/api/mentors/:id` (public) | public | 멘토 프로필 (예약 선택 화면용) |
 
-## 예약 (Reservation)
+## 카테고리·프로그램 (v2 신규)
+
+> 상세: [v2-categories](./v2-categories.html) · [v2-programs](./v2-programs.html)
 
 | Method | Path | 권한 | 설명 |
 |---|---|---|---|
-| GET | `/api/slots/available?date=&isPeak=` | member | 가용 시간 슬롯 |
-| POST | `/api/reservations/match-candidates` | member | 멘토 매칭 후보 3명 |
-| POST | `/api/reservations` | member | 예약 생성 |
+| GET | `/api/categories` | public | 활성 코스 카테고리 리스트 |
+| POST | `/api/categories` | admin | 카테고리 생성 |
+| PATCH | `/api/categories/:id` | admin | 카테고리 수정 |
+| DELETE | `/api/categories/:id` | admin | 소프트 삭제 |
+| GET | `/api/programs?categoryId=&mentorId=` | public | 프로그램 리스트 (카테고리·강사 필터) |
+| POST | `/api/programs` | admin | 프로그램 생성 |
+| PATCH | `/api/programs/:id` | admin | 프로그램 수정 |
+| DELETE | `/api/programs/:id` | admin | 소프트 삭제 |
+| GET | `/api/mentors/:id/programs` | public | 강사가 제공하는 프로그램 매핑 |
+| PUT | `/api/mentors/me/programs` | mentor | 본인 프로그램 매핑 갱신 |
+
+## 예약 (Reservation — v2)
+
+> 상세: [v2-reservations](./v2-reservations.html)
+
+| Method | Path | 권한 | 설명 |
+|---|---|---|---|
+| GET | `/api/slots/available?date=&categoryId=&duration=` | member | 카테고리·시간 가용 강사 슬롯 |
+| GET | `/api/slots/mentor/:mentorId?from=&to=` | member | 특정 강사 가용 슬롯 |
+| POST | `/api/reservations` | member | 예약 생성 (강사 + 프로그램 + 30/60분) |
 | GET | `/api/reservations` | member | 본인 예약 리스트 |
 | GET | `/api/reservations/:id` | member·mentor | 예약 상세 |
-| POST | `/api/reservations/:id/reject` | member | 자동 매칭 24h 거절 |
-| PATCH | `/api/reservations/:id` | member | 변경 |
+| PATCH | `/api/reservations/:id` | member | 변경 (룰 적용) |
 | DELETE | `/api/reservations/:id` | member | 취소 (룰 적용) |
-| POST | `/api/check-in` | member | 세션 QR 체크인 |
-| POST | `/api/fixed-slots` | member | 고정 슬롯 신청 |
+| POST | `/api/reservations/:id/check-in` | member | QR 체크인 |
+| POST | `/api/day-passes/:id/use` | member | 당일 예약권 사용 |
+| POST | `/api/fixed-slots` | member | 고정 슬롯 등록 (자유 선택) |
 | GET | `/api/fixed-slots` | member | 본인 고정 슬롯 |
 | PATCH | `/api/fixed-slots/:id` | member | 변경 (월 1회) |
-| POST | `/api/day-passes/:id/use` | member | 당일 예약권 사용 |
+
+> **v1 폐기 endpoint**: `/api/reservations/match-candidates`, `/api/reservations/:id/reject` — 자동 매칭 흐름 제거.
+
+## 자유 헬스 (Free Gym — v2 신규)
+
+> 상세: [v2-free-gym](./v2-free-gym.html)
+
+| Method | Path | 권한 | 설명 |
+|---|---|---|---|
+| POST | `/api/free-gym/enter` | member | QR 체크인 (회차권 자격 검증) |
+| POST | `/api/free-gym/exit` | member | 체크아웃 |
+| GET | `/api/free-gym/today` | member | 오늘 본인 visit |
+| GET | `/api/admin/free-gym/visits?from=&to=&storeId=` | admin | 운영 모니터링 |
 
 ## 세션 (Session)
 
@@ -78,37 +105,38 @@ nav_order: 1
 |---|---|---|---|
 | GET | `/api/sessions/today` | member·mentor | 오늘 세션 |
 | GET | `/api/sessions/:id` | member·mentor | 세션 상세 |
-| GET | `/api/sessions/:id/pre-info` | mentor | 세션 직전 회원 정보 |
-| POST | `/api/sessions/:id/check-in` | member | 회원 QR 체크인 |
-| POST | `/api/sessions/:id/record` | mentor | 세션 기록 저장 |
-| GET | `/api/sessions/:id/summary` | member | 세션 종료 요약 |
+| GET | `/api/sessions/:id/pre-info` | mentor | 직전 회원 정보 |
+| POST | `/api/sessions/:id/check-in` | member | 회원 체크인 |
+| POST | `/api/sessions/:id/record` | mentor | 세션 기록 |
+| GET | `/api/sessions/:id/summary` | member | 종료 요약 |
 | POST | `/api/sessions/:id/rating` | member | 평가 제출 |
 
-## 멤버십·결제 (Membership)
+## 회차권·결제 (Ticket — v2)
 
 | Method | Path | 권한 | 설명 |
 |---|---|---|---|
-| POST | `/api/memberships` | member | 가입 + 첫 결제 |
-| GET | `/api/memberships/me` | member | 현재 멤버십 |
-| POST | `/api/memberships/me/pause` | member | 일시정지 |
-| POST | `/api/memberships/me/resume` | member | 재개 |
-| POST | `/api/memberships/me/cancel` | member | 중도 해지 (환불) |
-| GET | `/api/memberships/me/refund-preview` | member | 환불액 미리보기 |
+| POST | `/api/tickets` | member | 회차권 결제 (`ticketType` ∈ one/four/twelve/twenty_four/forty_eight) |
+| GET | `/api/tickets/me` | member | 본인 활성 회차권 |
+| GET | `/api/tickets/me/history` | member | 회차권 이력 |
+| POST | `/api/tickets/me/:id/pause` | member | 일시정지 (4회+ 회차권만) |
+| POST | `/api/tickets/me/:id/resume` | member | 재개 |
+| POST | `/api/tickets/me/:id/cancel` | member | 중도 해지 (환불 산출 + 처리) |
+| GET | `/api/tickets/me/:id/refund-preview` | member | 환불액 미리보기 |
 | POST | `/api/points/charge` | member | 포인트 충전 |
 | POST | `/api/points/consume` | system | Pro 매칭 시 자동 차감 |
 | POST | `/api/points/refund` | member | 미사용 포인트 환불 |
 | GET | `/api/payments` | member | 결제 내역 |
-| POST | `/api/payments/webhook` | PG (signed) | PG 결제 webhook |
+| POST | `/api/payments/webhook` | PG (signed) | PG webhook |
+
+> **v1 폐기 endpoint**: `/api/memberships*` — `MembershipTicket` 단일 모델로 통합 ([data/07](../data/07-membership.html)).
 
 ## AI
 
 | Method | Path | 권한 | 설명 |
 |---|---|---|---|
 | GET | `/api/ai/recommendation?sessionId=` | member·mentor | 세션 추천 |
-| GET | `/api/ai/recommendation/next` | member | 다음 세션 추천 |
+| GET | `/api/ai/recommendation/next` | member | 다음 세션 추천 (카테고리·강사 후보) |
 | GET | `/api/ai/monthly-analysis?month=` | member | 월간 분석 |
-| GET | `/api/ai/cardio-guide?sessionId=` | member | 카디오 가이드 |
-| GET | `/api/ai/room-guide?sessionId=` | member | 방 자율 가이드 |
 
 ## 정산 (Payout)
 
@@ -125,7 +153,7 @@ nav_order: 1
 
 | Method | Path | 권한 | 설명 |
 |---|---|---|---|
-| GET | `/api/notifications/me` | auth | 내 인앱 알림 |
+| GET | `/api/notifications/me` | auth | 인앱 알림 |
 | PATCH | `/api/notifications/me/:id/read` | auth | 읽음 처리 |
 | PATCH | `/api/notifications/me/preferences` | auth | 채널·마케팅 설정 |
 | POST | `/api/notifications/internal/send` | system | 시스템 트리거 |
@@ -135,17 +163,20 @@ nav_order: 1
 | Method | Path | 권한 | 설명 |
 |---|---|---|---|
 | GET | `/api/admin/dashboard` | admin | KPI 대시보드 |
-| GET | `/api/admin/members` | admin | 회원 리스트·검색 |
+| GET | `/api/admin/members` | admin | 회원 리스트 |
 | GET | `/api/admin/mentors` | admin | 멘토 리스트 |
 | POST | `/api/admin/mentors/:id/verify` | admin | 검증 코스 통과 처리 |
 | GET | `/api/admin/pro-applications` | admin | Pro 신청 큐 |
 | POST | `/api/admin/pro-applications/:id/decide` | admin | 심사 결정 |
 | GET | `/api/admin/complaints` | admin | 컴플레인 큐 |
-| POST | `/api/admin/complaints/:id/resolve` | admin | 컴플레인 해결 |
+| POST | `/api/admin/complaints/:id/resolve` | admin | 해결 |
 | GET | `/api/admin/reservations` | admin | 예약 모니터링 |
-| GET | `/api/admin/payouts/:periodId` | admin | 격주 정산 현황 |
+| GET | `/api/admin/free-gym/visits` | admin | 자유 헬스 운영 |
+| GET | `/api/admin/payouts/:periodId` | admin | 격주 정산 |
 | POST | `/api/admin/payouts/:id/retry` | admin | 입금 재시도 |
 | GET | `/api/admin/stores` | admin | 지점 관리 |
+| GET | `/api/admin/pricing-config` | admin | 회차권 가격·Pro 옵션 변수 |
+| PATCH | `/api/admin/pricing-config` | admin | 정책 변수 갱신 |
 
 ## 시스템 (System / Cron)
 
@@ -153,20 +184,21 @@ nav_order: 1
 |---|---|---|---|
 | POST | `/api/system/cron/no-show-detection` | cron | T+15 노쇼 감지 |
 | POST | `/api/system/cron/fixed-slot-auto-book` | cron | 매주 고정 슬롯 자동 예약 |
-| POST | `/api/system/cron/payment-ledger-release` | cron | 7일 후 escrow → releasable |
+| POST | `/api/system/cron/free-gym-auto-exit` | cron | 180분 무활동 자동 exit |
+| POST | `/api/system/cron/ticket-auto-activate` | cron | 결제 후 30일 미사용 자동 활성화 |
+| POST | `/api/system/cron/ticket-expiry` | cron | 만료 처리 + grace period 알림 |
 | POST | `/api/system/cron/payout-calculate` | cron | 격주 정산 산출 |
-| POST | `/api/system/cron/membership-renewal` | cron | D-1 자동 갱신 |
-| POST | `/api/system/cron/tax-report-generate` | cron | 월말 세무 자료 생성 |
+| POST | `/api/system/cron/tax-report-generate` | cron | 월말 세무 자료 |
 
 ---
 
-## 응답 형식 (전체 공통)
+## 응답 형식 (공통)
 
 성공:
 ```json
 {
   "data": { /* 리소스 */ },
-  "meta": { "timestamp": "2026-05-13T19:00:00+09:00" }
+  "meta": { "timestamp": "2026-05-16T19:00:00+09:00" }
 }
 ```
 
@@ -183,8 +215,8 @@ nav_order: 1
 ```json
 {
   "error": {
-    "code": "RESERVATION_CONFLICT",
-    "message": "이 슬롯은 이미 예약되었습니다.",
+    "code": "BLOCK_TAKEN",
+    "message": "선택한 강사 슬롯이 이미 예약되었습니다.",
     "details": {...}
   }
 }
@@ -198,9 +230,12 @@ nav_order: 1
 | `FORBIDDEN` | 403 | 권한 없음 |
 | `NOT_FOUND` | 404 | 리소스 없음 |
 | `VALIDATION_ERROR` | 400 | 입력 오류 |
-| `RESERVATION_CONFLICT` | 409 | 슬롯 중복 |
+| `BLOCK_TAKEN` | 409 | 강사 30분 unit 이미 점유 |
+| `INSUFFICIENT_ROOM` | 409 | 룸 필요 프로그램인데 가용 룸 없음 |
 | `INSUFFICIENT_CREDITS` | 422 | 회차 부족 |
-| `INSUFFICIENT_POINTS` | 422 | 포인트 부족 |
+| `INSUFFICIENT_POINTS` | 422 | Pro 옵션 포인트 부족 |
+| `TICKET_EXPIRED` | 422 | 회차권 만료 |
+| `FREE_GYM_NOT_ELIGIBLE` | 403 | 자유 헬스 자격 ❌ (회차권 ❌ 또는 grace 만료) |
 | `POLICY_VIOLATION` | 422 | 정책 위반 (6h 이내 취소 등) |
 | `PAYMENT_FAILED` | 402 | PG 결제 실패 |
 | `RATE_LIMITED` | 429 | 요청 한도 초과 |
@@ -208,4 +243,9 @@ nav_order: 1
 
 ---
 
-| 2026-05-13 | 초안 — 12 도메인 그룹·80+ endpoint 통합 |
+## 변경 이력
+
+| 날짜 | 변경 |
+|---|---|
+| 2026-05-13 | v1 초안 — 12 도메인 그룹·80+ endpoint |
+| 2026-05-16 | **v2 재작성** — 매칭(`match-candidates`/`reject`) 폐기, 카테고리·프로그램·자유 헬스 endpoint 신설, 회차권(`/api/tickets`) 단일 모델, 에러코드 v2 갱신. v1 본문은 `_archive/v1-api-catalog.md` 참조. (ADR 0001 · 0003 · 0004) |

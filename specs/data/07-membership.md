@@ -1,41 +1,22 @@
 ---
-title: 7. Membership·Payment
+title: 7. MembershipTicket·Payment
 parent: 🗄️ 데이터
 grand_parent: 스펙 (PRD)
 nav_order: 17
 ---
 
-# 7. Membership — Membership·PointBalance·Payment·Refund
+# 7. MembershipTicket · PointBalance · Payment · Refund (v2)
 
-회원 멤버십 + 결제. [2B 멤버십](../../members/membership.html), [2D 정책](../../members/policies.html) 정책 반영.
+**Status**: v2 Accepted · **Updated**: 2026-05-16 · **Source of truth**
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+**의존**: [2B 멤버십](../../members/membership.html) · [2C 가격](../../members/pricing.html) · [2D 정책](../../members/policies.html)
 
-{: .warning }
-> **v2 변경 ([ADR 0004](../../decisions/0004-one-time-ticket-pricing.html))**: 멤버십 = **회차권 5단 (1·4·12·24·48회)** 단일 카테고리. "멤버십 vs 단발권" 이분법 폐기. Pro 옵션 = 회당 +5,000원 포인트. 본문 description 예시 등 v1 표현("주 2회권 12개월")이 잔존하며 데이터 재설계 시 v2로 정합 필요.
+> **v2 변경 요약**: "주 1회권/주 2회권 + contractMonths" 이원 구조 폐기. **회차권 5단(1·4·12·24·48회) 단일 모델**로 통합. `ticketType` 한 필드로 라인업 식별. Pro 옵션 = 회당 +5,000원 포인트 (회원 결제, 멘토 100% 인센티브).
 
-## Membership
+## MembershipTicket (v2 — 회차권 단일 모델)
 
-**Purpose**: 회원 멤버십. **결제 → 생성 → 활성화 → 만료/해지** 라이프사이클.
-**Related PRDs**: [👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html)
-
-### 라이프사이클
-
-```
-[결제 성공] → 회원권 생성 (status=created, 유효기간 카운트 ❌)
-       ↓
-[첫 사용 (첫 세션 예약 또는 체크인)]
-       ↓
-[활성화] → status=active, activatedAt 기록, expiresAt 카운트 시작
-       ↓
-[활성 기간] — 회차 사용·일시정지·재개
-       ↓
-[종료 조건 충족]:
-  - 유효기간 만료 (expiresAt < NOW) → status=expired
-  - 회차 0 + 만료 임박 → status=expired
-  - 중도 해지 + 환불 → status=cancelled
-  - autoRenew=true → 다음 기간 새 Membership 자동 생성
-       ↓
-[연장] — 만료 임박/만료 후 N일 내 추가 결제로 기간·회차 연장 (status=active 유지/복원)
-```
+**Purpose**: 회원이 보유한 회차권 1매. 모든 회차권은 동일 라이프사이클 — `ticketType`(=회차 라인업)만 가변.
+**Lifecycle**: `결제 → created → active(첫 사용) → expired/cancelled`
 
 ### Fields
 
@@ -43,116 +24,95 @@ nav_order: 17
 |---|---|---|---|---|
 | id | String | ✓ | cuid() | PK |
 | memberId | String | ✓ | - | FK |
-| type | MembershipType | ✓ | - | week1 / week2 |
-| creditsRemaining | Int | ✓ | - | 주 1=4, 주 2=8 기준 |
-| contractMonths | Int | ✓ | 1 | 1, 3, 6, 12 |
-| discountRate | Decimal(3,2) | ✓ | 0 | 0, 0.05, 0.10, 0.15 |
-| pricePerMonth | Int | ✓ | - | 정상가 |
+| ticketType | TicketType | ✓ | - | one / four / twelve / twenty_four / forty_eight |
+| creditsTotal | Int | ✓ | - | 1 / 4 / 12 / 24 / 48 (ticketType과 정합) |
+| creditsRemaining | Int | ✓ | - | 잔여 회차 |
+| pricePerCredit | Int | ✓ | - | 정상 회당가 (40k/35k/30k/27k/25k) — 환불 산출 기준 |
 | priceCharged | Int | ✓ | - | 실제 결제액 |
-| paidAt | DateTime | ✓ | - | 결제 완료 시각 (Payment 연결) |
-| activatedAt | DateTime? | - | null | 첫 사용 시점 (status=active 전환) |
-| autoActivateBy | DateTime | ✓ | - | 결제 후 자동 활성화 한도 (기본 paidAt + 30일) |
-| expiresAt | DateTime? | - | null | 활성화 시점 + contractMonths (활성화 전엔 null) |
+| paidAt | DateTime | ✓ | - | 결제 완료 시각 |
+| activatedAt | DateTime? | - | null | 첫 사용 시점 |
+| autoActivateBy | DateTime | ✓ | - | paidAt + 30일 (미사용 시 자동 활성화) |
+| expiresAt | DateTime? | - | null | 활성화 후 산출 (라인업별 유효기간 + pauseUsedDays) |
 | pausedAt | DateTime? | - | null | 일시정지 시작 |
 | resumedAt | DateTime? | - | null | 재개 |
-| pauseUsedDays | Int | ✓ | 0 | 누적 일시정지 일수 |
-| autoRenew | Boolean | ✓ | true | 만료 시 자동 갱신 여부 |
-| extensionCount | Int | ✓ | 0 | 수동 연장 횟수 (회원당 카운트) |
-| status | MembershipStatus | ✓ | created | created/active/paused/expired/cancelled |
+| pauseUsedDays | Int | ✓ | 0 | 누적 정지 일수 (잔여 회차 30% 한도) |
+| autoRenew | Boolean | ✓ | false | 만료 시 자동 재발급 (옵션) |
+| status | TicketStatus | ✓ | created | created / active / paused / expired / cancelled |
 | createdAt | DateTime | ✓ | now() | |
 
 ### Validation
-- 한 회원 = 1 active or created membership (status IN ('active', 'created'))
-- creditsRemaining: week1 = 0-4, week2 = 0-8 (확장 시 늘어남)
-- pauseUsedDays ≤ contractMonths × 30 × 0.30
-- expiresAt = activatedAt + contractMonths × 30일 + pauseUsedDays (활성화 후 산출)
-- autoActivateBy = paidAt + 30일 (이 시점 미사용 시 시스템 자동 활성화)
-- status='active' 전환 시 activatedAt, expiresAt 필수
-- discountRate enum {0, 0.05, 0.10, 0.15}
+- `creditsTotal`은 `ticketType`과 1:1 매핑 (1·4·12·24·48)
+- `creditsRemaining ≤ creditsTotal`, ≥ 0
+- 한 회원 = 1 active 또는 created ticket (다중 동시 보유 ❌ — 추가 결제는 잔여 + 신규 row 분리도 가능하나 베타는 단일 보유)
+- 일시정지 한도: `pauseUsedDays ≤ floor(creditsRemaining_at_pause_start × 0.30) × (avgDaysPerCredit)` — 운영 변수
+- `pricePerCredit` = `admin.PricingConfig.ticket_{N}_price / N` (저장 시점)
 
 ### State Transitions
 
 ```mermaid
 stateDiagram-v2
     [*] --> created: 결제 성공
-    created --> active: 첫 사용 또는 30일 후 자동
-    created --> cancelled: 청약철회 (7일 내, 미사용)
-    active --> paused: 일시정지
+    created --> active: 첫 사용 / 30일 자동
+    created --> cancelled: 청약철회 (7일 + 미사용)
+    active --> paused: 일시정지 (4·12·24·48만)
     paused --> active: 재개
-    active --> extended: 수동 연장 (추가 결제)
-    extended --> active: 기간·회차 +
-    active --> cancelled: 중도 해지
-    active --> expired: 유효기간 만료 OR 회차 0 + 만료
-    paused --> expired: 만료 (정지 중)
-    expired --> active: 만료 후 N일 내 수동 연장 (재활성화)
+    active --> cancelled: 중도 해지 + 환불
+    active --> expired: creditsRemaining=0 / 만료일 도과
 ```
 
-### 연장 (수동) 룰
+### 환불 산출 (회차권 5단 공식 — [2D](../../members/policies.html))
 
-회원이 추가 결제로 기간·회차 연장 가능:
-- **만료 전 연장**: 기존 expiresAt + N개월 + 회차 추가 (잔여 + N)
-- **만료 후 연장** (만료 후 30일 내): expired → active 재활성화 (새 기간 시작)
-- **만료 후 30일 초과**: 신규 가입과 동일 (Membership row 새로 생성)
-- 가격 = 현재 PricingConfig 기준 (할인 적용 가능 — 연장 인센티브)
+```
+환불액 = priceCharged - (pricePerCredit × usedCredits)
+       (단, 환불액 < 0 시 0원)
+usedCredits = creditsTotal - creditsRemaining
+```
+
+- **1회차권 (`ticketType=one`)**: 결제 후 24h + 미사용 = 100%, 그 외 환불 ❌
+- **4·12·24·48회차권**: 위 공식 적용
+- 청약철회 (결제 7일 + 미사용): 모든 ticketType 전액 100%
 
 ### Indexes
-- `[memberId, status]` — 회원 활성 멤버십 조회
-- `[expiresAt]` — 만료 임박 cron
-- `[autoRenew, expiresAt]` — 갱신 cron
+- `[memberId, status]` · `[expiresAt, status]` (만료 cron) · `[autoActivateBy]` (자동 활성화 cron)
 
 ### Common Queries
-- 회원 활성 멤버십: `WHERE memberId=? AND status='active'`
-- 갱신 임박 (D-7): `WHERE expiresAt BETWEEN NOW()+6d AND NOW()+7d AND autoRenew=true`
-- 일시정지 한도 도달: `WHERE pauseUsedDays >= contractMonths * 30 * 0.30`
+- 회원 활성 회차권: `WHERE memberId=? AND status='active'`
+- 자유 헬스 입장 자격 ([5D](../../operations/free-gym.html)): `WHERE memberId=? AND (status IN ('active','paused') OR (status='expired' AND expiresAt > NOW() - 30d))`
 
 ### Edge Cases
-- 정지 중 약정 만료 → expired 상태 (회원 알림)
-- creditsRemaining 0 + 다음 갱신 전 → 회원 다른 결제 권유 또는 대기
-- 일시정지 한도 초과 신청 → UI에서 차단
-- 자동 갱신 시 가격 변경 (본사가 정가 인상) → 7일 전 알림 + 동의
+- 1회차권 = `pauseUsedDays` 사용 ❌ (정지 자체 불가)
+- 자동 갱신 (`autoRenew=true`): 만료 D-1 cron이 같은 ticketType + 현재 PricingConfig 가격으로 새 row 생성
+- 결제는 됐지만 활성화 전 (`created`) 상태에서 청약철회 = 100% 환불
 
 ---
 
-## PointBalance
+## PointBalance (Pro 옵션 — v2 유지)
 
-**Purpose**: 회원 포인트 잔액 (Pro 인증 멘토 예약 시 차감).
-**Related PRDs**: [👤 멤버십·결제](../user/2026-05-13-membership-payment.html)
-**Lifecycle**: 충전 → 차감 → 만료 (선택, Phase 1엔 무기한)
+**Purpose**: Pro 강사 매칭 시 회당 +5,000원 차감 ([ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) §3).
 
 ### Fields
 
 | Field | Type | Required | Default | Description |
 |---|---|---|---|---|
 | memberId | String | ✓ | - | PK (1:1 with Member) |
-| balance | Int | ✓ | 0 | 포인트 (원 단위) |
-| lifetimeCharged | Int | ✓ | 0 | 누적 충전액 |
-| lifetimeSpent | Int | ✓ | 0 | 누적 사용액 |
-| lastChargedAt | DateTime? | - | null | 마지막 충전 |
-| lastSpentAt | DateTime? | - | null | 마지막 사용 |
+| balance | Int | ✓ | 0 | 잔액 (원) |
+| lifetimeCharged | Int | ✓ | 0 | 누적 충전 |
+| lifetimeSpent | Int | ✓ | 0 | 누적 사용 |
+| lastChargedAt | DateTime? | - | null | |
+| lastSpentAt | DateTime? | - | null | |
 
 ### Validation
-- balance ≥ 0
-- balance + spent = charged (정합성)
-
-### Indexes
-- `memberId` (PK)
-
-### Common Queries
-- 회원 포인트 잔액: `WHERE memberId=?`
-- 활발한 포인트 사용자: `ORDER BY lifetimeSpent DESC`
+- `balance ≥ 0` · `lifetimeCharged - lifetimeSpent = balance + 환불액`
+- Pro 매칭 시 잔액 부족 → 일반 멘토로 fallback 또는 충전 안내
 
 ### Edge Cases
-- Pro 인증 예약 시 잔액 부족 → 일반 멘토로 fallback
-- 환불 시 미사용분 100% 환불 (현금 결제분), 보너스분 ❌
-- 동시 차감 (race condition) → DB transaction + row lock
+- 환불: 미사용 현금 결제분 100% / 보너스분 ❌
 
 ---
 
 ## Payment
 
-**Purpose**: 결제 트랜잭션 (멤버십·포인트·체험 등).
-**Related PRDs**: [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [💳 결제 PG](../../specs/payments/flow.html)
-**Lifecycle**: pending → paid (또는 failed) → refunded (선택)
+**Purpose**: PG 결제 트랜잭션 (회차권·포인트). v1의 "membership" type을 "ticket"로 갱신.
 
 ### Fields
 
@@ -160,91 +120,66 @@ stateDiagram-v2
 |---|---|---|---|---|
 | id | String | ✓ | cuid() | PK |
 | memberId | String | ✓ | - | FK |
-| type | PaymentType | ✓ | - | membership/point/trial/bonus |
-| referenceId | String? | - | null | Membership·PointBalance 연결 |
+| type | PaymentType | ✓ | - | ticket / point / bonus |
+| referenceId | String? | - | null | MembershipTicket.id / PointBalance.memberId |
 | amount | Int | ✓ | - | 원화 |
 | currency | String | ✓ | KRW | |
 | status | PaymentStatus | ✓ | pending | pending/paid/failed/refunded |
 | pgProvider | String? | - | null | "toss" / "portone" |
 | pgTransactionId | String? | - | null | unique |
-| pgRawResponse | Json? | - | null | 디버깅용 |
+| pgRawResponse | Json? | - | null | |
 | paidAt | DateTime? | - | null | |
 | refundedAt | DateTime? | - | null | |
-| description | String? | - | null | "주 2회권 12개월 첫 결제" |
+| description | String? | - | null | 예: "24회차권 결제" |
 | createdAt | DateTime | ✓ | now() | |
 
 ### Validation
-- amount > 0
-- status='paid' 시 paidAt, pgTransactionId 필수
-- (pgProvider, pgTransactionId) unique (중복 결제 방지)
-
-### State Transitions
-
-```mermaid
-stateDiagram-v2
-    [*] --> pending: PG 호출 직전
-    pending --> paid: success
-    pending --> failed: PG 거절
-    paid --> refunded: 환불
-```
+- `amount > 0`
+- `(pgProvider, pgTransactionId)` unique
+- `type='ticket'` → `referenceId` = `MembershipTicket.id` 필수
 
 ### Indexes
-- `[memberId, paidAt]` — 회원 결제 내역
-- `pgTransactionId` (unique)
-- `[status, createdAt]` — pending 상태 5분+ → 알림
-
-### Common Queries
-- 회원 결제 내역: `WHERE memberId=? ORDER BY paidAt DESC`
-- 일별 매출: `SUM(amount) WHERE status='paid' AND DATE(paidAt) = ?`
-
-### Edge Cases
-- PG webhook 누락 → cron 5분 간격 동기화
-- 결제 후 회원이 즉시 환불 신청 → 청약철회 룰 적용
-- 부분 환불 → Refund.refundAmount < Payment.amount
+- `[memberId, paidAt]` · `pgTransactionId` (unique) · `[status, createdAt]`
 
 ---
 
 ## Refund
 
-**Purpose**: 환불 기록 (중도 해지·청약철회·노쇼 보상 등).
-**Related PRDs**: [💳 결제 흐름](../../specs/payments/flow.html)
-**Lifecycle**: 신청 → 산출 → 처리 (PG API) → 완료
+**Purpose**: 환불 기록 (중도해지 · 청약철회 · 노쇼 보상).
 
 ### Fields
 
 | Field | Type | Required | Default | Description |
 |---|---|---|---|---|
 | id | String | ✓ | cuid() | PK |
-| paymentId | String | ✓ | - | FK (1:1 또는 N:1 부분환불) |
-| usedCredits | Int | ✓ | 0 | 사용 회차 |
+| paymentId | String | ✓ | - | FK |
+| ticketId | String? | - | null | 회차권 환불이면 link |
+| usedCredits | Int | ✓ | 0 | 사용 회차 (산식 입력) |
+| pricePerCreditSnapshot | Int | ✓ | 0 | 산출 당시 정상 회당가 |
 | refundAmount | Int | ✓ | - | 환불액 |
-| fee | Int | ✓ | 0 | 위약금 (현재 0) |
-| reason | String | ✓ | - | "중도해지" / "청약철회" / "본사노쇼보상" |
+| fee | Int | ✓ | 0 | 위약금 (v2 기본 0) |
+| reason | String | ✓ | - | "withdraw_7d" / "cancel_pro_rata" / "compensation" |
 | processedAt | DateTime? | - | null | |
-| pgRefundId | String? | - | null | PG 환불 트랜잭션 |
+| pgRefundId | String? | - | null | |
 | status | String | ✓ | pending | pending/processed/failed |
 
 ### Validation
-- refundAmount + fee ≤ payment.amount
-- reason enum
-- paymentId당 누적 refund ≤ payment.amount
+- `refundAmount + fee ≤ payment.amount`
+- 산출식: `refundAmount = max(0, payment.amount - pricePerCreditSnapshot × usedCredits)` (4회+ 회차권)
+- 1회차권: 24h + 미사용 = `refundAmount = payment.amount`, 그 외 0
 
 ### Indexes
-- `paymentId` — 결제별 환불
-- `[status, createdAt]` — pending refund 추적
-
-### Common Queries
-- 회원 환불 이력: `JOIN Payment WHERE Payment.memberId=?`
-- 일별 환불액: `SUM(refundAmount) WHERE DATE(processedAt) = ?`
-
-### Edge Cases
-- PG 환불 실패 → 운영자 수동 처리 + 회원 알림
-- 환불 후 멘토 정산 회수 → DistributionEntry 차감 (다음 격주)
+- `paymentId` · `[status, createdAt]`
 
 ## 📘 사용 PRD
 
-[👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [🏢 정산 시스템](../platform/2026-05-13-payout-system.html) · [💳 결제 흐름](../payments/flow.html)
+[👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [💳 결제 흐름](../payments/flow.html)
 
 ---
 
-| 2026-05-13 | 초안 — Membership·PointBalance·Payment·Refund 상세 명세 |
+## 변경 이력
+
+| 날짜 | 변경 |
+|---|---|
+| 2026-05-13 | v1 초안 — Membership(week1/week2 + contractMonths) · PointBalance · Payment · Refund |
+| 2026-05-16 | **v2 재작성** — `MembershipTicket` 단일 모델 (ticketType 1·4·12·24·48). 환불 공식 5단 통일. Payment.type "ticket" 갱신. (ADR 0004) |
