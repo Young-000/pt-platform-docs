@@ -6,7 +6,17 @@ nav_order: 1
 
 # 4A. 세션 종류
 
-**🟢 Decided** · 의존: [1D VP](../product/value-prop.html), [4C AI](./ai-role.html) → [3E 강사 모델](../partners/model.html), [3F 일반 멘토](../partners/peer-leader.html), [3H 등급](../partners/quality.html), [8B 자격증법](../legal/pt-license.html)
+**🟡 Re-opened (2026-05-15)** · 의존: [1D VP](../product/value-prop.html), [4C AI](./ai-role.html) → [3E 강사 모델](../partners/model.html), [3F 일반 멘토](../partners/peer-leader.html), [3H 등급](../partners/quality.html), [8B 자격증법](../legal/pt-license.html)
+
+> **🔥 2026-05-15 회의 — 소비자향 피벗** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+>
+> 단일 PT 세션 → **다종목 코스**로 확장. 회원이 매 세션마다 강사·프로그램 자율 선택. 본문은 v1 (단일 PT) 기준이고, v2 (다종목)는 ADR 0001 참조.
+>
+> **핵심 변경**:
+> - 예약 대상 = "강사 + 프로그램" (룸 ❌, 룸은 프로그램 속성에 따라 자동 배정)
+> - 프로그램 분류: **룸 필요** (스트레칭·필라테스 등) / **오픈 공간** (PT) / **자유 헬스** (강사 ❌, 부가)
+> - 시간 단위 = **30분 unit** (60분 = 2 unit 연속 예약)
+> - **코스 카테고리는 가변** — admin이 추가 가능, 미리 확정 ❌
 
 ## 한 가지 세션
 

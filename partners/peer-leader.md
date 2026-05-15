@@ -6,7 +6,21 @@ nav_order: 6
 
 # 3F. 일반 멘토 (자격증 없는 멘토 운영)
 
-**🟡 Drafted** (검증 코스만 TBD) · 의존: [4A 세션 종류](../service/session-types.html), [4C AI](../service/ai-role.html), [8B 자격증법](../legal/pt-license.html) → [3G 정산](./payout.html), [3D 모집](./recruitment.html)
+**🟡 Updated (2026-05-15)** · 의존: [4A 세션 종류](../service/session-types.html), [4C AI](../service/ai-role.html), [8B 자격증법](../legal/pt-license.html) → [3G 정산](./payout.html), [3D 모집](./recruitment.html)
+
+> **🔥 2026-05-15 회의 — 강사 풀 두 시나리오 병행** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+>
+> 강사 시장을 두 풀로 나누어 하이브리드 운영:
+>
+> | | **S1. 파트타이머** (베타 위주) | **S2. 전문 강사** (Pro 인증 풀) |
+> |---|---|---|
+> | 정산 (30분 슬롯) | **12,000원** | **20,000원** |
+> | 자격증 | ❌ | ✅ 생활스포츠지도사 2급 등 |
+> | 락인 미끼 | 유연 근무 | 학습·창업 찬스 |
+> | 신뢰도 | 중 (검증 코스 + AI 가이드) | 상 |
+> | 공급 풀 | 넓음 | 좁음 |
+>
+> 법적 정리: **개별 멘토 자격증 의무 ❌** (국민체육진흥법은 "체육지도자" 칭호에만 적용, 우리는 "멘토" 호칭으로 회피). 시설당 자격증자 1명 배치는 체육시설법 — Pro 인증자가 지점장 겸직.
 
 ## 자격 요건
 

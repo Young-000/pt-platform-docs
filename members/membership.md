@@ -6,7 +6,17 @@ nav_order: 2
 
 # 2B. 멤버십 구조
 
-**🟢 Decided** · 의존: [1A 페르소나](../product/personas.html), [4A 세션 종류](../service/session-types.html) → [2C 가격](./pricing.html), [2D 정책](./policies.html), [5A 예약](../operations/reservation.html)
+**🟡 Updated (2026-05-15)** · 의존: [1A 페르소나](../product/personas.html), [4A 세션 종류](../service/session-types.html) → [2C 가격](./pricing.html), [2D 정책](./policies.html), [5A 예약](../operations/reservation.html)
+
+> **🔥 2026-05-15 회의 — 소비자향 피벗** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+>
+> **신규 가격 (v2)**:
+> - 월 이용권 (주 2회) = **24만원** (회당 3만, 8회/월)
+> - 6개월권 = **120만원** (월할 20만, 회당 2.5만)
+> - **1회권 신규 도입** (가격 미정)
+> - "프로그램 옵션 추가" 결제 — 부가 (가격 미정)
+>
+> 본문의 주 1회권·포인트 옵션은 v1 모델 기준. v2에서는 회원이 매 세션 프로그램·강사 자율 선택.
 
 ## 멤버십 2종
 
