@@ -7,11 +7,14 @@ nav_order: 3
 
 # 💪 멘토 등급·Pro 인증
 
-**Status**: Draft · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
-**관련 결정**: [3F 일반 멘토](../../partners/peer-leader.html) · [3H 품질·등급](../../partners/quality.html) · [3G 정산](../../partners/payout.html) · [4A 세션 종류](../../service/session-types.html) · [3A 강사 페르소나](../../partners/personas.html) · [3C 강사 VP](../../partners/value-prop.html)
+**Status**: Draft (v1) — v2 정합 검토 대기 · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [3F 일반 멘토](../../partners/peer-leader.html) · [3H 품질·등급](../../partners/quality.html) · [3G 정산](../../partners/payout.html) · [4A 세션 종류](../../service/session-types.html) · [3A 강사 페르소나](../../partners/personas.html) · [3C 강사 VP](../../partners/value-prop.html)
 **📡 API**: [멘토](../../api/catalog.html#멘토-mentor) · [어드민](../../api/catalog.html#어드민-admin)
 **🗄️ Data**: [8. Mentor System](../data/08-mentor-system.html)
 **현재 코드**: `apps/partner/src/pages/more/profile-page.tsx`
+
+{: .warning }
+> **v2 변경 ([ADR 0002](../../decisions/0002-license-policy.html))**: 일반 멘토 = 자격증 ❌ + 본사 검증 코스 통과. Pro 인증 멘토 = 자격증 ✅ + 본사 심사. 호칭 = "멘토" (PT·트레이너·코치 ❌). "매칭 우선순위"는 회원 자동 매칭 옵션 시에만 적용. 본문은 v1 기준이며 멘토 시스템 재설계 시 v2로 갱신 필요.
 
 ## 1. 배경
 

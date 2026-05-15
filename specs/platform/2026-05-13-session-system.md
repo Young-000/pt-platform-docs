@@ -7,10 +7,13 @@ nav_order: 1
 
 # 🏢 세션 시스템 (플랫폼 백엔드)
 
-**Status**: Draft
-**관련 결정**: [4A 세션 종류](../../service/session-types.html) · [4B 포맷](../../service/session.html) · [4D 공간](../../service/space.html) · [4C AI 역할](../../service/ai-role.html) · [5A 예약](../../operations/reservation.html)
+**Status**: Draft (v1) — v2 재설계 대기
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [4A 세션 종류](../../service/session-types.html) · [4B 포맷](../../service/session.html) · [4D 공간](../../service/space.html) · [4C AI 역할](../../service/ai-role.html) · [5A 예약](../../operations/reservation.html)
 **📡 API**: [세션](../../api/catalog.html#세션-session) · [예약](../../api/catalog.html#예약-reservation) · [시스템·Cron](../../api/catalog.html#시스템--cron)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [5. Records](../data/05-records.html) · [6. AI](../data/06-ai.html)
+
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 세션 단위 = **30분 unit**, 다종목 코스 (스트레칭·필라테스·1:1 PT·자유 헬스). 카디오존 30분 슬롯 모델은 폐기. 본문은 v1 기준이며 백엔드 재설계 시 v2로 갱신 필요.
 
 ## 1. 배경
 

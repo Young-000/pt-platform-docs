@@ -7,10 +7,13 @@ nav_order: 3
 
 # 🏢 예약 시스템 (백엔드)
 
-**Status**: Draft
-**관련 결정**: [5A 예약](../../operations/reservation.html) · [2D 정책](../../members/policies.html) · [4D 공간](../../service/space.html)
+**Status**: Draft (v1) — v2 재설계 대기
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [5A 예약](../../operations/reservation.html) · [2D 정책](../../members/policies.html) · [4D 공간](../../service/space.html)
 **📡 API**: [예약](../../api/catalog.html#예약-reservation) · [시스템·Cron](../../api/catalog.html#시스템--cron)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [10. Audit](../data/10-audit.html)
+
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 예약 대상 = **강사 + 프로그램** (룸은 자동 배정). 단위 = **30분 unit** (60분 = 2 unit 연속). 본문은 v1 (카디오+방 + 90분 세트 + AI 매칭 우선) 기준이며 백엔드 재설계 시 v2로 갱신 필요.
 
 ## 1. 핵심 컴포넌트
 

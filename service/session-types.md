@@ -6,7 +6,7 @@ nav_order: 1
 
 # 4A. 세션 종류
 
-**🟡 Re-opened (2026-05-15)** · 의존: [1D VP](../product/value-prop.html), [4C AI](./ai-role.html) → [3E 강사 모델](../partners/model.html), [3F 일반 멘토](../partners/peer-leader.html), [3H 등급](../partners/quality.html), [8B 자격증법](../legal/pt-license.html)
+**🟡 Updated (2026-05-16)** · 의존: [ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0002](../decisions/0002-license-policy.html), [1D VP](../product/value-prop.html), [4C AI](./ai-role.html) → [3E 강사 모델](../partners/model.html), [3F 일반 멘토](../partners/peer-leader.html), [3H 등급](../partners/quality.html), [8B 자격증법](../legal/pt-license.html)
 
 > **🔥 2026-05-15 회의 — 소비자향 피벗** ([ADR 0001](../decisions/0001-consumer-pivot.html))
 >
@@ -18,13 +18,23 @@ nav_order: 1
 > - 시간 단위 = **30분 unit** (60분 = 2 unit 연속 예약)
 > - **코스 카테고리는 가변** — admin이 추가 가능, 미리 확정 ❌
 
-## 한 가지 세션
+## 다종목 코스 (가변 카테고리)
 
-> **"AI 가이드 기반 1:1 개인 맞춤 세션"**
+> **"AI 가이드 기반 다종목 멘토링"** — 회원이 매 세션마다 강사·프로그램 자율 선택.
 
 - 운동 설계 = AI (회원 데이터 + 본사 프로그램)
 - 강사 = "운동 멘토" — 1:1 멘토링·동행 (지도 ❌)
-- "PT" 단어 사용 ❌
+- 호칭 = "멘토" (PT·트레이너·코치 ❌ — [ADR 0002](../decisions/0002-license-policy.html))
+
+### 코스 카테고리 (예시, admin 추가 가능)
+
+| 카테고리 | 룸 | 강사 | 비고 |
+|---|---|---|---|
+| 스트레칭·필라테스·요가 등 (룸 필요) | private room | ✅ | 8개 룸 점유 |
+| 1:1 PT | 오픈 공간 | ✅ | 오픈 공간 + 강사 |
+| 자유 헬스 | 오픈 공간 | ❌ | 강사 코스 회원에게만 부가 ([ADR 0003](../decisions/0003-free-gym-add-on.html)) |
+
+> 카테고리는 가변. admin에서 추가·조정 가능. 일반 멘토는 한 강사가 멀티 종목 가능.
 
 ## 강사 풀 — 등급 2단계
 
@@ -47,4 +57,6 @@ nav_order: 1
 ---
 
 | 2026-05-11 | Pro/Peer 분리 모델 검토 |
-| 2026-05-11 | 단일 카테고리 + 등급 2단계 (일반 멘토 / Pro 인증 멘토) 락 |
+| 2026-05-11 | 단일 카테고리 + 등급 2단계 (일반 멘토 / Pro 인증 멘토) 락 — v1 |
+| 2026-05-15 | 다종목 코스 (가변·admin 추가) 확정 ([ADR 0001](../decisions/0001-consumer-pivot.html)) |
+| 2026-05-16 | v2 본문 정합 갱신 — 다종목 + 카테고리 표 + ADR 0002 호칭 정책 반영 |

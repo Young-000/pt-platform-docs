@@ -6,8 +6,8 @@ nav_order: 2
 
 # Level 0 — 정체성 🟢 LOCKED
 
-> **"예약제 private PT shop with AI"**
-> AI 기반 운동 세션을 핵심으로 하는 회원제 부티크 PT 서비스.
+> **"예약제 private PT shop with AI"** — 다종목 (스트레칭·필라테스·1:1 PT·자유 헬스) 자율 선택 모델.
+> AI 기반 운동 세션을 핵심으로 하는 회원제 부티크 PT 서비스. ([ADR 0001](../decisions/0001-consumer-pivot.html))
 > 목표: **100호점 이상 체인화** (가맹 모델 활용 가능).
 
 ## 정의

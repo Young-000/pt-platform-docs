@@ -15,11 +15,11 @@ nav_order: 1
 >
 > - **1D**: "공급자향 PT의 문제를 소비자향으로 풀기" (강사+프로그램 자율 선택, 30분 unit, 1회권)
 > - **4A**: 단일 PT → **다종목 코스** (룸 필요 / 오픈 / 자유 헬스 3분류)
-> - **4D**: 90평 → **60평** (8 룸 + 오픈 28평)
-> - **2B**: 월권 24만 + 6개월권 120만 + **1회권 신규**
-> - **3F**: **두 시나리오 병행** (S1 파트타이머 1.2만/30분, S2 전문 강사 최대 2만/30분)
+> - **4D**: 90평 → **60평** (8 private room × 4평 + 오픈 28평)
+> - **2B**: **회차권 5단** (1·4·12·24·48회) — 멤버십/단발권 분리 ❌
+> - **3F**: **두 시나리오 병행** (S1 파트타이머 1.2만/30분, S2 전문 강사 최대 2만/30분 상한)
 >
-> 봉인된 결정: [ADR 0001](../decisions/0001-consumer-pivot.html) · [ADR 0002 자격증](../decisions/0002-license-policy.html) · [ADR 0003 자유 헬스](../decisions/0003-free-gym-add-on.html)
+> 봉인된 결정: [ADR 0001](../decisions/0001-consumer-pivot.html) · [ADR 0002 자격증](../decisions/0002-license-policy.html) · [ADR 0003 자유 헬스](../decisions/0003-free-gym-add-on.html) · [ADR 0004 회차권 라인업](../decisions/0004-one-time-ticket-pricing.html)
 
 {: .note }
 > 결정 진행 상태는 [홈 대시보드](./)에서 한눈에 확인 가능합니다.
@@ -49,10 +49,10 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 4A | 세션 종류 — Pro PT vs Peer 운동 | [session-types](../service/session-types.html) |
-| 4B | 세션 포맷 — 30분 카디오 + 60분 방 PT | [session](../service/session.html) |
+| 4A | 세션 종류 — 다종목 코스 (가변·admin 추가) | [session-types](../service/session-types.html) |
+| 4B | 세션 포맷 — 30분 unit | [session](../service/session.html) |
 | 4C | AI 역할 범위 | [ai-role](../service/ai-role.html) |
-| 4D | 공간 구조 — 방 단위·테마·평수 | [space](../service/space.html) |
+| 4D | 공간 구조 — 60평 (8 private room + 오픈 28평) | [space](../service/space.html) |
 
 ---
 

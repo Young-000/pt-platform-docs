@@ -9,9 +9,12 @@ nav_order: 14
 
 예약 + 세션 + 보상권. [5A 예약](../../operations/reservation.html), [2D 정책](../../members/policies.html) 정책 반영.
 
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 회원 1예약 = **강사 + 프로그램 + 30분 unit** (60분 = 2 unit). 카디오 슬롯·방 슬롯·90분 세트 모델은 v1 폐기. 본문 스키마는 v1이며 데이터 재설계 시 CardioSlot 제거 + Reservation 모델을 30분 unit 기준으로 단순화 필요.
+
 ## Reservation
 
-**Purpose**: 회원 1예약 = 카디오 30분 슬롯 + 방 60분 슬롯 + 멘토 30분 블록 묶음.
+**Purpose**: 회원 1예약 (v1: 카디오 30분 슬롯 + 방 60분 슬롯 + 멘토 30분 블록 묶음 / v2: 강사 + 프로그램 + 30분 unit).
 **Related PRDs**: [👤 예약](../user/2026-05-13-reservation.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
 **Lifecycle**: 회원 예약 → 매칭 → 체크인 → 세션 진행 → 완료 (또는 취소/노쇼)
 

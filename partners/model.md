@@ -6,7 +6,7 @@ nav_order: 5
 
 # 3E. 강사 운영 모델 (Hybrid)
 
-**🟢 Decided** · 의존: [0 비전](../product/vision.html), [3A 페르소나](./personas.html), [4A 세션 종류](../service/session-types.html) → [3D 모집](./recruitment.html), [3G 정산](./payout.html), [3H 등급](./quality.html), [5A 예약](../operations/reservation.html)
+**🟢 Decided** · 의존: [ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0002](../decisions/0002-license-policy.html), [0 비전](../product/vision.html), [3A 페르소나](./personas.html), [4A 세션 종류](../service/session-types.html) → [3D 모집](./recruitment.html), [3G 정산](./payout.html), [3H 등급](./quality.html), [5A 예약](../operations/reservation.html)
 
 ## 공통 (모든 Phase)
 

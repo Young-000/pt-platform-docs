@@ -7,11 +7,14 @@ nav_order: 1
 
 # 👤 세션 진행 (회원 흐름)
 
-**Status**: Draft · **Layer**: 👤 유저 · **Updated**: 2026-05-13
-**관련 결정**: [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html) · [4C AI 역할](../../service/ai-role.html) · [4D 공간](../../service/space.html) · [2A 회원 여정](../../members/journey.html) · [2D 정책](../../members/policies.html)
+**Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 👤 유저 · **Updated**: 2026-05-13
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html) · [4C AI 역할](../../service/ai-role.html) · [4D 공간](../../service/space.html) · [2A 회원 여정](../../members/journey.html) · [2D 정책](../../members/policies.html)
 **📡 API**: [예약](../../api/catalog.html#예약-reservation) · [세션](../../api/catalog.html#세션-session) · [AI](../../api/catalog.html#ai) · [알림](../../api/catalog.html#알림-notifications)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [5. Records](../data/05-records.html) · [6. AI](../data/06-ai.html) · [10. Audit](../data/10-audit.html)
 **현재 코드**: `apps/mvp/src/pages/SessionDetailPage.tsx`, `BookingFlowPage.tsx`
+
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 세션 단위 = **30분 unit** (60분 = 2 unit 연속). "카디오 30 + 방 60 = 90분 세트" 및 stagger 운영은 v1 폐기. 본문은 v1 기준이며 회원 앱 재설계 시 v2로 갱신 필요.
 
 ## 1. 배경
 

@@ -7,11 +7,14 @@ nav_order: 3
 
 # 👤 예약 시스템 (회원 흐름)
 
-**Status**: Draft · **Layer**: 👤 유저 · **Updated**: 2026-05-13
-**관련 결정**: [5A 예약](../../operations/reservation.html) · [2D 정책](../../members/policies.html) · [2B 멤버십](../../members/membership.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html)
+**Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 👤 유저 · **Updated**: 2026-05-13
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [5A 예약](../../operations/reservation.html) · [2D 정책](../../members/policies.html) · [2B 멤버십](../../members/membership.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html)
 **📡 API**: [예약](../../api/catalog.html#예약-reservation)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [10. Audit](../data/10-audit.html)
 **현재 코드**: `apps/mvp/src/pages/BookingFlowPage.tsx`
+
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 예약 대상 = **강사 + 프로그램** (룸은 자동 배정). 단위 = **30분 unit** (60분 = 2 unit 연속). 카디오 슬롯·90분 세트 모델은 폐기. 본문은 v1 기준이며 화면 재설계 시 v2로 갱신 필요.
 
 ## 1. 배경
 

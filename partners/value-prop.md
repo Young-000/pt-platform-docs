@@ -6,7 +6,7 @@ nav_order: 3
 
 # 3C. 강사 Value Proposition
 
-**🟢 Decided** · 의존: [3A 페르소나](./personas.html), [3B 문제](./problems.html), [3G 정산](./payout.html), [3H 등급](./quality.html) → 강사 모집 카피
+**🟢 Decided** · 의존: [ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0002](../decisions/0002-license-policy.html), [3A 페르소나](./personas.html), [3B 문제](./problems.html), [3G 정산](./payout.html), [3H 등급](./quality.html) → 강사 모집 카피
 
 ## 한 줄 약속
 

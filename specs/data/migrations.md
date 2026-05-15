@@ -7,7 +7,11 @@ nav_order: 3
 
 # 마이그레이션 계획 — 기존 → 새 스키마
 
-**Status**: Draft · **Updated**: 2026-05-13
+**Status**: Draft (v1) — v2 재정합 대기 · **Updated**: 2026-05-13
+**관련**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+
+{: .warning }
+> **v2 변경**: 본 매핑은 v1 (단일 PT + 90분 세트 + 주 1/2회권) 기준. v2 ([ADR 0001](../../decisions/0001-consumer-pivot.html)·[ADR 0004](../../decisions/0004-one-time-ticket-pricing.html))는 (1) 회차권 5단 통합 (Membership.type: 1/4/12/24/48), (2) CardioSlot 제거 + 30분 unit Reservation 단순화, (3) Mentor 정산 = 30분 unit S1 12k / S2 ≤20k, (4) 다종목 코스(Program) 모델 추가 필요. 본 페이지 매핑은 v2 결정 후 재작성.
 
 ## 현재 스키마 (12 테이블)
 

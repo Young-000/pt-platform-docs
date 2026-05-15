@@ -7,11 +7,14 @@ nav_order: 1
 
 # 💪 세션 진행 (멘토 흐름)
 
-**Status**: Draft · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
-**관련 결정**: [3A 강사 페르소나](../../partners/personas.html) · [3E 운영 모델](../../partners/model.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html) · [4C AI 역할](../../service/ai-role.html) · [3G 정산](../../partners/payout.html)
+**Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [3A 강사 페르소나](../../partners/personas.html) · [3E 운영 모델](../../partners/model.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html) · [4C AI 역할](../../service/ai-role.html) · [3G 정산](../../partners/payout.html)
 **📡 API**: [세션](../../api/catalog.html#세션-session) · [멘토](../../api/catalog.html#멘토-mentor) · [AI](../../api/catalog.html#ai)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [5. Records](../data/05-records.html) · [6. AI](../data/06-ai.html)
 **현재 코드**: `apps/partner/src/pages/session-detail-page.tsx`, `dashboard-page.tsx`
+
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 세션 단위 = **30분 unit**, 다종목 코스 (스트레칭·필라테스·1:1 PT·자유 헬스). "방 A 30분 → 방 B 30분 stagger" 모델은 v1 폐기. 본문은 v1 기준이며 멘토 앱 재설계 시 v2로 갱신 필요.
 
 ## 1. 배경
 

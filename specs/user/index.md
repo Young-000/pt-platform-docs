@@ -13,7 +13,7 @@ has_children: true
 
 ## PRDs
 
-1. [세션 진행 (90분 흐름)](./2026-05-13-session-flow.html)
+1. [세션 진행 (30분 unit 흐름)](./2026-05-13-session-flow.html)
 2. [멤버십·결제·정책](./2026-05-13-membership-payment.html)
 3. [예약 시스템](./2026-05-13-reservation.html)
 4. [AI 가이드 (시스템 PT)](./2026-05-13-ai-coaching.html)

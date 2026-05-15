@@ -9,9 +9,12 @@ nav_order: 12
 
 지점·방·카디오 자리. [4D 공간](../../service/space.html) 정책 반영.
 
+{: .warning }
+> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 표준 지점 = **60평** (8 private room × 4평 + 오픈 28평). 카디오존(CardioSeat) 모델은 v1 폐기 — v2에선 오픈 공간(OpenSpace) 단일 자원. 본문 스키마는 v1이며 데이터 재설계 시 CardioSeat → OpenSpace 마이그레이션 + Room 평수 4평 반영 필요.
+
 ## Store
 
-**Purpose**: 1지점 정보. 표준 90평 (8방 + 카디오 6 + 공용 22평).
+**Purpose**: 1지점 정보. 표준 90평 (8방 + 카디오 6 + 공용 22평) — v1 (v2: 60평).
 **Related PRDs**: [🏢 세션 시스템](../platform/2026-05-13-session-system.html) · [🏢 예약 시스템](../platform/2026-05-13-reservation-system.html)
 **Lifecycle**: 인테리어 → 개점 → 운영 → 폐점
 

@@ -11,7 +11,7 @@ nav_order: 1
 | **상태** | 🟢 Decided (비전) |
 | **Owner** | @young |
 | **Last updated** | 2026-05-11 |
-| **상위 의존** | [1A 회원 페르소나](../product/personas.html) · [0. 비전](../product/vision.html) |
+| **상위 의존** | [ADR 0001](../decisions/0001-consumer-pivot.html) · [ADR 0002](../decisions/0002-license-policy.html) · [1A 회원 페르소나](../product/personas.html) · [0. 비전](../product/vision.html) |
 | **하위 영향** | [3B 강사 문제](./problems.html) · [3C 강사 VP](./value-prop.html) · [3D 모집](./recruitment.html) · [3E 모델](./model.html) · [3G 정산](./payout.html) |
 
 ---

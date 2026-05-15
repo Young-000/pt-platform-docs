@@ -7,11 +7,14 @@ nav_order: 2
 
 # 👤 멤버십·결제·정책 (회원 흐름)
 
-**Status**: Draft · **Layer**: 👤 유저 · **Updated**: 2026-05-13
-**관련 결정**: [2B 멤버십](../../members/membership.html) · [2C 가격](../../members/pricing.html) · [2D 정책](../../members/policies.html) · [2A 회원 여정](../../members/journey.html) · [1A 페르소나](../../product/personas.html) · [4A 세션 종류](../../service/session-types.html)
+**Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 👤 유저 · **Updated**: 2026-05-13
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [2B 멤버십](../../members/membership.html) · [2C 가격](../../members/pricing.html) · [2D 정책](../../members/policies.html) · [2A 회원 여정](../../members/journey.html) · [1A 페르소나](../../product/personas.html) · [4A 세션 종류](../../service/session-types.html)
 **📡 API**: [멤버십·결제](../../api/catalog.html#멤버십결제-membership)
 **🗄️ Data**: [7. Membership](../data/07-membership.html) · [10. Audit](../data/10-audit.html)
 **현재 코드**: `apps/mvp/src/pages/MembershipPage.tsx`, `LoginPage.tsx`, `RegisterPage.tsx`
+
+{: .warning }
+> **v2 변경 ([ADR 0004](../../decisions/0004-one-time-ticket-pricing.html))**: 멤버십 모델 = **회차권 5단 (1·4·12·24·48회)**, 단일 카테고리. "주 1회권/주 2회권" 이분법은 폐기. Pro 강사 옵션 = 회당 +5,000원 포인트. 본문은 v1 (주 1회/주 2회) 기준이며 회원 앱 재설계 시 v2로 갱신 필요.
 
 ## 1. 배경
 

@@ -28,7 +28,7 @@ nav_order: 4
 
 {: .note }
 > 이 단계 핵심은 BEP가 아니라 **"우리 모델이 진짜 되는가"** 검증.
-> 방 8개 × 30분 슬롯 = 강사 12명이면 공급 충분. 강사 풀 확장은 Phase 2.
+> Private room 8개 + 오픈 공간 + 30분 unit 운영 ([ADR 0001](../decisions/0001-consumer-pivot.html)). 강사 풀 확장은 Phase 2.
 
 ### 🏢 Business
 
@@ -44,7 +44,7 @@ nav_order: 4
 ### 📍 Space
 
 - 🔴 1호점 입지 결정 (오피스 vs 주거+오피스)
-- 🔴 [4D 공간 구조](../service/space.html) — 90평 8룸 표준 확정
+- 🔴 [4D 공간 구조](../service/space.html) — 60평 (8 private room + 오픈 28평) 표준 확정
 - 🔴 임대 계약
 - 🔴 인테리어 설계·시공
 - 🔴 운동기구 입고
@@ -52,12 +52,12 @@ nav_order: 4
 
 ### 🎯 Service
 
-- 🔴 [4A 세션 종류](../service/session-types.html) — Pro/Peer 정의
-- 🔴 [4B 세션 포맷](../service/session.html) — 90분 락
+- 🔴 [4A 세션 종류](../service/session-types.html) — 다종목 코스 카테고리 락 (admin 가변)
+- 🔴 [4B 세션 포맷](../service/session.html) — 30분 unit 락
 - 🔴 [4C AI 역할](../service/ai-role.html) 범위 결정
 - 🔴 [3D 강사 모집](../partners/recruitment.html) — 코어 5-10명 헤드헌팅
-- 🔴 [3F Peer 리더](../partners/peer-leader.html) 검증 코스 설계
-- 🔴 [5A 예약 시스템](../operations/reservation.html) — 고정 슬롯 + AI 매칭
+- 🔴 [3F 일반 멘토](../partners/peer-leader.html) 검증 코스 설계
+- 🔴 [5A 예약 시스템](../operations/reservation.html) — 강사+프로그램 자율 선택 + AI 매칭 옵션
 - 🔴 [2A 회원 여정](../members/journey.html) · [2D 정책](../members/policies.html)
 - 🔴 1호점 회원 모집 시작 → BEP 검증
 
@@ -79,7 +79,7 @@ nav_order: 4
 ### 📍 Space
 
 - 🔴 직영 추가 1-2호점 (검증 강화)
-- 🔴 가맹점 표준 사이즈 락 (50평·90평 두 모델)
+- 🔴 가맹점 표준 사이즈 락 (60평 base + 입지 의존 변형)
 - 🔴 가맹점 인테리어 표준화 (지정 시공업체)
 - 🔴 가맹 1호점 오픈
 
@@ -164,3 +164,4 @@ nav_order: 4
 | 날짜 | 변경자 | 변경 내용 |
 |---|---|---|
 | 2026-05-11 | Young + Claude | 3-Track Phase 로드맵 (Business / Space / Service) — 시점 미정 |
+| 2026-05-16 | Claude | v2 본문 정합 갱신 — 60평·30분 unit·다종목 ([ADR 0001~0004](../decisions/)) |

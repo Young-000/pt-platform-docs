@@ -6,7 +6,7 @@ nav_order: 4
 
 # 2D. 회원 정책 (환불·노쇼·취소·일시정지·양도)
 
-**🟡 Updated (2026-05-15)** · 의존: [2B 멤버십](./membership.html), [2C 가격](./pricing.html) → [8C 약관](../legal/privacy-tos.html), CS SOP
+**🟡 Updated (2026-05-15)** · 의존: [ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0004](../decisions/0004-one-time-ticket-pricing.html), [2B 멤버십](./membership.html), [2C 가격](./pricing.html) → [8C 약관](../legal/privacy-tos.html), CS SOP
 
 > **🔥 2026-05-15 회의 — 1회권 도입** ([ADR 0001](../decisions/0001-consumer-pivot.html))
 >

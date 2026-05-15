@@ -17,8 +17,10 @@ has_children: true
 ## 회원 일상 흐름 (User Flow)
 
 ```
-앱 예약 → 입장(QR) → 카디오 30분 → 방 PT 60분 → 세션 기록 → 퇴장 → AI 다음 추천
+앱에서 강사+프로그램 선택 (30분 unit) → 입장(QR) → 세션 (룸 또는 오픈 공간) → 세션 기록 → 퇴장 → AI 다음 추천
 ```
+
+> v2: 룸은 프로그램 속성에 따라 자동 배정 ([ADR 0001](../decisions/0001-consumer-pivot.html)). 자유 헬스는 강사 코스 회원에게만 부가 ([ADR 0003](../decisions/0003-free-gym-add-on.html)).
 
 각 단계의 룰·SOP가 위 결정 노드에서 정의됩니다.
 

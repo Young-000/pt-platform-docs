@@ -9,6 +9,9 @@ nav_order: 17
 
 회원 멤버십 + 결제. [2B 멤버십](../../members/membership.html), [2D 정책](../../members/policies.html) 정책 반영.
 
+{: .warning }
+> **v2 변경 ([ADR 0004](../../decisions/0004-one-time-ticket-pricing.html))**: 멤버십 = **회차권 5단 (1·4·12·24·48회)** 단일 카테고리. "멤버십 vs 단발권" 이분법 폐기. Pro 옵션 = 회당 +5,000원 포인트. 본문 description 예시 등 v1 표현("주 2회권 12개월")이 잔존하며 데이터 재설계 시 v2로 정합 필요.
+
 ## Membership
 
 **Purpose**: 회원 멤버십. **결제 → 생성 → 활성화 → 만료/해지** 라이프사이클.

@@ -261,8 +261,8 @@ nav_order: 0
       <div class="pt-result-row"><span class="pt-result-label">방시간 목표 단가 (흑자)</span><span class="pt-result-num"><span id="o-take-goal"></span>원</span></div>
       <div class="pt-result-row"><span class="pt-result-label">회원 결제 BEP (1세션)</span><span class="pt-result-num"><span id="o-pay-bep"></span>원</span></div>
       <div class="pt-result-row pt-hi"><span class="pt-result-label">회원 결제 (흑자, 1세션)</span><span class="pt-result-num"><span id="o-pay-goal"></span>원</span></div>
-      <div class="pt-result-row pt-hi"><span class="pt-result-label">주 2회권 (월)</span><span class="pt-result-num"><span id="o-week2"></span>원</span></div>
-      <div class="pt-result-row"><span class="pt-result-label">주 1회권 (월)</span><span class="pt-result-num"><span id="o-week1"></span>원</span></div>
+      <div class="pt-result-row pt-hi"><span class="pt-result-label">월 8회 환산</span><span class="pt-result-num"><span id="o-week2"></span>원</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">월 4회 환산</span><span class="pt-result-num"><span id="o-week1"></span>원</span></div>
       <div class="pt-result-row"><span class="pt-result-label">지점 월 매출 (예상)</span><span class="pt-result-num"><span id="o-rev"></span>만/월</span></div>
       <div class="pt-result-row"><span class="pt-result-label">예상 회원 수 (포화)</span><span class="pt-result-num"><span id="o-members"></span>명</span></div>
     </div>
@@ -420,7 +420,7 @@ nav_order: 0
 ## 락된 가정
 
 - 멘토 운영: 회원 1세션당 30분 1:1 → 멘토 1시간 = 2 회원
-- 회원 1세션 = 90분 세트 (카디오 30 + 방 60)
+- 회원 1세션 = 30분 unit (60분 원할 시 2 unit 연속, [ADR 0001](../decisions/0001-consumer-pivot.html))
 - Phase 1 직영 (가맹 분배 ❌)
 - 주 평균 = 4.3주/월
 - 회원 1인당 월 8회 가정 (포화 회원 수 계산용)
@@ -438,3 +438,4 @@ nav_order: 0
 | 2026-05-13 | 9 시나리오 매트릭스 |
 | 2026-05-13 | 시간대별 슬라이더 |
 | 2026-05-13 | 3단계 카드 흐름 (공간→비용→운영→결과) + 자동 도출 표시 |
+| 2026-05-16 | v2 본문 정합 갱신 — 라벨 "주 2회권/주 1회권" → "월 8회/4회", 세션 단위 30분 unit ([ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0004](../decisions/0004-one-time-ticket-pricing.html)) |

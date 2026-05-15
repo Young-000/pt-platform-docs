@@ -6,7 +6,9 @@ nav_order: 8
 
 # 3H. 강사 품질·등급
 
-**🔴 TBD** (원칙만 락, 세부 보류) · 의존: [3E 운영 모델](./model.html), [3G 정산](./payout.html) → 매칭 알고리즘, [3G 단가 자율 자격](./payout.html)
+**🔴 TBD** (원칙만 락, 세부 보류) · 의존: [ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0002](../decisions/0002-license-policy.html), [3E 운영 모델](./model.html), [3G 정산](./payout.html) → 매칭 알고리즘, [3G 단가 자율 자격](./payout.html)
+
+> 회원은 매 세션마다 강사를 자율 선택 ([ADR 0001](../decisions/0001-consumer-pivot.html)). "매칭 우선순위"는 회원이 자동 매칭 옵션을 선택했을 때만 적용 (검색·랭킹 가중치).
 
 ## 원칙
 

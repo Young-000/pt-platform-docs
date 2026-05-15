@@ -6,7 +6,9 @@ nav_order: 3
 
 # 4C. AI 역할 — "시스템 PT"
 
-**🟢 Decided** · 의존: [0 정체성](../product/identity.html), [4A 세션 종류](./session-types.html) → [3A 강사](../partners/personas.html), [4B 포맷](./session.html)
+**🟢 Decided** · 의존: [ADR 0002](../decisions/0002-license-policy.html), [0 정체성](../product/identity.html), [4A 세션 종류](./session-types.html) → [3A 강사](../partners/personas.html), [4B 포맷](./session.html)
+
+> 운동 설계 = AI ([ADR 0002](../decisions/0002-license-policy.html)). 강사는 멘토링·동행만, 지도 ❌.
 
 ## 한 줄 정의
 
