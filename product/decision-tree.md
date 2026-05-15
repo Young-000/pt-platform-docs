@@ -61,7 +61,7 @@ nav_order: 1
 | 노드 | 내용 | 페이지 |
 |---|---|---|
 | 3E | Pro 강사 모델 (gig vs 전속 vs hybrid) | [model](../partners/model.html) |
-| 3F | Peer 운동 리더 (자격·보상·검증) | [peer-leader](../partners/peer-leader.html) |
+| 3F | 일반 멘토 (자격·보상·검증) | [peer-leader](../partners/peer-leader.html) |
 | 3D | 모집 전략 (콜드스타트 vs 스케일) | [recruitment](../partners/recruitment.html) |
 | 3G | 정산 구조 | [payout](../partners/payout.html) |
 | 3H | 품질 관리·등급 | [quality](../partners/quality.html) |

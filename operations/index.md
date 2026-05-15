@@ -10,9 +10,10 @@ has_children: true
 
 ## 결정 노드 (Level 5)
 
-- [5A. 예약 시스템 — 피크 6-10pm 고정 슬롯 등](./reservation.html) ★ user flow
+- [5A. 예약 시스템 — 강사+프로그램 자율 선택](./reservation.html) ★ user flow
 - [5B. 지점 운영 — 무인/유인·시간·SOP](./store.html)
 - [5C. 안전·보험·사고처리](./safety.html)
+- [5D. 자유 헬스 운영 SOP](./free-gym.html) (ADR 0003 — 멤버십 부가)
 
 ## 회원 일상 흐름 (User Flow)
 
