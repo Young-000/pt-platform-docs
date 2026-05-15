@@ -6,7 +6,21 @@ nav_order: 3
 
 # 2C. 가격 체계
 
-**🔴 TBD** · 의존: [2B 멤버십](./membership.html), [3G 정산](../partners/payout.html), [7A 단위 경제](../economics/unit-economics.html), [1C 경쟁](../product/competition.html) → [1D VP](../product/value-prop.html), 마케팅·시뮬레이터
+**🟢 부분 확정** ([ADR 0001](../decisions/0001-consumer-pivot.html) · [ADR 0004](../decisions/0004-one-time-ticket-pricing.html)) · 의존: [2B 멤버십](./membership.html), [3G 정산](../partners/payout.html), [7A 단위 경제](../economics/unit-economics.html), [1C 경쟁](../product/competition.html) → [1D VP](../product/value-prop.html), 마케팅·시뮬레이터
+
+> **📌 회차권 라인업 — [ADR 0004](../decisions/0004-one-time-ticket-pricing.html) (2026-05-16)**
+>
+> 멤버십 vs 단발권 이분법 ❌ → **회차권 단일 모델**, 회차 수만 가변.
+>
+> | 상품 | 회차 | 가격 | 회당가 | 약정 |
+> |---|---|---|---|---|
+> | **1회차권** | 1 | **40,000원** | 40,000원 | ❌ |
+> | **8회차권** (월권) | 8 | 240,000원 | 30,000원 | 1개월 |
+> | **48회차권** (6개월권) | 48 | 1,200,000원 | 25,000원 | 6개월 |
+>
+> **프로그램 옵션**: 카테고리 무관 회당가 동일. **Pro 강사** ([ADR 0002](../decisions/0002-license-policy.html)) 선택 시 **+5,000원/회** 포인트 차감.  자유 헬스는 회차 소비 ❌ (멤버십 부가, [ADR 0003](../decisions/0003-free-gym-add-on.html)).
+>
+> 모든 값 = `admin.PricingConfig` 변수.  베타 6개월 후 (2026-11) 재검토.
 
 ## 결정해야 할 것
 
