@@ -23,3 +23,4 @@ has_children: true
 - [3F. Peer 운동 리더 모델 — 자격·보상·검증](./peer-leader.html)
 - [3G. 강사 정산 구조](./payout.html)
 - [3H. 강사 품질 관리·등급](./quality.html)
+- [3I. 멘토 검증 코스 (본사 SOP)](./verification-course.html) 🟢 new
