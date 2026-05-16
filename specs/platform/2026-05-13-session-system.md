@@ -7,134 +7,183 @@ nav_order: 1
 
 # 🏢 세션 시스템 (플랫폼 백엔드)
 
-**Status**: Draft (v1) — v2 재설계 대기
-**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [4A 세션 종류](../../service/session-types.html) · [4B 포맷](../../service/session.html) · [4D 공간](../../service/space.html) · [4C AI 역할](../../service/ai-role.html) · [5A 예약](../../operations/reservation.html)
-**📡 API**: [세션](../../api/catalog.html#세션-session) · [예약](../../api/catalog.html#예약-reservation) · [시스템·Cron](../../api/catalog.html#시스템--cron)
+**Status**: 🟡 Updated (2026-05-16) · v2 본문 적용
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+**의존**: [4A 세션 종류](../../service/session-types.html) · [4B 포맷](../../service/session.html) · [4D 공간](../../service/space.html) · [4C AI 역할](../../service/ai-role.html) · [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html)
+**📡 API**: [v2 예약](../api/v2-reservations.html) · [v2 카테고리](../api/v2-categories.html) · [v2 자유 헬스](../api/v2-free-gym.html)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [5. Records](../data/05-records.html) · [6. AI](../data/06-ai.html)
 
-{: .warning }
-> **v2 변경 ([ADR 0001](../../decisions/0001-consumer-pivot.html))**: 세션 단위 = **30분 unit**, 다종목 코스 (스트레칭·필라테스·1:1 PT·자유 헬스). 카디오존 30분 슬롯 모델은 폐기. 본문은 v1 기준이며 백엔드 재설계 시 v2로 갱신 필요.
+{: .note }
+> **v2 (2026-05-16)**: 90분 세트(카디오 30 + 방 60) 모델·CardioSlot·stagger 알고리즘은 **폐기** ([ADR 0001](../../decisions/0001-consumer-pivot.html)). 세션 단위 = **30분 unit** (60분 = 2 unit 연속). 다종목 코스(스트레칭·필라테스·1:1 PT·자유 헬스)를 카테고리·프로그램 마스터로 분기.
 
 ## 1. 배경
 
-본사 시스템이 슬롯 스케줄링·매칭·세션 데이터·AI 학습을 책임. 회원·멘토 둘 다 본사 시스템 위에서 움직임.
+본사 시스템이 슬롯·예약·세션 기록·AI 학습을 책임. 회원·강사 모두 본사 시스템 위에서 움직임. v2는 예약 흐름이 **회원 직접 선택**으로 단순화됐고, 세션도 **카테고리에 따라 체크인·공간 사용 분기**가 명확해졌다.
 
 ## 2. 핵심 컴포넌트
 
-### A. 슬롯 스케줄러
+### A. MentorBlock 스케줄러
 
-- **방 슬롯**: 60분 단위, 30분 stagger (정각 4방 + 30분 4방)
-- **카디오 슬롯**: 30분 단위, 자리 수 = 6
-- **방 슬롯의 멘토 점유**: 방 60분 중 멘토 30분 (T+30~T+60) — 멘토 입장에서 별도 트랙
-- **회원 예약 = 카디오 30 + 방 60 연속 세트**
+- 강사가 본인 가능 시간을 **30분 unit**으로 자유 오픈 (`status='open'`)
+- 회원 예약 시 1개 또는 연속 2개 점유 (`status='assigned'`)
+- 강사 취소(6h 이내)는 모든 영향 회원에게 회차 +1 보상
 
-### B. 멘토 매칭
+### B. Room 자동 배정
 
-- 슬롯 오픈 시 = 멘토가 본인 가능 슬롯을 30분 단위로 등록 (1시간 = 2 슬롯)
-- 회원 예약 시 AI가 가능한 멘토 3명 추천 (수동 모드) 또는 자동 매칭 (자동 모드)
-- 이전 멘토 우선 매칭 (회원 익숙함 + 멘토 인수인계 연속성)
-- 회원 24h 거절권: 거절 시 다른 멘토 재매칭
+- 카테고리 `requiresPrivateRoom=true`만 룸 점유
+- 예약 트랜잭션에서 가용 Room 1개 자동 lock & 배정
+- 룸 부족이면 `INSUFFICIENT_ROOM` (회원 다른 시간/오픈 공간 카테고리 안내)
 
-### C. AI 운동 설계
+### C. 체크인 분기
 
-- 입력: 회원 직전 N세션 기록 + 본사 표준 프로그램 + 회원 컨디션
-- 출력: 다음 세션 운동 시퀀스 (자율 30분 + 멘토 30분)
-- 강사 인계 메모도 입력에 포함 (암묵지 명시화)
+| 카테고리 종류 | 체크인 흐름 |
+|---|---|
+| 룸 필요 (`requiresPrivateRoom=true`) | QR 체크인 → 배정된 `assignedRoomId` 입장 |
+| 오픈 공간 강사 코스 (PT) | QR 체크인 → 오픈 공간 대기 → 강사가 호출 |
+| 자유 헬스 (`requiresMentor=false`) | 별도 게이트 — `POST /api/free-gym/enter` (예약 ❌, 회차 차감 ❌) |
 
-### D. 세션 기록 저장
+체크인 윈도우: `startAt - 15m` ~ `startAt + 15m`. T+15 미체크인 → cron이 `no-show` 전환 + 회차 차감.
 
-- 세션마다 표준 schema로 저장 (운동·세트·중량·rep·폼·인수인계·컨디션)
-- AI 학습 데이터로 누적
-- 회원 본인이 열람 가능 (운동 이력 시각화)
+### D. AI 운동 설계
+
+- 입력: 회원 직전 N세션 SessionRecord + 카테고리/프로그램 표준 시퀀스 + 강사 인계 메모 + 회원 컨디션
+- 출력: 다음 세션 운동 시퀀스 (30분 unit 기준)
+- 다종목 회원의 경우 카테고리별 별도 트랙 (스트레칭 이력 / PT 이력 분리)
+
+### E. 세션 기록 (SessionRecord)
+
+- 강사가 세션 종료 시 작성 (5분 내 입력 가능한 표준 schema)
+- 운동·세트·중량·rep·폼·인계 메모·회원 컨디션
+- AI 학습 데이터로 누적, 회원이 본인 이력 열람 가능
 
 ## 3. 데이터 모델
 
 ```
-Member (회원)
+Member
   ├─ id, profile, persona signals
   └─ exercise history (joined)
 
-Mentor (멘토)
-  ├─ id, profile, 인증 등급 (일반 / Pro 인증)
-  └─ slot opens (joined)
+Mentor
+  ├─ id, profile, tier (pending_review / verified / pro_certified / rejected)
+  └─ MentorProgram[] (매핑한 프로그램)
 
-Room (방, 지점당 8개)
-  ├─ id, store_id, capacity
-  └─ slots (joined)
+MentorBlock (30분 unit)
+  ├─ id, mentorId, startAt, status (open / assigned / closed)
 
-CardioSeat (카디오 자리, 지점당 6)
-  ├─ id, store_id
+Room (지점 private 룸)
+  ├─ id, storeId, name, capacity=1
 
-RoomSlot (방 60분 슬롯, 30분 stagger)
-  ├─ id, room_id, start_at (정각 / 30분)
-  ├─ member_id (예약 시), status
+Reservation
+  ├─ id, memberId, mentorId, programId, categoryId
+  ├─ startAt, duration (30 / 60), unitCount (1 / 2)
+  ├─ mentorBlockIds (Int[]), assignedRoomId?
+  ├─ ticketId, isPro, pointsCharged
+  └─ status
 
-CardioSlot (카디오 30분 슬롯)
-  ├─ id, seat_id, start_at, member_id
+Session (1 reservation = 1 session)
+  ├─ id, reservationId
+  ├─ checkedInAt?, startedAt?, endedAt?
+  └─ status (booked / checked-in / in-progress / completed / no-show / cancelled)
 
-MentorBlock (멘토 30분 단위 가능 시간)
-  ├─ id, mentor_id, start_at, status (open/assigned)
-
-Session (회원 1세션 = 카디오 + 방 + 멘토 30분 묶음)
-  ├─ id, member_id, mentor_id (방의 T+60 30분 동안의 멘토)
-  ├─ cardio_slot_id, room_slot_id, mentor_block_id
-  ├─ status (booked / checked-in / in-progress / completed / no-show / cancelled)
-
-SessionRecord (멘토 입력)
-  ├─ id, session_id
+SessionRecord (강사 입력, 1 session = 0..1 record)
+  ├─ id, sessionId
   ├─ exercises (jsonb): [{name, sets, weight, reps, ...}]
-  ├─ form_notes (text)
-  ├─ handover_notes (text, AI 학습용)
-  ├─ member_condition (text)
+  ├─ formNotes (text)
+  ├─ handoverNotes (text, AI 학습용)
+  ├─ memberCondition (text)
+  └─ createdAt
 
-AIRecommendation (다음 세션 추천)
-  ├─ id, member_id, generated_at
-  ├─ next_session_plan (jsonb)
-  ├─ source: 최근 N세션 기록 IDs
+FreeGymVisit (자유 헬스 — 세션 ❌, 별도 모델)
+  ├─ id, memberId, storeId
+  ├─ enteredAt, exitedAt?, autoClosed (bool)
+  └─ ticketSnapshot (jsonb)
 
-Rating (회원 평가)
-  ├─ id, session_id, member_id, mentor_id, score (1-5), comment
+AIRecommendation
+  ├─ id, memberId, categoryId, generatedAt
+  ├─ nextSessionPlan (jsonb)
+  └─ sourceRecordIds (Int[])
+
+Rating
+  ├─ id, sessionId, memberId, mentorId, score (1-5), comment
 ```
 
 ## 4. API 엔드포인트 (주요)
 
-- `POST /reservations` — 회원 예약 생성 (카디오+방+멘토 동시 점유)
-- `POST /mentor/slots` — 멘토 슬롯 오픈
-- `GET /sessions/today` — 회원·멘토 오늘 일정
-- `POST /sessions/:id/check-in` — 회원 QR 체크인
-- `POST /sessions/:id/record` — 멘토 세션 기록 저장
-- `GET /members/:id/next-recommendation` — AI 다음 운동 제안
-- `POST /sessions/:id/rating` — 회원 평가
+| Method | Path | 비고 |
+|---|---|---|
+| POST | `/api/reservations` | 예약 생성 ([v2 예약 §2](../api/v2-reservations.html)) |
+| POST | `/api/mentor-blocks` | 강사 슬롯 오픈 (30분 unit) |
+| GET | `/api/sessions/today` | 회원·강사 오늘 일정 |
+| POST | `/api/reservations/:id/check-in` | QR 체크인 (룸/오픈) |
+| POST | `/api/free-gym/enter` | 자유 헬스 입장 ([v2 자유 헬스](../api/v2-free-gym.html)) |
+| POST | `/api/free-gym/exit` | 자유 헬스 퇴장 |
+| POST | `/api/sessions/:id/record` | 강사 세션 기록 저장 |
+| GET | `/api/members/:id/next-recommendation?categoryId=` | AI 다음 운동 제안 |
+| POST | `/api/sessions/:id/rating` | 회원 평가 |
 
-## 5. 슬롯 stagger 알고리즘 (예시)
+## 5. 세션 운영 흐름 (예시)
+
+### 룸 코스 (스트레칭 30분)
 
 ```
-시각  | 방 A (정각 시작) | 방 B (30분 시작) | 카디오 자리 사용
-12:00 | 회원 X 방 입장   | 회원 W 진행 중   | 회원 Y가 12:00-12:30 사용
-12:30 | 회원 X 자율 끝, 멘토 입장 | 회원 W 종료, 청소 | 회원 Z가 12:30-13:00 사용
-13:00 | 회원 X 종료, 청소 | 회원 Y 방 입장 | 회원 A가 13:00-13:30 사용
-13:30 | 회원 Z 방 입장 | 회원 Y 자율 끝, 멘토 입장 | ...
+T-15  회원 QR 체크인 → Session.checkedInAt, 배정된 Room 입장
+T+0   강사 시작 → Session.startedAt, status='in-progress'
+T+30  강사 종료 + SessionRecord 입력 → Session.endedAt, status='completed'
+       AI 학습 큐에 enqueue
 ```
 
-→ 멘토 1명이 12:30~13:00 방 A, 13:30~14:00 방 B 식으로 1시간에 2 회원.
+### 오픈 공간 PT (60분 = 2 unit)
 
-## 6. 다른 레이어 영향
+```
+T-15  회원 QR 체크인 → 오픈 공간 대기
+T+0   강사 호출 → 세션 시작
+T+60  강사 종료 + SessionRecord 입력
+       MentorBlock 2개 모두 status='closed'
+```
 
-- **👤 유저**: 예약·체크인·AI 가이드·평가 UI는 이 API 위에서
-- **💪 멘토**: 슬롯 오픈·일정·세션 기록·정산 UI도 이 API 위에서
+### 자유 헬스
 
-## 7. 엣지 케이스
+```
+회원 게이트 QR → POST /api/free-gym/enter
+  FreeGymVisit { enteredAt, ticketSnapshot } insert (회차 차감 ❌)
+운동 (강사 ❌)
+게이트 exit 또는 180분 후 cron auto-close
+  exitedAt 채움, autoClosed=true
+```
 
-- 멘토 슬롯과 방 슬롯 매칭 실패 (멘토 풀 부족): 회원에게 예약 불가 안내 + 대기 큐
-- 카디오 자리 부족 (6자리 < 동시 회원 8명): 회원 동선 stagger로 4명씩 카디오 → 시간 안 맞으면 거절
-- 세션 중 회원 부상: 즉시 종료 처리 + 회차 보상
+## 6. AI 추천 룰 (v1 유지, 30분 unit 적용)
 
-## 8. 측정 지표
+- 카테고리별 별도 트랙 (스트레칭/PT/필라테스 이력 분리 학습)
+- 직전 N세션(default 5)의 SessionRecord + 강사 handoverNotes 가중치 우선
+- 표준 프로그램 시퀀스 = 카테고리 마스터의 기본 템플릿
+- 회원 컨디션 입력 시 강도 자동 조정
+- 출력 단위 = 30분 unit (60분 예약이면 2 unit 합성)
 
-- 슬롯 매칭 성공률 ≥ 95%
-- API p95 응답 200ms 이내
-- AI 추천 생성 시간 < 3초
+## 7. 다른 레이어 영향
 
----
+- **👤 유저 앱**: 예약(카테고리·강사 직접 선택)·체크인·AI 가이드·평가 UI는 이 API 위에서
+- **💪 강사 앱**: MentorBlock 오픈·일정·세션 기록·정산 UI도 이 API 위에서
+- **🛠 admin**: 카테고리·프로그램·정책·세션 모니터링 ([어드민 콘솔](./2026-05-13-admin-console.html))
 
-| 2026-05-13 | 초안 |
+## 8. 엣지 케이스
+
+- 강사 노쇼(T+30m 체크인·세션 기록 ❌): 회원 회차 +1 자동 보상 (cron)
+- 회원 부상 중도 종료: 강사가 `endedAt` 조기 입력 + SessionRecord에 사유 명기, 운영 검토 후 회차 환원
+- 자유 헬스 활성 visit 1건 제한: `ALREADY_INSIDE` 에러
+- 자유 헬스 180분 초과: cron auto-exit (`autoClosed=true`)
+- 카테고리 비활성화: 진행 중 세션 무영향, 신규 예약만 차단
+
+## 9. 측정 지표
+
+- API p95 응답 < 200ms (체크인·세션 조회)
+- 예약 생성 p95 < 500ms (트랜잭션 전체, [예약 시스템 §10](./2026-05-13-reservation-system.html))
+- AI 추천 생성 < 3초
+- 세션 기록 입력률 ≥ 95% (강사 SLA: 종료 후 5분 이내)
+- 룸 부족 비율 < 5% (피크)
+
+## 변경 이력
+
+| 날짜 | 변경 |
+|---|---|
+| 2026-05-13 | 초안 (v1) — 카디오+방 90분 세트, 30분 stagger, CardioSlot 모델 |
+| 2026-05-16 | v2 본문 재작성 — 90분 세트·CardioSlot·stagger 폐기, 30분 unit MentorBlock + 카테고리 분기 체크인(룸/오픈/자유 헬스) + Room 자동 배정 ([ADR 0001](../../decisions/0001-consumer-pivot.html), [ADR 0003](../../decisions/0003-free-gym-add-on.html)) |
