@@ -14,6 +14,7 @@ has_children: true
 - [5B. 지점 운영 — 무인/유인·시간·SOP](./store.html)
 - [5C. 안전·보험·사고처리](./safety.html)
 - [5D. 자유 헬스 운영 SOP](./free-gym.html) (ADR 0003 — 멤버십 부가)
+- [5E. 1호점 OPEN 체크리스트 (D-30 → D-Day)](./launch-checklist.html) 🟢 신규
 
 ## 회원 일상 흐름 (User Flow)
 

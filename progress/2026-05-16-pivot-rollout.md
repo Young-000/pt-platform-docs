@@ -99,3 +99,4 @@ nav_order: 2
 | 2026-05-16 저녁 | 5 트랙 완료·머지·푸시 |
 | 2026-05-16 저녁 | 본 진행 로그 작성 |
 | 2026-05-16 야간 | ADR 0005 (Phase별 가격 전략) 봉인 + 시뮬레이터 v3 (시나리오 저장·12개월 P&L·2D 히트맵·LTV) |
+| 2026-05-16 야간 | 1호점 베타 OPEN launch checklist 작성 (`operations/launch-checklist.md`) + `store.md`·`safety.md` TBD 해소 |
