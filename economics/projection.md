@@ -8,6 +8,10 @@ nav_order: 3
 
 **🔴 TBD** · 의존: [7A 단위 경제](./unit-economics.html), [7B 매출·원가](./revenue-cost.html), [6A 확장 모델](../expansion/model.html)
 
+> **🆕 2026-05-16 — Phase별 가격 매트릭스** ([ADR 0005](../decisions/0005-pricing-phase-strategy.html))
+>
+> Phase 0~4+ 단계별 가격·KPI·트리거 매트릭스 봉인. 본 7C 의 100호점 추정은 ADR 0005 의 Phase 4+ 가맹점 자율 + 본사 라이선스 fee 모델 가정 위에 작성된다. 12개월 P&L 시뮬은 시뮬레이터 v3 참조.
+
 ## 결정 보류 항목
 
 - CapEx (지점당) 정확한 금액

@@ -24,6 +24,10 @@ nav_order: 0
 > → **S2 단독으로는 회원 단가 +30% 인상 필수**.  
 > → 6개월권 회당 본사 마진은 월권의 56% — 비중 50% 넘으면 마진 압박.
 
+> **🆕 2026-05-16 — Phase별 가격 매트릭스** ([ADR 0005](../decisions/0005-pricing-phase-strategy.html))
+>
+> Phase 0~4+ 단계별 가격 매트릭스 · 2D sensitivity (util × Pro) · LTV 추정 · Pro 옵션 인상 트리거 (util ≥ 70% AND Pro ≥ 30%) 봉인. 시뮬레이터 v3 에서 시나리오 저장 · 12개월 P&L · 히트맵 인터랙티브 제공.
+
 > **🆕 2026-05-16 — 회차권 라인업 매출 영향** ([ADR 0004](../decisions/0004-one-time-ticket-pricing.html))
 >
 > 회차권 통일 모델 + 1회차 40,000원 + Pro 강사 옵션 +5,000원/회.  Base = S1 시나리오 1지점.

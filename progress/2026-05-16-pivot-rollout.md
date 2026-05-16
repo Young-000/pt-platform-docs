@@ -16,6 +16,7 @@ nav_order: 2
 | [0002](../decisions/0002-license-policy.html) | 멘토 자격증 정책 | 일반 ❌ / Pro ✅ / 가맹점장 시설법용 / 법안 대응 admin 토글 |
 | [0003](../decisions/0003-free-gym-add-on.html) | 자유 헬스 = 부가 | 강사 코스 회원에게만 개방, 단독 가입 ❌ |
 | [0004](../decisions/0004-one-time-ticket-pricing.html) | 회차권 라인업 5단 | 1·4·12·24·48회 통일 모델, Pro 옵션 +5천/회 |
+| [0005](../decisions/0005-pricing-phase-strategy.html) | Phase별 가격 책정 전략 | Phase 0~4+ 가격 매트릭스, 2D sensitivity, LTV, Pro 인상 트리거 |
 
 ## 영향받은 PRD (callout 추가)
 
@@ -97,3 +98,4 @@ nav_order: 2
 | 2026-05-16 오후 | 회차권 5단 라인업 결정 (1·4·12·24·48회) |
 | 2026-05-16 저녁 | 5 트랙 완료·머지·푸시 |
 | 2026-05-16 저녁 | 본 진행 로그 작성 |
+| 2026-05-16 야간 | ADR 0005 (Phase별 가격 전략) 봉인 + 시뮬레이터 v3 (시나리오 저장·12개월 P&L·2D 히트맵·LTV) |

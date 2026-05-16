@@ -22,3 +22,4 @@ has_children: true
 - [0002. 멘토 자격증 정책](./0002-license-policy.html) — 2026-05-15. 일반 멘토 ❌ / Pro ✅ / 가맹점장 ✅ / 법안 통과 시 admin 토글
 - [0003. 자유 헬스 = 부가](./0003-free-gym-add-on.html) — 2026-05-15. 강사 코스 회원에게만 개방, 단독 가입 ❌
 - [0004. 회차권 라인업 (1·4·12·24·48회) 가격 책정](./0004-one-time-ticket-pricing.html) — 2026-05-16. 회차권 단일 모델, 5단 라인업(1회 4만 ~ 48회 120만), Pro 강사 옵션 +5천/회
+- [0005. Phase별 가격 책정 전략](./0005-pricing-phase-strategy.html) — 2026-05-16. Phase 0~4+ 가격 매트릭스, 2D sensitivity, LTV 추정, Pro 옵션 인상 트리거 (util ≥ 70% AND Pro ≥ 30%)
