@@ -21,6 +21,10 @@ nav_order: 4
 >
 > 본문은 v2 표 기준으로 정합 갱신됨 (2026-05-16). [경제성 시뮬레이션](../economics/simulation.html) 재계산 필요.
 
+> **📌 2026-05-18 — 베타 입지 가정** ([ADR 0006](../decisions/0006-beta-location-strategy.html))
+>
+> 베타 1호점 = **평당 10만 외곽 입지** (경기 외곽·인천·지방 광역시 외곽). 월 임대 **600만**, capex **1억**. 단위 경제 검증 우선. 강남 입지는 Phase 2 (2~3호점) 이월.
+
 ## 표준 1지점 — 60평
 
 | 구역 | 평수 | 수 | 비고 |
@@ -37,7 +41,8 @@ nav_order: 4
 
 ## Phase별 변형
 
-- **Phase 1 (1-3호점)** — 표준 60평 직영 검증
+- **Phase 0 (베타 1호점)** — 60평 외곽 입지 (평당 10만·capex 1억), 단위 경제 검증 ([ADR 0006](../decisions/0006-beta-location-strategy.html))
+- **Phase 1 (1-3호점)** — 표준 60평 직영 검증. 베타 KPI 4/5 통과 후 강남 2호점 추가
 - **Phase 2+** — 입지 따라 변형 가능 (소형/대형). admin 정책 변수.
 
 ---
@@ -46,3 +51,4 @@ nav_order: 4
 | 2026-05-12 | 카디오 6자리 (4 이론 + 2 운동 후·버퍼), 방 stagger 운영 락 — v1, 폐기 |
 | 2026-05-15 | v2 공간 축소 (60평 + 8 private 4평 + 오픈 28평) ([ADR 0001](../decisions/0001-consumer-pivot.html)) |
 | 2026-05-16 | v2 본문 정합 갱신 — 표 / 슬롯 매칭 / Phase 변형 모두 60평 기준 |
+| 2026-05-18 | 베타 입지 가정 callout 추가 — 평당 10만·외곽·capex 1억 ([ADR 0006](../decisions/0006-beta-location-strategy.html)) |

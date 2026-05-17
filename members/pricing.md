@@ -47,12 +47,18 @@ nav_order: 3
 - 약정 할인율 (다회차권 = 회차 수가 곧 약정 강도. 추가 % 할인 검토 중)
 - 단발 1회권 vs 신규 회원 첫 4회권 프로모션 가격
 
-## 핵심 제약 — 평당 비용 약 35만/월
+## 핵심 제약 — 평당 비용 (베타·강남 시나리오 비교)
 
-**60평 표준 1지점** ([4D 공간](../service/space.html), [ADR 0001](../decisions/0001-consumer-pivot.html)):
-- 평당 임대료 **35만** (강남 기준) → 총 임대 약 **2,100만/월**
+**60평 표준 1지점** ([4D 공간](../service/space.html), [ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0006](../decisions/0006-beta-location-strategy.html)):
+
+| 시나리오 | 평당 임대 | 월 임대 | capex |
+|---|---|---|---|
+| **베타 1호점 (외곽·기본 default)** | **10만** | **600만** | **1억** |
+| Phase 2 강남 (2~3호점) | 35만 | 2,100만 | 3억 |
+
 - 추가 관리비·공과금·인건비·강사 정산·보험 등
 - 회원 수 × 회차 소비 × 회당가 = 전체 비용 + 마진 충당해야 함
+- 베타 단가는 **단위 경제 검증 우선** ([ADR 0006](../decisions/0006-beta-location-strategy.html)) → Bear 도 흑자 27%
 
 → 단위 경제 ([7A](../economics/unit-economics.html)) 시뮬레이션에서 손익 추적.
 
@@ -76,3 +82,4 @@ nav_order: 3
 | 2026-05-12 | 초기 가설 가격 (Light 15만 / Std 25만 / Premium 40만) — placeholder, v1 |
 | 2026-05-12 | 평당 비용 8-10만 제약 반영, 가격은 TBD 유지 — v1 |
 | 2026-05-16 | v2 본문 정합 갱신 — 60평·평당 35만·회차권 5단 ([ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0004](../decisions/0004-one-time-ticket-pricing.html)) |
+| 2026-05-18 | 베타 default 비용 가정 갱신 — 평당 10만·임대 600만·capex 1억 ([ADR 0006](../decisions/0006-beta-location-strategy.html)) |

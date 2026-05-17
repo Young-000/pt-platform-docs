@@ -26,11 +26,20 @@ nav_order: 1
 - 100% 직영 ❌ (CapEx 부담 큼)
 - 100% 가맹 ❌ (검증 안 된 모델로 모집 어려움)
 
-## 자본 소요 — TBD
+## 자본 소요 — 베타 default ([ADR 0006](../decisions/0006-beta-location-strategy.html))
 
-Phase 1 자본 소요 숫자는 [2C 가격](../members/pricing.html) + [7A 단위 경제](../economics/unit-economics.html) 결정 후 산출. 자기자본·시드 투자 비율도 그때.
+| Phase | 호점당 capex | 임대 가정 | 비고 |
+|---|---|---|---|
+| **Phase 0 (베타 1호점)** | **1억** | 평당 10만 외곽 (월 600만) | 단위 경제 검증 우선 |
+| Phase 1 (1~3호) | 1~3억 | 베타 + 강남 2호점 추가 (Phase 2 진입 시) | 베타 KPI 4/5 통과 시 강남 진입 |
+| Phase 2 (4~10호) | 호점별 1~3억 | 입지 다양화 | 가맹 capex = 점주 부담 (R&R 참조) |
+| Phase 3+ | 가맹점 부담 1억 (외곽) ~ 3억 (강남) | 가맹점 자율 | 점주 BEP = 베타 모델 기준 2.7개월 |
+
+→ **가맹 확장 매력**: 점주당 capex 1억 (외곽 모델) → BEP 2.7개월. 강남 capex 3억 시 BEP 14개월.
+→ 자기자본·시드 투자 비율은 [2C 가격](../members/pricing.html) + [7A 단위 경제](../economics/unit-economics.html) + 베타 실측 후 확정.
 
 ---
 
 | 2026-05-12 | 직영·가맹·하이브리드 비교 |
 | 2026-05-12 | 하이브리드 4-Phase 구조 락. 기존 헬스장 가맹 변환 옵션 추가. 자본 숫자 TBD. |
+| 2026-05-18 | 자본 소요 표 갱신 — 베타 capex 1억·외곽 입지 ([ADR 0006](../decisions/0006-beta-location-strategy.html)). 가맹점주 BEP 2.7개월 |
