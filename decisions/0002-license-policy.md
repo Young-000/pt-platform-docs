@@ -6,9 +6,11 @@ nav_order: 2
 
 # 0002. 멘토 자격증 정책 (자격증법 회피 + 단계적 의무화 대비)
 
-- **상태**: Accepted
+- **상태**: **Superseded by [ADR 0007](./0007-trainer-model.html)** (2026-05-20 — 일반 멘토 트랙 폐기)
 - **결정일**: 2026-05-15 (회의), 2026-05-16 (ADR 작성)
 - **결정자**: Young
+
+> **🔥 2026-05-20 재봉인** — §1 (일반 멘토 = 자격증 ❌) 은 **폐기**. [ADR 0007](./0007-trainer-model.html) 에서 **모든 강사 = Pro Only (자격증 + 검증 통과 의무)** 로 재정의됨. §2 (Pro 정의), §3 (시설법용 슈퍼바이저), §4 (호칭·표방 안전판), §5 (admin 토글) 는 그대로 유효. §1 의 admin 토글 `mentor.require_license_general` 기본값은 **`true`** 로 변경 (전원 자격증 의무).
 
 ## 맥락 (Context)
 
@@ -90,3 +92,4 @@ PT 강사 자격증을 둘러싼 사실관계가 시장에 혼란스럽게 퍼�
 | 2026-05-15 | 회의: 자격증 정책 옵션 B 합의 |
 | 2026-05-16 | ADR 작성 |
 | 2026-05-16 | 후속 작업: 검증 코스 세부 정의 완료 ([3I](../partners/verification-course.html)) |
+| 2026-05-20 | **Superseded by [ADR 0007](./0007-trainer-model.html)** — 일반 멘토 트랙 폐기, 모든 강사 = Pro Only. §2~§5 유효. `mentor.require_license_general` default true 로 변경 |

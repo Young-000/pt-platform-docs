@@ -8,10 +8,19 @@ nav_order: 6
 
 > [ADR 0005](./0005-pricing-phase-strategy.html) 에서 Phase 0~4+ 가격 매트릭스를 봉인했으나, **베타 1호점의 입지·capex 가정 자체**는 "강남·평당 35만·capex 3억"이라는 v1 기본값을 사용하고 있었다. 5/17 수익성 리뷰 결과, 이 가정으로는 마진 buffer 가 부족해 단위 경제 자체가 검증되지 않는 위험이 노출됨. 본 ADR 에서 **베타 1호점 = 평당 10만 외곽 입지·capex 1억** 으로 봉인한다.
 
-- **상태**: Accepted
+- **상태**: Accepted (KPI · capex · BEP 재봉인 by [ADR 0010](./0010-unit-economics-3vars.html))
 - **결정일**: 2026-05-18
 - **결정자**: Young
 - **선행**: [ADR 0001](./0001-consumer-pivot.html), [ADR 0004](./0004-one-time-ticket-pricing.html), [ADR 0005](./0005-pricing-phase-strategy.html)
+
+> **🔥 2026-05-20 재봉인 (3변수 단위 경제)** — [ADR 0010](./0010-unit-economics-3vars.html) 의 3변수 모델로 본 ADR 의 베타 가정 일관화. 핵심 갱신:
+> - **평당 10만 외곽 유지** (변동 ❌)
+> - **공간 60평**: 룸 8 + 오픈 22평. 동시 capacity **12명** · 시간당 unit capacity **24 unit**
+> - **시간당 고정비 62,000원** (월 고정비 2,600만 / 420시간)
+> - **BEP utilization**: 운영 15.2% / capex 포함 18.7%
+> - **Capex 1.5~2억** 으로 상향 (ADR 0006 의 1억 → 인테리어 미반영분 보정)
+> - **베타 KPI 재정의**: 회원 ≥ 700명 (D+180) · 총 U 50% (D+180) — 본 ADR §베타 KPI 표는 [ADR 0010 §6](./0010-unit-economics-3vars.html) 시나리오로 흡수
+> - **점주 BEP**: 2.7개월 → 4~5개월 (capex 상향분 반영). 가맹 매력 유지.
 
 ## 맥락 (Context)
 
@@ -146,3 +155,4 @@ nav_order: 6
 | 날짜 | 변경 |
 |---|---|
 | 2026-05-18 | ADR 0006 작성 — 베타 1호점 입지 전략 (평당 10만·capex 1억) 봉인. 단위 경제 검증을 베타 1순위로 명시 |
+| 2026-05-20 | **3변수 단위 경제 재봉인** ([ADR 0010](./0010-unit-economics-3vars.html)) — 평당 10만·60평·capacity 12명·시간당 비용 62k·BEP util 18.7% 명시. Capex 1억 → 1.5~2억 상향. 베타 KPI 회원 ≥ 700명·총 U 50% (D+180) 재정의 |
