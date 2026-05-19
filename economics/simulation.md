@@ -6,56 +6,54 @@ nav_order: 0
 
 # 단위 경제 시뮬레이션
 
-> **3단계 흐름**: 공간 → 비용 → 운영 → 결과 가격대.
+> **3단계 흐름**: 공간 → 비용 → 운영 → 결과.
 
-> **🔥 2026-05-15 회의 — 모델 피벗 시뮬** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+> **📌 v2 봉인 (2026-05-20) — 3변수 단위 경제 모델 명세**
 >
-> 신규 가정 (60평·8룸·30분 unit·util 50%, 회원 495명·1인 8회/월·mix **회차권 5단 라인업 (1·4·12·24·48회)** — 정확한 라인업별 비중은 베타 운영 후 갱신 예정):
->
-> | | **S1. 파트타이머** | **S2. 전문 강사** (가격 유지) | **S2′. 전문 강사** (회원가 +30%) |
-> |---|---|---|---|
-> | 강사 정산 (30분) | 12,000원 | 20,000원 | 20,000원 |
-> | 회원 월권 | 24만 | 24만 | 31만 |
-> | 매출 | 1.11억 | 1.11억 | **1.44억** |
-> | 강사비 | 4,752만 | 7,920만 | 7,920만 |
-> | 이익 | **+2,187만 (20%)** | **−981만 (적자)** | **+1,959만 (14%)** |
->
-> → 베타는 S1 (파트타이머 풀, 마진 20%), 호점 늘면서 S2 비중 ↑ 하이브리드.  
-> → **S2 단독으로는 회원 단가 +30% 인상 필수**.  
-> → 6개월권 회당 본사 마진은 월권의 56% — 비중 50% 넘으면 마진 압박.
-
-> **🆕 2026-05-16 — Phase별 가격 매트릭스** ([ADR 0005](../decisions/0005-pricing-phase-strategy.html))
->
-> Phase 0~4+ 단계별 가격 매트릭스 · 2D sensitivity (util × Pro) · LTV 추정 · Pro 옵션 인상 트리거 (util ≥ 70% AND Pro ≥ 30%) 봉인. 시뮬레이터 v3 에서 시나리오 저장 · 12개월 P&L · 히트맵 인터랙티브 제공.
-
-> **🔥 2026-05-18 — 베타 1호점 입지 전략 (단위 경제 검증 우선)** ([ADR 0006](../decisions/0006-beta-location-strategy.html))
->
-> 베타 1호점 default = **평당 10만 외곽 입지·임대 600만·capex 1억**. 단위 경제 검증을 베타 1순위 목적으로 봉인. 강남 (평당 35만·capex 3억) 은 Phase 2 (2~3호점) 진입 시 추가.
->
-> | | 강남 (평당 35만·capex 3억) | **베타 (평당 10만·capex 1억)** |
+> | 변수 | 값 | 비고 |
 > |---|---|---|
-> | 월 임대 | 2,100만 | **600만** |
-> | 월 이익 (Base util 50%) | 2,187만 (20%) | **3,687만 (33%)** |
-> | BEP | 14개월 | **2.7개월** |
-> | 12개월 누적 (capex 차감) | ~0 | **+3.3억** |
-> | Bear (util 35%) | 619만 (8%) | **2,119만 (27%)** |
+> | **변수 1 — 시간당 비용** | **62,000원** | 60평 · 임대 600만 + 운영비 2,000만 = 2,600만/월 ÷ 360h |
+> | **변수 1 — 시간당 capacity** | **24 unit** | 12명 동시 × 30분 unit 2배 |
+> | **변수 2 — U (utilization)** | 0 ~ 1 | (공간 × 시간) 가동률 |
+> | **변수 3 — unit당 마진** | **17,000원** | 회원 평균 회당가 30k − 강사 평균 정산 13k |
 >
-> → 모든 시나리오에서 베타 입지 우월. 시뮬레이터 v3 default 도 베타 가정으로 갱신됨.
+> **공식**: 월 매출 = capacity × 2 × 30일 × U × 회당가 / 본사 마진 = capacity × 2 × 30일 × U × unit당 마진
+>
+> - 월 unit capacity = 24 × 12h × 30일 = **8,640 unit/월**
+> - **BEP util = 15.2%** (운영비 충당) · **18.7%** (Capex 12개월 회수 포함)
+> - **Base util 50% → 월 unit = 4,320 → 본사 마진 = 4,320 × 17,000 = +7,344만** (운영비 2,600 차감 → **+4,744만 순익**)
 
-> **🆕 2026-05-16 — 회차권 라인업 매출 영향** ([ADR 0004](../decisions/0004-one-time-ticket-pricing.html))
->
-> 회차권 통일 모델 + 1회차 40,000원 + Pro 강사 옵션 +5,000원/회.  Base = S1 시나리오 1지점.
->
-> | 항목 | 가정 | 매출 | 이익 |
-> |---|---|---|---|
-> | Base | 8회·48회만 | 1.11억 | +2,187만 (20%) |
-> | **+ 1회차권** | 월 50건 @4만 | +200만 | ~+2,387만 (+9%) |
-> | **+ Pro 옵션** | 회원 30% × 8회/월 × 5k | +594만 | ~+2,781만 (+27%) |
-> | **합산** | 둘 다 | **+794만** | **~+2,981만 (+36%)** |
->
-> Pro 옵션 매출은 정산 (~20k Pro) 일부 상쇄 — 단순 가산. 2026-11 운영 데이터로 재산출.
->
-> 아래의 인터랙티브 시뮬레이터는 v1 모델(단일 PT) 기준. **v2 인터랙티브는 추후 업데이트 예정**.
+## v2 시나리오 (2026-05-20 봉인)
+
+| 시나리오 | 시점 | Util | 월 unit | 본사 마진 | 운영비 차감 후 순익 |
+|---|---|---|---|---|---|
+| Bear | D+30 | **20%** | 1,728 | 2,938만 | **+338만** |
+| Standard | D+90 | **30%** | 2,592 | 4,406만 | **+1,806만** |
+| **Base** | **D+180** | **50%** | **4,320** | **7,344만** | **+4,744만** |
+| Bull | Mature | **70%** | 6,048 | 10,282만 | **+7,682만** |
+
+> Capex 1.5~2억 가정 시 Base 시나리오 BEP = **약 3~4개월** (월 +4,744만).
+
+## 강사 등급 mix (정산 평균 13k 산출)
+
+| 등급 | 비중 (Base) | 30분 정산 | 가중치 |
+|---|---|---|---|
+| P1 신입 | 20% | 10,000 | 2,000 |
+| P2 검증 | 30% | 12,000 | 3,600 |
+| P3 시니어 | 25% | 14,000 | 3,500 |
+| P4 전문 | 15% | 16,000 | 2,400 |
+| P5 마스터 | 10% | 18,000 | 1,800 |
+| **평균** | 100% | | **13,300원 ≈ 13,000원** |
+
+## 회원 수 추정 (Base · D+180)
+
+- 월 unit = 4,320
+- 회원 평균 월 사용 = **12 unit/월** ([2B](../members/membership.html) Standard)
+- **활성 회원 = 4,320 ÷ 12 ≈ 360명**
+- 월 매출 = 4,320 × 30,000 = **1.30억**
+- ARPU = 약 36만원/월
+
+> 아래의 인터랙티브 시뮬레이터는 v1 모델(단일 PT) 기준. **v2 인터랙티브는 추후 업데이트 예정**. 시뮬레이터 v3 (60평·평당 10만·P1~P5·30분 unit) 는 별도 프로젝트 (`pt-platform-simulator`)에서 갱신 중.
 
 <style>
 .pt-sim, .pt-sim * { box-sizing: border-box; }
@@ -151,18 +149,18 @@ nav_order: 0
     </div>
     <div class="pt-field">
       <span class="pt-field-label">방당 평수</span>
-      <input type="range" id="i-roomArea" min="5" max="10" value="7" step="0.5">
-      <span class="pt-field-val"><span id="v-roomArea">7</span>평</span>
+      <input type="range" id="i-roomArea" min="3" max="10" value="5" step="0.5">
+      <span class="pt-field-val"><span id="v-roomArea">5</span>평</span>
     </div>
     <div class="pt-field">
-      <span class="pt-field-label">공용 공간 비율 <small>카디오 + 라운지·탈의·샤워</small></span>
-      <input type="range" id="i-commonRatio" min="20" max="50" value="38" step="2">
-      <span class="pt-field-val"><span id="v-commonRatio">38</span>%</span>
+      <span class="pt-field-label">공용 공간 비율 <small>오픈·라운지·탈의·샤워</small></span>
+      <input type="range" id="i-commonRatio" min="20" max="50" value="33" step="2">
+      <span class="pt-field-val"><span id="v-commonRatio">33</span>%</span>
     </div>
     <div class="pt-derived">
-      <div class="item">방 총 면적 <b id="d-roomTotal">56</b>평</div>
-      <div class="item">공용 면적 <b id="d-commonTotal">34</b>평</div>
-      <div class="item">→ 전체 평수 <b id="d-totalArea">90</b>평</div>
+      <div class="item">방 총 면적 <b id="d-roomTotal">40</b>평</div>
+      <div class="item">공용 면적 <b id="d-commonTotal">20</b>평</div>
+      <div class="item">→ 전체 평수 <b id="d-totalArea">60</b>평</div>
     </div>
   </div>
 
@@ -176,17 +174,17 @@ nav_order: 0
     </div>
     <div class="pt-field">
       <span class="pt-field-label">인건비·관리비 <small>지점/월</small></span>
-      <input type="range" id="i-ops" min="300" max="1500" value="720" step="50">
-      <span class="pt-field-val"><span id="v-ops">720</span>만</span>
+      <input type="range" id="i-ops" min="500" max="3000" value="2000" step="100">
+      <span class="pt-field-val"><span id="v-ops">2,000</span>만</span>
     </div>
     <div class="pt-field">
-      <span class="pt-field-label">멘토 회당 <small>30분 1:1, 원</small></span>
-      <input type="range" id="i-mentor" min="10000" max="35000" value="20000" step="1000">
-      <span class="pt-field-val"><span id="v-mentor">20,000</span>원</span>
+      <span class="pt-field-label">강사 평균 unit 정산 <small>30분 1:1, 원</small></span>
+      <input type="range" id="i-mentor" min="10000" max="18000" value="13000" step="500">
+      <span class="pt-field-val"><span id="v-mentor">13,000</span>원</span>
     </div>
     <div class="pt-derived">
-      <div class="item">월 임대료 <b id="d-rentTotal">900</b>만</div>
-      <div class="item">→ 총 고정비 <b id="d-fixedTotal">1,620</b>만/월</div>
+      <div class="item">월 임대료 <b id="d-rentTotal">600</b>만</div>
+      <div class="item">→ 총 고정비 <b id="d-fixedTotal">2,600</b>만/월</div>
     </div>
   </div>
 
@@ -195,97 +193,55 @@ nav_order: 0
     <div class="pt-card-title">3️⃣ 운영 설정 <span class="badge">OPERATIONS</span></div>
 
     <div class="pt-presets" style="margin-top: 0.3rem;">
-      <button class="pt-preset-btn" data-preset="aggressive">공격적 (90/50/70)</button>
-      <button class="pt-preset-btn active" data-preset="standard">표준 (85/35/60)</button>
-      <button class="pt-preset-btn" data-preset="conservative">보수적 (70/25/50)</button>
+      <button class="pt-preset-btn" data-preset="bear">D+30 Bear (20%)</button>
+      <button class="pt-preset-btn" data-preset="standard">D+90 Std (30%)</button>
+      <button class="pt-preset-btn active" data-preset="base">D+180 Base (50%)</button>
+      <button class="pt-preset-btn" data-preset="bull">Bull (70%)</button>
     </div>
 
     <div class="pt-field">
       <span class="pt-field-label">⏰ 평일 운영 시간</span>
       <div class="pt-time-range">
-        <input type="number" id="i-weekdayOpen" min="0" max="23" value="6" step="1"> 시
+        <input type="number" id="i-weekdayOpen" min="0" max="23" value="10" step="1"> 시
         <span class="sep">~</span>
-        <input type="number" id="i-weekdayClose" min="1" max="24" value="23" step="1"> 시
+        <input type="number" id="i-weekdayClose" min="1" max="24" value="22" step="1"> 시
       </div>
-      <span class="pt-field-val"><span id="v-weekdayHours">17</span>h/일</span>
+      <span class="pt-field-val"><span id="v-weekdayHours">12</span>h/일</span>
     </div>
 
     <div class="pt-field">
-      <span class="pt-field-label">🌟 골든타임 (저녁) <small>피크 시간</small></span>
-      <div class="pt-time-range">
-        <input type="number" id="i-goldenEveOpen" min="0" max="23" value="18" step="1"> 시
-        <span class="sep">~</span>
-        <input type="number" id="i-goldenEveClose" min="1" max="24" value="22" step="1"> 시
-      </div>
-      <span class="pt-field-val"><span id="v-goldenEveHours">4</span>h/일</span>
-    </div>
-    <div class="pt-field">
-      <span class="pt-field-label">🌅 골든타임 (아침) <small>출근 전, 옵션</small></span>
-      <div class="pt-time-range">
-        <input type="number" id="i-goldenMornOpen" min="0" max="23" value="6" step="1"> 시
-        <span class="sep">~</span>
-        <input type="number" id="i-goldenMornClose" min="1" max="24" value="9" step="1"> 시
-      </div>
-      <span class="pt-field-val"><span id="v-goldenMornHours">3</span>h/일</span>
-    </div>
-    <div class="pt-field">
-      <span class="pt-field-label">↳ 골든 가동률</span>
-      <input type="range" id="i-golden" min="30" max="100" value="85" step="5">
-      <span class="pt-field-val"><span id="v-golden">85</span>%</span>
-    </div>
-
-    <div class="pt-field">
-      <span class="pt-field-label">🌤️ 오프피크 <small>자동 = 평일 - 골든</small></span>
-      <div class="pt-time-range" style="color:#9ca3af; font-size:0.85rem;">자동 도출</div>
-      <span class="pt-field-val"><span id="v-offpeakHours">10</span>h/일</span>
-    </div>
-    <div class="pt-field">
-      <span class="pt-field-label">↳ 오프피크 가동률</span>
-      <input type="range" id="i-offpeak" min="0" max="80" value="35" step="5">
-      <span class="pt-field-val"><span id="v-offpeak">35</span>%</span>
-    </div>
-
-    <div class="pt-field">
-      <span class="pt-field-label">📅 주말 운영 시간</span>
-      <div class="pt-time-range">
-        <input type="number" id="i-weekendOpen" min="0" max="23" value="8" step="1"> 시
-        <span class="sep">~</span>
-        <input type="number" id="i-weekendClose" min="1" max="24" value="21" step="1"> 시
-      </div>
-      <span class="pt-field-val"><span id="v-weekendHours">13</span>h/일</span>
-    </div>
-    <div class="pt-field">
-      <span class="pt-field-label">↳ 주말 가동률</span>
-      <input type="range" id="i-weekend" min="20" max="100" value="60" step="5">
-      <span class="pt-field-val"><span id="v-weekend">60</span>%</span>
+      <span class="pt-field-label">전체 가동률 (U)</span>
+      <input type="range" id="i-util" min="10" max="90" value="50" step="5">
+      <span class="pt-field-val"><span id="v-util">50</span>%</span>
     </div>
 
     <div class="pt-field" style="margin-top: 0.7rem;">
       <span class="pt-field-label">🎯 목표 흑자 <small>만원/지점/월</small></span>
-      <input type="range" id="i-margin" min="0" max="2000" value="500" step="100">
-      <span class="pt-field-val"><span id="v-margin">500</span>만</span>
+      <input type="range" id="i-margin" min="0" max="8000" value="4744" step="100">
+      <span class="pt-field-val"><span id="v-margin">4,744</span>만</span>
     </div>
     <div class="pt-derived">
-      <div class="item">효율 방시간/방/월 <b id="d-hours">270</b>h</div>
-      <div class="item">→ 지점 가용 방시간/월 <b id="d-storeHours">2,160</b>h</div>
+      <div class="item">시간당 capacity <b id="d-cap">24</b> unit</div>
+      <div class="item">월 unit capacity <b id="d-storeUnits">8,640</b> unit</div>
     </div>
   </div>
 
   <!-- 결과 -->
   <div class="pt-result">
-    <div class="pt-result-title">📊 결과 — 가격대 산출</div>
+    <div class="pt-result-title">📊 결과 — v2 봉인 기준</div>
     <div class="pt-result-grid">
-      <div class="pt-result-row"><span class="pt-result-label">방시간 원가 (BEP)</span><span class="pt-result-num"><span id="o-take-bep"></span>원</span></div>
-      <div class="pt-result-row"><span class="pt-result-label">방시간 목표 단가 (흑자)</span><span class="pt-result-num"><span id="o-take-goal"></span>원</span></div>
-      <div class="pt-result-row"><span class="pt-result-label">회원 결제 BEP (1세션)</span><span class="pt-result-num"><span id="o-pay-bep"></span>원</span></div>
-      <div class="pt-result-row pt-hi"><span class="pt-result-label">회원 결제 (흑자, 1세션)</span><span class="pt-result-num"><span id="o-pay-goal"></span>원</span></div>
-      <div class="pt-result-row pt-hi"><span class="pt-result-label">월 8회 환산</span><span class="pt-result-num"><span id="o-week2"></span>원</span></div>
-      <div class="pt-result-row"><span class="pt-result-label">월 4회 환산</span><span class="pt-result-num"><span id="o-week1"></span>원</span></div>
-      <div class="pt-result-row"><span class="pt-result-label">지점 월 매출 (예상)</span><span class="pt-result-num"><span id="o-rev"></span>만/월</span></div>
-      <div class="pt-result-row"><span class="pt-result-label">예상 회원 수 (포화)</span><span class="pt-result-num"><span id="o-members"></span>명</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">월 사용 unit</span><span class="pt-result-num"><span id="o-used"></span> unit</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">unit당 마진</span><span class="pt-result-num"><span id="o-margin-unit"></span>원</span></div>
+      <div class="pt-result-row pt-hi"><span class="pt-result-label">월 본사 마진 (회당 평균가 − 강사 평균)</span><span class="pt-result-num"><span id="o-margin-month"></span>만</span></div>
+      <div class="pt-result-row pt-hi"><span class="pt-result-label">월 순익 (고정비 차감)</span><span class="pt-result-num"><span id="o-net"></span>만</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">BEP util (운영)</span><span class="pt-result-num"><span id="o-bep"></span>%</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">활성 회원 수 (월 12 unit/명)</span><span class="pt-result-num"><span id="o-members"></span>명</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">지점 월 매출</span><span class="pt-result-num"><span id="o-rev"></span>만/월</span></div>
+      <div class="pt-result-row"><span class="pt-result-label">시간당 비용</span><span class="pt-result-num"><span id="o-hourly"></span>원</span></div>
     </div>
     <div class="pt-formula">
-      회원 결제 = 멘토 회당 + (총 고정비 + 목표 흑자) ÷ 지점 가용 방시간
+      월 본사 마진 = capacity (24 unit/h) × 영업시간 × 30일 × U × unit당 마진<br>
+      회원 평균 회당가 = 30,000원 / 강사 평균 정산 = 13,000원 / unit당 마진 = 17,000원
     </div>
   </div>
 </div>
@@ -297,17 +253,16 @@ nav_order: 0
   const round = (n, step) => Math.round(n / step) * step;
 
   const presets = {
-    aggressive:  { golden: 90, offpeak: 50, weekend: 70 },
-    standard:    { golden: 85, offpeak: 35, weekend: 60 },
-    conservative:{ golden: 70, offpeak: 25, weekend: 50 }
+    bear:     { util: 20 },
+    standard: { util: 30 },
+    base:     { util: 50 },
+    bull:     { util: 70 }
   };
 
   document.querySelectorAll('.pt-preset-btn').forEach(b => {
     b.addEventListener('click', () => {
       const p = presets[b.dataset.preset];
-      $('i-golden').value = p.golden;
-      $('i-offpeak').value = p.offpeak;
-      $('i-weekend').value = p.weekend;
+      $('i-util').value = p.util;
       calc();
     });
   });
@@ -321,43 +276,22 @@ nav_order: 0
     const mentor         = parseInt($('i-mentor').value, 10);
     const weekdayOpen    = parseInt($('i-weekdayOpen').value, 10);
     const weekdayClose   = parseInt($('i-weekdayClose').value, 10);
-    const goldenEveOpen  = parseInt($('i-goldenEveOpen').value, 10);
-    const goldenEveClose = parseInt($('i-goldenEveClose').value, 10);
-    const goldenMornOpen  = parseInt($('i-goldenMornOpen').value, 10);
-    const goldenMornClose = parseInt($('i-goldenMornClose').value, 10);
-    const weekendOpen    = parseInt($('i-weekendOpen').value, 10);
-    const weekendClose   = parseInt($('i-weekendClose').value, 10);
-    const golden         = parseInt($('i-golden').value, 10) / 100;
-    const offpeak        = parseInt($('i-offpeak').value, 10) / 100;
-    const weekend        = parseInt($('i-weekend').value, 10) / 100;
+    const util           = parseInt($('i-util').value, 10) / 100;
     const marginM        = parseInt($('i-margin').value, 10);
 
-    // 시간 도출
     const weekdayHours = Math.max(0, weekdayClose - weekdayOpen);
-    const goldenEveHours  = Math.max(0, goldenEveClose - goldenEveOpen);
-    const goldenMornHours = Math.max(0, goldenMornClose - goldenMornOpen);
-    const goldenHours = goldenEveHours + goldenMornHours;
-    const offpeakHours = Math.max(0, weekdayHours - goldenHours);
-    const weekendHours = Math.max(0, weekendClose - weekendOpen);
 
-    // 입력·도출 표시
-    $('v-rooms').textContent           = rooms;
-    $('v-roomArea').textContent        = roomArea;
-    $('v-commonRatio').textContent     = (commonRatio*100).toFixed(0);
-    $('v-rent').textContent            = rent;
-    $('v-ops').textContent             = opsM;
-    $('v-mentor').textContent          = fmt(mentor);
-    $('v-weekdayHours').textContent    = weekdayHours;
-    $('v-goldenEveHours').textContent  = goldenEveHours;
-    $('v-goldenMornHours').textContent = goldenMornHours;
-    $('v-offpeakHours').textContent    = offpeakHours;
-    $('v-weekendHours').textContent    = weekendHours;
-    $('v-golden').textContent          = (golden*100).toFixed(0);
-    $('v-offpeak').textContent         = (offpeak*100).toFixed(0);
-    $('v-weekend').textContent         = (weekend*100).toFixed(0);
-    $('v-margin').textContent          = marginM;
+    $('v-rooms').textContent       = rooms;
+    $('v-roomArea').textContent    = roomArea;
+    $('v-commonRatio').textContent = (commonRatio*100).toFixed(0);
+    $('v-rent').textContent        = rent;
+    $('v-ops').textContent         = fmt(opsM);
+    $('v-mentor').textContent      = fmt(mentor);
+    $('v-weekdayHours').textContent = weekdayHours;
+    $('v-util').textContent        = (util*100).toFixed(0);
+    $('v-margin').textContent      = fmt(marginM);
 
-    // 1. 공간 계산
+    // 공간
     const roomTotal   = rooms * roomArea;
     const totalArea   = roomTotal / (1 - commonRatio);
     const commonArea  = totalArea - roomTotal;
@@ -366,49 +300,48 @@ nav_order: 0
     $('d-commonTotal').textContent = commonArea.toFixed(0);
     $('d-totalArea').textContent   = totalArea.toFixed(0);
 
-    // 2. 비용 계산
+    // 비용
     const rentTotalM = totalArea * rent;
     const fixedTotalM = rentTotalM + opsM;
-    $('d-rentTotal').textContent  = rentTotalM.toFixed(0);
+    $('d-rentTotal').textContent  = fmt(Math.round(rentTotalM));
     $('d-fixedTotal').textContent = fmt(Math.round(fixedTotalM));
 
-    // 3. 가동률 → 효율 방시간 (시간대 시간도 가변)
-    const goldenMaxH  = goldenHours  * 5 * 4.3;
-    const offpeakMaxH = offpeakHours * 5 * 4.3;
-    const weekendMaxH = weekendHours * 2 * 4.3;
-    const util = goldenMaxH*golden + offpeakMaxH*offpeak + weekendMaxH*weekend;
-    const storeHours = util * rooms;
+    // capacity (룸 + 오픈 1:1 대략 4명)
+    const openPT = Math.max(2, Math.round(commonArea / 5));
+    const concurrent = rooms + openPT;
+    const unitsPerHour = concurrent * 2;  // 30분 unit
+    const monthUnits = unitsPerHour * weekdayHours * 30;
+    const usedUnits = monthUnits * util;
 
-    $('d-hours').textContent      = util.toFixed(0);
-    $('d-storeHours').textContent = fmt(Math.round(storeHours));
+    $('d-cap').textContent       = unitsPerHour;
+    $('d-storeUnits').textContent = fmt(Math.round(monthUnits));
 
-    // 4. 가격 산출
-    const fixedTotalWon = fixedTotalM * 10000;
-    const marginWon     = marginM * 10000;
+    // unit 마진 = 회원 평균 30,000 − 강사 평균
+    const memberPerUnit = 30000;
+    const unitMargin = memberPerUnit - mentor;
+    const monthMargin = usedUnits * unitMargin;   // 원
+    const monthMarginM = monthMargin / 10000;
+    const netM = monthMarginM - fixedTotalM;
 
-    const takeBep  = storeHours > 0 ? fixedTotalWon / storeHours : 0;
-    const takeGoal = storeHours > 0 ? (fixedTotalWon + marginWon) / storeHours : 0;
-    const payBep   = takeBep + mentor;
-    const payGoal  = takeGoal + mentor;
-    const week2    = payGoal * 8;
-    const week1    = payGoal * 4;
-    const revStoreM = (payGoal * storeHours) / 10000;
-    const memberCount = Math.round((storeHours / 8));  // 회원 1인당 월 8회 가정
+    const fixedWon = fixedTotalM * 10000;
+    const bepUtil = (fixedWon / (monthUnits * unitMargin)) * 100;
 
-    $('o-take-bep').textContent  = fmt(Math.round(takeBep));
-    $('o-take-goal').textContent = fmt(Math.round(takeGoal));
-    $('o-pay-bep').textContent   = fmt(round(payBep, 100));
-    $('o-pay-goal').textContent  = fmt(round(payGoal, 100));
-    $('o-week2').textContent     = fmt(round(week2, 1000));
-    $('o-week1').textContent     = fmt(round(week1, 1000));
-    $('o-rev').textContent       = fmt(Math.round(revStoreM));
-    $('o-members').textContent   = fmt(memberCount);
+    const revWon = usedUnits * memberPerUnit;
+    const revM = revWon / 10000;
+    const members = Math.round(usedUnits / 12);
+    const hourlyCost = (fixedTotalM * 10000) / (weekdayHours * 30);
 
-    // preset active 표시
+    $('o-used').textContent       = fmt(Math.round(usedUnits));
+    $('o-margin-unit').textContent = fmt(unitMargin);
+    $('o-margin-month').textContent = fmt(Math.round(monthMarginM));
+    $('o-net').textContent        = fmt(Math.round(netM));
+    $('o-bep').textContent        = bepUtil.toFixed(1);
+    $('o-members').textContent    = fmt(members);
+    $('o-rev').textContent        = fmt(Math.round(revM));
+    $('o-hourly').textContent     = fmt(Math.round(hourlyCost));
+
     const matched = Object.entries(presets).find(([k,v]) =>
-      Math.round(golden*100) === v.golden &&
-      Math.round(offpeak*100) === v.offpeak &&
-      Math.round(weekend*100) === v.weekend
+      Math.round(util*100) === v.util
     );
     document.querySelectorAll('.pt-preset-btn').forEach(b => {
       b.classList.toggle('active', matched && b.dataset.preset === matched[0]);
@@ -416,10 +349,7 @@ nav_order: 0
   }
 
   ['i-rooms','i-roomArea','i-commonRatio','i-rent','i-ops','i-mentor','i-margin',
-   'i-weekdayOpen','i-weekdayClose',
-   'i-goldenEveOpen','i-goldenEveClose','i-goldenMornOpen','i-goldenMornClose',
-   'i-weekendOpen','i-weekendClose',
-   'i-golden','i-offpeak','i-weekend']
+   'i-weekdayOpen','i-weekdayClose','i-util']
     .forEach(id => $(id).addEventListener('input', calc));
   calc();
 })();
@@ -427,34 +357,30 @@ nav_order: 0
 
 ---
 
-## 시간대 정의
+## 락된 가정 (v2 봉인)
 
-| 구분 | 평일 | 주말 | 주간 시간 |
-|---|---|---|---|
-| 🌟 **골든타임** | 06-09 + 18-22 = 7h/일 × 5일 | - | **35h/주** |
-| 🌤️ **오프피크** | 09-18 + 22-23 = 10h/일 × 5일 | - | **50h/주** |
-| 📅 **주말** | - | 08-21 = 13h/일 × 2일 | **26h/주** |
+- 표준 1지점 = **60평** (룸 8 + 오픈 22평)
+- 동시 capacity = **12명** / 시간당 **24 unit** (30분 unit 2배)
+- 월 unit capacity = 24 × 12h × 30일 = **8,640 unit/월**
+- 회원 평균 회당가 = **30,000원** (할인 반영 ARPU)
+- 강사 평균 정산 = **13,000원/30분 unit** (등급 P1~P5 mix)
+- **unit당 본사 마진 = 17,000원**
+- 월 고정비 = 임대 600 + 운영비 2,000 = **2,600만**
+- BEP util = **15.2%** (운영) · 18.7% (Capex 12개월)
+- Phase 1 직영 (가맹 분배 ❌ — Phase 2+ [6C](../expansion/revenue-share.html))
 
-## 락된 가정
+## 시나리오 매트릭스
 
-- 멘토 운영: 회원 1세션당 30분 1:1 → 멘토 1시간 = 2 회원
-- 회원 1세션 = 30분 unit (60분 원할 시 2 unit 연속, [ADR 0001](../decisions/0001-consumer-pivot.html))
-- Phase 1 직영 (가맹 분배 ❌)
-- 주 평균 = 4.3주/월
-- 회원 1인당 월 8회 가정 (포화 회원 수 계산용)
-
-## 프리셋
-
-| 시나리오 | 골든 | 오프피크 | 주말 | 평균 효율 방시간 (방 1개/월) |
-|---|---|---|---|---|
-| 공격적 | 90% | 50% | 70% | ~321h |
-| **표준** | 85% | 35% | 60% | ~270h |
-| 보수적 | 70% | 25% | 50% | ~215h |
+| 시나리오 | 시점 | Util | 월 사용 unit | 본사 마진 | 운영비 차감 후 순익 |
+|---|---|---|---|---|---|
+| Bear | D+30 | 20% | 1,728 | 2,938만 | +338만 |
+| Standard | D+90 | 30% | 2,592 | 4,406만 | +1,806만 |
+| **Base** | **D+180** | **50%** | **4,320** | **7,344만** | **+4,744만** |
+| Bull | Mature | 70% | 6,048 | 10,282만 | +7,682만 |
 
 ---
 
-| 2026-05-13 | 9 시나리오 매트릭스 |
-| 2026-05-13 | 시간대별 슬라이더 |
-| 2026-05-13 | 3단계 카드 흐름 (공간→비용→운영→결과) + 자동 도출 표시 |
-| 2026-05-16 | v2 본문 정합 갱신 — 라벨 "주 2회권/주 1회권" → "월 8회/4회", 세션 단위 30분 unit ([ADR 0001](../decisions/0001-consumer-pivot.html), [ADR 0004](../decisions/0004-one-time-ticket-pricing.html)) |
-| 2026-05-18 | 베타 default callout 추가 — 평당 10만·capex 1억 ([ADR 0006](../decisions/0006-beta-location-strategy.html)). 강남 vs 베타 비교 표 |
+| 2026-05-13 | 9 시나리오 매트릭스 + 시간대별 슬라이더 |
+| 2026-05-16 | v2 본문 정합 갱신 — 30분 unit |
+| 2026-05-18 | 베타 default callout — 평당 10만 |
+| 2026-05-20 | **v2 봉인** — 3변수 모델 (capacity 24·U·unit 마진 17k) 명시·시뮬레이터 갱신 (60평·강사 평균 13k·운영비 2,000만·util 단일 슬라이더)·D+30/D+90/Base/Bull 시나리오 표 |
