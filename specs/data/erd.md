@@ -7,6 +7,45 @@ nav_order: 2
 
 # ERD (Entity Relationship Diagram)
 
+{: .highlight }
+> **recoverGX 피벗 (2026-06-04)**: 현재 활성 모델은 아래 **GX 오픈 플랫폼 ERD**다 ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)). 그 아래 "PT 레일 ERD"는 1:1 PT 모델 기준으로 **보류**(코드·테이블 보존). 실제 스키마: `pt-platform/packages/db/prisma/schema.prisma`.
+
+## GX 오픈 플랫폼 관계 (현재 활성)
+
+지갑 충전금 → 클래스별 차감 드롭인, 강사 개설, 조합형 정산.
+
+```mermaid
+erDiagram
+    Member ||--o| Wallet : owns
+    Wallet ||--o{ WalletTransaction : records
+    ChargePackage ||--o{ WalletTransaction : "charges (refType)"
+
+    Member ||--o{ GxBooking : books
+    GxClass ||--o{ GxBooking : "holds (capacity)"
+    GxClass }o--|| Store : "at"
+    GxClass }o--|| Room : "in"
+    GxClass }o--|| Category : "typed"
+    Mentor ||--o{ GxClass : opens
+
+    GxClass ||--o| GxSettlement : "settles (1:1)"
+    Mentor }o--o| GxPayoutPolicy : assigned
+    GxPayoutPolicy ||--o{ GxSettlement : "applied (snapshot)"
+
+    GxPolicy ||--|| Platform : "singleton (가격범위·환불마감)"
+```
+
+핵심 불변식·제약:
+- `Wallet.memberId` unique (회원당 1지갑) · `WalletTransaction.idempotencyKey` unique (충전 멱등)
+- `GxBooking` `@@unique(classId, memberId)` (더블부킹 차단, cancelled 재활성화 허용)
+- `GxClass.bookedCount < capacity` 가드로 좌석 원자 점유 · `status` open↔full 불변식 유지
+- `GxSettlement.classId` unique (이중 정산 차단) · 완료 시 `policySnapshot` 값 복사 → 정책 변경 불변
+- `GxPolicy`/`ChargePackage`는 어드민 큐레이션 설정(단일 행/목록), `Mentor.gxOpenEnabled`로 개설 권한
+
+## PT 레일 ERD (보류)
+
+{: .warning }
+> 아래는 1:1 PT 세션 모델 ERD. 코드·테이블은 보존되어 있으나 GX 피벗 이후 **보류 상태**다. 재활성화 여부는 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) 참조.
+
 ## 핵심 도메인 관계
 
 ```mermaid
@@ -110,3 +149,4 @@ stateDiagram-v2
 ---
 
 | 2026-05-13 | 초안 — 핵심 관계 + 그룹별 + 인덱스 추천 |
+| 2026-06-04 | recoverGX 피벗 — GX 오픈 플랫폼 ERD(지갑·클래스·정산) 추가, 기존 PT ERD는 보류 표기 ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)) |
