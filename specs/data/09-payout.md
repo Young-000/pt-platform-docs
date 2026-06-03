@@ -5,11 +5,66 @@ grand_parent: 스펙 (PRD)
 nav_order: 19
 ---
 
-# 9. Payout — PricingConfig·RevenueDistributionConfig·PayoutPeriod·PaymentLedger·DistributionEntry·MentorPayout·MentorBankAccount·TaxReport
+# 9. Payout — GX 정산 + PT 레일 정산
 
 정산 시스템 + **가변 가격·분배 설정**. [3G 정산](../../partners/payout.html), [6C 본사 수익](../../expansion/revenue-share.html), [2C 가격](../../members/pricing.html) 정책 반영.
 
-## PricingConfig (회원 결제 가격, 가변)
+{: .highlight }
+> **recoverGX (2026-06-03)**: GX 전용 정산 모델(`GxPayoutPolicy`·`GxSettlement`)이 신규 구현. PT 레일의 `PricingConfig`·`PayoutPeriod`·`MentorPayout` 등은 보존(미활성). 두 정산 시스템은 **완전히 별도** — GX는 클래스 완료 시 즉시 `GxSettlement` 생성, PT는 격주 `MentorPayout` 주기.
+
+## GX 정산 (recoverGX — 구현 완료)
+
+### 조합형 정산 공식
+
+```
+강사 지급액 = baseAmount + (perHeadAmount × attendedCount) + (revenue × revenueSharePercent / 100)
+platformMargin = revenue - payoutAmount
+```
+
+세 요소 자유 조합 (0 = 비활성). 어드민이 정책 N개 생성 후 강사별 할당.
+
+### GxPayoutPolicy (정산 정책 정의)
+
+| Field | Type | 설명 |
+|---|---|---|
+| `name` | String | "기본 정책" · "스타 강사 정책" |
+| `baseAmount` | Int | 클래스당 기본금 |
+| `perHeadAmount` | Int | 출석 인당 금액 |
+| `revenueSharePercent` | Int | 매출 비율 0~100 |
+| `isDefault` | Boolean | 미할당 강사에게 적용 |
+| `active` | Boolean | 비활성화 시 기본 정책 폴백 |
+
+> 강사에게 할당된 정책이 비활성화되면 정산 시 `isDefault=true` 정책으로 자동 폴백.
+
+### GxSettlement (클래스 완료 시 자동 생성)
+
+| Field | Type | 설명 |
+|---|---|---|
+| `classId` | String unique | GxClass FK |
+| `attendedCount` | Int | 출석 인원 |
+| `revenue` | Int | 차감 합계 (취소 환불 제외, no_show 포함) |
+| `policySnapshot` | Json | 정책 스냅샷 (불변 보장) |
+| `payoutAmount` | Int | 공식 계산 결과 |
+| `platformMargin` | Int | revenue - payoutAmount |
+
+> **정산-출석 정합성**: 클래스가 완료(`done`)되면 출석 변경 불가. 정산 스냅샷과 출석부 불일치 방지.
+> 실제 이체(은행 지급)는 현재 범위 밖. 계산·조회까지만 구현.
+
+### Mentor 컬럼 추가
+
+| Field | 설명 |
+|---|---|
+| `gxOpenEnabled Boolean @default(false)` | GX 클래스 개설 권한 (어드민 토글) |
+| `gxPayoutPolicyId String?` | 할당된 GxPayoutPolicy |
+
+---
+
+{: .warning }
+> 아래 PT 레일 정산 모델(PricingConfig·PayoutPeriod·MentorPayout 등)은 **보존·미활성** 상태.
+
+## PT 레일 정산 (보류)
+
+## PricingConfig (PT 레일 — 회원 결제 가격, 가변)
 
 **Purpose**: 회원이 1세션에 내는 가격을 **시간·슬롯 타입·멘토 등급별로 가변** 설정. admin이 운영.
 **Related PRDs**: [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [👤 멤버십·결제](../user/2026-05-13-membership-payment.html) · [🏢 예약](../platform/2026-05-13-reservation-system.html)
@@ -453,8 +508,9 @@ stateDiagram-v2
 
 ## 📘 사용 PRD
 
-[💪 정산](../mentor/2026-05-13-payout.html) · [🏢 정산 시스템](../platform/2026-05-13-payout-system.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [💳 결제 흐름](../payments/flow.html)
+[💪 정산](../mentor/2026-05-13-payout.html) · [🏢 정산 시스템](../platform/2026-05-13-payout-system.html) · [🏢 멤버십 시스템](../platform/2026-05-13-membership-system.html) · [💳 결제 흐름](../payments/flow.html) · [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)
 
 ---
 
 | 2026-05-13 | 초안 — Payout 7 모델 상세 명세 |
+| 2026-06-03 | GX 정산 섹션 추가 — GxPayoutPolicy·GxSettlement 요약 + PT 레일 보류 배너 (ADR 0011) |

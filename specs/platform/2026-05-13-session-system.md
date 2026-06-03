@@ -7,6 +7,13 @@ nav_order: 1
 
 # 🏢 세션 시스템 (플랫폼 백엔드)
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환으로 세션 단위가 **GX 클래스(그룹 출석)**로 바뀐다: 1 Session = 1 GX 클래스 타임슬롯, 복수 회원이 동일 Session에 체크인. SessionRecord는 1:1 운동 처방 대신 클래스 퀄리티 메모(강도·참여도·특이사항)로 형태가 바뀐다. MentorBlock 스케줄러·Room 자동 배정 로직은 GX 스튜디오 정원·공간 관리 로직으로 대체.
+
 **Status**: 🟡 Updated (2026-05-16) · v2 본문 적용
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
 **의존**: [4A 세션 종류](../../service/session-types.html) · [4B 포맷](../../service/session.html) · [4D 공간](../../service/space.html) · [4C AI 역할](../../service/ai-role.html) · [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html)

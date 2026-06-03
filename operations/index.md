@@ -10,19 +10,19 @@ has_children: true
 
 ## 결정 노드 (Level 5)
 
-- [5A. 예약 시스템 — 강사+프로그램 자율 선택](./reservation.html) ★ user flow
+- [5A. 예약 시스템 — 그룹 클래스 시간표 드롭인](./reservation.html) ★ user flow
 - [5B. 지점 운영 — 무인/유인·시간·SOP](./store.html)
 - [5C. 안전·보험·사고처리](./safety.html)
-- [5D. 자유 헬스 운영 SOP](./free-gym.html) (ADR 0003 — 멤버십 부가)
+- [5D. 자유 헬스 운영 SOP](./free-gym.html) (GX 레일과 분리된 접근성 채널)
 - [5E. 1호점 OPEN 체크리스트 (D-30 → D-Day)](./launch-checklist.html) 🟢 신규
 
 ## 회원 일상 흐름 (User Flow)
 
 ```
-앱에서 강사+프로그램 선택 (30분 unit) → 입장(QR) → 세션 (룸 또는 오픈 공간) → 세션 기록 → 퇴장 → AI 다음 추천
+앱에서 지점 → 날짜 → 클래스 시간표 탐색 (잔여석 확인) → 드롭인 예약(지갑 차감) → 입장(QR) → 그룹 클래스 → 퇴장
 ```
 
-> v2: 룸은 프로그램 속성에 따라 자동 배정 ([ADR 0001](../decisions/0001-consumer-pivot.html)). 자유 헬스는 강사 코스 회원에게만 부가 ([ADR 0003](../decisions/0003-free-gym-add-on.html)).
+> recoverGX 피벗: 1:1 PT 슬롯 예약 → 그룹 클래스 드롭인 전환 ([ADR 0011](../decisions/0011-recovergx-gx-pivot.html)). 자유 헬스는 GX 레일과 분리된 접근성 포지션 ([ADR 0003](../decisions/0003-free-gym-add-on.html)).
 
 각 단계의 룰·SOP가 위 결정 노드에서 정의됩니다.
 

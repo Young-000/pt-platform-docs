@@ -5,13 +5,32 @@ grand_parent: 스펙 (PRD)
 nav_order: 17
 ---
 
-# 7. MembershipTicket · PointBalance · Payment · Refund (v2)
+# 7. MembershipTicket · PointBalance · Payment · Refund (v2) + GX 지갑
 
-**Status**: v2 Accepted · **Updated**: 2026-05-16 · **Source of truth**
-**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+**Status**: v2 Accepted · GX Implemented · **Updated**: 2026-06-03 · **Source of truth**
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)
 **의존**: [2B 멤버십](../../members/membership.html) · [2C 가격](../../members/pricing.html) · [2D 정책](../../members/policies.html)
 
+{: .highlight }
+> **recoverGX (2026-06-03)**: GX 드롭인 결제는 **Wallet(지갑)** 모델로 처리. 회차권(`MembershipTicket`) 모델은 PT 레일에 보존. GX 흐름: 정액 패키지 충전(mock PG) → `WalletTransaction(charge)` → 예약 시 `WalletTransaction(deduct)` → 취소 시 `WalletTransaction(refund)`. 상세: [전체 스키마 §11](./schema.html).
+
+## GX 지갑 모델 (recoverGX — 구현 완료)
+
+| 모델 | 역할 |
+|---|---|
+| `Wallet` | 회원 지갑 (1:1, 잔액) |
+| `WalletTransaction` | 원장 (charge·deduct·refund, `idempotencyKey @unique`) |
+| `ChargePackage` | 충전 패키지 정의 (어드민 관리, name·amount·bonus·sortOrder) |
+
+> 잔액은 `WalletTransaction` 원장에서 재계산 가능. `balanceAfter` 스냅샷은 빠른 조회용.
+> 이중 충전 방어: `WalletTransaction.idempotencyKey @unique` (DB 레벨). 클라이언트는 충전 클릭 시점 키 1회 고정.
+
+---
+
 > **v2 변경 요약**: "주 1회권/주 2회권 + contractMonths" 이원 구조 폐기. **회차권 5단(1·4·12·24·48회) 단일 모델**로 통합. `ticketType` 한 필드로 라인업 식별. Pro 옵션 = 회당 +5,000원 포인트 (회원 결제, 멘토 100% 인센티브).
+
+{: .warning }
+> 아래 MembershipTicket · PointBalance · Payment · Refund 는 **PT 레일 (보류)** 기준. 코드·스키마는 보존. recoverGX 이후 PT 재활성화 시 활용.
 
 ## MembershipTicket (v2 — 회차권 단일 모델)
 
@@ -183,3 +202,4 @@ usedCredits = creditsTotal - creditsRemaining
 |---|---|
 | 2026-05-13 | v1 초안 — Membership(week1/week2 + contractMonths) · PointBalance · Payment · Refund |
 | 2026-05-16 | **v2 재작성** — `MembershipTicket` 단일 모델 (ticketType 1·4·12·24·48). 환불 공식 5단 통일. Payment.type "ticket" 갱신. (ADR 0004) |
+| 2026-06-03 | GX 지갑 모델 섹션 추가 — `Wallet`·`WalletTransaction`·`ChargePackage` 요약 + PT 레일 보류 배너. (ADR 0011) |

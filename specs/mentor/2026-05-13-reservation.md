@@ -7,6 +7,13 @@ nav_order: 2
 
 # 💪 슬롯 오픈·매칭 (멘토 흐름)
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환 후 강사의 스케줄 관리가 **GX 클래스 시간표 등록**으로 바뀐다: 30분 unit MentorBlock ON/OFF 대신, 강사가 GX 클래스(요일·시간·정원·카테고리)를 등록하고 회원 예약을 수신. 개별 회원 매칭 알림 대신 클래스별 수강 신청 현황을 조회. `gxOpenEnabled` 권한 보유 강사만 클래스 개설 가능. 슬롯 취소 패널티 룰의 기본 골격(6h 이내 패널티)은 계승.
+
 **Status**: Draft · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [3A 강사 페르소나](../../partners/personas.html) · [3E 운영 모델](../../partners/model.html) · [5A 예약](../../operations/reservation.html) · [3F 일반 멘토](../../partners/peer-leader.html)
 **📡 API**: [멘토](../../api/catalog.html#멘토-mentor) · [예약](../../api/catalog.html#예약-reservation)

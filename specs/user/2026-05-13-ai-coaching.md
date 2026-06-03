@@ -7,6 +7,11 @@ nav_order: 4
 
 # 👤 AI 시스템 PT (회원 흐름)
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+> **GX 레일에서 보류**: 본 AI 가이드(세션 기록 누적 → 1:1 운동 시퀀스 추천, Phase 진행, 강사 인계 메모)는 1:1 PT 자산이다. GX 레일에서는 그룹 클래스 출석 이력 기반 AI가 별도 설계되며, 개인별 1:1 추천 AI는 PT 레일 재개 시 재사용한다.
+
 **Status**: Draft · **Layer**: 👤 유저 · **Updated**: 2026-05-13
 **관련 결정**: [4C AI 역할](../../service/ai-role.html) · [1B 문제의식](../../product/problems.html) · [1D VP](../../product/value-prop.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html)
 **📡 API**: [AI](../../api/catalog.html#ai)

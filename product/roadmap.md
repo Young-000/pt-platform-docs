@@ -17,34 +17,36 @@ nav_order: 4
 |---|---|---|
 | 🏢 **Business** | 어떻게 조직·돈을 굴리는가? | 정체성·BM·가맹·정산·법무·자본 |
 | 📍 **Space** | 어디에 어떻게 공간을 짓는가? | 입지·평수·인테리어·임대·운영 |
-| 🎯 **Service** | 무엇을 어떻게 제공하는가? | 세션·AI·강사·회원·예약 |
+| 🎯 **Service** | 무엇을 어떻게 제공하는가? | 클래스·강사·회원·예약·충전금 |
 
 ---
 
-## Phase 1 — 유저 반응도 검증 (PMF) (1 → 3호점)
+## Phase 1 — GX 드롭인 PMF 검증 (1 → 3호점)
 
-**진입 조건**: 정체성·비전 락 (완료) · 1A 페르소나 결정 필요
-**진출 조건**: **PMF 시그널 확보** (재예약률·NPS·회원 만족도) + 운영 매뉴얼 완성
+**진입 조건**: 정체성·비전 락 (완료) · 1A 페르소나 결정 완료
+**진출 조건**: **PMF 시그널 확보** (재방문율·클래스 충원율·입소문) + 운영 매뉴얼 완성
 
 {: .note }
-> 이 단계 핵심은 BEP가 아니라 **"우리 모델이 진짜 되는가"** 검증.
-> Private room 8개 + 오픈 공간 + 30분 unit 운영 ([ADR 0001](../decisions/0001-consumer-pivot.html)). 강사 풀 확장은 Phase 2.
+> 이 단계 핵심은 BEP가 아니라 **"GX 드롭인 모델이 진짜 되는가"** 검증.
+> 현재 구현 완료: DB / API 서버 / 유저·강사·어드민 앱 / 랜딩. 잔여: ECS 배포·실 PG·브랜딩.
+> 1:1 PT 레일은 GX PMF 이후 재검토. ([ADR 0011](../decisions/0011-recovergx-gx-pivot.html))
 
 ### 🏢 Business
 
-- ✅ [정체성 락](./identity.html)
+- ✅ [정체성 락](./identity.html) — GX 드롭인 플랫폼
 - ✅ [100호점 비전 락](./vision.html)
-- 🔴 [1A 페르소나·1B 문제·1C 경쟁·1D VP](./personas.html) 결정
-- 🔴 [3E Pro 강사 모델](../partners/model.html) — Hybrid 결정 + 코어 풀
-- 🔴 [3G 정산](../partners/payout.html) 구조 결정
-- 🔴 [2B 멤버십·2C 가격](../members/pricing.html) 결정
+- 🔴 [1A 페르소나·1B 문제·1C 경쟁·1D VP](./personas.html) 결정 (GX 피벗 반영)
+- 🔴 [3E 강사 모델](../partners/model.html) — 검증 절차 + 클래스 개설 권한 구조
+- 🔴 [3G 정산](../partners/payout.html) — 조합형 클래스 단위 정산 결정
+- 🔴 [2B 충전금·2C 가격](../members/pricing.html) — 클래스별 명시 가격 체계
 - 🔴 자본 조달 (자기자본 + 시드)
 - ⚪ 법인 설립
+- 🔴 실 PG 연동 (토스/포트원 HMAC 서명 검증)
 
 ### 📍 Space
 
-- 🔴 1호점 입지 결정 (오피스 vs 주거+오피스)
-- 🔴 [4D 공간 구조](../service/space.html) — 60평 (8 private room + 오픈 28평) 표준 확정
+- 🔴 1호점 입지 결정
+- 🔴 [4D 공간 구조](../service/space.html) — GX 그룹 클래스 운영에 맞는 평수·레이아웃 확정
 - 🔴 임대 계약
 - 🔴 인테리어 설계·시공
 - 🔴 운동기구 입고
@@ -52,20 +54,19 @@ nav_order: 4
 
 ### 🎯 Service
 
-- 🔴 [4A 세션 종류](../service/session-types.html) — 다종목 코스 카테고리 락 (admin 가변)
-- 🔴 [4B 세션 포맷](../service/session.html) — 30분 unit 락
-- 🔴 [4C AI 역할](../service/ai-role.html) 범위 결정
-- 🔴 [3D 강사 모집](../partners/recruitment.html) — 코어 5-10명 헤드헌팅
-- 🔴 [3F 일반 멘토](../partners/peer-leader.html) 검증 코스 설계
-- 🔴 [5A 예약 시스템](../operations/reservation.html) — 강사+프로그램 자율 선택 + AI 매칭 옵션
-- 🔴 [2A 회원 여정](../members/journey.html) · [2D 정책](../members/policies.html)
-- 🔴 1호점 회원 모집 시작 → BEP 검증
+- 🔴 [4A 클래스 종류](../service/session-types.html) — GX 카테고리 라인업 락 (admin 가변)
+- 🔴 [4B 클래스 포맷](../service/session.html) — 시간 단위·정원 수 기준 락
+- 🔴 [3D 강사 모집](../partners/recruitment.html) — 검증 코어 강사 확보 (콜드스타트 브랜딩)
+- 🔴 [5A 예약 시스템](../operations/reservation.html) — 드롭인 예약 + 충전금 차감 플로우
+- 🔴 [2A 회원 여정](../members/journey.html) · [2D 정책](../members/policies.html) — 충전금 환불·노쇼 정책
+- 🔴 ECS Fargate 배포 (API 서버 운영 안정화)
+- 🔴 1호점 회원 모집 시작 → PMF 검증
 
 ---
 
 ## Phase 2 — 가맹 시작 (4 → 10호점)
 
-**진입 조건**: Phase 1 완료 (1호점 BEP + 매뉴얼)
+**진입 조건**: Phase 1 완료 (PMF 시그널 + 운영 매뉴얼)
 **진출 조건**: 가맹 매뉴얼 안정화 + 본사 시스템 자동화
 
 ### 🏢 Business
@@ -79,16 +80,16 @@ nav_order: 4
 ### 📍 Space
 
 - 🔴 직영 추가 1-2호점 (검증 강화)
-- 🔴 가맹점 표준 사이즈 락 (60평 base + 입지 의존 변형)
+- 🔴 가맹점 표준 공간 사이즈 락
 - 🔴 가맹점 인테리어 표준화 (지정 시공업체)
 - 🔴 가맹 1호점 오픈
 
 ### 🎯 Service
 
-- 🔴 ★ **[3E 강사 모델 다양화](../partners/model.html) — 파트타임·다채널 본격화**
-- 🔴 강사 풀 자동화 onboarding 시스템
-- 🔴 AI 시스템 본격 가동 (Mock → 실 데이터 학습)
-- 🔴 회원 데이터 플라이휠 작동 검증
+- 🔴 ★ **[3E 강사 모델 다양화](../partners/model.html) — 파트타임·다채널 검증 강사 본격화**
+- 🔴 강사 온보딩·검증 절차 자동화 시스템
+- 🔴 클래스 카테고리 확장 (Phase 1 데이터 기반)
+- 🔴 드롭인 수요 데이터 → 다이나믹 클래스 편성 검토
 
 ---
 
@@ -99,7 +100,7 @@ nav_order: 4
 
 ### 🏢 Business
 
-- 🔴 본사 BEP (회원 6,000명 가정)
+- 🔴 본사 BEP (회원·충전금 규모 재산출 대상)
 - 🔴 가맹 모집 자동화·표준화
 - ⚪ 마스터 가맹 (지역 단위) 도입 검토
 - 🔴 본사 인사·CS 조직 확대
@@ -113,9 +114,9 @@ nav_order: 4
 ### 🎯 Service
 
 - 🔴 등급별 차등 강사 운영
-- 🔴 다이나믹 프라이싱 도입 (피크/오프피크)
+- 🔴 다이나믹 프라이싱 도입 (피크/오프피크 클래스 가격 변동)
 - 🔴 회원 LTV 데이터 기반 retention 운영
-- 🔴 AI 코칭 정밀도 ↑
+- ⚪ 1:1 PT 레일 부활 여부 재검토 (GX PMF 자산 기반)
 
 ---
 
@@ -127,7 +128,7 @@ nav_order: 4
 ### 🏢 Business
 
 - 🔴 지역 마스터 가맹 본격화
-- 🔴 본사 R&D (AI·하드웨어 moat)
+- 🔴 본사 R&D (플랫폼 데이터·알고리즘 moat)
 - 🔴 IPO·M&A 등 EXIT 시나리오
 
 ### 📍 Space
@@ -137,9 +138,9 @@ nav_order: 4
 
 ### 🎯 Service
 
-- 🔴 회원 데이터 기반 영양·습관 코칭 확장
-- 🔴 하드웨어 moat (스마트 미러·InBody 자동 연동)
-- 🔴 강사 평가·매칭 알고리즘 고도화
+- 🔴 회원 데이터 기반 클래스 큐레이션 고도화
+- 🔴 강사 평가·클래스 품질 알고리즘 고도화
+- 🔴 브랜드 콘텐츠·커뮤니티 (슈퍼몽키 방법론 심화)
 
 ---
 
@@ -165,3 +166,4 @@ nav_order: 4
 |---|---|---|
 | 2026-05-11 | Young + Claude | 3-Track Phase 로드맵 (Business / Space / Service) — 시점 미정 |
 | 2026-05-16 | Claude | v2 본문 정합 갱신 — 60평·30분 unit·다종목 ([ADR 0001~0004](../decisions/)) |
+| 2026-06-04 | Young | GX 피벗 반영 — GX 드롭인 단일 레일 + 현 구현 현황 + 1:1 PT 보류 명시 ([ADR 0011](../decisions/0011-recovergx-gx-pivot.html)) |

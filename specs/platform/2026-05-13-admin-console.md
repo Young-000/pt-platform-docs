@@ -7,6 +7,13 @@ nav_order: 7
 
 # 🏢 어드민 콘솔 — 수익·시스템·현황·분석
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환으로 어드민 콘솔에 **recoverGX 섹션**이 추가된다: GX 클래스(시간표) CRUD, 강사별 GX 개설 권한(`gxOpenEnabled` 플래그), GX 룰(정원 cap·예약 창·당일 취소 정책) 운영 변수, GX 정산(기본금 + 수강 인당 보너스 + 매출 비율% **조합형** `PayoutConfig`). 기존 1:1 PT 어드민 기능(회차권·분배·멘토 심사 등)은 PT 레일 병행 시 유지, GX 단독 전환 시 해당 메뉴를 GX 전용으로 교체.
+
 **Status**: 🟡 Updated (2026-05-16) · v2 본문 적용
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
 **의존**: [6B 본사 R&R](../../expansion/responsibility.html) · [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html)

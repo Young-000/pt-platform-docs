@@ -6,7 +6,9 @@ has_children: true
 
 # 비즈니스 모델 (How we make money)
 
-100호점 도달 방식 + 본사 수익 구조. **공간 임대업 관점이 핵심**: 평당 수익 × utilization × 가맹점 수.
+**recoverGX** — 오픈형 GX 클래스 기반 신사업. 100호점 도달 방식 + 본사 수익 구조. **공간 임대업 관점이 핵심**: 평당 수익 × utilization × 가맹점 수. 상품 단위는 1:1 PT 세션이 아닌 그룹 클래스(충전금·드롭인 기반).
+
+참조: [ADR 0011 — recoverGX GX 피벗](../decisions/0011-recovergx-gx-pivot.html)
 
 ## 결정 노드
 

@@ -11,6 +11,8 @@ nav_order: 13
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html)
 **의존**: [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html) · [2D 정책](../../members/policies.html)
 
+> **GX 영향**: GX 클래스 스케줄은 `GxClass` 모델(기존)에서 관리. `MentorBlock`·`FixedSlot`은 PT 레일 전용 (보존·미활성) ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)).
+
 > **v2 변경 요약**: `CardioSlot` · `RoomSlot` 모델은 폐기. 룸은 `Room` 마스터로만 존재하며 **점유는 강사 30분 unit 슬롯(`MentorBlock`)** 에서 파생된다. 룸이 필요한 프로그램이면 예약 트랜잭션이 자동으로 룸을 배정. 회원 1예약 = **강사 + 프로그램 + 30분 unit**(60분=2 unit 연속).
 
 ## 폐기 모델 (v1)

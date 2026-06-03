@@ -5,12 +5,64 @@ grand_parent: 스펙 (PRD)
 nav_order: 1
 ---
 
-# API 엔드포인트 카탈로그 (v2)
+# API 엔드포인트 카탈로그 (v2 + GX)
 
-**Status**: v2 Accepted · **Updated**: 2026-05-16
-**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+**Status**: v2 Accepted · GX Implemented · **Updated**: 2026-06-03
+**관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)
 
-> **v2 변경 요약**: 매칭 알고리즘 엔드포인트(`match-candidates`, `reject`) 폐기. **회원이 카테고리 → 시간 → 강사를 직접 선택**하는 단일 흐름. 회차권 라인업 1·4·12·24·48 결제, Pro 옵션 포인트 차감, 자유 헬스 입장 엔드포인트 신설. 신규 v2 엔드포인트 카테고리: [v2-categories](./v2-categories.html) · [v2-programs](./v2-programs.html) · [v2-reservations](./v2-reservations.html) · [v2-free-gym](./v2-free-gym.html).
+> **GX 추가 (2026-06-03)**: recoverGX 피벗으로 `/api/gx/*` · `/api/wallet/*` · `/api/gx-admin/*` 라우트군 구현. 기존 v2 PT 라우트는 보존(프론트 미노출). 정본 설계: `pt-platform/docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`.
+
+## GX 오픈 플랫폼 (recoverGX — 구현 완료)
+
+### 지갑 (`/api/wallet`)
+
+| Method | Path | 권한 | 설명 |
+|---|---|---|---|
+| GET | `/api/wallet/me` | member | 잔액 + 거래 내역 |
+| GET | `/api/wallet/packages` | public | 활성 충전 패키지 목록 |
+| POST | `/api/wallet/charge` | member | 충전 (mock PG, `idempotencyKey` 필수 — 이중 적립 방어) |
+
+### GX 클래스·예약·정산 (`/api/gx`)
+
+| Method | Path | 권한 | 설명 |
+|---|---|---|---|
+| GET | `/api/gx/meta` | public | 지점·룸·강사·카테고리·가격범위(`priceRange`) |
+| GET | `/api/gx/classes` | public | 시간표 + 잔여석 |
+| POST | `/api/gx/classes` | admin + 검증강사 | 개설 (가격 범위 검증·카테고리 존재 검증) |
+| GET | `/api/gx/classes/mine` | mentor | 내 클래스 + 수강생 명단 |
+| GET | `/api/gx/bookings/mine` | member | 내 예약 목록 (예정/지난) |
+| POST | `/api/gx/bookings` | member | 드롭인 예약 (지갑 차감 + 정원 점유, 단일 트랜잭션, idempotency) |
+| DELETE | `/api/gx/bookings/:id` | member | 취소 + 지갑 환불 (마감 전: 전액, 마감 후: 0원) |
+| PATCH | `/api/gx/bookings/:id/attendance` | mentor(본인 클래스) | 출석 체크 (attended / no_show) |
+| POST | `/api/gx/classes/:id/complete` | admin·mentor | 클래스 완료 → `GxSettlement` 자동 생성 |
+| DELETE | `/api/gx/classes/:id` | admin·mentor(본인) | 폐강 + 예약자 전원 환불 + status=cancelled |
+| GET | `/api/gx/settlements` | admin·mentor(본인) | 정산 내역 (클래스명·매출·지급액·마진) |
+
+### GX 어드민 룰 (`/api/gx-admin`)
+
+| Method | Path | 권한 | 설명 |
+|---|---|---|---|
+| GET | `/api/gx-admin/policy` | admin | GX 정책 조회 (가격범위·환불마감시간) |
+| PUT | `/api/gx-admin/policy` | admin | GX 정책 수정 (`gx_policy_singleton` upsert) |
+| GET | `/api/gx-admin/packages` | admin | 충전 패키지 목록 |
+| POST | `/api/gx-admin/packages` | admin | 충전 패키지 생성 |
+| PATCH | `/api/gx-admin/packages/:id` | admin | 충전 패키지 수정·비활성화 (active 필드) |
+| GET | `/api/gx-admin/payout-policies` | admin | 정산 정책 목록 |
+| POST | `/api/gx-admin/payout-policies` | admin | 정산 정책 생성 |
+| PATCH | `/api/gx-admin/payout-policies/:id` | admin | 정산 정책 수정·비활성화 (active 필드) |
+| GET | `/api/gx-admin/mentors` | admin | 강사 GX 개설 현황 |
+| PATCH | `/api/gx-admin/mentors/:id` | admin | 강사 GX 개설 권한 토글 (`gxOpenEnabled`) + 정산 정책 할당 |
+
+> **강사 개설 권한**: `Mentor.gxOpenEnabled` 전용 필드 — `MentorTier` 대신 사용 (tier 변별력 없음). 어드민이 토글.
+> **GxPolicy 싱글톤**: 고정 ID `gx_policy_singleton` upsert로 단일 행 보장.
+> **에러 코드 추가**: `INSUFFICIENT_BALANCE` (잔액 부족, 프론트 충전 CTA 분기), `REFUND_CUTOFF_PASSED` (환불 마감 후 취소).
+
+---
+
+## PT 레일 (보존·프론트 미노출)
+
+{: .warning }
+> 아래 엔드포인트는 코드베이스에 보존되어 있으나, recoverGX 전환 후 3앱 네비게이션에서 숨겨진 상태. 재활성화 여부 미결정.
 
 ## 인증 (Auth)
 
@@ -249,3 +301,4 @@ nav_order: 1
 |---|---|
 | 2026-05-13 | v1 초안 — 12 도메인 그룹·80+ endpoint |
 | 2026-05-16 | **v2 재작성** — 매칭(`match-candidates`/`reject`) 폐기, 카테고리·프로그램·자유 헬스 endpoint 신설, 회차권(`/api/tickets`) 단일 모델, 에러코드 v2 갱신. v1 본문은 `_archive/v1-api-catalog.md` 참조. (ADR 0001 · 0003 · 0004) |
+| 2026-06-03 | **GX 추가** — `/api/gx/*` (클래스·예약·정산) · `/api/wallet/*` (지갑·충전) · `/api/gx-admin/*` (정책·패키지·강사) 신설. PT 라우트 보존·미노출 배너 추가. (ADR 0011) |

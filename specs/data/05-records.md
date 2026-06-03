@@ -9,6 +9,8 @@ nav_order: 15
 
 세션 기록 + 회원 평가. [4C AI 역할](../../service/ai-role.html), [3H 품질](../../partners/quality.html) 정책 반영.
 
+> **GX 영향**: GX 출석 기록은 `GxBooking.attendanceStatus` 필드에서 관리. `SessionRecord`·`Rating`은 PT 레일 전용 (보존·미활성) ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)).
+
 ## SessionRecord
 
 **Purpose**: 멘토가 입력하는 세션 기록 (5분 내 SLA). AI 학습 + 다음 추천의 핵심 입력.

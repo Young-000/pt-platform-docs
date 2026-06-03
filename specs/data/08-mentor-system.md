@@ -9,6 +9,8 @@ nav_order: 18
 
 멘토 등급·심사·컴플레인. [3F](../../partners/peer-leader.html), [3H](../../partners/quality.html), [3G](../../partners/payout.html) 정책 반영.
 
+> **GX 영향 (2026-06-03)**: GX 개설 권한은 `MentorTier` 대신 `Mentor.gxOpenEnabled` 전용 필드로 관리 (tier 변별력 부재). 어드민 `/api/gx-admin/mentors/:id` PATCH로 토글 ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)).
+
 ## VerificationCourse
 
 **Purpose**: 본사 검증 코스 회차 (가입 → 일반 멘토 자격). Phase 1엔 후순위 운영.

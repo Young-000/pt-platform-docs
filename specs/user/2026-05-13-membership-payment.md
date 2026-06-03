@@ -7,6 +7,13 @@ nav_order: 2
 
 # 👤 회차권·결제·정책 (회원 흐름, v2)
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환 후 회원 결제 흐름이 **지갑 충전 → 드롭인 차감**으로 바뀐다: 회원이 지갑에 현금을 충전(PG 결제)하고, GX 클래스 드롭인 예약마다 회당가를 차감. 회차권 5단 라인업은 GX 패스(횟수권 또는 무제한 월정액)로 전환 검토 중(ADR 0011 후속 확정). 청약철회·환불 산출 기본 정책 골격은 계승.
+
 **Status**: v2 Accepted · **Layer**: 👤 유저 · **Updated**: 2026-05-16
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
 **📡 API**: [catalog](../api/catalog.html) `/api/tickets/*` · `/api/points/*`

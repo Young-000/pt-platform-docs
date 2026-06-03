@@ -7,10 +7,10 @@ nav_order: 1
 
 # 전체 DB 스키마 (Prisma) — 최종
 
-**Status**: Draft · **Updated**: 2026-05-13
-**참고 PRD**: 모든 플랫폼 PRD ([session](../platform/2026-05-13-session-system.html) · [membership](../platform/2026-05-13-membership-system.html) · [reservation](../platform/2026-05-13-reservation-system.html) · [ai](../platform/2026-05-13-ai-engine.html) · [mentor-tier](../platform/2026-05-13-mentor-tier-system.html) · [payout](../platform/2026-05-13-payout-system.html) · [admin-console](../platform/2026-05-13-admin-console.html))
+**Status**: Draft · **Updated**: 2026-06-03
+**참고 PRD**: 모든 플랫폼 PRD ([session](../platform/2026-05-13-session-system.html) · [membership](../platform/2026-05-13-membership-system.html) · [reservation](../platform/2026-05-13-reservation-system.html) · [ai](../platform/2026-05-13-ai-engine.html) · [mentor-tier](../platform/2026-05-13-mentor-tier-system.html) · [payout](../platform/2026-05-13-payout-system.html) · [admin-console](../platform/2026-05-13-admin-console.html)) · [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)
 
-> **Phase 1 MVP 풀 스키마.** 13건 정합성 이슈 모두 반영.
+> **Phase 1 MVP 풀 스키마.** 13건 정합성 이슈 모두 반영. **2026-06-03: GX 신규 모델 6개 추가** (섹션 11 참조).
 
 ## 도메인 그룹
 
@@ -25,6 +25,8 @@ nav_order: 1
 8. Mentor System   — VerificationCourse · VerificationAttendance · ProCertificationApplication · MentorRateChange · MentorComplaint · TierChange
 9. Payout          — PricingConfig · RevenueDistributionConfig · PayoutPeriod · PaymentLedger · DistributionEntry · MentorPayout · PayoutLineItem · PayoutDeduction · MentorBankAccount · TaxReport
 10. Audit          — PolicyEvent · CancellationLog · AdminAuditLog
+11. GX Platform ★ — Wallet · WalletTransaction · ChargePackage · GxPolicy · GxPayoutPolicy · GxSettlement
+                     (+ GxClass.price · GxBooking.paidAmount·walletTransactionId · Mentor.gxOpenEnabled·gxPayoutPolicyId)
 ```
 
 ## 1. Identity
@@ -1010,11 +1012,111 @@ model AdminAuditLog {
 
 ---
 
+## 11. GX Platform (recoverGX — 구현 완료)
+
+> 정본: `pt-platform/docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md` § 3·4·5. 아래는 요약.
+
+```prisma
+// 회원 지갑 (1:1)
+model Wallet {
+  id        String   @id @default(cuid())
+  memberId  String   @unique
+  balance   Int      @default(0)   // KRW
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  transactions WalletTransaction[]
+  @@schema("pt_platform")
+}
+
+model WalletTransaction {
+  id             String                @id @default(cuid())
+  walletId       String
+  type           WalletTransactionType // charge | deduct | refund
+  amount         Int                   // 항상 양수
+  balanceAfter   Int                   // 거래 후 잔액 스냅샷
+  refType        String?               // 'gx_booking' | 'charge_package'
+  refId          String?
+  idempotencyKey String?               @unique  // 이중 충전 방어
+  createdAt      DateTime              @default(now())
+  @@index([walletId, createdAt])
+  @@schema("pt_platform")
+}
+
+enum WalletTransactionType { charge deduct refund @@schema("pt_platform") }
+
+// 충전 패키지 (어드민 관리)
+model ChargePackage {
+  id        String   @id @default(cuid())
+  name      String
+  amount    Int
+  bonus     Int      @default(0)
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0)
+  @@schema("pt_platform")
+}
+
+// GX 전역 정책 (싱글톤, id='gx_policy_singleton')
+model GxPolicy {
+  id                String   @id @default(cuid())
+  priceMin          Int      @default(10000)
+  priceMax          Int      @default(50000)
+  refundCutoffHours Int      @default(6)   // 취소 환불 마감 시간
+  updatedAt         DateTime @updatedAt
+  @@schema("pt_platform")
+}
+
+// GX 정산 정책 (조합형: 기본금 + 인당 + 매출비율)
+model GxPayoutPolicy {
+  id                  String   @id @default(cuid())
+  name                String
+  baseAmount          Int      @default(0)
+  perHeadAmount       Int      @default(0)
+  revenueSharePercent Int      @default(0)  // 0~100
+  isDefault           Boolean  @default(false)
+  active              Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  @@schema("pt_platform")
+}
+
+// GX 클래스 완료 시 자동 생성 — 정책 스냅샷으로 불변성 보장
+model GxSettlement {
+  id             String   @id @default(cuid())
+  classId        String   @unique
+  mentorId       String
+  attendedCount  Int
+  revenue        Int      // 취소 환불 제외 차감 합계
+  policySnapshot Json     // {name, baseAmount, perHeadAmount, revenueSharePercent}
+  payoutAmount   Int      // = baseAmount + perHeadAmount×attendedCount + revenue×revenueSharePercent/100
+  platformMargin Int      // revenue - payoutAmount
+  createdAt      DateTime @default(now())
+  @@index([mentorId, createdAt])
+  @@schema("pt_platform")
+}
+```
+
+### 기존 모델 컬럼 추가
+
+| 모델 | 추가 필드 | 설명 |
+|---|---|---|
+| `GxClass` | `price Int` | 강사 지정 가격 (priceMin·priceMax 범위 내) |
+| `GxBooking` | `paidAmount Int` · `walletTransactionId String?` | 차감액 + 지갑 트랜잭션 출처 |
+| `Mentor` | `gxOpenEnabled Boolean @default(false)` · `gxPayoutPolicyId String?` | GX 개설 권한 + 할당 정산 정책 |
+
+### 정산 공식
+
+```
+payoutAmount = baseAmount + (perHeadAmount × attendedCount) + (revenue × revenueSharePercent / 100)
+platformMargin = revenue - payoutAmount
+```
+
+---
+
 ## 📘 사용 PRD
 
-[모든 플랫폼 PRD](../platform/) · [어드민 콘솔](../platform/2026-05-13-admin-console.html)
+[모든 플랫폼 PRD](../platform/) · [어드민 콘솔](../platform/2026-05-13-admin-console.html) · [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)
 
 ---
 
 | 2026-05-13 | 초안 (10 도메인) |
 | 2026-05-13 | 13건 정합성 + 멘토 흐름 + 회원권 라이프사이클 + 가변 config 일괄 반영 |
+| 2026-06-03 | 11. GX Platform 섹션 추가 — 6 신규 모델 + 기존 모델 컬럼 확장 (ADR 0011) |

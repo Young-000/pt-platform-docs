@@ -11,6 +11,8 @@ nav_order: 14
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
 **의존**: [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html) · [2D 정책](../../members/policies.html)
 
+> **GX 영향**: GX 예약은 `GxBooking` 모델(기존 + `paidAmount`·`walletTransactionId` 추가)로 처리. 이 문서의 `Reservation`·`Session` 등은 PT 레일 전용 (보존·미활성) ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)).
+
 > **v2 변경 요약**: 회원 1예약 = **강사 + 프로그램 + 30분 unit**. v1의 `cardioSlotId`·`roomSlotId`·`autoMatchedAt`(자동 매칭) 필드 폐기. 룸 필요 프로그램이면 `assignedRoomId`로 자동 배정. 자유 헬스는 별도 `FreeGymVisit`로 분리 (회차·예약 ❌).
 
 ## Reservation (v2)

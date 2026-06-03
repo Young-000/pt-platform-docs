@@ -7,6 +7,13 @@ nav_order: 6
 
 # 🏢 정산·자동 분배 시스템
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환으로 정산 구조가 **조합형(기본금 + 수강 인당 보너스 + 매출 비율%)**으로 확장된다. PT 레일의 "30분 unit 1세션 = 1 정산 단위" 단순 모델 대신, GX 클래스 1회당 기본금 + (실제 출석 인원 × 인당 보너스) + 월 총매출 비율%를 합산하는 복합 산식이 적용된다. 격주 정산 주기·Escrow 7일·환불 회수·TaxReport 자동 생성 등의 운영 골격은 계승.
+
 **Status**: Draft
 **관련 결정**: [3G 정산](../../partners/payout.html) · [6C 본사 수익](../../expansion/revenue-share.html) · [6B R&R](../../expansion/responsibility.html)
 **📡 API**: [정산](../../api/catalog.html#정산-payout) · [시스템·Cron](../../api/catalog.html#시스템--cron)

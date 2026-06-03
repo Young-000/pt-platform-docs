@@ -9,6 +9,8 @@ nav_order: 11
 
 회원·멘토·관리자 3 종 식별 주체.
 
+> **GX 영향 (2026-06-03)**: `Mentor`에 `gxOpenEnabled Boolean @default(false)` · `gxPayoutPolicyId String?` 추가 ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)). `Member`에 `Wallet` 1:1 관계 추가.
+
 ## Member
 
 **Purpose**: 회원 (PT 서비스 사용자). 페르소나 정보·멤버십·포인트·예약·결제·평가 보유.

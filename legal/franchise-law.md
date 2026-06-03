@@ -6,11 +6,13 @@ nav_order: 1
 
 # Level 8A — 가맹사업법 / 정보공개서
 
+> recoverGX (GX 그룹 클래스 중심) 전환 후에도 가맹사업법 요건은 그대로 적용. 자세한 전환 맥락: [ADR 0011](../decisions/0011-recovergx-gx-pivot.html).
+
 | | |
 |---|---|
 | **상태** | ⚪ 변호사 검토 필요 |
 | **Owner** | @young + 변호사 |
-| **Last updated** | 2026-05-11 |
+| **Last updated** | 2026-06-04 |
 | **상위 의존** | [6A 확장 모델](../expansion/model.html) · [6C 본사 수익](../expansion/revenue-share.html) |
 | **하위 영향** | 가맹 모집 가능 시점 · 가맹점주 계약 |
 
@@ -92,3 +94,4 @@ nav_order: 1
 | 날짜 | 변경자 | 변경 내용 |
 |---|---|---|
 | 2026-05-11 | Young + Claude | 가맹사업법 요건 + 단계별 액션 |
+| 2026-06-04 | Young + Claude | recoverGX 피벗 — ADR 0011 참조 배너 추가 (본문 내용 유효 유지) |

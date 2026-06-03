@@ -6,7 +6,9 @@ nav_order: 1
 
 # 🛡️ 모니터링·관측 (Observability)
 
-**Status**: Draft · Phase 1 필수 · **Updated**: 2026-05-13
+**Status**: Draft · Phase 1 필수 · **Updated**: 2026-06-04
+
+> recoverGX 피벗 후 비즈니스 메트릭에 GX 클래스 예약·지갑 충전·크레딧 사용 항목 추가. 기존 3축(Logs/Metrics/Traces) 구조는 그대로 승계. [ADR 0011](../decisions/0011-recovergx-gx-pivot.html) 참조.
 
 ## 3 축: Logs / Metrics / Traces
 
@@ -22,7 +24,7 @@ nav_order: 1
 ### 2. Metrics
 
 - **시스템**: CPU·메모리·DB connection·API 응답 시간
-- **비즈니스**: 가입·결제·예약·매칭·세션 완료 카운트 (시간당·일별)
+- **비즈니스**: 가입·결제·예약·매칭·세션 완료 카운트 (시간당·일별) + GX 클래스 예약·지갑 충전·크레딧 사용
 - **AI**: LLM 호출·tokens·비용
 
 ### 3. Traces (선택, Phase 2+)
@@ -85,7 +87,7 @@ nav_order: 1
 ```typescript
 interface MetricEvent {
   id: string
-  type: 'reservation_created' | 'session_completed' | 'payment_succeeded' | ...
+  type: 'reservation_created' | 'session_completed' | 'payment_succeeded' | 'gx_class_booked' | 'wallet_charged' | 'credit_used' | ...
   payload: Record<string, any>
   recipientType?: string
   recipientId?: string
@@ -117,3 +119,4 @@ interface ErrorLog {
 ---
 
 | 2026-05-13 | 초안 — 3축 (logs·metrics·traces) + SLO + 알림 + 비용 |
+| 2026-06-04 | recoverGX 피벗 — GX 예약·지갑·크레딧 메트릭 추가, ADR 0011 참조 |

@@ -1,18 +1,20 @@
 ---
-title: ⚪ 8B. PT 자격증 법규
+title: ⚪ 8B. 강사 자격증 법규
 parent: 법무·약관
 nav_order: 2
 ---
 
-# Level 8B — PT 자격증 법규 (Pro 인증 멘토 vs 일반 멘토)
+# Level 8B — 강사 자격증 법규 (Pro 인증 멘토 vs 일반 멘토)
 
 | | |
 |---|---|
 | **상태** | ⚪ 변호사 검토 필요 ★ 핵심 |
 | **Owner** | @young + 변호사 |
-| **Last updated** | 2026-05-16 |
+| **Last updated** | 2026-06-04 |
 | **상위 의존** | [4A 세션 종류](../service/session-types.html) · [3F 일반 멘토](../partners/peer-leader.html) |
 | **하위 영향** | 멘토 모델 가능 여부 · 사업 자체의 법적 안전성 |
+
+> recoverGX 피벗 후에도 GX 강사(그룹 인스트럭터)를 포함한 모든 강사에 대해 동일한 자격 검증 정책 적용. 서비스 전환 맥락: [ADR 0011](../decisions/0011-recovergx-gx-pivot.html).
 
 > **🔥 2026-05-15 회의 — 자격증 정책 합의** ([ADR 0002](../decisions/0002-license-policy.html))
 >
@@ -36,6 +38,7 @@ nav_order: 2
 ## 결정해야 할 것
 
 > **자격증 없는 일반 멘토 모델이 한국 체육·의료 법규에 저촉되지 않는가?** 어떻게 포지셔닝해야 안전한가?
+> GX 클래스(그룹 인스트럭터) 형태에서도 동일 질문이 적용됨.
 
 이 결정이 **사업 자체의 법적 토대**.
 
@@ -142,3 +145,4 @@ nav_order: 2
 |---|---|---|
 | 2026-05-11 | Young + Claude | 법규 매핑 + 방어 매커니즘 + 변호사 체크리스트 |
 | 2026-05-16 | Young + Claude | Critical 리뷰 High 8건 fix — 본문 v2 전면 재작성 (Peer 리더 → 일반 멘토, Pro PT → Pro 인증 멘토, ADR 0002 결정 직접 반영, 가맹점장 R&R, admin 토글 명시) |
+| 2026-06-04 | Young + Claude | recoverGX 피벗 — GX 인스트럭터 맥락 추가, ADR 0011 참조, 자격 정책 동일 적용 명시 |

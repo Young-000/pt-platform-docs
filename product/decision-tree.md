@@ -9,17 +9,18 @@ nav_order: 1
 > **사업 OS의 골격.** 모든 결정이 이 트리의 어딘가에 위치합니다.
 > 위에서부터 아래로 내려가며 한 노드씩 정의합니다. 상위 결정이 하위 결정의 제약/입력이 됩니다.
 
-> **🔥 2026-05-15 회의 — 트리 상위 노드 재정의** ([ADR 0001](../decisions/0001-consumer-pivot.html))
+> **🔥 2026-06-04 GX 피벗 — 트리 상위 노드 전면 재정의** ([ADR 0011](../decisions/0011-recovergx-gx-pivot.html))
 >
-> 노드 1D (가치 제안) → 4A (세션 종류) → 4D (공간) → 2B (멤버십) → 3F (멘토)에서 v2 결정이 갱신됨:
+> 1:1 private PT 모델 → **오픈형 GX 드롭인 플랫폼**으로 전환. 주요 변경:
 >
-> - **1D**: "공급자향 PT의 문제를 소비자향으로 풀기" (강사+프로그램 자율 선택, 30분 unit, 1회권)
-> - **4A**: 단일 PT → **다종목 코스** (룸 필요 / 오픈 / 자유 헬스 3분류)
-> - **4D**: 90평 → **60평** (8 private room × 4평 + 오픈 28평)
-> - **2B**: **회차권 5단** (1·4·12·24·48회) — 멤버십/단발권 분리 ❌
-> - **3F**: **두 시나리오 병행** (S1 파트타이머 1.2만/30분, S2 전문 강사 최대 2만/30분 상한)
+> - **Level 0 (정체성)**: "예약제 private PT shop with AI" → "검증 강사 GX 드롭인 + 충전금 모델"
+> - **1A (페르소나)**: "주 2회 체계화 원함" → "혼자선 작심삼일, 같이+약정없이+탐색"
+> - **1D (VP)**: AI 기반 1:1 → 투명가격·드롭인·충전금 3축
+> - **4A (클래스)**: 다종목 1:1 코스 → GX 그룹 클래스 카테고리
+> - **2B (요금)**: 회차권 5단 → 충전금 + 클래스별 명시 가격
+> - **3F (강사)**: 멘토 시나리오 → 검증 절차 통과 후 클래스 직접 개설
 >
-> 봉인된 결정: [ADR 0001](../decisions/0001-consumer-pivot.html) · [ADR 0002 자격증](../decisions/0002-license-policy.html) · [ADR 0003 자유 헬스](../decisions/0003-free-gym-add-on.html) · [ADR 0004 회차권 라인업](../decisions/0004-one-time-ticket-pricing.html)
+> 봉인된 결정: [ADR 0011](../decisions/0011-recovergx-gx-pivot.html) (GX 피벗)
 
 {: .note }
 > 결정 진행 상태는 [홈 대시보드](./)에서 한눈에 확인 가능합니다.
@@ -28,7 +29,10 @@ nav_order: 1
 
 ## Level 0 — 정체성 🟢 LOCKED
 
-> **"예약제 private PT shop with AI"** — 100호점 체인화 야망.
+> **"검증된 강사가 여는 그룹 클래스를 회원이 충전금으로 골라 드롭인하는 오픈형 GX 플랫폼."**
+> 슬로건: "강매 없음 · 연장 압박 없음 · 충전해서 쓰는 만큼만." — 100호점 체인화 야망.
+>
+> 1:1 PT 레일은 GX PMF 이후 재검토 (현재 보류).
 
 → [상세](./identity.html)
 
@@ -49,10 +53,10 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 4A | 세션 종류 — 다종목 코스 (가변·admin 추가) | [session-types](../service/session-types.html) |
-| 4B | 세션 포맷 — 30분 unit | [session](../service/session.html) |
-| 4C | AI 역할 범위 | [ai-role](../service/ai-role.html) |
-| 4D | 공간 구조 — 60평 (8 private room + 오픈 28평) | [space](../service/space.html) |
+| 4A | 클래스 종류 — GX 카테고리 (가변·admin 추가) | [session-types](../service/session-types.html) |
+| 4B | 클래스 포맷 — 시간·정원 기준 | [session](../service/session.html) |
+| 4C | AI 역할 범위 (GX PMF 이후 재검토) | [ai-role](../service/ai-role.html) |
+| 4D | 공간 구조 — GX 클래스 운영 레이아웃 | [space](../service/space.html) |
 
 ---
 
@@ -60,10 +64,10 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 3E | Pro 강사 모델 (gig vs 전속 vs hybrid) | [model](../partners/model.html) |
-| 3F | 일반 멘토 (자격·보상·검증) | [peer-leader](../partners/peer-leader.html) |
+| 3E | 강사 모델 (검증 절차 + 클래스 개설 권한) | [model](../partners/model.html) |
+| 3F | 강사 검증·등급 기준 | [peer-leader](../partners/peer-leader.html) |
 | 3D | 모집 전략 (콜드스타트 vs 스케일) | [recruitment](../partners/recruitment.html) |
-| 3G | 정산 구조 | [payout](../partners/payout.html) |
+| 3G | 정산 구조 (조합형 클래스 단위) | [payout](../partners/payout.html) |
 | 3H | 품질 관리·등급 | [quality](../partners/quality.html) |
 
 ---
@@ -72,7 +76,7 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 2B | 멤버십 구조 | [membership](../members/membership.html) |
+| 2B | 충전금 구조 + 클래스별 가격 | [membership](../members/membership.html) |
 | 2C | 가격 체계 | [pricing](../members/pricing.html) |
 | 2A | 회원 여정 (가입~이탈방지) | [journey](../members/journey.html) |
 | 2D | 환불·노쇼·취소·일시정지·양도 | [policies](../members/policies.html) |
@@ -93,7 +97,7 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 5A | 예약 시스템 (피크 6-10pm 고정 슬롯 등) | [reservation](../operations/reservation.html) |
+| 5A | 예약 시스템 (드롭인 + 충전금 차감) | [reservation](../operations/reservation.html) |
 | 5B | 지점 운영 (무인/유인, 시간, SOP) | [store](../operations/store.html) |
 | 5C | 안전·보험·사고 | [safety](../operations/safety.html) |
 
@@ -103,7 +107,7 @@ nav_order: 1
 
 | 노드 | 내용 | 페이지 |
 |---|---|---|
-| 7A | 단위 경제 (지점당 P&L) | [unit-economics](../economics/unit-economics.html) |
+| 7A | 단위 경제 (지점당 P&L) — 수치 재산출 대상 | [unit-economics](../economics/unit-economics.html) |
 | 7B | 매출·원가 모델 | [revenue-cost](../economics/revenue-cost.html) |
 | 7C | 100호점 추정 / BEP / CapEx | [projection](../economics/projection.html) |
 

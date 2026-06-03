@@ -9,6 +9,8 @@ nav_order: 20
 
 정책 트리거·취소 감사 로그. 환불·노쇼·보상 추적 + 분쟁 대응.
 
+> **GX 영향 (2026-06-03)**: GX 취소·환불은 `WalletTransaction(type=refund)`으로 원장 기록. `CancellationLog`는 PT 레일 전용. GX 폐강(전원 환불)은 `GxSettlement` 미생성 상태에서 원자적 `updateMany`로 처리 ([ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)).
+
 ## PolicyEvent
 
 **Purpose**: 모든 정책 액션의 감사 로그 (환불·일시정지·노쇼·보상·등급 변경 등).

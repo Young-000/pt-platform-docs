@@ -7,6 +7,13 @@ nav_order: 1
 
 # 💪 세션 진행 (멘토 흐름, v2)
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환 후 강사 세션 흐름이 **GX 클래스 진행**으로 바뀐다: 오늘 GX 클래스 목록 조회 → 수강 회원 명단 확인 → 그룹 클래스 진행 → 출석 체크 → 클래스 메모 입력(개인 처방 대신 그룹 퀄리티 메모). 1:1 운동 처방·AI 가이드 노출·강사 인계 메모는 GX 레일에서 보류. 노쇼 체크·세션 기록 입력 SLA의 기본 흐름은 계승.
+
 **Status**: v2 Accepted · **Layer**: 💪 멘토 · **Updated**: 2026-05-16
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html)
 **📡 API**: [catalog](../api/catalog.html) · [v2-reservations](../api/v2-reservations.html) · [v2-programs](../api/v2-programs.html)

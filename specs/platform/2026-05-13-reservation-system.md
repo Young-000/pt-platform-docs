@@ -7,6 +7,13 @@ nav_order: 3
 
 # 🏢 예약 시스템 (백엔드)
 
+{: .warning }
+> **PT 레일 (보류)** — 이 스펙은 1:1 PT 모델 기준이다. 2026-06 [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html) GX 피벗으로 제품 레일이 GX 그룹 클래스로 전환됐다. GX 정본 스펙 = 레포 `docs/superpowers/specs/2026-06-03-recovergx-open-gx-platform-design.md`. 1:1 PT 레일 부활 시 본 스펙 재사용.
+
+### GX 대응
+
+GX 전환으로 예약 모델이 **시간표 기반 그룹 예약**으로 바뀐다: 강사가 GX 클래스 시간표를 등록(정원 cap 포함)하고, 회원이 시간표를 보고 드롭인 예약. MentorBlock 1:1 점유 모델 → GX 클래스 1건에 N명 참여하는 그룹 좌석 트랜잭션으로 전환. 체크인·노쇼·변경·취소 룰의 기본 골격(PolicyConfig 동적 조회)은 GX 레일에도 계승.
+
 **Status**: 🟡 Updated (2026-05-16) · v2 본문 적용
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [ADR 0003](../../decisions/0003-free-gym-add-on.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
 **의존**: [5A 예약](../../operations/reservation.html) · [5D 자유 헬스](../../operations/free-gym.html) · [2D 정책](../../members/policies.html) · [4D 공간](../../service/space.html)

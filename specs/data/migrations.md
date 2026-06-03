@@ -7,11 +7,14 @@ nav_order: 3
 
 # 마이그레이션 계획 — 기존 → 새 스키마
 
-**Status**: Draft (v1) — v2 재정합 대기 · **Updated**: 2026-05-13
-**관련**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)
+**Status**: Draft (v1 기준) · GX 마이그레이션 완료 · **Updated**: 2026-06-03
+**관련**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [ADR 0011](../../decisions/0011-recovergx-gx-pivot.html)
+
+{: .highlight }
+> **GX 마이그레이션 (2026-06-03)**: `Wallet` · `WalletTransaction` · `ChargePackage` · `GxPolicy` · `GxPayoutPolicy` · `GxSettlement` 신규 추가 + `GxClass.price` · `GxBooking.paidAmount·walletTransactionId` · `Mentor.gxOpenEnabled·gxPayoutPolicyId` 컬럼 추가. 기존 테이블 변경 없음 (down-time ❌).
 
 {: .warning }
-> **v2 변경**: 본 매핑은 v1 (단일 PT + 90분 세트 + 주 1/2회권) 기준. v2 ([ADR 0001](../../decisions/0001-consumer-pivot.html)·[ADR 0004](../../decisions/0004-one-time-ticket-pricing.html))는 (1) 회차권 5단 통합 (Membership.type: 1/4/12/24/48), (2) CardioSlot 제거 + 30분 unit Reservation 단순화, (3) Mentor 정산 = 30분 unit S1 12k / S2 ≤20k, (4) 다종목 코스(Program) 모델 추가 필요. 본 페이지 매핑은 v2 결정 후 재작성.
+> **v2 변경**: 본 기존→새 스키마 매핑은 v1 (단일 PT + 90분 세트 + 주 1/2회권) 기준. v2 ([ADR 0001](../../decisions/0001-consumer-pivot.html)·[ADR 0004](../../decisions/0004-one-time-ticket-pricing.html)) 회차권 단일 모델 재정합은 추후 반영 예정.
 
 ## 현재 스키마 (12 테이블)
 
@@ -85,6 +88,27 @@ goals · settlements
 - Prisma migration `migrate reset` + restore 절차
 - 1주일 유예 기간 (Phase D 전) — 문제 시 코드만 옛 모델로 되돌림
 
+## GX 마이그레이션 (2026-06-03 — 완료)
+
+### Phase GX-A — 신규 모델 추가 (down-time ❌)
+
+1. `Wallet` · `WalletTransaction` · `ChargePackage` · `GxPolicy` · `GxPayoutPolicy` · `GxSettlement` 테이블 생성
+2. `GxClass`에 `price Int` 컬럼 추가
+3. `GxBooking`에 `paidAmount Int` · `walletTransactionId String?` 컬럼 추가
+4. `Mentor`에 `gxOpenEnabled Boolean @default(false)` · `gxPayoutPolicyId String?` 컬럼 추가
+5. `WalletTransaction.idempotencyKey @unique` 인덱스 추가
+
+### Phase GX-B — 시드·초기 데이터
+
+1. 기본 `GxPolicy` 행 생성 (`id='gx_policy_singleton'`)
+2. 기본 `GxPayoutPolicy` 행 생성 (`isDefault=true`)
+3. 기본 `ChargePackage` 라인업 생성
+
+### 롤백
+
+- 신규 테이블만 추가 (기존 테이블 미변경) → `DROP TABLE` + 컬럼 삭제로 완전 롤백 가능
+
 ---
 
 | 2026-05-13 | 초안 — Phase A~D 단계별 + 매핑 표 + 롤백 |
+| 2026-06-03 | GX 마이그레이션 Phase GX-A·B 추가 (ADR 0011) |
