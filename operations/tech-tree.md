@@ -97,7 +97,7 @@ flowchart LR
   end
   subgraph MTR[강사]
     direction LR
-    M1[수요·단가 파악]:::mt --> M2[seed 모집·심사]:::mt
+    M1[가용성·유형·단가 파악]:::mt --> M2[seed 모집·심사]:::mt
     M1 --> M4[오픈마켓 자가신청]:::mt
   end
   subgraph CAP[자본]
