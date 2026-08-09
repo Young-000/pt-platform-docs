@@ -16,7 +16,7 @@ GX 전환으로 정산 구조가 **조합형(기본금 + 수강 인당 보너스
 
 **Status**: Draft
 **관련 결정**: [3G 정산](../../partners/payout.html) · [6C 본사 수익](../../expansion/revenue-share.html) · [6B R&R](../../expansion/responsibility.html)
-**📡 API**: [정산](../../api/catalog.html#정산-payout) · [시스템·Cron](../../api/catalog.html#시스템--cron)
+**📡 API**: [정산](../api/catalog.html#정산-payout) · [시스템·Cron](../api/catalog.html#시스템--cron)
 **🗄️ Data**: [9. Payout](../data/09-payout.html) · [7. Membership](../data/07-membership.html) · [10. Audit](../data/10-audit.html)
 
 ## 1. 핵심 컴포넌트

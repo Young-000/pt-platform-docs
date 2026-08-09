@@ -9,7 +9,7 @@ nav_order: 2
 
 **Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 👤 유저 · **Updated**: 2026-05-13
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [2B 멤버십](../../members/membership.html) · [2C 가격](../../members/pricing.html) · [2D 정책](../../members/policies.html) · [2A 회원 여정](../../members/journey.html) · [1A 페르소나](../../product/personas.html) · [4A 세션 종류](../../service/session-types.html)
-**📡 API**: [멤버십·결제](../../api/catalog.html#멤버십결제-membership)
+**📡 API**: [멤버십·결제](../api/catalog.html#멤버십결제-membership)
 **🗄️ Data**: [7. Membership](../data/07-membership.html) · [10. Audit](../data/10-audit.html)
 **현재 코드**: `apps/mvp/src/pages/MembershipPage.tsx`, `LoginPage.tsx`, `RegisterPage.tsx`
 

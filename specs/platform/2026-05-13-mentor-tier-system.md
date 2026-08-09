@@ -16,7 +16,7 @@ GX 전환 후 강사 등급 체계는 **P1~P5** 5단계로 재설계된다. veri
 
 **Status**: Draft
 **관련 결정**: [3F 일반 멘토](../../partners/peer-leader.html) · [3H 품질·등급](../../partners/quality.html) · [3G 정산](../../partners/payout.html)
-**📡 API**: [멘토](../../api/catalog.html#멘토-mentor) · [어드민](../../api/catalog.html#어드민-admin)
+**📡 API**: [멘토](../api/catalog.html#멘토-mentor) · [어드민](../api/catalog.html#어드민-admin)
 **🗄️ Data**: [8. Mentor System](../data/08-mentor-system.html)
 
 ## 1. 핵심 컴포넌트

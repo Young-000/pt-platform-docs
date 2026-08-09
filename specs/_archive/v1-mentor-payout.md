@@ -9,7 +9,7 @@ nav_order: 4
 
 **Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [ADR 0004](../../decisions/0004-one-time-ticket-pricing.html) · [3G 정산](../../partners/payout.html) · [3E 운영 모델](../../partners/model.html) · [3F 일반 멘토](../../partners/peer-leader.html) · [3C 강사 VP](../../partners/value-prop.html) · [4B 세션 포맷](../../service/session.html)
-**📡 API**: [정산](../../api/catalog.html#정산-payout)
+**📡 API**: [정산](../api/catalog.html#정산-payout)
 **🗄️ Data**: [9. Payout](../data/09-payout.html)
 **현재 코드**: `apps/partner/src/pages/earnings-page.tsx`, `apps/api` `settlements` 라우트
 
