@@ -9,7 +9,7 @@ nav_order: 1
 
 **Status**: Draft (v1) — v2 재설계 대기 · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [3A 강사 페르소나](../../partners/personas.html) · [3E 운영 모델](../../partners/model.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html) · [4C AI 역할](../../service/ai-role.html) · [3G 정산](../../partners/payout.html)
-**📡 API**: [세션](../../api/catalog.html#세션-session) · [멘토](../../api/catalog.html#멘토-mentor) · [AI](../../api/catalog.html#ai)
+**📡 API**: [세션](../api/catalog.html#세션-session) · [멘토](../api/catalog.html#멘토-mentor) · [AI](../api/catalog.html#ai)
 **🗄️ Data**: [3. Schedule](../data/03-schedule.html) · [4. Reservation](../data/04-reservation.html) · [5. Records](../data/05-records.html) · [6. AI](../data/06-ai.html)
 **현재 코드**: `apps/partner/src/pages/session-detail-page.tsx`, `dashboard-page.tsx`
 
@@ -235,7 +235,7 @@ UX 목표: **3 필드 5분 내 입력**.
 
 ### 5.6 정산 화면 (`/earnings`)
 
-**컴포넌트**: `earnings-page.tsx` (개편 — [정산 PRD](./2026-05-13-payout.html) 참고)
+**컴포넌트**: `earnings-page.tsx` (개편 — [정산 PRD](./v1-mentor-payout.html) 참고)
 
 ```
 이번 격주 (5/1 - 5/14)
@@ -386,7 +386,7 @@ GET    /api/mentors/me/exercise-library?category=lower|upper|core|cardio
 - [ ] `src/pages/session-detail-page.tsx` — 5분 내 입력 UX (564줄 → 200줄 목표)
 - [ ] `src/pages/session-pre-page.tsx` (신규) — 세션 전 회원 정보·AI 추천
 - [ ] `src/pages/session-active-page.tsx` (신규) — 세션 진행 중 운동 체크
-- [ ] `src/pages/earnings-page.tsx` — 정산 화면 ([별도 PRD](./2026-05-13-payout.html))
+- [ ] `src/pages/earnings-page.tsx` — 정산 화면 ([별도 PRD](./v1-mentor-payout.html))
 
 ### 10.2 컴포넌트
 

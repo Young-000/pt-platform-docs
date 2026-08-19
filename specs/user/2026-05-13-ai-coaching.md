@@ -14,7 +14,7 @@ nav_order: 4
 
 **Status**: Draft · **Layer**: 👤 유저 · **Updated**: 2026-05-13
 **관련 결정**: [4C AI 역할](../../service/ai-role.html) · [1B 문제의식](../../product/problems.html) · [1D VP](../../product/value-prop.html) · [4A 세션 종류](../../service/session-types.html) · [4B 세션 포맷](../../service/session.html)
-**📡 API**: [AI](../../api/catalog.html#ai)
+**📡 API**: [AI](../api/catalog.html#ai)
 **🗄️ Data**: [6. AI](../data/06-ai.html) · [5. Records](../data/05-records.html)
 **현재 코드**: `apps/mvp/src/services/ai-coach.ts`, `pages/CoachPage.tsx`, `components/AIAnalysisCard.tsx`, `components/AIRecommendationCard.tsx`
 
