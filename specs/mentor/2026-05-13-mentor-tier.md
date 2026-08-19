@@ -16,7 +16,7 @@ GX 전환 후 강사 등급 체계가 **P1~P5** 5단계로 재설계된다. 현�
 
 **Status**: Draft (v1) — v2 정합 검토 대기 · **Layer**: 💪 멘토 · **Updated**: 2026-05-13
 **관련 결정**: [ADR 0001](../../decisions/0001-consumer-pivot.html) · [ADR 0002](../../decisions/0002-license-policy.html) · [3F 일반 멘토](../../partners/peer-leader.html) · [3H 품질·등급](../../partners/quality.html) · [3G 정산](../../partners/payout.html) · [4A 세션 종류](../../service/session-types.html) · [3A 강사 페르소나](../../partners/personas.html) · [3C 강사 VP](../../partners/value-prop.html)
-**📡 API**: [멘토](../../api/catalog.html#멘토-mentor) · [어드민](../../api/catalog.html#어드민-admin)
+**📡 API**: [멘토](../api/catalog.html#멘토-mentor) · [어드민](../api/catalog.html#어드민-admin)
 **🗄️ Data**: [8. Mentor System](../data/08-mentor-system.html)
 **현재 코드**: `apps/partner/src/pages/more/profile-page.tsx`
 
